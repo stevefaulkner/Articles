@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Fieldsets, Legends and Screen Readers</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2007/11/fieldsets-legends-and-screen-readers/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Fieldsets, Legends and Screen Readers</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">9-12 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Italian translation <a href="http://webaccessibile.org/le-basi/fieldset-legend-e-screen-reader/" hreflang="it" lang="it">Fieldset, Legend e Screen Reader</a> by Roberto Castaldo.</p>
+<p>The grouping and labelling of thematically related controls within a 
+form is an important aspect of providing semantic information so users 
+can understand and complete a form successfully. Differences in quality 
+and implementation of support across user agents can hamper some users’ 
+ability to benefit from this information. This must not be taken as 
+disincentive to developers, as the benefits of using these elements 
+outweighs the negatives. But it is clear that some assistive technology 
+vendors need to improve implementation of HTML features that enhance 
+accessibility, so their users can gain the most benefit.</p>
+<h3>Using the fieldset and legend elements</h3>
+<p>The <a href="http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.10">HTML 4.1 specification</a> provides a method for grouping and labeling related form controls. This capability is provided by the use of the <code>fieldset</code> and <code>legend</code> elements:</p>
+<blockquote cite="http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.10"><p>The <code>fieldset</code> element allows authors to group thematically related controls and labels. <strong>Grouping controls makes it easier for users to understand their purpose</strong>
+ while simultaneously facilitating tabbing navigation for visual user 
+agents and speech navigation for speech-oriented user agents. The proper
+ use of this element makes documents more accessible.</p>
+<p>The <code>legend</code> element allows authors to assign a caption to a <code>fieldset</code>. <strong>The legend improves accessibility when the <code>fieldset</code> is rendered non-visually</strong>.</p></blockquote>
+<p>Whenever a label is needed to provide information about a related set of controls consider using the <code>legend</code> and <code>fieldset</code>
+ elements. They can be used to group any thematically related controls 
+in a form such as address details, date of birth and sets of radio 
+buttons or check boxes.</p>
+<p><strong>Note:</strong> It is required that the <code>fieldset</code> and <code>legend</code> are used in conjunction. A <code>fieldset</code> cannot be used without a <code>legend</code> and visa versa.</p>
+<h4>Example code:</h4>
+<p><code><strong>&lt;fieldset&gt;</strong><br>
+<strong>&lt;legend&gt;</strong>filter by<strong>&lt;/legend&gt;</strong><br>
+&lt;input type="radio" name="filter" id="a"&gt;<br>
+&lt;label for="a"&gt;television&lt;/label&gt;<br>
+&lt;input type="radio" name="filter" id="b"&gt;<br>
+&lt;label for="b"&gt;radio&lt;/label&gt;<br>
+&lt;input type="radio" name="filter" id="c"&gt;<br>
+&lt;label for="c"&gt;cinema&lt;/label&gt;<br>
+<strong>&lt;/fieldset&gt;</strong></code></p>
+<h3>Presentation to users</h3>
+<h4>Visual browsers</h4>
+<p>The default rendering of the <code>fieldset</code> and <code>legend</code> elements is fairly uniform across the major visual browsers. The <code>fieldset</code> is displayed with a solid border and the <code>legend</code>
+ text is overlaid on the top left border. This provides a clear visual 
+indication of the controls that are contained within the group and the 
+caption (legend) that applies to the grouped controls.</p>
+<h5>Default visual display in Internet Explorer, Firefox and Opera</h5>
+
+<h4>Screen Readers</h4>
+<p>For visual users, the association can be represented by the position 
+of the legend and the enclosing of related controls within a bordered 
+box. How should non visual user agents such as screen readers convey the
+ structural associations provided by the legend and fieldset elements? 
+The most important relationship is that of the <code>legend</code> text 
+to the individual controls contained in a fieldset, as the legend serves
+ to describe the context of the data or choices required. As the content
+ is accessed linearly by screen readers, the apparent simple visual 
+association is not so easily or clearly expressed.</p>
+<p>The <a href="http://www.w3.org/TR/UAAG10-TECHS/topics.html#form-techniques">UAAG 1.0</a> (User Agent Accessibility Guidelines) provide this advice on implementation:</p>
+<blockquote><p>HTML 4 specifies the FIELDSET element , which allows 
+authors to group thematically related elements and labels. The LEGEND 
+element assigns a caption to a <code>FIELDSET</code>. For example, the <code>LEGEND</code> element might identify a <code>FIELDSET</code>
+ of radio buttons as “Connection Rate.” Each button could have a LABEL 
+element, stating a rate. When it receives content focus, identify the 
+radio button as “Connection Rate: Radio button X of Y: 28.8kpbs”, where 
+“Y” represents the total number of radio buttons in the grouping and 
+“28.8kbps” is the information contained in the <code>LABEL</code>.</p></blockquote>
+<p>With this implementation advice in mind, 2 of the major screen readers were tested using an example <code>fieldset</code> containing 3 radio buttons labelled “television, radio, cinema” with a <code>legend</code> of “filter by”. It was found that what is announced varies depending on the software, mode and navigation keys used.</p>
+<h5>JAWS</h5>
+<p>In Virtual PC cursor and Forms mode the <code>legend</code> is announced when each of the controls contained in a <code>fieldset </code>receive focus.</p>
+<h6>virtual PC cursor ‘browse’ mode</h6>
+<p>If the user moves through the content using a “Say All” (ins+down arrow) command or “Say Next Line” command (down arrow), the <code>legend</code> is announced when intitally encountered, but no indication of association to related controls is provided:</p>
+<blockquote><p><strong>filter by</strong> radio button televsion, radio button radio, radio button cinema</p></blockquote>
+<p>If the “Move To Next Form Field” (F) command (only available in ‘browse’ mode) is used to move through radio buttons within the <code>fieldset</code> the result is different:</p>
+<blockquote><p><strong>filter by</strong> radio button television, <strong>filter by</strong> radio button radio, <strong>filter by</strong> radio button cinema</p></blockquote>
+<h5>Forms mode</h5>
+<p>The results for navigating through controls contained within the <code>fieldset</code> are the same as when the “Move To Next Form Field” command is used, the <code>legend</code> text is prefixed to each control label contained within the fieldset.</p>
+<h5>Window Eyes</h5>
+<p>Using the default settings <strong>no indication</strong> of the <code>fieldset</code> or <code>legend</code> is announced in any mode. For the user to be made aware of the presence of a <code>fieldset</code>, the user must first modify the Window Eyes browse mode verbosity settings <code>fieldset</code> option:</p>
+<blockquote><p>Insert Beginning / End Message (Fieldsets) This option will notify the user of both the beginning and end of a <code>fieldset</code> element.</p></blockquote>
+<h6>Browse mode – announce fieldset option enabled</h6>
+<p>When this option is enabled, if the user navigates using the down arrow, the start and end of the <code>fieldset</code> is announced as is the <code>legend</code> text:</p>
+<blockquote><p><strong>filter by fieldset start</strong> radio button television, radio button radio, radio button cinema <strong>filter by fieldset end</strong></p></blockquote>
+<p>The user can also navigate using the “Next Fieldset” (E) and 
+“Previous Fieldset” (shift+E) commands. When these commands are used, 
+the end of a fieldset <strong>is not</strong> announced. If the “Next Control” (C), “Previous Control” (shift+C) or the TAB key is used to navigate, <code>fieldsets</code> and <code>legends</code> <strong>are not</strong> announced.</p>
+<h6>Using Firefox</h6>
+<p>When using Firefox, Window Eyes does not recognize or announce the presence of the <code>fieldset</code> or <code>legend </code>elements. So for example, when using the “Next Fieldset” (E) command “no fieldset” is announced.</p>
+<h6>Browse mode off (forms mode)</h6>
+<p>When the user is not in browse mode (has to be disabled to for the 
+user to interact with edit boxes, text areas and dropdown lists) the 
+user is confined to navigating through controls using the TAB key and <strong>no <code>fieldset</code> or <code>legend</code> information</strong> is announced.</p>
+<h4>Testing Notes:</h4>
+<ul>
+<li>JAWS 8 and Window Eyes 5.5 were used for testing. The <a href="http://www.paciellogroup.com/blog/misc/fieldset.html">fieldset test page </a>was viewed in Internet Explorer 7 and Firefox 2 on Windows XP.</li>
+<li>The examples of screen reader output have been edited to include only pertinent announcements.</li>
+</ul>
+<h4>Conclusion</h4>
+<p>The <code>fieldset</code> and <code>legend</code> elements are a 
+useful part of a web developer’s toolkit for making forms more 
+accessible to people with disabilities. The support in Window Eyes is 
+quite different from the advice given in <abbr title="user agent accessibility guidelines">UAAG</abbr>1.0.
+ Due to this, Window Eyes users will not be able to gain the full 
+benefit of the additional information provided through the use of these 
+elements. In fact no <code>legend</code> text will be announced to users
+ unless they first enable an option to announce such information. Even 
+when the option is enabled Window Eyes users will not receive this 
+important information when they are inputting data into form fields. 
+Furthermore if they use Window Eyes in conjunction with the Firefox 
+browser no <code>legend</code> or <code>fieldset</code> information will be provided.</p>
+<p>The situation for JAWS users is much better. The JAWS implementation is consistent with the advice in <abbr title="user agent accessibility guidelines">UAAG</abbr> 1.0. The grouping of controls using the <code>fieldset</code> is not explicitly announced (as it is in Window Eyes), but the announcing of the fieldset is not advised in <abbr title="user agent accessibility guidelines">UAAG</abbr>
+ and may be of limited value or overly obtrusive for the users, which 
+could be why it is not enabled by default in Window Eyes. Importantly 
+the association of <code>legend</code> text with controls contained within a <code>fieldset</code> is reliably conveyed by the announcement of the <code>legend</code>
+ along with a control’s text label. This behaviour works when the user 
+is browsing or interacting with form fields and across supported 
+browsers.</p>
+<p>Due to the nature of the advice in <abbr title="user agent accessibility guidelines">UAAG</abbr>
+ 1.0 and its implementation in JAWS (legend text being announced before a
+ control’s label text), developers should be mindful of the length of <code>legend</code> texts, as lengthy <code>legend</code>
+ texts have been found to make forms difficult to use. Another potential
+ pot hole is the JAWS behaviour when headings are included within a <code>fieldset</code>. In this case JAWS will typically use the heading text in place of the <code>legend</code>
+ text, this is a quirk or bug, which can lead to unexpected and 
+problematic consequences. This needs to be fixed in JAWS, but until it 
+is, perhaps the use of headings within fieldsets should be minimised.</p>
+<p>The <code>fieldset</code> and <code>legend</code> elements are well 
+supported by many user agents. While it is helpful to have knowledge of 
+some of the quirks and failings of particular user agents, the poor 
+support in software such as Window Eyes <strong>must not stop</strong> 
+developers using these elements or accessibility practitioners 
+recommending their use. Their use can make it easier for a wide range of
+ disabled users to fill out forms. In order to improve accessibility for
+ all disabled users, web standards must be adhered to so that developers
+ can code for accessibility with confidence. It is the assistive 
+technology vendor’s job in these cases to fix their implementations.</p>
+
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

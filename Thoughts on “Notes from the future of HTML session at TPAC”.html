@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Thoughts on “Notes from the future of HTML session at TPAC”</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/10/thoughts-on-notes-from-the-future-of-html-session-at-tpac/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Thoughts on “Notes from the future of HTML session at TPAC”</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-8 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<h2 id="07b1"><em>Stinkin’ thinkin’ on HTML</em> <a href="https://twitter.com/w3c" rel="nofollow" data-href="https://twitter.com/w3c">@<strong>w3c</strong></a> (AKA what i would be saying at <a href="https://twitter.com/hashtag/TPAC2015?src=hash" rel="nofollow" data-href="https://twitter.com/hashtag/TPAC2015?src=hash">#<strong>TPAC2015</strong></a> if I was there)</h2>
+<p id="3a75">HTML is being <a href="http://www.w3.org/2015/10/28-html-minutes.html" rel="nofollow" data-href="http://www.w3.org/2015/10/28-html-minutes.html">discussed</a>, again, at W3C.</p>
+<p id="1e1c"><a href="http://www.w3.org/TR/html5/" rel="nofollow" data-href="http://www.w3.org/TR/html5/">HTML5 was published</a> as a recommendation at W3C a year ago. One of the tasks it was talked about at <a href="https://www.paciellogroup.com/blog/2014/11/w3c-tpac-2014-notes-and-souvenirs/" rel="nofollow" data-href="https://www.paciellogroup.com/blog/2014/11/w3c-tpac-2014-notes-and-souvenirs/">the time</a> was maintaining HTML5 <em>the Rec, </em>so
+ at least it didn’t include silly errors like typo’s. AFAIK, no typo’s 
+have been fixed. Nobody at W3C could agree on an errata process…</p>
+<h3 id="2b96">The only editor at the party</h3>
+<p id="c208">Furthermore, there was discussion about <a href="http://lists.w3.org/Archives/Public/public-html-admin/2014Nov/0000.html" rel="nofollow" data-href="http://lists.w3.org/Archives/Public/public-html-admin/2014Nov/0000.html">modularisation</a>, I was tasked with creating a module, testing the waters. <a href="http://www.w3.org/TR/aria-in-html/" rel="nofollow" data-href="http://www.w3.org/TR/aria-in-html/">I did that</a>, I <span data-creator-ids="e70fdf2e7b49">also worked with the reconstituted WHATWG editorship to make the <a href="https://html.spec.whatwg.org/multipage/dom.html#wai-aria" rel="nofollow" data-href="https://html.spec.whatwg.org/multipage/dom.html#wai-aria">WHATWG HTML</a> and <a href="http://www.w3.org/TR/html51/dom.html#wai-aria" rel="nofollow" data-href="http://www.w3.org/TR/html51/dom.html#wai-aria">W3C HTML 5.1</a> specs align on this.</span> Both specs now defer to the relevant specs in regards to accessibility implementations of <a href="http://rawgit.com/w3c/aria/master/html-aam/html-aam.html" rel="nofollow" data-href="http://rawgit.com/w3c/aria/master/html-aam/html-aam.html">HTML feature semantics</a> and <a href="http://www.w3.org/TR/html-aria/" rel="nofollow" data-href="http://www.w3.org/TR/html-aria/">ARIA in HTML</a>. I have also fixed some bugs in the bits of <a href="http://www.w3.org/TR/html51/Overview.html" rel="nofollow" data-href="http://www.w3.org/TR/html51/Overview.html">HTML 5.1</a> I feel confident about editing, <span data-creator-ids="e70fdf2e7b49">but have been constrained by <a href="https://github.com/w3c/spork" rel="nofollow" data-href="https://github.com/w3c/spork">Spork</a>, the editing process, being a PITA to make edits with.</span></p>
+<h3 id="52f5">Drifting</h3>
+<p id="79d6">For most of the past year, both the WHATWG HTML and the W3C HTML 5.1 spec have been unattended, <span data-creator-ids="e70fdf2e7b49">this
+ changed dramatically on the WHATWG side, recently, when Hixie relaxed 
+his total control over the editorship to a small group of other people</span>. Meanwhile W3C HTML lopes along behind, <span data-creator-ids="e70fdf2e7b49">picking up automagically a subset of commits from WHATWG. The major differences between the two specs <a href="http://www.w3.org/TR/html51/introduction.html#landscape" rel="nofollow" data-href="http://www.w3.org/TR/html51/introduction.html#landscape">are documented</a>.</span></p>
+<h3 id="ae1d">Why maintain?</h3>
+<p id="c59f">What <a href="https://github.com/w3c/charter-html/issues/130" rel="nofollow" data-href="https://github.com/w3c/charter-html/issues/130">possible reasons</a> could there be to continue develop a separate version of HTML at the W3C? <span data-creator-ids="e70fdf2e7b49">The only one offered is IPR. There may well be a lot of other reasons, but none have been clearly stated for the record.</span></p>
+<h3 id="09ef">My reasons</h3>
+<p id="7181">The reason why <a href="http://html5doctor.com/interview-steve-faulkner-html5-editor-new-doctor/" rel="nofollow" data-href="http://html5doctor.com/interview-steve-faulkner-html5-editor-new-doctor/">I got into</a>
+ editing HTML at the W3C was because I disagreed with the process of 
+WHATWG’s ‘benevolent dictator’ model of stewardship, which, I believe, 
+lead to aspects of the definition of HTML being suboptimal. For example,
+ the definitions of blockquote, cite, lack of an element for indicating 
+the main content of a document, <span data-creator-ids="e70fdf2e7b49">the
+ advice on how to provide text alternatives, use of ARIA in HTML, 
+leading developers up the garden path on the document outline, use of 
+the title and placeholder attributes etc. </span>The value of W3C HTML to me is that <span data-creator-ids="e70fdf2e7b49">it is a specification of HTML that is not completely the vision of a small group of browser implementers.</span></p>
+<h3 id="90ec">Fuzzy stuff</h3>
+<p id="e586"><span data-creator-ids="e70fdf2e7b49">Much of what I was, 
+and am still interested is not the stuff that browser implementers have 
+any interest in, but does effect how web developers use HTML</span>. Thus most of the <a href="http://www.w3.org/TR/html51/introduction.html#landscape" rel="nofollow" data-href="http://www.w3.org/TR/html51/introduction.html#landscape">differences</a> bewtween W3C and WHATWG are <span data-creator-ids="e70fdf2e7b49">not about how browsers implement stuff, but how web developers do stuff</span>. I think for example <a href="http://www.w3.org/TR/html5/sections.html#outlines" rel="nofollow" data-href="http://www.w3.org/TR/html5/sections.html#outlines">making developers aware</a> that <span data-creator-ids="e70fdf2e7b49">the outline algorithm doesn’t work yet and <a href="https://www.w3.org/wiki/HTML/Usage/Headings/h1only" rel="nofollow" data-href="https://www.w3.org/wiki/HTML/Usage/Headings/h1only">may never work</a> as defined is an important piece of information for web developers and has important consequences for end users. </span>So much so I have <a href="https://github.com/whatwg/html/issues/83" rel="nofollow" data-href="https://github.com/whatwg/html/issues/83">Suggest[ed] adding a warning about outline algorithm to WHATWG HTML</a>. I also think that <span data-creator-ids="e70fdf2e7b49">having clear information about using ARIA in HTML, <a href="http://html5doctor.com/using-aria-in-html/" rel="nofollow" data-href="http://html5doctor.com/using-aria-in-html/"><em>in</em><strong> HTML</strong></a>, is useful for web developers.</span></p>
+<h3 id="32fb">The cream</h3>
+<p id="8802">I believe, there has and continues to be a view that because <a href="https://whatwg.org/" rel="nofollow" data-href="https://whatwg.org/">one group</a> of people do most of the <em>important stuff</em> of defining how HTML is implemented, <span data-creator-ids="e70fdf2e7b49">a
+ natural consequence is, they have the authority, the right, and skill 
+set to also define how it is used, to define the meaning of HTML and to 
+impose the same model of development on the definition of the semantics 
+of HTML as is considered to work for the implementation aspects of HTML.
+ This view is not born out, by my experience.</span></p>
+<h3 id="7b32">main argument</h3>
+<p id="fb63">I was encouraged to <a href="https://github.com/whatwg/html/issues/100" rel="nofollow" data-href="https://github.com/whatwg/html/issues/100">file an issue</a> about <span data-creator-ids="e70fdf2e7b49">the
+ differences between the definition of the main element between WHATWG 
+and W3C HTML to see if we would could reach some closer aligment between
+ the definitions</span>. I sorely regret this now as it resulted in the re-opening of wounds. But I also think <span data-creator-ids="e70fdf2e7b49">it illustrates the main reason why we still need a HTML spec at the W3C, not for the implementation aspects (<a href="http://www.w3.org/2015/10/28-html-minutes.html" rel="nofollow" data-href="http://www.w3.org/2015/10/28-html-minutes.html">even Microsoft</a>
+ looks at WHATWG HTML for implementations now), but for the definition 
+of HTML as a markup language; how it is to be used, what it means, how 
+its use affects users.</span></p>
+<h3 id="51ff">A suggestion for the future of HTML at W3C</h3>
+<p id="c5be">The HTML specification <span data-creator-ids="e70fdf2e7b49">could be divided up into 3 class of content:</span></p>
+<ol>
+<li id="9958"><span data-creator-ids="e70fdf2e7b49">UA implementation details and requirements</span></li>
+<li id="7dd9"><span data-creator-ids="e70fdf2e7b49">Conformance checker implementation details and requirements</span></li>
+<li id="b8c9"><span data-creator-ids="e70fdf2e7b49">Feature definitions, details, authoring conformance requirements, examples, advice</span></li>
+</ol>
+<p id="f109">The HTML W3C specification content is derived from the 
+WHATWG HTML spec for 90% (ballpark) of 1 &amp; 2 the divergences are 
+minor (but still in some cases considered important) <span data-creator-ids="e70fdf2e7b49">and in many cases due to error not conscious decisions of the W3C.</span></p>
+<p id="321b"><span data-creator-ids="e70fdf2e7b49">For 3, the 
+divergences are both more pronounced and mostly willful, due to 
+disagreements between the WHATWG editors and contributors and the W3C WG
+ members and editors about the semantics, conformance requirements and 
+advice for use of HTML.</span></p>
+<p id="b44f">I make some assumptions:</p>
+<p id="9d69"><span data-creator-ids="e70fdf2e7b49">For IP purposes the 
+importantant content in the HTML spec is the UA implementation 
+definition of features and this is a primary driver for continued 
+publication of a copy of whatwg HTML at the W3C.</span></p>
+<p id="c7e8">For <span data-creator-ids="e70fdf2e7b49">authoring 
+purposes, the important content is 3 and it is a primary driver for 
+continued publication of an actively edited HTML at the W3C, but is not a
+ reason to continue copying these aspects of the content from the WHATWG
+ (and then modifying it where there are differences.)</span></p>
+<h4 id="1b0f">The proposal:</h4>
+<p id="5bf4"><span data-creator-ids="e70fdf2e7b49">Continue to publish a
+ ‘living’ delta of the WHATWG spec consisting of the UA requirements 
+which will satisfy the IP requirements. </span>This delta will be an exact and up to date copy of the WHATWG spec.</p>
+<p id="f94e">For the rest of the content, <span data-creator-ids="e70fdf2e7b49">fork the current HTML 5.1 spec (which includes both W3C and WHATWG content) and then cease to update from the WHATWG spec.</span></p>
+<p id="1a3d">HTML at W3C <span data-creator-ids="e70fdf2e7b49">will then
+ reference the the delta for UA requirements, but the rest of the 
+content will be solely edited at the W3C going forward.</span> If there 
+are UA/comformance checker requirements/features not present in the 
+WHATWG delta or there are divergent requirements, the W3C HTML 
+specification <span data-creator-ids="e70fdf2e7b49">can reference other relevant specs.</span></p>
+<p></p>
+<p><strong>Note:</strong> Originally <a href="https://medium.com/@stevefaulkner/thoughts-on-notes-from-the-future-of-html-session-at-tpac-1c2f6f204cea#.o6lakpcwt">published on Medium</a>, but feel safer having it published here as well.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

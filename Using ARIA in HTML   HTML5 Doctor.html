@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Using ARIA in HTML | HTML5 Doctor</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/using-aria-in-html/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Using ARIA in HTML | HTML5 Doctor</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <p>ARIA (<a href="http://www.w3.org/TR/wai-aria/">WAI-ARIA</a> if you want to be formal) is a set of attributes that you can add to <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#elements">HTML elements</a>.</p>
+<p>These attributes communicate role, state and property semantics to <a href="http://en.wikipedia.org/wiki/Assistive_technology">assistive technologies</a> via the <a href="http://www.w3.org/WAI/PF/aria-implementation/#def_accessibility_api">accessibility APIs</a> implemented in browsers. The <a href="http://www.w3.org/html/wg/drafts/html/master/">W3C HTML specification</a> provides information about which ARIA attributes are allowed to be used on each HTML element in section <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#wai-aria"><span>3.2.7 </span>WAI-ARIA</a>.<br>
+<span id="more-5472"></span></p>
+<h2>Developer (un)friendly information</h2>
+<p>The requirements specified in section <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#wai-aria"><span>3.2.7 </span>WAI-ARIA</a> are not in a form which could be considered web developer <em>friendly</em>. They are presented in 2 large tables and <strong>only include</strong>
+ features that have constraints. i.e. if you can use any ARIA attribute,
+ the element is not listed, this is because the primary purpose of this 
+information is for browser and conformance checker implementers, not 
+developers like you and I. Furthermore to find out what ARIA attributes 
+can be used on a particular element, in the past would involve 
+navigating away from an element definition to the ARIA section then 
+going through the tables to find the desired element or attribute, to 
+locate its ARIA rules.</p>
+<h2>Developer friendly information</h2>
+<p>Over the past few months the <a href="http://www.w3.org/html/wg/drafts/html/master/">W3C HTML specification</a> has been updated to include the ARIA information, formerly tucked away or absent, now presented <em>in your face</em>, in the introductory section of each element definition.</p>
+<p>In the example below, the introductory section of the <a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#the-picture-element">picture element</a>
+ definition now includes information about allowed ARIA roles and 
+property attributes, so developers can quickly find the info without 
+having to hunt about in the spec. In the case of the (newly added) <code><span>picture</span></code> element, the <code><span>role</span></code> attribute cannot be used and only <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#index-aria-global">global ARIA attributes</a> are allowed. The same ARIA information can be found in the introductory section of <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#elements">every element</a> in the HTML specification.</p>
+<p><a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#the-picture-element"><img src="Using%20ARIA%20in%20HTML%20%20%20HTML5%20Doctor_files/picture.png" alt="picture element definition" moz-reader-center="true" width="742" height="586"></a></p>
+<p>If an element can have roles set it is stated in the intro, for example the <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#the-button-element">button</a>
+ element intro includes all allowed ARIA role values and indicates the 
+default role for the element, which in most circumstances <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#aria-usage-note">does not need</a> to be set. Each role is linked to a description, within the <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#allowed-aria-roles,-states-and-properties">ARIA reference section</a>, of the HTML spec, which also includes a list of allowed <code><span>aria</span><span>-*</span></code>
+ attributes for each role value, with additional links to the ARIA 
+specification information for all role, states and properties.</p>
+<p><a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#the-button-element"><img src="Using%20ARIA%20in%20HTML%20%20%20HTML5%20Doctor_files/button.png" alt="button" moz-reader-center="true" width="686" height="141"></a></p>
+<p>The intent of these additions to the <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML specification</a> is to make it easier for developers to <em>get at</em> the information they need to make <em>accessible</em> things with HTML. <strong>Feedback welcome!</strong></p>
+<h2>Further Reading</h2>
+<ul>
+<li><a href="http://w3c.github.io/aria-in-html/">Using ARIA in HTML</a> – a practical guide for developers on how to add accessibility information to HTML elements using ARIA.</li>
+<li><a href="http://www.w3.org/WAI/PF/aria-practices/"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> 1.0 Authoring Practices</a> – An author’s guide to understanding and implementing Accessible Rich Internet Applications
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria-practices/#aria_ex">widget design patterns</a></li>
+</ul>
+</li>
+<li>HTML 5.1 section <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#wai-aria"><span>3.2.7 </span>WAI-ARIA</a></li>
+</ul>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

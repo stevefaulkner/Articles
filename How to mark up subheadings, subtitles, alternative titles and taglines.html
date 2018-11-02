@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>How to mark up subheadings, subtitles, alternative titles and taglines</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/howto-subheadings/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">How to mark up subheadings, subtitles, alternative titles and taglines</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <p>If you don’t already know, the <code><span>hgroup</span></code> element is <a href="#obsolete">obsolete</a> in <a href="http://www.w3.org/html/wg/drafts/html/master/Overview.html">HTML5</a>.</p>
+<p>Advice is now provided in the <a href="http://www.w3.org/html/wg/drafts/html/master/common-idioms.html#sub-head">HTML spec</a> on how to mark up subheadings, subtitles, alternative titles and taglines using existing and <em>implemented</em> HTML features.<br>
+<span id="more-5067"></span></p>
+<p>Russian Translation of this article: <a href="http://frontender.info/howto-subheadings/#razmetka-dlya-podzagolovkov" lang="ru-RU">Разметка для подзаголовков</a> by <a href="https://twitter.com/frontenderinfo">Frontender magazine</a></p>
+<h2>Advice for marking up subheadings and the like</h2>
+<p>The important question for developers is: <strong>How do I mark up these buggers???</strong></p>
+<p>To answer this advice and requirements have been <a href="http://www.w3.org/html/wg/drafts/html/master/common-idioms.html#sub-head">added</a> to the HTML specification on how to mark up subheadings, subtitles, alternative titles and taglines:</p>
+<blockquote><p><strong></strong><code><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements"><span>h1</span></a></code>–<code><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements"><span>h6</span></a></code> elements <strong>must not</strong>
+ be used to markup subheadings, subtitles, alternative titles and 
+taglines unless intended to be the heading for a new section or 
+subsection.</p></blockquote>
+<p><strong>Note:</strong> Example below added 10/5/2013</p>
+<blockquote><p>In the following example the title and subtitles of a web page are grouped using a <code><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-header-element"><span>header</span></a></code>
+ element. As the author does not want the subtitles to be included the 
+table of contents and they are not intended to signify the start of a 
+new section, they are marked up using <code><a href="http://www.w3.org/html/wg/drafts/html/master/grouping-content.html#the-p-element"><span>p</span></a></code> elements. A sample CSS styled rendering of the title and subtitles is provided below the code example.</p>
+<pre><span> &nbsp; </span><span>&lt;header&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;h1&gt;</span><span>HTML 5.1 Nightly</span><span>&lt;/h1&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;p&gt;</span><span>A vocabulary and associated APIs for HTML and XHTML</span><span>&lt;/p&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;p&gt;</span><span>Editor's Draft 9 May 2013</span><span>&lt;/p&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;/header&gt;</span></pre>
+<p><img alt="Title:'HTML 5.1 Nightly' in a mid blue Sans Serif font.     Subtitle 1:'A vocabulary and associated APIs for HTML and XHTML' on a new line, same style smaller font size.     Subtitle 2:'Editor's Draft 9 May 2013' on a new line, same style and size as subtitle 1." src="How%20to%20mark%20up%20subheadings,%20subtitles,%20alternative%20titles%20and%20taglines_files/htmlheading.png"></p></blockquote>
+<blockquote><p>In the following example the subtitle of a book is on the same line as the title separated by a colon.</p>
+<pre><span>&lt;h1&gt;</span><span>The Lord of the Rings: The Two Towers</span><span>&lt;/h1&gt;</span></pre>
+<p><img alt="Title and subtitle:'The Lord of the Rings: The Two Towers' in a gold coloured Gothic style Serif font on a black background." src="How%20to%20mark%20up%20subheadings,%20subtitles,%20alternative%20titles%20and%20taglines_files/lotr.PNG" width="414" height="43"></p></blockquote>
+<blockquote><p>In the following example part of an album title is included in a <code><span>span</span></code> element, allowing it to be styled differently from the rest of the title.</p>
+<pre><span> &nbsp; </span><span>&lt;h1&gt;</span><span>The Mothers <br>&nbsp; &nbsp;</span><span>&lt;span&gt;</span><span>Fillmore East - June 1971</span><span>&lt;/span&gt;</span><span> <br>&nbsp; &nbsp;</span><span>&lt;/h1&gt;</span></pre>
+<p><img alt=" Line 1:'The Mothers' displayed in a bold stencil style font. Line 2:'Fillmore East - June 1971' displayed in a free flowing hand writing style font." src="How%20to%20mark%20up%20subheadings,%20subtitles,%20alternative%20titles%20and%20taglines_files/heading.PNG" width="296" height="77"></p></blockquote>
+<blockquote><p>In the following example the title and tagline for a news article are grouped using a <code><span>header</span></code> element. The title is marked up using a <code><span>h2</span></code> element and the tagline is in a <code><span>p</span></code> element.</p>
+<pre><span> &nbsp; </span><span>&lt;header&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;h2&gt;</span><span>3D films set for popularity slide </span><span>&lt;/h2&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;p&gt;</span><span>First drop in 3D box office projected for this year despite hotly tipped summer blockbusters,<br>&nbsp; &nbsp; according to Fitch Ratings report</span><span>&lt;/p&gt;</span><span><br>&nbsp; &nbsp;</span><span>&lt;/header&gt;</span></pre>
+<p><img alt=" Title:'3D films set for popularity slide' in a large, bold, dark blue Serif font style. Paragraph: 'First drop in 3D box office projected for this year despite...' in a smaller, dark grey, Sans Serif font style." src="How%20to%20mark%20up%20subheadings,%20subtitles,%20alternative%20titles%20and%20taglines_files/title-tagline.PNG" width="454" height="74"></p></blockquote>
+<p><strong>Note:</strong> Some have been <a href="https://github.com/twitter/bootstrap/issues/7482">advocating</a> of the use of the <code><span>small</span></code> element to signify subtitles. This has been under <a href="http://lists.w3.org/Archives/Public/public-html/2013Apr/thread.html#msg2">discussion</a> in the <a href="http://www.w3.org/html/wg/">HTML working group</a>, but no compelling arguments for its use have been made. Therefore it is not advised to use <code><span>small</span></code> to mark up subtitles.</p>
+<h2>What about the document outline?</h2>
+<p>If you want a subtitle to be displayed in the <em>semi-mythical </em><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#outlines">document outline</a>, include it along with the heading text as per example 1 and 2 above. If you don’t, put the text in a <code><span>p</span></code> element (for example), as per example 3 above.<strong><br>
+</strong></p>
+<h2>Questions for developers</h2>
+<p>Does the advice in the spec cover the use cases you encounter? If not
+ what other advice should the spec include? Are the examples clear and 
+unambiguous? If not how could they be improved? Any other questions you 
+have, ask away in the comments!</p>
+<p>If you are really keen you can <a href="http://www.w3.org/html/wg/#join">join</a> the likes of Bruce Lawson, Ian Devlin and myself in the HTML working group and take part in discussion there.</p>
+<h2 id="obsolete" tabindex="-1">What being <em>obsolete</em> in HTML5 means</h2>
+<blockquote><p>must not be used by authors</p></blockquote>
+<p><code><span>hgroup</span></code> like other <a href="http://www.w3.org/html/wg/drafts/html/CR/obsolete.html#non-conforming-features">obsolete features,</a>&nbsp; is non-conforming. This means that a <a href="http://validator.w3.org/nu/">conformance checker</a>&nbsp; displays an error&nbsp; if the <code><span>hgroup</span></code> element is found. The following is the error message displayed by the <a href="http://validator.w3.org/">W3C Markup Validation Service</a>:</p>
+<blockquote><p><strong>Error</strong>: The <code><span>hgroup</span></code> element is obsolete. To mark up subheadings, consider either just putting the subheading into a <code><span>p</span></code> element after the <code><span>h1</span></code>–<code><span>h6</span></code> element containing the main heading, or else putting the subheading directly within the <code><span>h1</span></code>–<code><span>h6</span></code> element containing the main heading, but separated from the main heading by punctuation and/or within, for example, a <code><span>span</span></code> element with differentiated styling. To group headings and subheadings, alternative titles, or taglines, consider using the <code><span>header</span></code> or <code><span>div</span></code> elements.</p></blockquote>
+<p>Like for other <a href="http://www.w3.org/html/wg/drafts/html/master/obsolete.html#non-conforming-features">obsolete elements</a>, browsers will continue their current level of support for <code><span>hgroup</span></code>. That is, browsers that have parsing and user agent style support will continue to do so, therefore authors that have used <code><span>hgroup</span></code>
+ in their pages do not need to rush out and remove it. The element 
+effectively has no meaning as its semantics have not been implemented. 
+It’s effectively a <code><span>div</span></code> with a funny name.</p>
+<h2>The whys and wherefores</h2>
+<p>Much has been discussed and written over the past few years on the <code><span>hgroup</span></code>
+ element and whether it meets the high bar required to include as a 
+feature in HTML, on balance it has been decided it does not. Should this
+ have happened more quickly? Yes , but as <a href="http://people.w3.org/mike//">Mike[tm]Smith</a> <a href="http://www.w3.org/QA/2013/04/getting_agreements_is_hard_som.html">stated recently</a>:</p>
+<blockquote><p>People disagree. Organizations disagree. The task of us 
+all working together to try to overcome our disagreements is 
+time-consuming, often very frustrating, and almost never easy.</p></blockquote>
+<p>If you want to read up on the history of <code><span>hgroup</span></code> there is plenty of stuff available:</p>
+<h3>HTML working group <a href="http://lists.w3.org/Archives/Public/public-html/">mail archives</a> 2010 (tip of the iceberg):</h3>
+<ul>
+<li><a href="http://lists.w3.org/Archives/Public/public-html/2010Nov/thread.html#msg396">suggestion for abolition of <code><span>hgroup</span></code> thread (November)</a></li>
+<li><a href="http://lists.w3.org/Archives/Public/public-html/2010Nov/thread.html#msg325"><code><span>hgroup</span></code> and ARIA outline thread</a></li>
+<li><a href="http://lists.w3.org/Archives/Public/public-html/2010Dec/thread.html#msg0">suggestion for abolition of <code><span>hgroup</span></code> thread (December)</a></li>
+</ul>
+<h3><em>Selected</em> articles on the subject:</h3>
+<ul>
+<li><a href="http://www.brucelawson.co.uk/2010/on-the-hgroup-element/">On the <code><span>hgroup</span></code> element</a></li>
+<li><a href="http://www.brucelawson.co.uk/2013/farewell-hgroup/">Farewell, <code><span>hgroup</span></code></a></li>
+<li><a href="http://www.webmonkey.com/2013/04/w3c-drops-hgroup-tag-from-html5-spec/">W3C Drops <code><span>hgroup</span></code> Tag From HTML5 Spec</a></li>
+<li><a href="http://blog.paciellogroup.com/2012/04/html5-accessibility-chops-data-for-the-masses/">HTML5 Accessibility Chops: data for the masses</a></li>
+<li><a href="http://html5doctor.com/the-hgroup-hokey-cokey/">The <code><span>hgroup</span></code> hokey cokey</a></li>
+<li><a href="http://www.iandevlin.com/blog/2013/04/html5/hgroup-removed-from-the-html5-specification"><code><span>hgroup</span></code> removed from the HTML5 specification</a></li>
+<li><a href="http://www.sitepoint.com/html5-hgroup-element-dropped/">RIP HTML5 <code><span>hgroup</span></code> Element</a></li>
+</ul>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

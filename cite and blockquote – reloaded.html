@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>cite and blockquote – reloaded</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/cite-and-blockquote-reloaded/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">cite and blockquote – reloaded</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <p>The definitions of the <code><span>blockquote</span></code> and <code><span>cite</span></code> elements in the <a href="https://w3c.github.io/html/textlevel-semantics.html#the-cite-element">HTML specification</a> have recently been updated. This article explains what the changes mean for developers.<br>
+<span id="more-5283"></span></p>
+<p>Russian translation: <a href="http://web-standards.ru/articles/cite-blockquote-reloaded/" lang="ru">Сite и blockquote: перезагрузка</a></p>
+<h2>blockquote definition updated</h2>
+<blockquote><p>The <code><span>blockquote</span></code> element represents content that&nbsp; is quoted from another source, <strong>optionally</strong> with a citation which <strong>must</strong> be within a <code><span>footer</span></code> or <code><span>cite</span></code> element, and <strong>optionally</strong> with in-line changes such as annotations and abbreviations.<br>
+Content inside a <code><span>blockquote</span></code> other than citations and in-line changes <strong>must</strong> be quoted from another source, whose address, if it has one, <strong>may</strong> be cited in the <code><span>cite</span></code> attribute. [emphasis mine]<br>
+– <cite><a href="https://w3c.github.io/html/grouping-content.html#the-blockquote-element">4.4.4 the Blockquote element</a> , Faulkner et al. 2016 </cite></p></blockquote>
+<p>Note the added emphasis indicated via an inline note using square brackets “[emphasis mine]”</p>
+<h3>What the changes to blockquote mean for developers</h3>
+<p><a href="http://www.w3.org/TR/html5/">Previously in HTML5</a> it is was not conforming to include citations within <code><span>blockquote</span></code> elements. Now it is, as long as the citation content is within a <code><span>cite</span></code> or <code><span>footer</span></code> element. Citations inside <code><span>blockquote</span></code> elements are a common markup pattern (data indicates approximately <a href="http://lists.w3.org/Archives/Public/public-html/2013Aug/0100.html">60% of <code><span>blockquote</span></code> elements</a> include citations), the change to the <a href="https://w3c.github.io/html/grouping-content.html#the-blockquote-element">HTML spec</a> acknowledges this and provides semantic mechanisms to differentiate quoted content from citations.</p>
+<h4>Example of <code><span>footer</span></code> and <code><span>cite</span></code> used inside a <code><span>blockquote</span></code>:</h4>
+<pre><span>&lt;blockquote&gt;</span><span><br></span><span>&lt;p&gt;</span><span>As my fellow HTML5 Doctor, Oli Studholme has showed, people seldom quote exactly <br>– so sacrosanctity of the quoted text isn’t a useful ideal – and in print etc, <br>citations almost always appear as part of the quotation – it’s highly conventional.</span><span>&lt;/p&gt;</span><span><br></span><span>&lt;footer&gt;</span><span><br>— </span><span>&lt;cite&gt;&lt;a </span><span>href</span><span>=</span><span>"http://www.brucelawson.co.uk/2013/on-citing-quotations-again/"</span><span>&gt;</span><span>Bruce Lawson</span><span>&lt;/a&gt;&lt;/cite&gt;</span><span><br></span><span>&lt;/footer&gt;</span><span><br></span><span>&lt;/blockquote&gt;</span></pre>
+<p>The above example is indicative of what authors are doing anyway, so rather than maintain a <a href="http://www.w3.org/TR/html-design-principles/#priority-of-constituencies">theoretical purity</a> which serves no one, the definition has been modified to <a href="http://www.w3.org/TR/html-design-principles/#solve-real-problems">solve a real problem</a> using existing HTML features, rather than <a href="http://www.w3.org/TR/html-design-principles/#do-not-reinvent-the-wheel">re-inventing the wheel</a>.</p>
+<h3>An edge case</h3>
+<p>One of the arguments against allowing use of <code><span>cite</span></code> and <code><span>footer</span></code> in <code><span>blockquote</span></code>
+ to identify citation content is that the quoted content itself may 
+contain these elements. The simple reason for dismissing this argument 
+is that the vast majority of instances of quotations in <code><span>blockquote</span></code> elements this will not be the case. Denying the utility of <code><span>cite</span></code> and <code><span>footer</span></code> for an edge case is another example of <a href="http://ln.hixie.ch/?start=1154950069&amp;count=1">theoretical purity</a> that serves&nbsp; minimal practical purpose.</p>
+<p><del>If the case does arise for you, one method the <a href="http://www.w3.org/html/wg/drafts/html/master/grouping-content.html#the-blockquote-element">HTML speccurrently suggests</a> is you comment out the elements from the source (This is still an <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=23175">open issue</a> and advice may change):</del></p>
+<p>(added 20/11/13) In response to feedback the suggestion in the <a href="https://w3c.github.io/html/grouping-content.html#the-blockquote-element">HTML spec</a> is to use a <code><span>class</span></code> attribute (a <a href="https://w3c.github.io/html/introduction.html#design-notes-extensibility">defined extensibility mechanism</a>) on the <code><span>cite</span></code> element to identify it as an inclusion from the quoted source:</p>
+<pre><span> &nbsp;</span><span>&lt;blockquote&gt;</span><span><br>&nbsp; </span><span>&lt;p&gt;</span><span>My favorite book is </span><span>&lt;cite </span><span>class</span><span>=</span><span>"from-quote"</span><span>&gt;</span><span>At Swim-Two-Birds</span><span>&lt;/cite&gt;&lt;/p&gt;</span><span><br>&nbsp; </span><span>&lt;footer&gt;</span><span>- </span><span>&lt;cite&gt;</span><span>Mike[tm]Smith</span><span>&lt;/cite&gt;&lt;/footer&gt;</span><span><br>&nbsp; </span><span>&lt;/blockquote&gt;</span></pre>
+<h2>cite definition updated</h2>
+<blockquote><p>The <code><a href="https://w3c.github.io/html/textlevel-semantics.html#the-cite-element"><span>cite</span></a></code> element <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#represents">represents</a> a reference to a creative work. It <strong>must</strong> include the title of the work or the name of the author (person, people or organization) or an URL reference, which <strong>may</strong> be in an abbreviated form as per the conventions used for the addition of citation metadata. [emphasis mine]<br>
+– <cite><a href="http://www.w3.org/html/wg/drafts/html/master/text-level-semantics.html#the-cite-element">4.51 the Cite element</a> , Berjon et al. 2013 </cite></p></blockquote>
+<h3>What the changes to cite mean for developers</h3>
+<p><a href="http://www.w3.org/TR/html5/">Previously in HTML5</a> it is 
+was not conforming to cite an author by name or include other reference 
+information for a creative work in a cite element, the use of cite was 
+reserved (theoretically) to identify the title of a creative work. This 
+was an attempt to rip up a cow path, that authors had created over the 
+last <a href="http://www.w3.org/TR/REC-html40/">14 years of the cite elements existence</a>.</p>
+<p>Authors railed against the change in definition:</p>
+<blockquote><p>Join me in a campaign of civil disobedience against the unnecessarily restrictive, backwards-incompatible change to the <code><span>cite</span></code> element. Start using HTML5 but start using it sensibly. Let’s ensure that bad advice remains fictitious.</p>
+<p><a href="http://24ways.org/2009/incite-a-riot/"><cite>Jeremy Keith, 2009</cite></a></p></blockquote>
+<p>They also provided <a href="http://wiki.whatwg.org/wiki/Cite_element">use cases</a> and <a href="http://oli.jp/example/blockquote-metadata/">real world examples</a> of citation usage. As a result of <a href="https://dl.dropboxusercontent.com/u/377471/cite1.html">research</a>, <a href="http://lists.w3.org/Archives/Public/public-html/2013Aug/0100.html">data analysis</a> and <a href="http://www.w3.org/Search/Mail/Public/search?keywords=%3Cblockquote%3E+%3Ccite%3E&amp;hdr-1-name=subject&amp;hdr-1-query=&amp;index-grp=Public_FULL&amp;index-type=t&amp;type-index=public-html">discussion,</a> authors can now, again, use the <code><span>cite</span></code> element to identify a wider range of references to a creative work; <q>the title of the work or the name of the author (person, people or organization) or an URL reference</q>. What we lose in theoretical purity we gain in utility:</p>
+<blockquote><p>part of the reason why &lt;cite&gt; can now be used with an URL (not to mention <a href="https://twitter.com/bing">@bing</a>‘s identical use. <a href="http://t.co/h3qp3ujfzX">http://t.co/h3qp3ujfzX</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/statuses/392645777874370560">October 22, 2013</a></p></blockquote>
+<h3>What do you think?</h3>
+<p>Please read the definitions in HTML 5.1, your feedback as always is welcome!</p>
+<ul>
+<li><a href="https://w3c.github.io/html/textlevel-semantics.html#the-cite-element"><span>4.5.6 </span>The <dfn><code><span>cite</span></code></dfn> element</a></li>
+<li><a href="https://w3c.github.io/html/grouping-content.html#the-blockquote-element"><span>4.4.4 </span>The <dfn><code><span>blockquote</span></code></dfn> element</a></li>
+</ul>
+<p><strong>Big up!</strong> to Doctor Oli whose <a href="http://oli.jp/2011/blockquote/">research</a> helped mold the changes made to the <code><span>cite</span></code> and <code><span>blockquote</span></code> elements. And to Doctor Bruce for <a href="http://www.brucelawson.co.uk/2013/on-citing-quotations-again/">insisting</a> that it his right to <em>cite</em> his mum.</p>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

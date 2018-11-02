@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on notes (of smart people) about web components</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/09/notes-on-notes-of-smart-people-about-web-components/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on notes (of smart people) about web components</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The <a href="http://www.w3.org/blog/TAG/2014/03/17/the-extensible-web-summit/">Extensible Web Summit</a> happened in Berlin yesterday. This prompted written words from some big thinkers and doers. Jeremy Keith wrote a piece on <a href="https://adactio.com/journal/7431">Web Components</a> followed up by a <a href="https://infrequently.org/2014/09/uncomfortably-excited/">uncomfortably excited</a> response from Alex Russell.<span id="more-2994"></span></p>
+<h2>On Piffle and Tosh and feasting upon Fetid code</h2>
+<p>While <a href="http://www.paciellogroup.com/?s=web+components">I am as excited</a>
+ as the next nerd by the potential of web components. Their development 
+and marketing appear to follow the same depressing pattern of <em>ship first, oh yeah we better tack on some ARIA to cover up the cracks</em>.</p>
+<p><a href="https://infrequently.org/2014/09/uncomfortably-excited/">Alex stated yesterday</a>:</p>
+<blockquote><p>Jeremy’s argument, if I can paraphrase, is that people will build Web Components and this might be bad [for accessibility].<br>
+…<br>
+Piffle and tosh.</p></blockquote>
+<p>I cannot but agree with Alex <em>piffle</em> wise. Jeremy’s argument 
+does not go far enough.&nbsp; Web components are being built in the same
+ development culture that web stuff is usually built in, and <strong>this is <em>bad</em></strong> for accessibility. This is not to say that web components are by definition <em>bad. </em>It
+ is the same story for any implementation of accessibility support on 
+the web, in browsers and in UI libraries: it usually comes after, often <em>way after</em>
+ a product has been shipped and distributed to millions upon millions of
+ people and 100s of thousands of developers have gorged on and 
+regurgitated the code in their own projects.</p>
+<h3>Examples?</h3>
+<p>Some tweets I wrote in June (in usual diplomatic style) upon initial release of <a href="https://www.polymer-project.org/docs/elements/paper-elements.html#paper-button">Polymer Paper web components</a>
+ which may well be fantastic examples of what can be achieved with this 
+new technology, but were sadly lacking in even the most basic 
+accessibility considerations (this situation has improved but they are 
+still riddled with issues):</p>
+<blockquote lang="en-gb"><p>new polymer demos are cool <a href="http://t.co/Zid5ko0ion">http://t.co/Zid5ko0ion</a> <a href="http://t.co/9B2qUl3Ifx">http://t.co/9B2qUl3Ifx</a> <a href="http://t.co/IWIVdyMlNv">http://t.co/IWIVdyMlNv</a> except for keyboard or assistive tech users</p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/481859355583983616">June 25, 2014</a></p></blockquote>
+
+<blockquote lang="en-gb"><p>
+<a href="https://twitter.com/dstorey">… </a>making showcase UI components with minimal UX/AX is just taking the piss — Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/481914631460777984">June 25, 2014</a>
+</p></blockquote>
+
+<blockquote lang="en-gb"><p>
+<a href="https://twitter.com/dstorey">@dstorey</a> <a href="https://twitter.com/patrick_h_lauke">@patrick_h_lauke</a> <a href="https://twitter.com/marcysutton">@marcysutton</a> not point, much $$$$ +brains invested by <a href="https://twitter.com/google">@google</a> on <a href="https://twitter.com/polymer">@polymer</a> bling “Welcome to the future” dogfood — Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/481913416022786048">June 25, 2014</a>
+</p></blockquote>
+
+<p>Alex stated yesterday:</p>
+<blockquote><p>Luckily we’ve been thinking very hard about this at 
+Google and have invested heavily in Polymer and high-quality Material 
+Design components that are, as I write this, undergoing review and 
+enhancement for accessibility.<br>
+…<br>
+The economics of the new situation that Web Components introduce are 
+(intentionally) tilted in a direction that provides ability for cream to
+ rise to the top — and for the community to quickly judge if it smell 
+off and do something about it.</p></blockquote>
+<p>As Alex stated “Google … have invested heavily in Polymer” and also 
+invest in accessibility (see references). What I can’t comprehend is why
+ that investment of <em><strong>big</strong></em> smarts and <em><strong>big</strong></em>
+ bucks by Google did not include the integration of accessibility and 
+usability into the core development cycle? Why is it considered the 
+community’s job to polish the turds?</p>
+<h3>Further reading/watching</h3>
+<ul>
+<li><a href="http://www.paciellogroup.com/blog/2014/08/developing-a-manifesto-for-accessible-ux/">Developing a Manifesto for Accessible UX</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2014/06/accessibility-maturity-continuum/">An Accessible Design Maturity Continuum</a></li>
+<li><a href="https://www.polymer-project.org/articles/accessible-web-components.html">Accessible web components (part 1)</a></li>
+<li><a href="http://youtu.be/Nyjhk8s4T6o">Alice Boxhall “Accessible Web Components using Polymer” (ID24)</a></li>
+</ul>
+<p><br>
+</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20notes%20(of%20smart%20people)%20about%20web%20components_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

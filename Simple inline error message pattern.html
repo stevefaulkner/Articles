@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Simple inline error message pattern</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2016/01/simple-inline-error-message-pattern/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Simple inline error message pattern</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Error messages can be problematic to convey consistently to <em>all</em> users across browsers and assistive technology (AT). Using simple HTML, with a little ARIA <em>polyfil</em> magic if you want to get fancy, you can robustly associate error messages with controls and ensure that users get the <strong>message</strong> every time. <span id="more-4144"></span></p>
+<h2>The issue</h2>
+<ul>
+<li>You want to display a message to users in the case where they have not filled in a form field correctly.
+<ul>
+<li>You want the error to be announced by screen readers when the invalid field is focused.</li>
+<li>You don’t wan’t any delay between the field getting focus and the error message being announced.</li>
+<li>You want it to work in as many browser and AT combinations as is possible.</li>
+</ul>
+</li>
+</ul>
+<h2>The really simple pattern</h2>
+<p>Add the error message as a child of the <a href="http://www.w3.org/TR/html5/forms.html#the-label-element">label</a> element associated with an input.</p>
+<p>It is <em>really</em> robust because the error message, when added, becomes part of the <a href="http://www.w3.org/TR/accname-aam-1.1/#dfn-accessible-name">accessible name</a> for the control:</p>
+<p><strong>Non-error state of <code>input type=text</code>:</strong></p>
+<p>accessible name: “pootish”</p>
+<p><strong>Error state of <code>input type=text</code>:</strong></p>
+<p>accessible name: “pootish ERROR – fill it in sucker!”</p>
+
+<h2>A pretty simple pattern</h2>
+<p>This pattern is almost as robust as the previous, except that it 
+relies on some ARIA magic to polyfil the lack of implementation support 
+for multiple labels. While browsers support the activation behaviour for
+ multiple labels (you can click on any <code>label</code> associated with a control via <code>for/id</code>). Only Firefox currently exposes the correct accessible name.<br>
+Using a separate <code>label</code> for the error message provides more 
+flexibility in (CSS) decoration and positioning of the message. It 
+results in the same accessible names for the non-error and error states 
+as the really simple pattern.</p>
+
+
+<h2>Bugs filed</h2>
+<p>As mentioned above, browsers mostly don’t implement the deriving of an accessible name from multiple <code>label</code> elements, so have filed some bugs, so in the future the use of <a href="http://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">aria-labelledby</a>, in this case, will not be needed.</p>
+<ul>
+<li>Edge – <a href="https://connect.microsoft.com/IE/feedbackdetail/view/2193482/incorrect-accessible-name-from-multiple-label-elements">incorrect accessible name from multiple label elements</a></li>
+<li>Chrome – <a href="https://code.google.com/p/chromium/issues/detail?id=573494">acc name not produced for labelable elements that have multiple associated labels</a></li>
+<li>Firefox – <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1236051">accessible name from multiple label elements missing white space</a></li>
+</ul>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Simple%20inline%20error%20message%20pattern_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

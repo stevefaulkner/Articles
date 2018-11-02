@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>CSS, HTML, ARIA, browsers, assistive technology and interoperability</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/10/css-html-aria-browsers-assistive-technology-and-interoperability/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">CSS, HTML, ARIA, browsers, assistive technology and interoperability</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>A number of issues are being debated in accessibility circles 
+at the moment. These primarily revolve around how browsers and assistive
+ technology interpret and represent HTML semantics via <a href="http://www.paciellogroup.com/blog/2011/10/brief-history-of-browser-accessibility-support/">accessibility APIs</a> and to the end user, and how this is affected by the use of CSS style rules.</p>
+
+<h3>The wild west</h3>
+<p>It feels as if understanding how browsers implement accessibility is 
+like the wild west, in many respects it’s uncharted territory, unlike 
+the specification of mainstream implementation of HTML, being specified 
+and documented in explicit detail in <a href="http://dev.w3.org/html5/spec/spec.html">HTML5</a>.
+ browsers implementers and AT implementers pretty much do their own 
+thing, all acting in good faith, but without co-ordination or 
+co-operation. This leads to inconsistencies across implementations and 
+deviations from the subset of accessibility support implementation that 
+is specified.</p>
+<h3>Specification of accessibility support not needed</h3>
+<p>A while back the editor of the HTML5 specification Ian Hickson made the <a href="http://wiki.whatwg.org/index.php?title=Objections_against_CP_for_ISSUE-129&amp;oldid=6206#The_HTML_to_Platform_Accessibility_APIs_Implementation_Guide">following statement</a> in reference to the <a href="http://dev.w3.org/html5/html-api-map/overview.html">HTML to Platform Accessibility APIs Implementation Guide</a> a document that is being developed in an attempt to nail down HTML accessibility implementation details:</p>
+<blockquote><p>In fact, the proposed document is unnecessary. Vendors 
+have not shown an  inability to read the existing normative 
+specifications, and the text  does not help authors or readers of the 
+specification.</p></blockquote>
+<p>The problem being is that “existing normative specifications” do not 
+provide details or guidance on many aspects of how accessibility support
+ in browsers or AT is currently implemented or how it should be. There 
+is the<abbr title="Accessible Rich Internet Applications"> <a href="http://www.w3.org/TR/wai-aria-implementation/">WAI-ARIA</a></abbr><a href="http://www.w3.org/TR/wai-aria-implementation/"> 1.0 User Agent Implementation Guide</a>
+ which is a good attempt at specifying how ARIA should be implemented, 
+but this covers only ARIA, a subset of what needs to be specified.</p>
+<h3><a href="http://dev.w3.org/html5/html-api-map/overview.html">HTML to Platform Accessibility APIs Implementation Guide</a></h3>
+<p>This document that I am currently editing along with Cynthia Shelly 
+from Microsoft, is attempting to provide details on how to implement the
+ rest of what is now known as HTML5. It’s in it’s infancy, but recently 
+the ongoing work has been given a major boost through the <a href="http://twitter.com/#!/stevefaulkner/status/124835322579271680">support for its development</a> by Adobe Systems. Along with continuing support from <a href="http://www.paciellogroup.com/">The Paciello Group</a> it means that I will have dedicated days each month for the next year to devote to the editing of the specification.</p>
+<h3>CSS effects upon semantics</h3>
+<p>As noted earlier, there has been discussions of late on how CSS rules
+ affect HTML semantics. I think developers are fairly aware, for example
+ that using <code>display:none</code> on content means that it will be 
+hidden from all users (of CSS supporting browsers), including assistive 
+technology that sits on top of the browsers, while <a href="http://webaim.org/techniques/css/invisiblecontent/">content shifted offscreen</a>
+ will still be available to screen reader users. But there are other CSS
+ related effects that are worrying and confusing developers, such as the
+ use of <a href="http://www.accessibleculture.org/articles/2011/08/responsive-data-tables-and-screen-reader-accessibility/"><code>display:block</code> on table elements</a> which removes all the table semantics in some browsers&nbsp; and <a href="http://www.456bereastreet.com/archive/201110/using_displaytable_has_semantic_effects_in_some_screen_readers/"><code>display:table</code> on non table elements</a>
+ which turns the elements into a table. The effects of these seem 
+counter intuitive since the mantra of CSS as the presentation layer and 
+HTML as the semantic layer, is widely taught.</p>
+<p>If you are interested in discussing, researching and documenting the CSS accessibility issues, join the newly formed <a href="http://www.w3.org/community/cssacc/">W3C CSS Accessibility Community Group</a>.</p>
+<h3>A non interoperable web is a non accessible web</h3>
+<p>Currently we have accessibility layer implementation inconsistencies 
+across browsers and assistive technologies, we have a lack of 
+understanding of how features are implemented and a lack of 
+documentation of accessibility features. This makes it harder for 
+developers, implementers and most importantly end users. This situation 
+will not change unless we work together to document and specify this 
+stuff and seek implementation consistency across browsers and AT. A 
+non-interoperable web is a non-accessible web.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="CSS,%20HTML,%20ARIA,%20browsers,%20assistive%20technology%20and%20interoperability_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

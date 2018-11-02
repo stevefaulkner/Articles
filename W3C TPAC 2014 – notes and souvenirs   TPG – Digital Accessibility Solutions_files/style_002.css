@@ -1,0 +1,1146 @@
+/*
+Theme Name: PacielloTheme (TPG 2015)
+Theme URI: http://www.paciellogroup.com
+Description: Responsive Bootstrap-based WP custom theme
+Author: Patrick H. Lauke
+Author URI: http://www.splintered.co.uk
+Version: 1.0
+Tags: responsive, bootstrap
+*/
+
+@import url('bootstrap/css/bootstrap.min.css');
+@import url('font-awesome/font-awesome.min.css');
+
+@font-face{font-family:'Roboto Slab';font-style: normal;font-weight:100;src: local('Roboto Slab Thin'), local('RobotoSlab-Thin'), url(font/robotoslab-thin.woff) format("woff")}
+@font-face{font-family:'Roboto Slab';font-style: normal;font-weight:300;src: local('Roboto Slab Light'), local('RobotoSlab-Light'), url(font/robotoslab-light.woff) format("woff")}
+@font-face{font-family:'Roboto Slab';font-style: normal;font-weight:400;src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'), url(font/robotoslab-regular.woff) format("woff")}
+@font-face{font-family:'Roboto Slab';font-style: normal;font-weight:700;src: local('Roboto Slab Bold'), local('RobotoSlab-Bold'), url(font/robotoslab-bold.woff) format("woff")}
+
+::-moz-selection { background: #5B5B5B; color: #fff; }
+::selection { background: #5B5B5B; color: #fff; }
+
+.container .jumbotron {
+    font-size: 0.85em;
+    padding: 1em;
+}
+
+@media (min-width: 768px) {
+    .container .jumbotron {
+        font-size: 1em;
+        padding: 2em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
+html {
+    font-size: 0.95em;
+}
+
+body {
+    font-size: 1em;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3, h4 {
+    font-size: 1.2em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+p, ul, ol {
+    margin-bottom: 1.4em;
+}
+
+main li {
+    margin-bottom: 0.25em;
+}
+
+a.btn {
+    text-decoration: none;
+    background: #1b75bc;
+}
+
+
+body > footer {
+    margin-top: 2.5em;
+    background: #0E3B5E;
+    color: #CFCFCF;
+    padding: 2.5em 0;
+}
+
+body > footer a {
+    color: #7AADD9;
+    transition: all 0.15s; /* soften the focus/hover a tad */
+}
+
+a {
+    color: #1b75bc;
+}
+
+body > footer a:hover,
+body > footer a:focus {
+    color: #bcd6ec;
+}
+
+header {
+    background: #F7F7F7;
+    padding: 1em 0 0.5em 0;
+    margin-bottom: 2.5em;
+}
+
+nav .current_page_item a,
+nav .current_page_parent a,
+.navbar-toggle {
+    border-bottom: 0.3em #999 solid;
+    padding-bottom: 12px;
+    /* font-weight: bold; */
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+    outline: none;
+    background-color: #e0e0e0;
+    color: #444;
+}
+
+.navbar-toggle {
+    background: #ddd;
+    color: #000;
+    border: 1px #444 solid;
+    outline: none;
+    font-weight: bold;
+    font-size: 0.925em; /* hacky, but fixes display of the hamburger icon on desktop */
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+    background: #eee;
+}
+
+ul.nav.navbar-nav {
+    margin-left: 2em;
+    text-transform: uppercase;
+    float: right;
+    font-size: 0.9em;
+}
+
+ul.nav.navbar-nav>li>a {
+    transition: all 0.15s; /* soften the focus/hover a tad */
+    margin: 0 0.1em;
+    padding: 0.3em 0.4em;
+}
+
+.container>.navbar-header {
+    margin: 0;
+}
+
+.navbar-toggle {
+    margin-right: 0;
+    border-radius: 0.5em;
+    margin-top: 0;
+    padding: 0.5em 1em;
+}
+
+.navbar-toggle[aria-expanded=true] .fa::before {
+    content: "\f00d";
+}
+
+/* fix for Chrome's "show focus outline on tabindex=-1 items that were focused" */
+
+h1:focus, h2:focus, h3:focus, p:focus, div:focus { outline: none; }
+
+/* special "small screen" styling for the disclosure widget navigation */
+
+@media (max-width: 767px) {
+
+    header {
+        padding: 1em 0 0 0;
+    }
+
+    header .container {
+        border-bottom: 1px #DDD solid;
+    }
+
+    header .container>.navbar-header {
+        margin: 0 0 1em 0;
+    }
+
+    nav#primaryNav {
+        background: #fafafa;
+        border-top: 1px #ddd solid;
+    }
+
+    .jumbotron h1 {
+        font-size: 2em !important;
+    }
+
+    ul.nav.navbar-nav {
+        margin: 1em;
+        float: none;
+    }
+
+    ul.nav.navbar-nav>li>a {
+        padding: 1em;
+    }
+
+    nav .current_page_item a, nav .current_page_parent a {
+        border-bottom: none;
+        border-left: 0.5em #666 solid;
+        margin-left: -0.5em;
+        font-weight: bold;
+        background: #f0f0f0;
+    }
+
+}
+
+@media (max-width: 321px) {
+    .navbar-toggle {
+        padding: 0.25em 0.4em;
+    }
+}
+
+.jumbotron h1,
+body> footer h2 {
+    margin-top: 0.25em;
+}
+
+table caption {
+    padding: 1em;
+    font-weight: bold;
+}
+
+/* breadcrumbs */
+ul#breadcrumbs {
+    list-style: none;
+    background: #fafafa;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: #444;
+    padding: 0.5em 1em;
+}
+
+ul#breadcrumbs li {
+    display: inline;
+    margin-right: 0.3em;
+}
+
+ul#breadcrumbs li::after {
+    content: ' >';
+}
+
+ul#breadcrumbs li.current::after {
+    content: '';
+}
+
+
+/* footer */
+
+.col-md-4 iframe {
+    width: auto !important;
+    max-width: none !important;
+}
+
+.col-md-4 .twitter-timeline {
+    /* font-size: 12px; */
+}
+
+ul.social {
+    padding-left: 0;
+}
+
+ul.social li {
+    display: inline;
+    font-size: 2em;
+    margin-right: 0.5em;
+}
+
+.legal { margin-top:1em; font-size: 0.95em; color:#aaa }
+
+
+/* for skip link */
+
+.container { position: relative; }
+#skippy {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    padding: 1em;
+    background-color: #1b75bc;
+    color: #fff;
+    z-index: 10;
+    outline: none;
+}
+div#content:focus { outline:none; }
+
+main a {
+    text-decoration: underline;
+}
+
+code {
+    background: #eee;
+    color: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', Helvetica, Arial, sans-serif;
+}
+
+main h2 {
+   color: #333;
+
+}
+
+main h3, main h4, main h5, main h6 {
+   color: #1b75bc;
+}
+
+.widget.randomtext {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px #EEE solid;
+}
+
+.randomtext {
+    background: #F4F4F4;
+    border-radius: 0.5em;
+    padding: 0.25em;
+}
+
+.col-md-4 .randomtext {
+    margin-top: 1.25em;
+}
+
+.randomtext h1,
+.randomtext h2,
+.randomtext h3,
+.randomtext h4,
+.randomtext h5,
+.randomtext h6 {
+    color: #222;
+}
+
+.randomtext a {
+    color: #0E3B5E;
+}
+
+.randomtext small {
+    color: #707070;
+}
+
+.randomtext blockquote {
+    border: none;
+    margin-bottom: 0;
+    font-size: 0.8em;
+}
+
+.randomtext blockquote p {
+    margin-bottom: 1em;
+}
+
+.randomtext .fa.fa-quote-left {
+    padding-left: 0.4em;
+    padding-top: 0.55em;
+    color: #999;
+}
+
+
+.randomtext cite {
+    padding: 0;
+    display: block;
+    font-size: 0.8em;
+    font-weight:bold;
+    color:#555;
+    font-style: normal;
+}
+
+/* homepage */
+.jumbotron {
+    /* background-color: #2F3F4E; */
+    /* background-color: #324F69; */
+    background-color: #1b75bc;
+    color: #fff;
+    border-radius: 0.3em;
+}
+
+.jumbotron h1 {
+    font-size: 2.75em;
+}
+
+.jumbotron p {
+    font-size: 1.25em;
+}
+
+main .callout .fa {
+    color: #aaa;
+}
+
+main .callout a .fa {
+    color: #fff;
+}
+
+/* mainly for our about/staff page */
+
+#biogs [data-toggle="collapse"] {
+    outline: none;
+    text-decoration: none;
+}
+
+#biogs [data-toggle="collapse"] .name {
+    text-decoration: underline;
+    margin-bottom: 0;
+    font-size: 1.2em;
+    display: block;
+    margin-top: 0.75em;
+}
+
+#biogs [data-toggle="collapse"] .role {
+    font-size: 0.85em;
+    display: block;
+}
+
+#biogs [data-toggle="collapse"] img {
+    float: left;
+    margin-right: 1em;
+    border-radius: 50%;
+    transition: all 0.2s;
+    border: 8px #fff solid; ;
+}
+
+#biogs [data-toggle="collapse"]:focus img,
+#biogs [aria-expanded="true"] img {
+  border: 4px #1B75BC solid;
+}
+
+#biogs [data-toggle="collapse"] .namerole {
+    display:block;
+}
+
+@media (max-width: 767px) {
+    #biogs [data-toggle="collapse"] .namerole {
+        clear: both;
+    }
+}
+
+#biogs .panel-collapse div {
+    background: #F4F4F4
+
+;
+    padding: 1em 2em;
+    margin: 1em;
+    border-radius: 0.5em;
+}
+
+#team dt {
+    font-weight: normal;
+    margin-top: 0.35em;
+}
+
+#team dd {
+    font-size: 0.75em;
+    color: #767676;
+}
+
+/* mainly for our resources/download pages */
+
+#resources dt {
+    font-weight: normal;
+}
+
+#resources dd {
+    font-size: 0.75em;
+    margin-left: 1.75em;
+    margin-bottom: 1.5em;
+}
+
+#download ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+#download .btn .fa {
+    position: absolute;
+    left: 0.25em;
+}
+
+#download .btn {
+    text-align: left;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0.25em 0;
+    white-space: normal;
+    position: relative;
+    padding-left: 3em;
+}
+
+#download .btn span.dl-label {
+    display: block;
+    text-align: left;
+}
+
+#download .btn span.dl-info {
+    font-size: 0.85em;
+    text-align: left;
+}
+
+#download .btn code {
+    background: inherit;
+    color: inherit;
+    padding: 0;
+}
+
+div#versions {
+    font-size: 0.75em;
+}
+
+ul.resources {
+    list-style: none;
+    padding: 0;
+}
+ul.resources li {
+    margin-bottom: 0.75em;
+}
+
+/* for services page */
+
+div.service {
+    border-bottom: 1px #eee solid;
+    margin: 1em 0;
+    padding: 1em 0;
+}
+
+.service.premium {
+    background: #F4F4F4
+
+;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+div.service h2 {
+    margin-top: 0;
+}
+
+div.service .fa {
+    color:#bbb;
+}
+
+div.additional {
+    margin: 2em 0;
+}
+
+.additional p {
+    margin-left: 2.4em;
+}
+
+div.note {
+    background: #F4F4F4
+
+;
+    padding: 1.5em;
+    font-size: 1.25em;
+    margin: 1em 0;
+    border-radius: 0.5em;
+}
+
+.note .fa {
+    color: #aaa;
+}
+
+/* for contact page */
+#addresses ul {
+    list-style: none;
+    padding: 0;
+}
+
+#addresses .fa {
+    color: #767676;
+}
+
+#gmap_canvas {
+    margin-top: 1.5em;
+}
+
+#gmap_canvas img {
+    max-width:none!important;
+    background:none!important;
+}
+
+/* blog styles */
+
+h2 a {
+    text-decoration: none;
+}
+
+.screen-reader-text { display:none; }
+blockquote { font-size: 1em; }
+.meta {
+    font-size: 0.75em;
+    margin: 0;
+}
+
+article .meta {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px #eee solid;
+}
+
+article .taxonomy ul li {
+    display: inline;
+    margin: 0 0.5em 0 0;
+    padding: 0 0.5em 0 0;
+}
+
+article .taxonomy ul {
+    list-style: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+article .taxonomy ul li .fa {
+    margin: 0 0.2em 0 0;
+    color: #666;
+}
+
+article .taxonomy ul li a {
+    color: #222;
+    text-decoration: none;
+}
+
+article .taxonomy ul li a:focus,
+article .taxonomy ul li a:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+img.alignleft {
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+img.alignright {
+    float:right;
+    margin: 0 0 1em 1em;
+}
+
+.comment-form label,
+.comment-form input,
+.comment-form textarea {
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.form-allowed-tags {
+    font-size: 0.75em;
+}
+
+main article {
+    overflow: hidden; /* for long urls etc */
+}
+
+main article pre {
+    overflow: auto; /* code blocks */
+}
+
+main img { 
+    max-width: 100%;
+    height: auto;
+}
+
+main figure { padding: 1em 0; }
+
+main figure > p { display: none; } /* fix for WP adding spurious paragraph tags */
+
+main figure figcaption { 
+    font-style: italic;
+    margin-top: 0.5em;
+    font-size: 0.8em;
+    border: 1px #eee solid;
+    padding: 0.5em;
+    background: #f5f5f5;
+}
+
+main .table-scroller {
+    overflow: auto; /* automagic wrapper element added from script.js to article tables */
+}
+
+main .pager a { text-decoration: none; }
+
+.singlepost h1 {
+    font-size: 2em;
+}
+
+.singlepost h2 {
+    /* font-size: 1.25em; */
+    margin-top: 2em;
+}
+
+.singlepost h3,
+.singlepost h4,
+.singlepost h5,
+.singlepost h6 {
+    font-size: 1em;
+}
+
+article iframe {
+    border: 1px #ddd solid;
+}
+
+#entry-author-info {
+    background: #fafafa;
+    border-radius: 0.5em;
+    padding: 2em;
+    position: relative;
+    font-size: 0.8em;
+    line-height: 1.75;
+}
+
+#author-description h2 {
+    margin-top: 0;
+}
+
+#author-avatar {
+    float: left;
+    margin: 0 1.5em 1em 0;
+}
+
+#author-description {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+
+    #author-avatar {
+        position: absolute;
+        top: 2em;
+        left: 2em;
+        float: none;
+        margin: 0;
+    }
+
+    #author-description {
+        margin-left: 130px;
+    }
+
+}
+
+.comment-list {
+    padding: 0;
+}
+
+.comment {
+    padding: 0.5em 0;
+    margin: 0.5em 0;
+    border-bottom: 1px #eee solid;
+}
+
+.comment-metadata {
+    font-size: 0.75em;
+}
+
+.comment-content {
+    margin: 0.5em 0;
+}
+
+.comment-author.vcard img {
+    float: left;
+    margin-right: 0.5em;
+}
+
+.comment.byuser {
+    background: #fafafa; /* added to all TPG user "staff" comments */
+    padding: 1em;
+}
+
+.widget_recent_entries ul {
+    list-style: none;
+    padding: 0;
+}
+
+.widget_recent_entries ul li {
+    border-bottom: 1px #eee solid;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+form.search-form {
+    margin-top: 1.5em;
+}
+
+label { vertical-align: bottom; }
+.search-form .btn { vertical-align: top; }
+
+/* Luxbox custom bootstrap-based lightbox by PHL */
+
+#screenshots ul {
+    list-style: none;
+    margin: 1em 0;
+    padding: 0;
+}
+
+#screenshots ul li {
+    display: inline;
+}
+
+.modal-content img { max-width: 100%; max-height: 80%; display: block; margin: 0 auto; }
+.modal-content p { text-align: center; margin-top: 0.5em;}
+.modal-content { box-shadow: none; -webkit-box-shadow: none; padding: 1em; border: 1px #999 solid; border-radius: 0.25em; }
+.modal-backdrop { background-color: #fff; }
+.modal-backdrop.in { opacity: .9; }
+.modal.in .modal-dialog { z-index: 2000; }
+
+a.luxbox img {
+    border: 1px #ccc solid;
+    padding: 0.25em;
+}
+
+small.legal { font-size: 0.65em; color: #666;}
+
+
+
+/* New primary navigation - AAR 03-Jan-2018 */
+
+nav#primaryNav.collapse {
+    display: block;
+}
+ 
+  nav#primaryNav {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border-top: none;
+  }
+  
+  nav#primaryNav a {
+    /* color: #fff;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.4; */
+    transition: all 0.15s;
+    margin: 0 0.1em;
+    padding: 0.3em 0.4em;
+    border-bottom: 0.3em transparent solid;
+    line-height: 20px;
+    color: #1b75bc;
+    text-decoration: none;
+  }
+  
+  nav#primaryNav a:hover,
+  nav#primaryNav a:focus
+  /*nav li:focus-within > a*/ {
+    outline: none;
+    background-color: #e0e0e0;
+    color: #444;
+    text-decoration: none;
+  }
+  
+  nav#primaryNav ul,
+  nav#primaryNav li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  
+  /* Style links that are current page/section. */
+  
+  /* nav#primaryNav>ul>li a[aria-label^="Current"],
+  nav#primaryNav>ul>li:hover a[aria-label^="Current"],
+  nav#primaryNav>ul>li:focus a[aria-label^="Current"] {
+    color: #666;
+    border-color: #999;
+  } */
+
+  /* nav#primaryNav > ul > .current_page_item > a, nav#primaryNav > ul > .current-page-ancestor > a */
+  .current_page_item > a, .current-page-ancestor > a {
+    border-bottom: 0.3em #999 solid;
+    border-left: none;
+    /* padding-bottom: 12px; */
+    font-weight: bold;
+}
+
+nav#primaryNav > ul > .current_page_item > a, nav#primaryNav > ul > .current-page-ancestor > a {
+    border-bottom: 0.3em #999 solid;
+}
+  
+  /* nav#primaryNav {
+    padding: .25em;
+  } */
+  
+ 
+  nav#primaryNav > ul a {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* padding: .7em .5em; */
+    margin: 0;
+    display: block;
+    width: auto;
+  }
+  
+  nav#primaryNav > ul > li > a {
+    text-align: center;
+    min-height: 2.5em;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+  }
+
+  nav#primaryNav > ul > li:first-child > a {
+      /* border-left: 1px solid #ddd; */
+  }
+  
+  li[data-child=true] > a::after {
+    content: " \1f83b";
+    /* Rebuild as an SVG and encode at https://yoksel.github.io/url-encoder/ */
+    white-space: nowrap;
+  }
+  
+  nav#primaryNav > ul {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* margin: 0; */
+    padding: 0;
+    /*float: left;*/
+    /* margin-left: 2em; */
+    /* text-transform: uppercase; */
+    float: right;
+    font-size: 0.9em;
+    /*float: right;*/
+    /*border: 1px dotted #f00;*/
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    justify-content: space-around;
+    /*width: 100%;*/
+    width: auto;
+    border-left: 1px solid #ddd;
+  }
+  
+  nav#primaryNav > ul > li {
+    /*width: auto;
+    float: left;*/
+    flex: 1 1 5em; /* 3 (edit me!) */
+    /* margin: 0.5em; 4 (edit me!) */
+  }
+
+  @media (min-width: 580px) {
+    nav#primaryNav > ul {
+        border-left: none;
+    }
+    nav#primaryNav > ul > li > a {
+        border: none;
+    }
+  }
+
+  @media (min-width: 580px) {
+    nav#primaryNav > ul {
+        width: 40em;
+        border-left: none;
+    }
+    nav#primaryNav > ul > li {
+        flex: 1 0 2em;
+    }
+}
+@media (max-width: 580px) {
+    nav#primaryNav > ul > li ul.sub-menu {
+        display: none;
+    }
+  }
+  
+  nav#primaryNav > ul > li > a {
+    /* border: none; */
+    min-height: inherit;
+    /* padding: .5em .75em .5em .75em;
+    border: 1px solid rgba(255,255,255,.25); */
+    text-transform: uppercase;
+  }
+  
+  nav#primaryNav > ul li ul {
+    /* -- second-level lists ------------------ */
+    position: absolute;
+    width: 12.5em;
+    z-index: 1001;
+    left: -999em;
+    /* using left instead of display to hide menus because display: none isn't read by screen readers */
+    background-color: #fff;
+    /* New technique */
+    /* clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; */
+  }
+
+  nav#primaryNav > ul li:hover ul, nav#primaryNav > ul li:focus-within ul {
+    white-space: normal; 
+  }
+  
+  nav#primaryNav > ul li ul ul {
+    /* -- third-and-above-level lists ------------------ */
+    margin: -2.5em 0 0 13.75em;
+  }
+  
+  nav#primaryNav > ul li ul ul ul {
+    /* -- fourth-and-above-level lists ------------------ */
+    margin: -2.5em 0 0 13.75em;
+  }
+  
+  nav#primaryNav > ul li:hover ul ul,
+  nav#primaryNav > ul li:hover ul ul ul,
+  nav#primaryNav > ul li:hover ul ul ul ul,
+  nav#primaryNav > ul li.focus ul ul,
+  nav#primaryNav > ul li.focus ul ul ul,
+  nav#primaryNav > ul li.focus ul ul ul ul {
+    left: auto;
+    right: auto;
+    clip: initial;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    padding: .5em 0;
+  }
+  
+  
+  nav#primaryNav > ul li:hover ul,
+  nav#primaryNav > ul li li:hover ul,
+  nav#primaryNav > ul li li li:hover ul,
+  nav#primaryNav > ul li li li li:hover ul,
+  nav#primaryNav > ul li.focus ul,
+  nav#primaryNav > ul li li.focus ul,
+  nav#primaryNav > ul li li li.focus ul,
+  nav#primaryNav > ul li li li li.focus ul
+  /*nav#primaryNav > ul li:focus-within ul*/ /*Safari TP and Firefox only (uncomment previous 4 styles to support all browsers*/ {
+    /* -- lists nested under hovered list items ------------------ */
+    left: auto;
+    right: auto;
+    clip: initial;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    z-index: 1;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    box-shadow: 0 5px 10px rgba(0,0,0,.25);
+  }
+
+  /* :focus-within in a selector kills the entire selector in IE11 */
+
+  /* nav#primaryNav > ul li.focus ul, nav#primaryNav > ul li:hover ul {
+      left: auto;
+      border-top: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      box-shadow: 0 5px 10px rgba(0,0,0,.25);
+  } */
+
+  /* IE11 is writing the class
+  nav#primaryNav > ul li.focus {
+      background-color: #f00;
+  } */
+  
+  nav#primaryNav > ul li:hover,
+  nav#primaryNav > ul li.focus,
+  nav#primaryNav > ul li:focus-within {
+    position: static;
+  }
+  
+  
+  /* IE7 fix where menus didn't close after click-drag */
+  
+  nav#primaryNav > ul li li {
+    width: 12.5em;
+    margin: 0;
+    /*background-color: #08414c;*/
+    text-transform: initial;
+  }
+  
+  nav#primaryNav > ul li li:first-child a {
+    border-top: none;
+  }
+  
+  nav#primaryNav > ul li li:last-child a {
+    /*border-bottom: none;
+              margin-bottom: .75em;*/
+  }
+  
+  nav#primaryNav > ul li ul a {
+    line-height: 1.2em;
+    text-align: left;
+    padding: .5em 1em;
+    margin: 0;
+    width: 12.5em;
+    border-bottom: 1px solid #ddd;
+    /*border-top: 1px solid #154b55;
+              border-bottom: 1px solid #063842;*/
+  }
+  
+  nav#primaryNav > ul li ul a:link,
+  nav#primaryNav > ul li ul a:visited,
+  nav#primaryNav > ul li ul a:hover,
+  nav#primaryNav > ul li ul a#PrimaryFlySel:link,
+  nav#primaryNav > ul li ul a#PrimaryFlySel:visited {
+    /*color: #f00;*/
+    text-decoration: none;
+  }
+  
+  nav#primaryNav > ul li ul a#PrimaryFlySel:link,
+  nav#primaryNav > ul li ul a#PrimaryFlySel:visited {
+    /*background-color: #f00;*/
+  }
+
+  nav .current_page_item a, nav .current_page_parent a {
+      border-left: none;
+      background: #fff;
+  }
+
+  nav#primaryNav > ul .current_page_parent li > a {
+      font-weight: normal;
+  }
+
+  nav#primaryNav > ul .current_page_parent li.current_page_item > a {
+    /* border-bottom: 0.3em #999 solid;
+    border-left: none; */
+    /* padding-bottom: 12px; */
+    font-weight: bold;
+    color: #000;
+}
+  
+  nav#primaryNav > ul li ul a:hover,
+  nav#primaryNav > ul li ul a#PrimaryFlySel:hover,
+  nav#primaryNav > ul li ul a:active,
+  nav#primaryNav > ul li ul a#PrimaryFlySel:active {
+    /*background-color: #f00;*/
+  }
+  
+  nav#primaryNav > ul li.menu-item-has-children > a::after {
+      /* content: "+"; */
+    /* background-image: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJAQMAAADAY3TdAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlOAAE0QVXMAAAAXSURBVAjXY6hgsGCQYOBgYABiCSC7AgAOsgGhDOVmLAAAAABJRU5ErkJggg==);
+    background-position: center right;
+    background-repeat: no-repeat; */
+  }
+  
+  ul.sub-menu ul.sub-menu {
+      display: none; /* Because we are disallowing anything past one level */
+  }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML Developers: Please Consider | HTML5 Doctor</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/html-developers-please-consider/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML Developers: Please Consider | HTML5 Doctor</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <p><a href="http://www.w3.org/TR/wai-aria-1.1/">ARIA</a> is an amazing technology, it allows developers to add meaning to meaningless <a href="http://www.w3.org/TR/html5/">HTML</a> or override meaning on HTML that is being repurposed and <a href="http://w3c.github.io/html-aria/">sometimes misused</a>,
+ so that users who rely upon the meaning of HTML, as implemented in 
+browsers, can understand and interact with HTML User Interfaces 
+successfully.</p>
+
+<p><a href="http://www.w3.org/TR/wai-aria-1.1/">ARIA</a> allows developers to re-invent and extend native <a href="http://www.w3.org/TR/html5/">HTML</a> features in meaningful ways. But like all <em>bolt-on</em> technologies its features are <strong><a href="http://w3c.github.io/aria-in-html/#aria-touch">brittle</a></strong> compared to its <em>built-in</em> counterparts.</p>
+<p>Whenever you are considering:</p>
+<ul>
+<li>Using <code><span>role</span><span>=</span><span>button</span></code> consider using a <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/button.html"><code><span>&lt;button&gt;</span></code></a> element, or the various other native HTML button types, instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>link</span><span>,</span></code> consider using an <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/a-href.html"><code><span>&lt;a </span><span>href</span><span>&gt;</span></code></a> element instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>heading</span></code> and <code><span>aria</span><span>-</span><span>level</span><span>=</span><span>"1-6"</span><span>,</span></code> consider using <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/h1-h6.html"><code><span>&lt;h1&gt;</span></code> to <code><span>&lt;h6&gt;</span></code></a> elements instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>list</span></code> and <code><span>role</span><span>=</span><span>listitem</span><span>,</span></code> consider using <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/ol-li.html"><code><span>&lt;ol&gt;</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/ul-li.html"><code><span>&lt;ul&gt;</span></code></a> and <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/ul-li.html"><code><span>&lt;li&gt;</span></code></a> elements instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>listbox</span></code> and <code><span>role</span><span>=</span><span>option</span></code>, consider using <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/select-option.html"><code><span>&lt;select&gt;</span></code> and <code><span>&lt;option&gt;</span></code></a> elements instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>checkbox</span></code> or <code><span>role</span><span>=</span><span>radio</span></code>, consider using <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-checkbox.html"><code><span>&lt;input </span><span>type</span><span>=</span><span>"checkbox"</span><span>&gt;</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-radio.html"><code><span>&lt;input </span><span>type</span><span>=</span><span>"radio"</span><span>&gt;</span></code></a> elements instead.</li>
+<li>Using <code><span>role</span><span>=</span><span>textbox</span></code>, consider using an <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-text.html"><code><span>&lt;input </span><span>type</span><span>=</span><span>"text"</span><span>&gt;</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-search.html"><code><span>search</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-email.html"><code><span>email</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-url.html"><code><span>url</span></code></a> or <a href="http://thepaciellogroup.github.io/AT-browser-tests/test-files/input-tel.html"><code><span>tel</span></code></a> instead.</li>
+<li>and so on…</li>
+</ul>
+<p>By using native <a href="http://www.w3.org/TR/html5/">HTML features</a>,
+ wherever practical, over custom HTML with bolt-on semantics and 
+interaction behaviours, you will save yourselves and users a lot of 
+grief and ensure that your User Interfaces work robustly across the 
+largest number of devices, operating systems, input devices, browsers 
+and assistive technologies.</p>
+<h2>Further Reading</h2>
+<ul>
+<li id="w3c-recommendation-28-october-2014"><a href="http://www.w3.org/TR/html5/">HTML5 – W3C Recommendation 28 October 2014</a></li>
+<li id="title"><a href="http://w3c.github.io/aria-in-html/">Notes on Using <abbr title="Accessible Rich Internet Applications">ARIA</abbr> in HTML</a></li>
+</ul>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

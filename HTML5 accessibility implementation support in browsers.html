@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 accessibility implementation support in browsers</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/06/html5-accessibility-implementation-support-browsers/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 accessibility implementation support in browsers</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="HTML5%20accessibility%20implementation%20support%20in%20browsers_files/HTML5_Logo_64.png" alt="HTML5" width="64" height="64"> I have been testing and tracking browser accessibility implementation support for a range of new <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML</a> features since 2010. Data can be found on <a href="http://www.html5accessibility.com/">HTML5accessibility.com</a>. Over the last week I also undertook a more formal, <a href="http://stevefaulkner.github.io/html-mapping-tests/">targeted testing</a> of the normative implementation requirements in the <a href="https://developer.paciellogroup.com/blog/2014/06/html5-accessibility-implementation-support-browsers/WAI-ARIA">WAI-ARIA section</a> of the HTML5.0 specification which is currently <a href="http://www.w3.org/blog/2014/06/html5-on-our-way-to-recommendation/">on its way</a> to becoming a W3C Recommendation.</p>
+
+<blockquote lang="en">
+<p>.<a href="https://twitter.com/firefox">@Firefox</a> ? 58 tests 
+<a href="https://twitter.com/webkit">@webkit</a> ? 58 tests 
+<a href="https://twitter.com/IE">@IE</a> ? 47 tests 
+<a href="https://twitter.com/googlechrome">@googlechrome</a> ? 40 tests <a href="https://twitter.com/search?q=%23HTML5&amp;src=hash">#HTML5</a> <a href="https://twitter.com/search?q=%23accessibility&amp;src=hash">#accessibility</a> requirements <a href="http://t.co/2BMdZ08brH">http://t.co/2BMdZ08brH</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/statuses/478929832630550528">June 17, 2014</a></p></blockquote>
+
+<h2>Understanding the testing results</h2>
+<p>HTML5 contains normative requirements (things a browser MUST 
+implement) to be considered to support HTML5. In order for HTML5.0 to 
+become a W3C Recommendation the normative requirements must be 
+implemented interoperably (i.e. in at least 2 independent browsers). One
+ of the methods used to decide whether a given HTML feature is 
+implemented interoperably is to create tests and test the assertions in 
+the specification in browsers. Details of the requirements are in the <a href="http://dev.w3.org/html5/decision-policy/public-permissive-exit-criteria.html">Model CR Exit Criteria (Public Permissive version 3).</a></p>
+<p>In the case of accessibility semantics implementation the assertions 
+are framed in terms of ARIA roles, states and properties as <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#default-implicit-aria-semantics">implicit ARIA semantics</a>. For example:</p>
+
+<h3>Another step is required</h3>
+<p>ARIA semantics in this case are used as an abstract indicator of the 
+platform specific requirements. To find out and test what browsers are 
+actually required to implement to conform to the above requirement we 
+have to refer to the <a href="http://www.w3.org/TR/wai-aria-implementation/">ARIA implementation guide</a>, which describes the implementation requirements for ARIA semantics in terms of the platform accessibility API mappings</p>
+
+<p>So from this information it can be assessed whether a browser passes or fails the assertion that the <code>button</code> element has a <code>button</code> role by looking at what <code>role</code>
+ the browser exposes via the platform accessibility API(s) it has 
+implemented (noted browser/platform in table headers) . We can look at 
+the accessibility information (roles and properties) by using an object 
+inspection tool, such as <a href="http://www.paciellogroup.com/resources/aviewer">aViewer</a> inspect.exe or <a href="http://accessibility.linuxfoundation.org/a11yweb/util/accprobe/">a11y-probe.</a></p>
+<p>For example, using aViewer it can be confirmed that Firefox 29 on Windows exposes the correct <code>role</code> for the <code>button</code> element:</p>
+<div id="attachment_2477" class="wp-caption"><p><img src="HTML5%20accessibility%20implementation%20support%20in%20browsers_files/aviewerbutton.png" alt="" width="594" height="306"></p><p class="wp-caption-text">button element information exposed in MSAA and Iaccessible2 by Firefox 29 is <code>role</code> of <code>button</code>.</p></div>
+<p>The results of testing all the assertions within the <a href="http://www.w3.org/TR/html5/dom.html#wai-aria">WAI-ARIA section</a>&nbsp;of the <a href="http://www.w3.org/TR/html5/">HTML5.0 Last Call Working Draft</a> specification are available: <a href="http://stevefaulkner.github.io/html-mapping-tests/">Implementation status for HTML5 element/attribute accessibility mappings</a></p>
+<h2>Notes</h2>
+<p>The accessibility requirements specified in the HTML5.0/5.1 specifications are <strong>only a subset</strong> of browser accessibility implementation requirements. Much of what is needed is simply not specified in <em>any</em> HTML specification. <a href="http://www.w3.org/WAI/PF/wiki/Outline_Core_User_Agent_Implementation_Guide">Work is continuing</a> on a <a href="http://rawgit.com/w3c/html-api-map/master/index.html">HTML accessibility mapping</a> and <a href="http://www.w3.org/TR/core-aam-1.1/">related specifications</a> to <strong>fully define</strong> the requirements on browsers to support HTML and SVG accessibility.</p>
+<p>The <a href="http://stevefaulkner.github.io/html-mapping-tests/">testing conducted</a> is for the purposes of checking <a href="http://www.w3.org/TR/html5/">HTML5 Last Call Working Draft</a> specification support, these are a subset of the requirements contained in the (still in development) <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML 5.1</a> specification,&nbsp; features that do not have at least 2&nbsp; implementations&nbsp; are <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=24812">absent from HTML5.0</a> (e.g. <code>dialog</code> element).</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20accessibility%20implementation%20support%20in%20browsers_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

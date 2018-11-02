@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on use of multiple ARIA role attribute values</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/10/notes-on-use-of-multiple-aria-role-attribute-values/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on use of multiple ARIA role attribute values</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The <code>role</code> attribute in <a href="http://www.w3.org/TR/html51/">HTML</a> can have multiple space separated values :</p>
+
+<section>
+<blockquote>
+<p id="aria-role-attribute"><strong>3.2.7.3.1 ARIA Role Attribute</strong></p>
+<p>Every HTML element may have an ARIA <a href="http://www.w3.org/TR/html51/infrastructure.html#attr-aria-role">role</a> attribute specified. This is an ARIA Role attribute as defined by ARIA <a href="http://www.w3.org/TR/wai-aria/roles#role_definitions">Section 5.4 Definition of Roles</a>.</p>
+<p>The attribute, if specified, must have a value that is a set of 
+space-separated tokens representing the various WAI-ARIA roles that the 
+element belongs to.</p>
+<p>The WAI-ARIA role that an HTML element has assigned to it is the 
+first non-abstract role found in the list of values generated when the <a href="http://www.w3.org/TR/html51/infrastructure.html#attr-aria-role">role</a> attribute is split on spaces.</p></blockquote>
+<h2>Code examples:</h2>
+<p>A new role <a href="http://www.w3.org/TR/wai-aria-1.1/#switch"><code>switch</code></a> has been introduced in <a href="http://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1</a>, for assistive technology that recognise the <code>switch</code> role it should be the role used to represent the semantics of the element, for those that don’t it should be ignored and the <code>checkbox</code> role should be recognised as representing the semantics of the element.</p>
+<pre><span>&lt;<span>div</span> <span>tabindex</span>=<span>"0"</span> <span>role</span>=<span>"switch checkbox"</span> <span>aria-label</span>=<span>"test"</span>&gt;</span>test<span>&lt;/<span>div</span>&gt;</span></pre>
+<p><strong>Note:</strong> in browsers tested (latest versions of Chrome and Firefox on Windows 10) multiple <code>role</code> values are presented as such in the <a href="https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">accessibility tree</a> and the <code>switch</code> role is exposed correctly in iA2 with a role=”toggle button”</p>
+<h2>Test cases:</h2>
+<p>These include various permutations of <a href="http://www.w3.org/TR/wai-aria-1.1/#abstract_roles">abstract</a> (<code>landmark, section</code>) roles and a landmark role <code>main</code>, as well as tests for the <code>switch</code> role.</p>
+<p><strong>Note:</strong> the abstract roles are used ONLY for the purposes of testing implementations, as the <a href="http://www.w3.org/TR/wai-aria-1.1/#abstract_roles">ARIA spec states</a>:</p>
+<blockquote><p>Abstract roles are used for the ontology. Authors <strong>MUST NOT</strong> use abstract roles in content.</p></blockquote>
+<p data-height="268" data-theme-id="5390" data-slug-hash="wKrdYQ" data-default-tab="result" data-user="stevef">See the Pen <a href="http://codepen.io/stevef/pen/wKrdYQ/">multiple role value tests</a> by steve faulkner (<a href="http://codepen.io/stevef">@stevef</a>) on <a href="http://codepen.io/">CodePen</a>.</p>
+<h2 data-height="268" data-theme-id="5390" data-slug-hash="wKrdYQ" data-default-tab="result" data-user="stevef">Findings</h2>
+<h3>JAWS</h3>
+<p>JAWS 16/Firefox 41 does not recognise the role of an element when 
+abstract role values are placed prior to a recognised non abstract role,
+ for example the following is reported as a ‘main region’:</p>
+<pre><span>&lt;<span>div</span> <span>role</span>=<span>"main landmark"</span> <span>aria-label</span>=<span>"test 3"</span>&gt;</span>test 3<span>&lt;/<span>div</span>&gt;</span></pre>
+<p>This is not reported as having <em>any</em> role.</p>
+<pre><span>&lt;<span>div</span> <span>role</span>=<span>"landmark main"</span> <span>aria-label</span>=<span>"test 2"</span>&gt;</span>test 2<span>&lt;/<span>div</span>&gt;</span></pre>
+<p>This is a <strong>JAWS bug</strong>.</p>
+<p>JAWS does not recognise the <code>switch</code> role and does not fallback to reporting as a <code>checkbox</code>. This is a <strong>JAWS bug</strong>.</p>
+<h3>NVDA</h3>
+<p>NVDA/Firefox 41 reports all test cases correctly: all <code>main</code> regions are recognised. <code>switch</code>
+ role is recognised (really NVDA uses the iA2 role value exposed by 
+browser, it doesn’t take note of the ARIA role) and reported as “toggle 
+button”.</p>
+<h3>Window Eyes</h3>
+<p>Window Eyes 9.2/Firefox 41&nbsp; only reports <a href="http://s.codepen.io/stevef/debug/wKrdYQ?">test 1</a> as a region, does not recognise any element semantics for multiple roles in tests 2-5.</p>
+<p>This is a <strong>Window Eyes bug</strong>.</p>
+<p>Reports test 6/7 as a <code>checkbox</code>, this is correct fallback behaviour as Window Eyes has not yet implemented support for the iA2 <code>toggle button</code> role exposed in the browser.</p>
+<h3>VoiceOver on iOS</h3>
+<p>Reports all test cases correctly: all <code>main</code> regions are recognised. <code>switch</code> role is not recognised, but test 6 reported with fallback role as “tick box”.</p>
+<p><strong>Note:</strong> the iOS testing was not latest version (version prior).&nbsp; <a href="https://gitter.im/w3c/a11ySlackers?at=561f9f16aa8d9347692bd7a9">Michiel Bijl reports</a> the <code>switch</code> role is not implemented in iOS 9.02.</p>
+<h3>VoiceOver on OSX Yosemite</h3>
+<p><a href="https://gitter.im/w3c/a11ySlackers?at=561fb7448b09e2973cce67ea">@ccwilcox reports</a> VO supports all test cases correctly: all <code>main</code> regions are recognised. <code>switch</code> role is reported as “switch”.</p>
+<h2>Suggestion</h2>
+<p>Until screen readers such as JAWS and Window Eyes have fixed their bugs it may not be the best idea to use the <code>role</code> attribute with multiple values or to use the <code>switch</code> role.</p>
+<p><strong>With thanks</strong> to my friend <a href="https://twitter.com/johnfoliot">John Foliot</a> for asking a question about use of multiple role values.<br>
+</p>
+</section>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20use%20of%20multiple%20ARIA%20role%20attribute%20values_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

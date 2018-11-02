@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 – Check it Before you Wreck it with Mike[tm] Smith</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 – Check it Before you Wreck it with Mike[tm] Smith</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">17-21 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <p>The W3C’s <a href="http://people.w3.org/mike//">Mike[tm] Smith</a> (AKA <a href="https://twitter.com/sideshowbarker">@sideshowbarker</a>) is the man with his head in the W3C <s>validation</s> <em>markup checking</em> tool source code; he makes the <em>magic</em> happen.&nbsp; Questions were asked for the HTML5 Doctor reader’s delight and edification.</p>
+<p>Russian Translation: <a href="http://web-standards.ru/articles/check-it-before-you-wreck-it/" lang="ru">Не&nbsp;проверив HTML5-кода, не&nbsp;суйся в&nbsp;воду&nbsp;— с&nbsp;Майком™&nbsp;Смитом</a></p>
+<h2>First off tell us a bit about what you do and what you work on</h2>
+<div id="attachment_5716" class="wp-caption"><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/mike-e1418142893611.png" alt="mike smith with phone and beer" width="300" height="297"></p><p class="wp-caption-text">Mike[tm] Smith – Deputy Director <a href="https://twitter.com/w3c">@W3C</a> – permissive work mode edition</p></div>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+I don’t work. I’m an old-world <em>boulevardier</em>.</p>
+
+<p>I drink tea with my pinky extended and I only expend effort on 
+anything if it somehow amuses me to do so. For the last few years it’s 
+amused me to spend time working on software for helping people check 
+whether or not their documents meet certain requirements in the HTML 
+spec.</p></blockquote>
+<p><a href="http://validator.w3.org/nu/"><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/numarkup.png" alt="nu markup checker" width="423" height="94"></a></p>
+<h2>What’s the difference between DTD and schema based checking?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+DTDs are chiseled into stone tablets. And so for processing they require
+ stone-tablet-aware toolchains. Sadly however the Web was not built on 
+stone-tablet processing so we’ve had to look around for other solutions.
+ In the case of document-conformance checking we’ve turned to using 
+things like RelaxNG schemas that while lacking the quaintness of DTDs 
+are a far more powerful means for expressing certain kinds of 
+document-conformance requirements. So it’s a tradeoff.</p></blockquote>
+<p><a href="http://validator.w3.org/"><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/w3c-valid.png" alt="W3C Validator" width="535" height="85"></a></p>
+<h2>What’s the difference between conformance checking and validation?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+<em>Validation</em> is an oldthink word. Use it for when you want to 
+make people think you’re a sort of fossil or relic of some earlier time.
+ Kind of like the word groovy or <em>XHTML</em>.</p>
+<p>Lots of people don’t know this but the etymology of that word 
+validation is from the days when our ancestors were mostly pig thieves 
+and they were given actual badges for spelling their own names 
+correctly, and usually a pat on that back too. Good job!</p>
+<p><em>Document-conformance checking</em> is the current party-approved 
+goodthink way of talking about looking for problems in HTML documents. 
+And do note that we call it <strong>document</strong> conformance and not authoring conformance, and we talk about conformance requirements for <strong>documents</strong>,
+ not conformance requirements for authors. That’s because you as an 
+author are a human being; a technical specification can’t place 
+requirements on you, it can only place requirements on documents you 
+create. And related tools don’t evaluate you as a human being for 
+conformance to particular technologies; instead they just evaluate the 
+documents you create.</p>
+<p>Anyway, <em>document-conformance checking</em> has the nasty ugly part <em>conformance</em> which is a hurtful word really but you gotta look past that part and only pay attention to the word <em>checking</em> which is mostly a happy helpful type of word.</p>
+<p>So I call the tool at <a href="http://validator.w3.org/nu">validator.w3.org/nu</a> the <em>Nu Markup Checker</em> instead of the blah-blah-<em>Validator</em>
+ because I want to spread the happiness of the word checker in the sense
+ of doing something actually useful for people instead of just giving 
+them a pat on the back. It’s an automated thing which checks stuff for 
+you that’d otherwise be really tedious for you to check manually. So it 
+helps you. Maybe it should be called the <em>Nu Help-You Checker</em>.</p>
+<p>As far as what it checks, it looks for unintentional mistakes you 
+might have made: misspelled element names or attribute values where some
+ stray character snuck in. That kind of stuff. And it alerts you about 
+those sorts of things so you can fix them.</p>
+<p>It also looks at other kinds of requirements defined in the HTML spec
+ designed to help you not make broken HTML documents and web 
+applications that aren’t going to work the way they should or that might
+ otherwise result in degraded user experience. Some of those 
+requirements are gray-area judgment calls, but it’s helpful to have a 
+common baseline-ish set of those kinds of requirements actually defined 
+in a spec.</p>
+<p>Other words for what this tool does that aren’t yet party-approved goodthink are words like <em>linter</em> and <em>static-analysis tool</em>.
+ But the difference with this thing I work on is, the linting rules are 
+actually defined in a spec, instead of something, say, Doug Crockford 
+(to pick a name at random) woke up one morning and just pulled out of 
+his hat.</p></blockquote>
+<h2>What’s the difference between errors and warnings?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+An error is for something that’s clearly a mistake, like a misspelled 
+element name or an attribute value that has some crazy garbage 
+characters or whatever that showed up somehow and shouldn’t be there.</p>
+<p>But an error is also for some cases of stuff that the HTML spec for 
+other reasons just says, this must be an error. The spec explains that 
+the reasons for some of those other things being defined as errors; 
+basically it’s just that they can create certain kinds of problems that 
+are not always easy to anticipate.</p>
+<p>There’s a long list of those kinds of problems that are defined as 
+errors but some examples include markup cases that are bad for 
+accessibility, usability, interoperability, security, or 
+maintainability—or that can result in poor performance, or that might 
+cause your scripts to fail in ways that are hard to troubleshoot.</p>
+<p>Along with those some cases are defined as errors because they can 
+cause you to run into quirks in HTML parsing and error-handling 
+behavior—so that, say, you’d end up with some unintuitive, unexpected 
+result in the DOM.</p>
+<p>Finally there are some other errors defined for markup cases that 
+just don’t make any sense and would most likely only be used by mistake,
+ or cases that clash with default styling behavior.</p>
+<p>Warnings, on the other hand, are for things that the spec doesn’t 
+define as an outright errors but that still might be problems. Sometimes
+ warnings get added to the checker experimentally, as a way to test out 
+whether they’re useful to you or not. (That’s part of the reason the 
+checker continues to be labelled as <em>experimental</em>.)</p></blockquote>
+<h2 id="JustSayNoToHTML4">Is there a use in using HTML4/XHTML doctypes?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+There’s absolutely no reason whatsoever for using an HTML4 doctype. Just put the <code><span>&lt;!DOCTYPE HTML&gt;</span></code>
+ doctype on your HTML documents and make sure they’re served as 
+text/html and be done with it. Move on with your life. But if for some 
+reason you really want to serve your documents as application/xhtml+xml 
+you don’t have to put an XHTML doctype on them—you can can still just 
+use <code><span>&lt;!DOCTYPE HTML&gt;</span></code> like the rest of us.
+ (But you probably don’t want to be using application/xhtml+xml and 
+XHTML anyway. Again, lose the haircut—there’s a whole world out there 
+waiting for you.)</p></blockquote>
+<h2>What are the pitfalls for users of HTML checking/validation tools?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+I guess the same pitfalls as you’d running into asking some really 
+helpful and really thoughtful person for help with anything: They’ll 
+actually make an effort to help you instead of just shining you on or 
+giving you a this-pig-thief-can-spell-his/her-own-name badge. The help 
+they give you may not always be what you want to hear, or it may be some
+ advice that you already know yourself you can safely ignore. Such is 
+life.</p></blockquote>
+<h2>What are the upsides?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+The upsides are that you catch mistakes you might have otherwise missed.</p></blockquote>
+<h2>There are differences between W3C HTML and WHATWG HTML conformance rules, how so?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+Some things defined as errors are judgment calls. Specs are written by 
+human people, not machines. Different people can make different judgment
+ calls—“reasonable people can disagree” or whatever other less trite way
+ there is for expressing that sentiment. If you walk around this world 
+expecting complete consistency from mankind everywhere you’re going to 
+stumble onto a few serious disappointments now and then.</p></blockquote>
+<h2>What if I find an error in the W3C HTML validator/checker?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+Report it at <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=Nu%20Markup%20Checker">w3.org/Bugs/Public/enter_bug.cgi?product=Nu%20Markup%20Checker</a> or at <a href="https://bugzilla.validator.nu/">bugzilla.validator.nu</a> or <a href="https://github.com/validator/validator/issues">github.com/validator/validator/issues</a>.</p></blockquote>
+<h2>Can I run a local copy of the W3C HTML conformance checker?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>Yeah. The best way to do that is to download a release from <a href="https://github.com/validator/validator/releases">github.com/validator/validator/releases</a> and, for using that, to follow the instructions at <a href="https://validator.github.io/validator/">validator.github.io/validator</a> and at <a href="https://validator.github.io/validator/#web-based-checking">validator.github.io/validator/#web-based-checking</a>.</p>
+<p>And if you use grunt, check out <a href="https://github.com/jzaefferer/grunt-html">github.com/jzaefferer/grunt-html</a> which is a grunt plugin for HTML checking that uses code from <a href="https://github.com/validator/validator">github.com/validator/validator</a> as its backend.</p></blockquote>
+<h2>Any tips/advice for sane using of HTML conformance checking tools?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>Is this some kind of trick question? I guess the only advice I’d give
+ is that you should remember that tools are machines, and you are not a 
+machine. (Assuming this question wasn’t asked by a machine.) So when 
+evaluating error and warning messages that you get from any HTML 
+checker, use your own human judgment. And if your judgment is that a 
+particular checker message isn’t really helping you, then just ignore 
+it. This isn’t a popularity contest, you won’t be hurting anybody’s 
+feelings.</p>
+<p>Or better yet if you care to take the time, use the “Message filtering” feature at <a href="http://validator.w3.org/nu/">validator.w3.org/nu</a> which lets you persistently ignore any checker messages you find unhelpful or annoying or just don’t want to see any more.</p></blockquote>
+<h2>Currently the W3C HTML checking tools don’t check/throw errors for 
+SVG1.1 and some web component attributes, any plans to add support?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+Yeah. That stuff is on my TODO list. I’ll get to it eventually.</p></blockquote>
+<h2 id="unknown">What’s the deal with unknown attribute errors? many JS libraries use them, what should developers do?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>The problem is that the checker is a machine and it’s not smart 
+enough to tell the difference between some attribute with an unknown 
+name that you’re using on purpose and some attribute whose name you 
+misspelled by mistake. If we just told the checker to let through all 
+unknown attribute names without checking, then we wouldn’t be able to 
+help you catch the case where you misspelled something by mistake.</p>
+<p>The workaround is that if you’re using some unknown attribute name on purpose, then exploit the “Message filtering” option at <a href="http://validator.w3.org/nu/">validator.w3.org/nu</a> to tell the checker you don’t want to see messages about that particular attribute any more. And they’ll go away.</p></blockquote>
+<h2>Does the validator check for use of ARIA? if so what is it checking?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>Yes it checks for errors in the use of ARIA markup in HTML documents,
+ including now some limited checking for errors in use of ARIA with SVG 
+elements in HTML documents and also in standalone SVG documents.</p>
+<p>For HTML elements it’s checking against requirements in the HTML spec itself but that are now also specified in <a href="http://w3c.github.io/html-aria/">ARIA in HTML&nbsp;</a>
+ as a separate standalone document, with the plan that for ARIA, the 
+HTML spec can soon be updated to just reference the ARIA requirements in
+ that document.</p>
+<p>For SVG elements, my plan’s to soonishly update the checker to follow a similar standalone document at <a href="https://specs.webplatform.org/SVG1.1-ARIA/webspecs/master/">[Web developer rules for use of ARIA attributes on SVG1.1 elements] – specs.webplatform.org/SVG1.1-ARIA/webspecs/master</a></p></blockquote>
+<h2>ARIA checking in &lt; HTML5 what’s the deal? Will/should/can it be supported?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+Nobody should be using anything but “HTML5”, and we shouldn’t be trying 
+to help them do it. HTML5 is just HTML. We outgrew the whole version 
+thing a long time ago now. <code><span>&lt;!DOCTYPE HTML&gt;</span></code>
+ will be 10 years old soon. Common sense won. Here in the 21st century 
+we can’t really help anybody who’s putting an HTML4 or whatever ancient 
+doctype on a new document. That’s a lost cause. Certainly we’d not be 
+helping by providing some way for them to do that and to put ARIA markup
+ into their documents and then we tell them that’s OK. That’s called 
+enabling behavior, in clinical terms.</p></blockquote>
+<h2>When using the w3c html validator to check my HTML5 I see the following:<br>
+“The validator checked your document with an experimental feature: HTML5
+ Conformance Checker. …” does this mean there is a more stable 
+validation tool I should be using?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>The idea of <i>stable</i> doesn’t really apply here. But yeah there is another tool you should be using. You should use <a href="http://validator.w3.org/nu/">validator.w3.org/nu</a> directly. It has more features and is better in every possible way.</p>
+<p>That tool is an experimental tool, but in a good sense. And the plan is for it to always remain that way. The <a href="http://validator.w3.org/nu/about.html">validator.w3.org/nu/about.html</a> page tries to help set the right expectations about what the goals are and what <i>experimental</i> means:</p>
+<p><i>The Nu Markup Checker is an experimental tool and its behavior 
+remains subject to change. In particular, because new types of error 
+checks continue to be actively added to the checker, there is no 
+guarantee provided that if the checker reports zero errors for a 
+particular document at one point in time, it will report zero errors for
+ that same document at some later point in time.</i><br>
+<i></i></p>
+<p><i>The Nu Markup Checker should not be used as a means to attempt to 
+unilaterally enforce pass/fail conformance of documents to any 
+particular specifications; it is intended solely as a checker, not as a 
+pass/fail certification mechanism. </i></p></blockquote>
+<h2>Web components checking?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+If you mean checking custom elements, my answer is that custom elements 
+aren’t yet widely supported in multiple browser engines, so I don’t 
+think it’s useful for me or anybody else to put too much of time and 
+energy yet into figuring out how to deal with checker behavior for 
+documents that contain custom elements.</p>
+<p>If/when custom elements do ever become widely supported across more 
+browser engines, then we should figure out how to deal with checker 
+behavior for them. That’s actually going to be complicated and messy to 
+do—but that’s the case for a lot of stuff in the Web platform and I’m 
+sure we’ll figure out something together that we can all live with, just
+ as we all have together for lots of other complicated Web-platform 
+stuff.</p></blockquote>
+<h2>What is the difference between the w3c validator and the nu markup checker?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>The legacy W3C validator is at <a href="http://validator.w3.org/">validator.w3.org</a>
+ and its core is built on old stuff like Perl and DTDs and SGML and old 
+specs from the 20th century like HTML4 and nobody is actively 
+maintaining its code at this point. The only good news about it is that 
+for checking any document with a modern <code><span>&lt;!DOCTYPE html&gt;</span></code>
+ doctype, it actually uses the backend from the Nu Markup Checker to 
+check the document, and then just passes back all the messages from 
+that.</p>
+<p>The Nu Markup Checker is at <a href="http://validator.w3.org/nu/">validator.w3.org/nu</a>
+ and it’s built on slightly less old stuff like Java and RelaxNG and on 
+specs from the current century like “HTML5” and has the big advantage of
+ actually being actively maintained. And it has more features, like the 
+“Message filtering” feature that lets you filter out message you don’t 
+want to see.</p></blockquote>
+<h2>Checking the source code versus the HTML DOM output, one better? issues?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>I guess there’s good use cases for both. A limitation with checking the DOM is that at <a href="http://validator.w3.org/nu">validator.w3.org/nu</a>
+ itself we can’t really provide a way to have it go grab the DOM of some
+ arbitary HTML document on the Web and then check that. There needs to 
+be a browser engine somewhere in between to actually parse the document 
+into a DOM representation in memory and execute your JavaScript on that 
+and then serialize that resulting DOM back out to a text representation 
+you can feed to a checker. But if you have an HTML document you want to 
+check and you actually open it in your browser you can then use 
+something like the bookmarklet at <a href="http://codepen.io/stevef/full/LasCJ/">codepen.io/stevef/full/LasCJ</a> to send the serialized DOM from that document to <a href="http://validator.w3.org/nu/">validator.w3.org/nu</a> for checking.</p></blockquote>
+
+<h2>Should pre-HTML5 doctypes be flagged with a warning, in the <a href="http://validator.w3.org/">W3C Validator</a>, now <a href="http://www.w3.org/TR/html/">HTML5</a> is a REC?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+I dunno, maybe. On the one hand there are gazillions of existing 
+documents out there with older doctypes that are working just fine the 
+way they are now, so no reason to screw with them. On the other hand, if
+ somebody’s actually taking time to run one of those documents through 
+an HTML checker, then they may be doing that for some good reason and 
+maybe we would be helping by alerting them to obsolete doctype in there 
+so they can go in an update it.</p></blockquote>
+<h2 id="alink">It is conforming in HTML5 for the <a href="http://www.w3.org/TR/html/text-level-semantics.html#the-a-element"><code><span>&lt;a&gt;</span></code></a> element to contain block/flow content, what changed (if anything) in browsers?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+Nothing changed in browsers. Browsers have always supported that and it 
+doesn’t cause any problems and we’d not be helping anybody by making it 
+an error. So we made it a non-error.</p></blockquote>
+<h2>On WCAG 2.0 Parsing Criteria</h2>
+<blockquote><p>Our client’s accessibility consultant is telling them 
+that they must have valid HTML in order to be WCAG 2.0 compliant. Is 
+that true? – <a href="http://shoptalkshow.com/episodes/141-marcy-sutton/"><cite>Shoptalk Show</cite></a></p></blockquote>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"><br>
+I have no idea. I’m not a WCAG expert and I’ve never even read the WCAG 
+2.0 spec. And the HTML checker is not a WCAG checker. Or at least it 
+doesn’t claim to be.</p></blockquote>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/me2_normal.jpg" alt="Steve Faulkner" width="48" height="48"><br>
+WCAG 2.0 has a success criterion that requires <a href="http://www.w3.org/TR/WCAG20/#ensure-compat-parses">markup documents have no parsing errors</a>. The <a href="http://validator.w3.org/nu/">nu markup checker</a> flags parsing errors along with other machine checkable <a href="http://www.w3.org/TR/html/introduction.html#conformance-requirements-for-authors">HTML conformance criteria</a>. We have created a <a href="http://validator.w3.org/nu/about.html#extras">WCAG 2.0 Parsing error bookmarklet</a> that filters the results from the nu markup checker to only display parsing errors/warnings.</p>
+<p><strong>Note:</strong> this bookmarklet is experimental and not <em>the law</em>
+ and even when filtered some of the errors/warnings displayed may not 
+have any practical negative effect on the accessibility of the document.
+ It is provided as an aid to filter out <em>some</em> of the irrelevant (to WCAG) issues only. Mike and I have talked about providing the filter as a built in feature of the <a href="http://validator.w3.org/nu/">nu markup checker</a>, so hope to make that happen.</p></blockquote>
+<h2>Will there be a valid HTML5 icon?</h2>
+<blockquote><p><img src="HTML5%20%E2%80%93%20Check%20it%20Before%20you%20Wreck%20it%20with%20Mike[tm]%20Smith_files/ms-e1414048507324.jpg" alt="" width="80" height="80"></p>
+<p>No, there won’t be a Valid HTML icon any time soon and likely not ever.</p>
+<p>The reason is basically that “This is valid” icons/badges promote the
+ idea that there’s significant value in making public claims of 
+pass/fail document-conformance requirements in standards.</p>
+<p>But the HTML5 checker is by design not intended to encourage anybody 
+to use it as a means to make public assertions of simple pass/fail 
+conformance of any documents to any particular specifications; it’s 
+intended solely as a checker — for people to use to catch unintended 
+mistakes in documents and fix them — not as a pass/fail certification 
+mechanism.</p>
+<p>There won’t be any proper Valid HTML5 icon forthcoming, so if you’d 
+like to use one in your content, you’ll probably need to create one on 
+your own.</p></blockquote>
+<p><strong>Thanks Mike!</strong></p>
+<h3>Pro tip – always <a href="http://validator.w3.org/nu/">check your HTML</a> with <a href="http://youtu.be/FVbVCZw5BPQ">Rock’n’Roll</a> playing… LOUD!</h3>
+<p></p>
+<h2><em>More questions people?</em></h2>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message">Loading…</div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

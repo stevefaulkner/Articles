@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>ARIA in HTML – there goes the neighborhood</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/10/aria-in-html-there-goes-the-neighborhood/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">ARIA in HTML – there goes the neighborhood</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Will <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML5</a> make the use of <a href="http://rawgit.com/w3c/aria/master/spec/aria.html">WAI-ARIA</a> in HTML redundant? the short answer is definitely not. There are <strong>many ARIA roles and properties</strong>
+ that are not provided by native elements and attributes in HTML5. Also 
+developers still have the desire to roll their own interactive controls 
+or <a href="http://www.paciellogroup.com/blog/2014/09/accessibility-in-a-web-components-world-at-makingweb/">web components</a> even though they have been available in HTML as native elements for <strong>15 years</strong>, why would this suddenly change with HTML5?</p>
+
+<h2>First rule of <abbr title="Accessible Rich Internet Applications">ARIA</abbr> use (never forget):</h2>
+<blockquote><p>If you <em>can</em> use a native HTML element [<cite><a href="http://w3c.github.io/aria-in-html/#bib-HTML5">HTML5</a></cite>] or attribute with the semantics and behaviour you require <strong>already built in</strong>, instead of re-purposing an element and adding an <abbr title="Accessible Rich Internet Applications">ARIA</abbr> role, state or property to make it accessible<strong>, then do so</strong>.</p>
+<p><cite><a href="http://w3c.github.io/aria-in-html/">Using ARIA in HTML </a></cite></p></blockquote>
+<h2>Examples from <em>real world</em> web apps : a button and a link</h2>
+<p>Developers have had for <strong>15 years</strong> a number of <a href="http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.2.1">native elements</a> they can use for buttons and the <a href="http://www.w3.org/TR/REC-html40/struct/links.html#h-12.2"><code>a</code> element</a>
+ for links, provided in HTML 4, all of which provide built in mouse and 
+keyboard interaction and convey role, state and name properties to <a href="http://rawgit.com/w3c/aria/master/html-aam/html-aam.html#introduction-accessibility-apis">accessibility APIs</a>:</p>
+<ul>
+<li><code>input type="button"</code></li>
+<li><code>input type="image"</code></li>
+<li><code>button</code> element</li>
+<li><code>a</code> element</li>
+</ul>
+<p>But still in <strong>2014</strong> companies like Twitter and Google, choose to emulate a button with code (not to mention the associated scripting) such as this:</p>
+<p><img src="ARIA%20in%20HTML%20%E2%80%93%20there%20goes%20the%20neighborhood_files/twitter.png" alt="write a tweet button" width="47" height="35"></p>
+<pre><code>&lt;a data-placement="bottom" class="js-tooltip global-dm-nav" href="#" role="button"
+ data-original-title="Direct messages"&gt;
+ &lt;span class="Icon Icon--dm Icon--large"&gt;&lt;/span&gt;
+ &lt;span class="dm-new"&gt;&lt;span class="count-inner"&gt;&lt;/span&gt;&lt;/span&gt;
+ &lt;span class="visuallyhidden"&gt;Direct messages&lt;/span&gt;
+ &lt;/a&gt; </code></pre>
+<p>Or this</p>
+<p><img src="ARIA%20in%20HTML%20%E2%80%93%20there%20goes%20the%20neighborhood_files/refresh.png" alt="Gmail refresh button" width="79" height="32"></p>
+<pre>&lt;div tabindex="0" role="button" act="20" class="T-I J-J5-Ji nu T-I-ax7 L3" 
+style="-moz-user-select: none;" data-tooltip="Refresh" aria-label="Refresh"&gt;
+&lt;div class="asa"&gt;
+&lt;div class="asf T-I-J3 J-J5-Ji"&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+<p>and a link like this:</p>
+<p><img src="ARIA%20in%20HTML%20%E2%80%93%20there%20goes%20the%20neighborhood_files/link.png" alt="quick links link in Gmail" width="94" height="22"></p>
+<pre><code>&lt;div role="link" tabindex="0" idlink="" class="py pr" id=":i"&gt;
+&lt;h2 id=":k" class="pw"&gt;Quick Links&lt;/h2&gt;
+&lt;div class="qn"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+<p><strong>Note:</strong> First example from twitter, others are&nbsp; from Google’s Gmail application.</p>
+<p>The reason is probably because they cannot apply the styles they want
+ to native interactive elements, but who knows? What is important for 
+accessibility is <em>if developers choose to code in this way</em>, they
+ now have a method to provide the needed accessibility information. It 
+would be preferable that they used the available native HTML elements, 
+but if they do not, then ARIA provides what HTML alone cannot.</p>
+<h2>ARIA used in native HTML implementations (<a href="http://youtu.be/dG6yQZ1QIRs">there goes the neighborhood</a>):</h2>
+<p>Chrome uses ARIA to map roles and properties from the HTML DOM to <a href="http://rawgit.com/w3c/aria/master/html-aam/html-aam.html#introduction-accessibility-apis">accessibility APIs</a> in its <strong>native HTML implementation</strong> of <b><a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#week-state-%28type=week%29">input type=”week”</a></b></p>
+<pre><code><b>&lt;input type="week"&gt;</b>
+#shadow root (user agent)
+&lt;div pseudo="-webkit-datetime-edit" id="date-time-edit" datetimeformat="'Week 'ww, yyyy"&gt;
+&lt;div pseudo="-webkit-datetime-edit-fields-wrapper"&gt;
+&lt;div pseudo="-webkit-datetime-edit-text"&gt;Week &lt;/div&gt;
+&lt;span <mark>role="spinbutton"</mark> <mark>aria-valuetext="blank"</mark> <mark>aria-valuemin="1"</mark> 
+<mark>aria-valuemax="53"</mark> pseudo="-webkit-datetime-edit-week-field"&gt;--&lt;/span&gt;
+&lt;div pseudo="-webkit-datetime-edit-text"&gt;, &lt;/div&gt;
+&lt;span <mark>role="spinbutton"</mark> <mark>aria-valuetext="blank"</mark> <mark>aria-valuemin="1"</mark> <mark>aria-valuemax="275760"</mark> 
+ pseudo="-webkit-datetime-edit-year-field"&gt;----&lt;/span&gt;
+&lt;/div&gt;&lt;/div&gt;
+</code><strong>&lt;/input&gt;</strong></pre>
+<h2 id="html5na" tabindex="-1">Aria roles and properties not available in HTML5</h2>
+<p>Below are listed the ARIA roles and properties. not considered to be 
+available natively in HTML5. It is clear that many roles and properties 
+provided by ARIA which can be used to convey information to users are 
+not available in HTML5.</p>
+<h3>ARIA Roles</h3>
+<ol>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#alert"><code>alert</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#alertdialog"><code>alertdialog</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#gridcell"><code>gridcell</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#log"><code>log</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#marquee"><code>marquee</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#menuitemcheckbox"><code>menuitemcheckbox</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#menuitemradio"><code>menuitemradio</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#scrollbar"><code>scrollbar</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#status"><code>status</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#tab"><code>tab</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#tabpanel"><code>tabpanel</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#timer"><code>timer</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#tooltip"><code>tooltip</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#treeitem"><code>treeitem</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#grid"><code>grid</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#menu"><code>menu</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#menubar"><code>menubar</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#switch">switch</a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#tablist"><code>tablist</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#toolbar"><code>toolbar</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#tree"><code>tree</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#treegrid"><code>treegrid</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#directory"><code>directory</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#document"><code>document</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.htmls#group"><code>group</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#note"><code>note</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#presentation"><code>presentation</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#region"><code>region</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#application"><code>application</code></a></li>
+<li><a href="http://w3c.github.io/aria/aria/aria.html#search"><code>search</code></a></li>
+</ol>
+<h3>ARIA States and Properties (aria-* attributes)</h3>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="ARIA%20in%20HTML%20%E2%80%93%20there%20goes%20the%20neighborhood_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message">Loading…</div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

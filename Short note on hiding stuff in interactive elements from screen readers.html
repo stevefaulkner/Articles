@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Short note on hiding stuff in interactive elements from screen readers</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2018/02/short-note-on-hiding-stuff-in-interactive-elements-from-screen-readers/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Short note on hiding stuff in interactive elements from screen readers</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/symbol.png" alt="Text symbols on buttons." moz-reader-center="true" width="654" height="60"></p>
+<p>Symbols are <em>cool</em>. They add decoration and/or information to 
+user interfaces. For screen reader users their inclusion can sometimes 
+be annoying or confusing as the visual and aural user interface differ.</p>
+
+<p><img src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/question.png" alt="" width="75" height="65"> The term <strong>symbol</strong> in this case refers to <a href="https://www.utf8icons.com/">UTF-8 symbols</a> and related text characters used as symbols or icons.</p>
+<p><del role="region" aria-label="deleted text">If symbols are included as a child of an interactive element such as a <code>&lt;button&gt;</code> or <code>&lt;a href…&gt;</code> their content will be used as part of the <a href="https://w3c.github.io/accname/">accessible name calculation</a> for the interactive element. Why? because they are exposed in the HTML DOM, as text in <em>modern</em> browsers, even when they are included as <a href="https://tink.uk/accessibility-support-for-css-generated-content/">CSS “content”</a>
+ , and text children of such elements are concatenated and used as the 
+accessible name for the element, by browsers, regardless of their state 
+(hidden or not), thus may be spoken by screen reader software.</del></p>
+<h2 id="update">Update 20/2/2018</h2>
+<p>The cause of the announcement <strong>is not</strong> as I previously stated, it is due to&nbsp; how Firefox have implemented support for <code>aria-hidden</code>, which results in hidden content being included in the accessible name</p>
+<p>Given the following:</p>
+<pre><span>&lt;<span>button</span>&gt;</span><span>&lt;<span>span</span> <span>aria-hidden</span>=<span>"true"</span>&gt;</span>poot<span>&lt;/<span>span</span>&gt;</span> Pat<span>&lt;/<span>button</span>&gt;</span></pre>
+<p>Firefox exposes the label of the button as “poot Pat”. The <code>aria-hidden</code> text is present in the accessibility tree, but has an iA2 object attribute property of <code>hidden=true</code><br>
+<img src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/firefox.png" alt="" width="530" height="151"></p>
+<p>Chrome meanwhile, exposes the label of the button as “Pat” and does not include the hidden content in the accessibility tree.</p>
+<p><img src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/chrome.png" alt="" width="479" height="107"></p>
+<p>there 2 Firefox bugs related to this behavior:</p>
+<ol>
+<li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1147359">aria-hidden state not honoured with CSS generated content</a></li>
+<li id="field-value-short_desc"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1123360">exclude aria-hidden=”true” elements from the tree</a></li>
+</ol>
+<p><strong>Thanks</strong> to <a href="https://twitter.com/patrick_h_lauke">Patrick Lauke</a> and others for questioning the initial results and conclusions.</p>
+<p>The use of child text elements as part of the accessible name 
+calculation in Firefox can be overridden by placing source for the <a href="https://w3c.github.io/accname/#dfn-accessible-name">accessible name</a> on the button element itself:</p>
+
+
+<h2>Aside</h2>
+<p>In the process of testing this issue I found that the announcement of UTF-8 symbols by screen readers is <em><strong>all over the place</strong>. </em>If you do want them to be announced, try:</p>
+<pre><span>&lt;<span>span</span> </span><mark><span><span>role</span>=<span>"img"</span> <span>aria-label</span>=<span>"Peace"</span></span></mark><span>&gt;</span><img draggable="false" class="emoji" alt="☮" src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/262e.svg"><span>&lt;/<span>span</span>&gt;</span></pre>
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://tink.uk/accessible-emoji/">Accessible emoji</a></li>
+<li><a href="http://adrianroselli.com/2016/12/accessible-emoji-tweaked.html">Accessible emoji, tweaked</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Short%20note%20on%20hiding%20stuff%20in%20interactive%20elements%20from%20screen%20readers_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

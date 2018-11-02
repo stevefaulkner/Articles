@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>W3C HTML and WHATWG HTML ‘split’ effect on HTML Accessibility?</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/07/w3c-html-and-whatwg-html-split-affect-on-html-accessibility/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">W3C HTML and WHATWG HTML ‘split’ effect on HTML Accessibility?</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">8-10 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The recent formalisation of the ‘HTML split’ between the W3C 
+and the WHATWG, is not news to those working in either group. Work 
+continues pretty much as it has, prior to <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Jul/0119.html">Hixie’s communication</a> to the WHATWG.</p>
+
+<h2>HTML Implementation in Browsers</h2>
+<p>The reality is that browser implementation information of HTML will 
+be similar if not the same up until the point where HTML5 is finalised 
+at the W3C. There may be some minor differences due to the W3C spec not 
+keeping up with changes to the WHATWG spec or points where not all 
+browser vendors have agreed on the implementation details of a 
+particluar feature. In the latter case it may be that the WHATWG spec or
+ the W3C spec contains implementation information relevant to some but 
+not all current implementations or a proposed implementation that has 
+not actually been implemented by anybody.</p>
+<p>It will be the case that as finalisation of HTML5 occurs at the W3C, 
+the browser implementation information in it will become progressively 
+out of date as new features are specced in the WHATWG HTML, 
+implementation bugs arise and are fixed. Concurrently with the 
+finalisation of HTML5 it is envisaged that work on <a href="http://www.w3.org/wiki/HTML/next">HTML.next</a>
+ will commence at the W3C, taking HTML5 as its basis.&nbsp; It will 
+likely be the case that HTML.next will mostly track the WHATWG spec on 
+implementation details where browser vendors have indicated they intend 
+to implement the WHATWG spec as written. This is not always the case now
+ and will not be so in the future, for example some of the new additions
+ to <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">canvas</a>
+ contained in the WHATWG spec have not been agreed upon by browser 
+vendors and further work is taking place between Apple and Microsoft and
+ other stakeholders to agree upon the details, <a href="http://www.w3.org/html/wg/tracker/issues/201">this work</a>
+ is occurring in the W3C HTML WG. If it is the case that the Canvas 2d 
+context spec contains agreed upon implementation details that the WHATWG
+ spec does not, then what should occur is the WHATWG spec changes to 
+reflect such consensus. So let us not be fooled into thinking that the 
+current and future specification of HTML is a one way street always 
+leading from the WHATWG to the the W3C. So it may be that at moments in 
+time implementation details in the current W3C HTML (whether that be 
+HTML5 or HTML X) and WHATWG HTML&nbsp; diverge, but it will not be a 
+permanent divergence unless either spec diverges from reality.</p>
+<p>It is not the case that WHATWG spec always contains a realistic 
+representation of what is implemented in browsers, it contains defined 
+features that are not yet implemented by any browser even though they 
+have been in the spec (and HTML5) for years. And it omits features 
+implemented in browsers. The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html">command element</a> has been specced for years When Mozilla decided to implement the HTML5 <a href="http://dev.w3.org/html5/spec/the-menu-element.html#context-menus">context menu</a> instead decided to use the unspecified (in HTML) &lt;menuItem&gt; element rather than implement the command element.</p>
+<h2>HTML Accessibility Implementation in Browsers</h2>
+<p>While the <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Jul/0119.html">WHATWG claims</a>
+ its goal is to provide a canonical description of HTML and related 
+technologies,&nbsp; it only contains a minimal description of how 
+browsers should implement HTML support for assistive technology. The 
+WHATWG have never shown any interest to my knowledge (note: <a href="http://krijnhoetmer.nl/irc-logs/whatwg/20120723#l-664">anne van kesteren claims this is FUD</a>,
+ but have not seen anything from the WHATWG leadership to suggest 
+otherwise and Hixie stated the HTML to accessibility API document <a href="http://wiki.whatwg.org/index.php?title=Objections_against_CP_for_ISSUE-129&amp;diff=6214&amp;oldid=6213">was unecessary</a>) in specifying the level of detail required for the interoperable implementation of accessible HTML. <a href="http://dvcs.w3.org/hg/html-api-map/raw-file/tip/Overview.html">This work</a>
+ is being carried out at the in the W3C HTML WG as part of the ongoing 
+HTML standardization effort. WHATWG leader Ian Hickson decided to fork 
+HTML rather than include a link to it in the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/introduction.html#is-this-html5?">WHATWG HTML</a>:</p>
+<blockquote cite="http://www.whatwg.org/specs/web-apps/current-work/multipage/introduction.html#is-this-html5?"><p>The W3C HTML specification includes a link to an incomplete    document that contradicts this specification because of <a href="http://lists.w3.org/Archives/Public/public-html/2011Feb/0407.html">a    working group decision from February 2011</a>.</p></blockquote>
+<h2>Author conformance requirements and advice</h2>
+<p>Much of the authoring conformance requirements and advice impacts the
+ accessibility of the authored content. This is where things get less 
+predictable. While requirements and advice in regards to HTML feature 
+implementation in browsers is in essence dictated by what browsers will 
+implement, how such features are to be used is not and consequently the 
+differing HTML development processes between the W3C and the WHATWG have
+ had most effect and will continue to do so.</p>
+<p>To get author conformance requirements and advice on the how to use 
+HTML into the WHATWG spec, or get it changed, you must convince Ian 
+Hickson (Hixie). If Hixie does not agree with you it doesn’t go in or it
+ doesn’t change. The W3C HTML working group does not work this way. You 
+can present your arguments, research and data to the working group and 
+whether information is added to or changed in W3C HTML is decided by the
+ working group using a consensus process. And yes this can take longer 
+than a simple <em>Yay or Nay</em> from Hixie, but I&nbsp; think the extra time is worthwhile.</p>
+<h3>Some examples</h3>
+<p>I have long argued that due to the almost complete lack of keyboard 
+access to the the title attribute in browsers, the HTML specification 
+should not include conformance requirements and&nbsp; authoring advice 
+for the use of the <a href="http://dev.w3.org/html5/spec/global-attributes.html#the-title-attribute">title attribute</a> that will result in inaccessible content. I provided information on this to the HTML WG and Hixie, (then) editor of HTML5:</p>
+<ul>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/notitle_annotations">Advice in spec about annotations promotes inaccessible content</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/notitlev2">Do
+ not consider the title attribute as a  possible conforming source for 
+caption information for an image that  lacks a text alternative</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/notitle_captions">Replace poor coding example for figure containing multiple images</a></li>
+</ul>
+<p>Each of these proposals were considered and accepted by the HTML WG 
+and the changes were made to HTML5 to reflect this. While at the WHATWG,
+ Hixie, making no argument either way simply <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/introduction.html#is-this-html5?">rejected the changes</a>, resulting in further forking of HTML:</p>
+<blockquote><p>The W3C HTML specification omits a number of suggestions    regarding using the <code title="attr-title"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/elements.html#the-title-attribute">title</a></code> attribute, and makes using the <code title="attr-title"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/elements.html#the-title-attribute">title</a></code>
+ attribute for captions    non-conforming in certain specific cases, 
+because of a number of    working group chair decisions from March 2012:
+    <a href="http://lists.w3.org/Archives/Public/public-html/2012Mar/0555.html">first</a>,    <a href="http://lists.w3.org/Archives/Public/public-html/2012Mar/0731.html">second</a>,    <a href="http://lists.w3.org/Archives/Public/public-html/2012Mar/0785.html">third</a>.</p></blockquote>
+<p>Now I would appreciate ANYONE&nbsp; explaining how the splintering of
+ authoring conformance requirements and advice being good for anyone? Is
+ it good for users? developers? If not then who?</p>
+<h2>Conclusion</h2>
+<p>What has <a href="http://www.theverge.com/2012/7/22/3175248/html5-fork-w3c-whatwg">recently been reported</a>
+ as a split has in effect been happening for some time. If all you care 
+about is how browsers implement or are expected to implement some 
+aspects of HTML then you have little to worry about, both W3C HTML and 
+WHATWG HTML will include pretty much the same information over time. The
+ locus of the HTML accessibility work will continue to be at the W3C and
+ in the <a href="http://www.w3.org/WAI/PF/html-task-force">HTML WG</a>, 
+the specification of how browsers implement HTML to support 
+accesssibility, will continue in the W3C HTML working group. The 
+development of author conformance requirements and advice based on real 
+world implementations and direct participation from users will continue 
+in the W3C HTML WG.</p>
+<h3>Is this HTML5?</h3>
+<p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/introduction.html#is-this-html5?">HTML living standard still claims to be HTML5</a>, while the HTML living standard <a href="http://developers.whatwg.org/">‘developer edition’</a> still calls itself “HTML5 A technical specification for Web developers”, so if you are interested in <em>how to</em>
+ use HTML to provide a better, more accessible user experience, then 
+increasingly you will be in a quandary as to which set of rules to 
+follow and which set of rules you are <em>actually</em> following. I think you know <a href="http://dev.w3.org/html5/spec/spec.html">which one I would suggest</a>…</p>
+<h2>Further Reading</h2>
+<ul>
+<li>Mike Smith’s (aka <a href="https://twitter.com/sideshowbarker">@sideshowbarker</a>) <a href="https://plus.google.com/111991826926222544385/posts/QdGfrgtP6Eg">personal comments on the latest WHATWG vs W3C non-news</a></li>
+<li><a href="http://www.theverge.com/2012/7/22/3175248/html5-fork-w3c-whatwg">W3C and WHATWG finalize split on HTML5 spec, forking&nbsp;‘unlikely’</a></li>
+<li>Ian Hickson: <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Jul/0119.html">Update on the relationship between the  WHATWG HTML living standard and the W3C HTML5 specification</a>
+<ul>
+<li>Steve Faulkner: <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Jul/0123.html">Re:&nbsp; Update on the relationship between the  WHATWG HTML living standard and the W3C HTML5 specification</a></li>
+<li>Ian Hickson: <a href="http://lists.w3.org/Archives/Public/www-archive/2012Jul/0021.html">Re:&nbsp; Update on the relationship between the  WHATWG HTML living standard and the W3C HTML5 specification</a></li>
+<li>Steve Faulkner: <a href="http://lists.w3.org/Archives/Public/www-archive/2012Jul/0023.html">Re:&nbsp; Update on the relationship between the  WHATWG HTML living standard and the W3C HTML5 specification</a></li>
+</ul>
+</li>
+</ul>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="W3C%20HTML%20and%20WHATWG%20HTML%20%E2%80%98split%E2%80%99%20effect%20on%20HTML%20Accessibility_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

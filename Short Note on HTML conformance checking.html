@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Short Note on HTML conformance checking</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/08/short-note-on-html-conformance-checking/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Short Note on HTML conformance checking</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>When you check a HTML document, using the <a href="http://validator.w3.org/nu/">W3C HTML conformance checker</a>, to find out whether its code conforms to the rules defined in the <a href="http://www.w3.org/TR/html/">HTML specification</a> (and other referenced specifications). It’s useful to understand what the output means.</p>
+
+<blockquote data-lang="en">
+<p dir="ltr" lang="en"><img draggable="false" class="emoji" alt="📌" src="Short%20Note%20on%20HTML%20conformance%20checking_files/1f4cc.svg">Tip:
+ Running your HTML through a conformance checker will miss any errors 
+you may have introduced when adding to elements/attributes via 
+JavaScript. There is a bookmarklet <a href="https://t.co/iho9lKLtrA">https://t.co/iho9lKLtrA</a> that will send the HTML DOM of a page to <a href="https://t.co/BHtU1P2RhA">https://t.co/BHtU1P2RhA</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/974657888122818560?ref_src=twsrc%5Etfw">March 16, 2018</a></p></blockquote>
+
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2015/08/numarkup.png"><img src="Short%20Note%20on%20HTML%20conformance%20checking_files/numarkup-300x67.png" alt="W3C Nu Markup checker" width="300" height="67"></a></p>
+<h2>Errors</h2>
+<p><strong>Errors</strong> are instances where the code you are checking does not conform to MUST level requirements defined in the HTML specification.</p>
+<blockquote>
+<pre><span>1.</span> MUST This word, <span>or</span> the terms <span>"REQUIRED"</span> <span>or</span> <span>"SHALL"</span>, mean that the
+   definition <span>is</span> an absolute requirement <span>of</span> the specification.
+
+<span>2.</span> MUST NOT  This phrase, <span>or</span> the phrase <span>"SHALL NOT"</span>, mean that the
+   definition <span>is</span> an absolute prohibition <span>of</span> the specification.
+</pre>
+</blockquote>
+<p>For example, the following code snippet breaks the rule:</p>
+<blockquote><p>Content model for element <code>ol</code>: Zero or more <code>li</code> and script-supporting elements.</p></blockquote>
+<pre><span>&lt;<span>body</span>&gt;</span>
+<span>&lt;<span>ol</span>&gt;</span>
+<span>&lt;<span>div</span>&gt;</span><span>&lt;/<span>div</span>&gt;</span>
+<span>&lt;/<span>ol</span>&gt;</span>
+<span>&lt;/<span>body</span>&gt;</span>
+</pre>
+<p>In other words, an <code>ol</code> element must only contain <code>li</code>, <code>script</code> or <code>template</code> elements as child elements.</p>
+<pre><span>&lt;<span>body</span>&gt;</span>
+<span>&lt;<span>ol</span>&gt;</span>
+<span>&lt;<span>template</span>&gt;</span><span>&lt;/<span>template</span>&gt;</span>
+<span>&lt;<span>script</span>&gt;</span><span></span><span>&lt;/<span>script</span>&gt;</span>
+<mark><span>&lt;<span>li</span>&gt;</span></mark><span>&lt;<span>div</span>&gt;</span><span>&lt;/<span>div</span>&gt;</span><mark><span>&lt;/<span>li</span>&gt;</span></mark>
+<span>&lt;/<span>ol</span>&gt;</span>
+<span>&lt;/<span>body</span>&gt;</span></pre>
+<p>MUST level requirements and the errors they produce are there to stop
+ you doing stuff that can cause problems or remind you to do stuff that 
+you need to do to avoid problems.</p>
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2015/08/w3c-valid.png"><img src="Short%20Note%20on%20HTML%20conformance%20checking_files/w3c-valid-300x48.png" alt="W3C Old Skool W3C validator" width="300" height="48"></a></p>
+<h2>Warnings</h2>
+<p><strong>Warnings</strong> are instances where the code you are checking does not conform to SHOULD level requirements defined in the HTML specification.</p>
+<blockquote>
+<pre><span>3.</span> SHOULD   This word, <span>or</span> the adjective <span>"RECOMMENDED"</span>, mean that there
+   may exist valid reasons <span>in</span> particular circumstances to ignore a
+   particular item, but the full implications must be understood <span>and</span>
+   carefully weighed before choosing a different course.
+
+<span>4.</span> SHOULD NOT   This phrase, <span>or</span> the phrase <span>"NOT RECOMMENDED"</span> mean that
+   there may exist valid reasons <span>in</span> particular circumstances <span>when</span> the
+   particular behavior <span>is</span> acceptable <span>or</span> even useful, but the full
+   implications should be understood <span>and</span> the <span>case</span> carefully weighed
+   before implementing any behavior described <span>with</span> <span>this</span> label.</pre>
+</blockquote>
+<p>For example, the following code snippet breaks the rule:</p>
+<blockquote><p>Default Implicit <abbr title="Accessible Rich Internet Applications">ARIA</abbr> semantics – <em title="SHOULD NOT">SHOULD NOT</em> be used</p></blockquote>
+<pre><span>&lt;<span>body</span>&gt;</span>
+<span>&lt;<span>ol</span> </span><mark><span><span>role</span>=<span>"list"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>li</span>&gt;</span>item 1
+<span>&lt;/<span>ol</span>&gt;</span>
+<span>&lt;/<span>body</span>&gt;</span>
+</pre>
+<p>In other words, <code>ol</code> has a an implicit role of <code>list</code>, which is conveyed by browsers automatically, so there is no neeed to add the explicit role as an attribute.</p>
+<pre><span>&lt;<span>body</span>&gt;</span>
+<span>&lt;<span>ol</span>&gt;</span>
+<mark><span>&lt;<span>li</span>&gt;</span></mark>list item
+<span>&lt;/<span>ol</span>&gt;</span>
+<span>&lt;/<span>body</span>&gt;</span></pre>
+<p>SHOULD level requirements and the warnings they produce are there to 
+stop you doing stuff that is unecessary or harmful in general or as a 
+reminder to do stuff that it is useful or helpful to do, in general.</p>
+<h2>Where do these requirement terms come from?</h2>
+<p>An <em>ancient</em> (1997) text handed down by our ancestors: <a href="https://www.ietf.org/rfc/rfc2119.txt">Key words for use in RFCs to Indicate Requirement Levels</a>. Which you will find referenced by many (all?) W3C specifications that define what are known as <strong>normative requirements</strong>. Requirements are defined in HTML, for user agent implementers, conformance tool implementers or web developers (AKA authors).</p>
+<h2>Further Reading</h2>
+<ul>
+<li><a href="http://www.w3.org/TR/html5/introduction.html#conformance-requirements-for-authors">HTML5 Conformance requirements for authors</a></li>
+<li><a href="http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/">HTML5 – Check it Before you Wreck it with Mike[tm] Smith</a></li>
+<li><a href="http://html5doctor.com/on-html-belts-and-aria-braces/">On HTML belts and ARIA braces (The Default Implicit ARIA semantics they didn’t want you to know about)</a></li>
+<li><a href="http://validator.w3.org/nu/about.html">W3C NU HTML Checker (about)</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Short%20Note%20on%20HTML%20conformance%20checking_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

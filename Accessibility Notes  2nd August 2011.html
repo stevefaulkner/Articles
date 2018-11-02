@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Accessibility Notes: 2nd August 2011</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/08/accessibility-notes-2nd-august-2011/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Accessibility Notes: 2nd August 2011</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Bits &amp; Bobs about web accessibility.<span id="more-1040"></span></p>
+<h3>HTML5 <a href="http://dev.w3.org/html5/spec/interactive-elements.html#the-details-element"><code>details</code></a> and <a href="http://dev.w3.org/html5/spec/interactive-elements.html#the-summary-element"><code>summary</code></a> elements</h3>
+<p>Have been looking into the chrome (13.0.782.107 beta-m) implementation of HTML5 <a href="http://dev.w3.org/html5/spec/interactive-elements.html#the-details-element"><code>details</code></a> and <a href="http://dev.w3.org/html5/spec/interactive-elements.html#the-summary-element"><code>summary</code></a> elements. Bottom line is, currently no keyboard support and no usable information exposed to assistive technology.</p>
+<h3>ARIA Landmark support in VoiceOver on Mac OS X 10.7 Lion</h3>
+<p>Roger Johansson reports on<a rel="bookmark" href="http://www.456bereastreet.com/archive/201107/accessibility_in_mac_os_x_107_lion/"> Accessibility in Mac OS X 10.7 Lion</a>. Including details about VoiceOver on OSX 10.7 Lion now supporting <a href="http://www.paciellogroup.com/blog/2011/07/html5-accessibility-chops-aria-landmark-support/">ARIA landmarks</a>:</p>
+<blockquote><p>VoiceOver now lets you use ARIA landmarks, if they are  
+present, to  navigate web pages. If Quick Nav is active you can use the w
+  and W keys  to navigate to the next or previous landmark. When you use
+  the arrow  keys to navigate around a page, VoiceOver announces when 
+you  enter and  leave landmarks, including the type of landmark (for 
+example  “Leaving  main landmark, entering complementary landmark”).</p></blockquote>
+<h3>vision australia versions of the Web Accessibility Toolbar and Color Contrast Analyser</h3>
+<p>Worked with my old employers <a href="http://www.visionaustralia.org.au/info.aspx?page=520">vision australia</a> to make updated versions of the <a href="http://www.visionaustralia.org.au/info.aspx?page=614">Web Accessibility Toolbar</a> and <a href="http://www.visionaustralia.org.au/info.aspx?page=628">Color Contrast Analyser</a> available for download on their site.</p>
+<h3>Funky <code>aria-describedby</code> and <code>aria-labelledby</code> support in IE9</h3>
+<ul>
+<li>Looked into the <code>aria-describedby</code> and <code>aria-labelledby</code><a href="http://public.yahoo.com/kloots/aria/aria-ie-labelling.html">test cases</a> provided by <a href="http://www.paciellogroup.com/blog/2011/07/html5-accessibility-chops-form-control-labeling/comment-page-1/#comment-14852">Todd Kloots</a>, generated some <a href="http://www.html5accessibility.com/tests/label-described-tests-kloots.html">further test cases</a> from his, and found that:
+<ul>
+<li>latest versions of NVDA and JAWS used with&nbsp; IE 9 will not announce descriptions unless <code>tabindex=-1</code> is added to&nbsp; elements such as <code>p</code>, <code>div</code> and <code>span</code> when referenced from <code>aria-describedby</code> or <code>aria-labelledby</code> that reference multiple elements:
+<ul>
+<li><code>&lt;input type="text" aria-labelledby="label1 label2"&gt;</code></li>
+<li><code>&lt;input type="text" aria-describedby="desc1 desc2"&gt;</code></li>
+</ul>
+</li>
+<li> As I found previously, <code>aria-describedby</code> with a single reference:<code><br>
+&lt;input type="text" aria-describedby="desc1"&gt;</code><br>
+does not result in the MSAA acc-description property being populated with the text content of the referenced element, <strong>but</strong>
+ in testing it with NVDA and JAWS found it still worked.&nbsp; (i.e the 
+description was announced when the control recieved focus.)</li>
+<li><a href="http://twitter.com/#!/stevefaulkner/status/98659429943218176">asked</a><a href="http://twitter.com/#!/jcsteh">@jcsteh</a> how NVDA accesses the aria-describedby text in IE when it is not provided via the MSAA accessible description property <a href="http://twitter.com/#!/jcsteh">Jamie responded</a>: “We pull it from the DOM… which we have to do for a lot of stuff in IE. :(“</li>
+</ul>
+</li>
+</ul>
+<h3>HTML5 and ARIA Boolean attributes</h3>
+<ul>
+<li>Clarified with <a href="http://twitter.com/#!/stommepoes">@stommepoes</a> that ARIA boolean attributes do not work the same as HTML5 boolean attributes, for example:
+<ul>
+<li>In HTML5 native boolean attributes <code>&lt;input type=text <strong>required</strong>&gt;</code> the presence of the attribute indicates the true state while the abscence indicates the false state: <code>&lt;input type=text&gt;</code></li>
+<li>But even when used in HTML5 <code>&lt;input type=text <strong>aria-required</strong>&gt;</code> the presence of the aria-required attribute does not indicate the <em>true</em> state. The value needs to be expliclty declared: <code>&lt;input type=text <strong>aria-required="true"</strong>&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3>HTML5 accessibility change proposal</h3>
+<p>Completed a <a href="http://www.w3.org/html/wg/wiki/ChangeProposal/meta_name%3Dgenerator_does_not_make_missing_alt_conforming">change proposal</a> to overturn the W3C HTML working group <a href="http://www.paciellogroup.com/blog/2011/04/html5-accessibility-chops-the-alt-decision/#d3">decision</a> that the presence of <code>&lt;meta name=generator&gt;</code> in a HTML document results in conformance checkers such as the <a href="http://www.w3.org/html/check">W3C validator</a> hiding alt errors.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Accessibility%20Notes%20%202nd%20August%202011_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>The state of hidden content support in 2016</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2016/01/the-state-of-hidden-content-support-in-2016/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">The state of hidden content support in 2016</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="The%20state%20of%20hidden%20content%20support%20in%202016_files/aria-5small.png" alt="ARIA and HTML5" width="123" height="154"> I have reported previously on support in browsers and screen readers (SR) for <code>aria-hidden</code> and the HTML5 <code>hidden</code> attribute. The last time was <a href="https://www.paciellogroup.com/blog/2013/11/html5-accessibility-chops-hidden-aria-hidden-support/">2 years ago</a>, the <a href="https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/">orginal article</a>
+ published 2 years prior in 2012 still gets lots of page views. As its a
+ subject that developers are interested in, so here is an update.<span id="more-4249"></span></p>
+<h2>Support for HTML5 hidden and aria-hidden in 2016</h2>
+<h3>Summary</h3>
+<p>All major browsers and screen readers:</p>
+<ul>
+<li>support the use of the <a href="http://w3c.github.io/html/editing.html#the-hidden-attribute">hidden</a> attribute to hide content</li>
+<li>support the use of the CSS <a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop">display:none</a> to hide content</li>
+<li>support the use of the <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-hidden">aria-hidden</a> attribute to hide visible content from screen reader users</li>
+</ul>
+<h3>The Details</h3>
+<p><a href="http://stevefaulkner.github.io/HTML5accessibility/tests/hidden-2016.html">Screen reader support for hidden content</a> – tests and results for</p>
+<ul>
+<li>Windows 10
+<ul>
+<li>Firefox 43</li>
+<li>Internet Explorer 11</li>
+<li>Chrome 47</li>
+<li>JAWS 17</li>
+<li>Window Eyes 9</li>
+<li>NVDA 2015.4</li>
+<li>Narrator 10</li>
+</ul>
+</li>
+<li>VoiceOver on iOS 9.2.1 (iPhone 6)</li>
+<li>VoiceOver on OSX El Capitan</li>
+<li>ChromeVox&nbsp; on Chrome OS 47</li>
+<li>Orca 3.16 on Linux</li>
+</ul>
+<h3>Notes:</h3>
+<p>In some browser and screen reader combinations <code>aria-hidden=false</code> on an element that is hidden using the <code>hidden</code> attribute or CSS <code>display:none</code> results in the content being <em>unhidden</em>. This behaviour <strong>does not</strong> have consensus support among browser implementers and I <strong>strongly</strong> recommend, it not be used.</p>
+<p>Why no Edge testing? The Edge browser does not yet have sufficient accessibility support for testing to be useful.</p>
+<p>The <code>hidden</code> attribute hides content due to browser’s 
+implementation of CSS display:none on content hidden using the 
+attribute. If the default UA CSS is overidden, then <code>aria-hidden=true</code> will have to be used alongside the <code>hidden</code> attribute:</p>
+
+
+<p><a href="https://github.com/stevefaulkner/HTML5accessibility/blob/gh-pages/tests/hidden-2016.html">Tests and results on github</a> – issues and PR’s welcome!</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="The%20state%20of%20hidden%20content%20support%20in%202016_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

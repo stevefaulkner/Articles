@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Short note on getting spaced out with SC 1.4.12 Text Spacing</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2018/05/short-note-on-getting-spaced-out-with-sc-1-4-12-text-spacing/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Short note on getting spaced out with SC 1.4.12 Text Spacing</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="Short%20note%20on%20getting%20spaced%20out%20with%20SC%201.4.12%20Text%20Spacing_files/SPACEFACE-prof.gif" alt="astronaut puffing on a cheroot through her helmet. The words SPACED OUT, with the letters separated, above her head." width="149" height="149">One of the new success criterion in WCAG 2.1 is <a href="https://www.w3.org/TR/WCAG21/#text-spacing">1.4.12 Text Spacing</a>. Conforming to this criteria provides accommodation for people to modify their text styles according to their needs.</p>
+<p>The success criterion defines a set of text styles that must be 
+supported. Thinking that this should be pretty simple to test using a <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklet</a> I went searching for one that someone may have prepared previously. Not finding any, I whipped one up.<br>
+<span id="more-6671"></span></p>
+<h2>What the success criterion requires;</h2>
+<blockquote><p>In content implemented using markup languages that support the following <a href="https://www.w3.org/TR/WCAG21/#dfn-text">text</a> <a href="https://www.w3.org/TR/WCAG21/#dfn-style-properties">style properties</a>, no loss of content or functionality occurs by setting all of the following and by changing no other style property:</p>
+<ul>
+<li>Line height (line spacing) to at least 1.5 times the font size;</li>
+<li>Spacing following paragraphs to at least 2 times the font size;</li>
+<li>Letter spacing (tracking) to at least 0.12 times the font size;</li>
+<li>Word spacing to at least 0.16 times the font size.</li>
+</ul>
+<p><cite>source: <a href="https://www.w3.org/TR/WCAG21/#text-spacing">1.4.12 Text Spacing</a></cite></p></blockquote>
+<p>Using a bookmarklet that applies these styles to a page when 
+activated, the styled content can be visually scanned to identify any 
+issues such as clipping or overlaying of content.</p>
+<h2>The Text Spacing bookmarklet</h2>
+<p>On Tuesday night, <em>way past</em> my bedtime, the Text Spacing bookmarklet was born:<br>
+On Codepen: <a href="https://codepen.io/stevef/pen/YLMqbo/">text spacing bookmarklet</a></p>
+
+
+<p>Permalink to the <a href="http://html5accessibility.com/tests/tsbookmarklet.html">Text Spacing Bookmarklet</a></p>
+<h3>Addendum</h3>
+<p>I <a href="https://twitter.com/alastc/status/999059087609532417">found out later</a> that there was another bookmarklet to test this criteria:</p>
+<blockquote data-lang="en">
+<p dir="ltr" lang="en">If that doesn't have any dependencies and works 
+across a reasonable browser spread, it's better than the quick one I did
+ previously (<a href="https://t.co/pzzPHxTos3">https://t.co/pzzPHxTos3</a>). Will that URL be stable?</p>
+<p>— Alastair Campbell (@alastc) <a href="https://twitter.com/alastc/status/999059087609532417?ref_src=twsrc%5Etfw">May 22, 2018</a></p></blockquote>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Short%20note%20on%20getting%20spaced%20out%20with%20SC%201.4.12%20Text%20Spacing_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

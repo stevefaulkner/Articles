@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Computer says NO to HTML5 document outline</title><link rel="shortcut icon" href="http://html5doctor.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="http://html5doctor.com/computer-says-no-to-html5-document-outline/">html5doctor.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Computer says NO to HTML5 document outline</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><div>
+
+		
+                <h2>What a brilliant idea!</h2>
+<p><img src="Computer%20says%20NO%20to%20HTML5%20document%20outline_files/Capture-150x150.png" alt="Patrick lauke with red lips and styled hair" width="150" height="150"><img src="Computer%20says%20NO%20to%20HTML5%20document%20outline_files/pinkunicorn.png" alt="pink unicorn unleashes H1's for everyone" width="200" height="119"></p>
+<p>For the longest time HTML5 specified, and advised developers, that it no longer mattered what the number (1 to 6) was in a <a href="http://w3c.github.io/html/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">heading element</a> (when used in conjunction with <a href="http://w3c.github.io/html/sections.html#sections">sectioning elements</a>). What mattered was the nesting level of the H1-h6 in sectioning elements, just like the <a href="http://www.w3.org/TR/xhtml2/mod-structural.html#sec_8.5.">X&lt;H&gt;TML promised land</a>, but <em>better</em>
+ as it recycled current heading elements. This concept was embraced by 
+many a web standards afficianado and has been spread far and wide by web
+ standards <em>evangelists</em>, in speeches, articles and books.</p>
+<p><strong>How the outline should work: using nested <code><span>section</span></code> and <code><span>h1</span></code> elements</strong></p>
+<pre><span>&lt;body&gt;</span><span><br>&nbsp;</span><span>&lt;h1&gt;</span><span>top level heading (parent sectioning element is body)</span><span>&lt;/h1&gt;</span><span><br>&nbsp;</span><span>&lt;section&gt;</span><span><br>&nbsp;</span><span>&lt;h1&gt;</span><span>2nd level heading (nested within one sectioning element)</span><span>&lt;/h1&gt;</span><span> <br>&nbsp; </span><span>&lt;section&gt;</span><span><br>&nbsp; </span><span>&lt;h1&gt;</span><span>3rd level heading (nested within 2 sectioning elements)</span><span>&lt;/h1&gt;</span><span> <br>&nbsp; </span><span>&lt;/section&gt;</span><span> <br>&nbsp;</span><span>&lt;/section&gt;</span><span><br></span><span>&lt;/body&gt;</span></pre>
+<p><strong>document outline:</strong></p>
+<pre><span> </span><span>→</span><span> top level heading<br>&nbsp;</span><span>→</span><span> </span><span>→</span><span> </span><span>2nd</span><span> level heading<br>&nbsp;</span><span>→</span><span> </span><span>→</span><span> </span><span>→</span><span> </span><span>3rd</span><span> level heading</span></pre>
+<h2>Trouble in outline nerdvana</h2>
+<p><b>Document outline semantics exposed by browsers and assistive technology:</b></p>
+<pre><span>→</span><span> top level heading<br></span><span>→</span><span> top level heading<br></span><span>→</span><span> top level heading</span></pre>
+<p>Brilliant as it is, this idea as specified has not been taken up by <a href="https://www.w3.org/wiki/HTML/Usage/Headings/h1only#Heading_semantics_exposed_by_browsers">user agents</a>. So after 7 years or more we have a concept without interoperable implementations (<em>super sad face</em>).</p>
+<p>For the last few years, the HTML5 specification has included <a href="http://w3c.github.io/html/sections.html#creating-an-outline">a warning</a>
+ about the lack of implementations and has suggested that the document 
+outline algorithm not be relied upon to convey heading semantics to 
+users. Recently this has been taken a step further. Now the HTML 5.1 
+specification&nbsp; requires developers to use <code><span>h1</span><span>-</span><span>h6</span></code> to convey document structure. The simple reason for this change is that the HTML5 document outline is not implemented and <a href="https://www.w3.org/wiki/HTML/Usage/Headings/h1only#Notes">despite efforts</a>
+ to get it implemented, the general response from user agent developers 
+has not been enthusiastic. You can read the updated advice and 
+requirements in the <a href="http://w3c.github.io/html/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">HTML 5.1 specification</a></p>
+<p><strong>Comments or questions? Bring ’em on!</strong></p>
+<p><strong>PS:</strong> If you find any bugs in the <a href="http://w3c.github.io/html/index.html">HTML 5.1 spec</a> you can <a href="https://github.com/w3c/html/issues/new">open an issue</a> or send a&nbsp; <a href="https://github.com/w3c/html/pulls">pull request</a>.</p>
+<h2 id="bonus">Update 21/06/16 – Heading-level outline view</h2>
+<p>You can now check the <strong>heading-level outline</strong> of a page using the <a href="https://validator.w3.org/nu/">W3C HTML checker</a> or the <a href="https://validator.w3.org/">W3C markup validation service</a> (same output different UI) with thanks to <a href="http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/">Mike[TM]Smith</a>. It is provided alongside the structural outline, so you can compare semantic reality and theory.</p>
+<div id="attachment_6053" class="wp-caption"><p><img src="Computer%20says%20NO%20to%20HTML5%20document%20outline_files/Capture-1-270x300.png" alt="outline view screenshot" width="270" height="300"></p><p class="wp-caption-text">Example of heading-level outline and structural outline displayed by the Nu HTML Checker</p></div>
+                        
+            </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

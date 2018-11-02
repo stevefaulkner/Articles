@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Usability and accessibility opportunities in a web component world</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/04/usability-accessibility-opportunities-web-compenent-world/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Usability and accessibility opportunities in a web component world</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>A discussion on the WHATWG list about the limitations/issues with the current design of the <a href="http://www.w3.org/html/wg/drafts/html/master/interactive-elements.html#the-summary-element">summary</a> and <a href="http://www.w3.org/html/wg/drafts/html/master/interactive-elements.html#the-details-element">details</a> elements, brought forth the following comment:</p>
+
+<blockquote><p>[me: ] in the absence of browser making “clicks on 
+(non-interactive) parts of the summary defer to the disclosure 
+triangle.” how is&nbsp; an author supposed to do this?</p>
+<p>[hixie:] The author isn’t supposed to do this. The whole point of 
+semantic controls like this [details/summary] is that the user agent is 
+the one that picks the user interface.</p>
+<p><strong>Once we start talking about custom widgets, we’re in the 
+space of Web components, at which point the author can do whatever the 
+author wants. </strong>[emphasis mine]</p>
+<p><cite>source: <a href="http://lists.w3.org/Archives/Public/www-archive/2014Apr/0012.html">http://lists.w3.org/Archives/Public/www-archive/2014Apr/0012.html</a></cite></p></blockquote>
+<h3>Don’t fear – <em>embrace</em></h3>
+<p>Which got me to thinking that we should be embracing <a href="http://w3c.github.io/webcomponents/explainer/">web components </a>as
+ an opportunity to improve the usability and accessibility of native 
+HTML controls and content. It’s a little sad that the way to fix 
+accessibility and usability in a native UI is to create a custom UI, 
+rather than ensuring by design of the HTML feature that usability and 
+accessibility are built in, but if it is to be, lets embrace it.</p>
+<h2>A simple demo</h2>
+<p>To this end, I have made a <a href="http://rawgithub.com/stevefaulkner/flipbox/master/demo/testpage.html">simple demo</a> using the <a href="https://github.com/x-tag/flipbox">flipbox web component</a>, to illustrate use of a web component to provide easy display of rich text alternatives for images using a <em>natty</em> interaction pattern:<br>
+<img alt="Default state with images displayed." src="Usability%20and%20accessibility%20opportunities%20in%20a%20web%20component%20world_files/Capture1.png" width="888" height="489"><br>
+<img alt="Rich text alternatives displayed after pressing flip button." src="Usability%20and%20accessibility%20opportunities%20in%20a%20web%20component%20world_files/Capture2.png" width="882" height="493"></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Usability%20and%20accessibility%20opportunities%20in%20a%20web%20component%20world_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

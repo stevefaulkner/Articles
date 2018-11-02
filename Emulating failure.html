@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Emulating failure</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/02/emulating-failure/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Emulating failure</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>HTML has a problem. As implemented in browsers many <a href="http://www.w3.org/TR/html5/dom.html#interactive-content">interactive elements</a>
+ cannot be styled as desired by web developers, or developers as 
+directed by designers, marketing or any of the numerous others whose 
+wishes code cutters must abide by.</p>
+
+<h2>Something borrowed, something blue</h2>
+<p>Take for example, Google’s gmail UI, a ‘web application’ if there 
+ever was one. It consists of literally 100’s of controls, many of which 
+are simple controls such as buttons and checkboxes.</p>
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2015/02/gmail.gif"><img src="Emulating%20failure_files/gmail.gif" alt="screenshot of gmail 'all mail' view." width="500" height="290"></a></p>
+<p>Looking under the hood, what is evident is there are a lot of custom controls built from <code>&lt;div&gt;</code>‘s and <code>&lt;span&gt;</code>‘s:</p>
+<p>HTML: 1, HEAD: 1, STYLE: 8, META: 6, TITLE: 1, LINK: 3, SCRIPT: 11, BODY: 1,&nbsp; IFRAME: 11,&nbsp; <strong>DIV: 3757</strong>, FORM: 3,&nbsp; <strong>INPUT: 11</strong>,&nbsp; NOSCRIPT: 1,&nbsp; P: 1,&nbsp; A: 107,&nbsp; B: 433, OL: 1, LI: 19, BR: 115, UL: 2, <strong>SPAN: 1603</strong>,&nbsp; IMG: 263,&nbsp; H2: 6,&nbsp; FIELDSET: 2,&nbsp; LEGEND: 2,&nbsp; TABLE: 10, TBODY: 61, TR: 284, TD: 1618, <strong>BUTTON: 1</strong>, H1: 1, NOBR: 1, H3: 6, HR: 1, COLGROUP: 5, COL: 34, <strong>TEXTAREA: 1</strong>.</p>
+<p>Digging a little deeper:</p>
+<p>There are 1172 instances of the role attribute, including:</p>
+<ul>
+<li>304 – <code>role="checkbox"</code></li>
+<li>83 – <code>role="button"</code></li>
+<li>54 – <code>role="option"</code></li>
+</ul>
+<p>These roles are some examples of&nbsp; native <a href="http://w3c.github.io/elements-of-html/">elements of HTML</a> that in 2015 continue to be re-invented using <code>&lt;div&gt;</code>‘s and <code>&lt;span&gt;</code>‘s, but have been around since pretty much the dawn of HTML. The <code>&lt;button&gt;</code> and <code>&lt;input type="button"&gt;</code> elements are latecomers as they first appeared in <a href="http://www.w3.org/TR/html401/">HTML 4 in 1999</a>, while <code>&lt;input type="checkbox"&gt;</code> and <code>&lt;option&gt;</code> appeared in <a href="http://www.w3.org/MarkUp/html-spec/html-spec_toc.html">HTML 2</a> in 1995.</p>
+<p>Now in 2015 we have <a href="http://webcomponents.org/">web components</a> re-inventing native HTML buttons, radio buttons and checkboxes, for relief from the scourge of&nbsp;<em>divitis</em>, perpetrated upon us by the <em>as shipped</em> inability to style a native HTML element as desired.</p>
+<p>Is it just me, or are new web UI technologies continuing to try to solve the wrong problems?</p>
+<blockquote lang="en"><p>When will browsers implement <a href="https://twitter.com/hashtag/HTML5?src=hash">#HTML5</a> UI features in a way that web developers want to use them? <a href="https://twitter.com/hashtag/fronteers?src=hash">#fronteers</a> 2010 <a href="http://t.co/mp2uhzHNnE">pic.twitter.com/mp2uhzHNnE</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/561830483454341120">February 1, 2015</a></p></blockquote>
+<blockquote lang="en"><p><a href="https://twitter.com/codepo8">@codepo8</a> suggest developers want browsers to provide functional UI structures that can be easily painted and decorated, not locked down</p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/561842195125506048">February 1, 2015</a></p></blockquote>
+<blockquote lang="en"><p><a href="https://twitter.com/codepo8">@codepo8</a> old rope &lt;div&gt; and &lt;span&gt; new rope &lt;x-div&gt; and &lt;x-span&gt;</p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/561855345078063104">February 1, 2015</a></p></blockquote>
+
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://lists.w3.org/Archives/Public/public-webapps/2015JanMar/thread.html#msg206">Minimum Viable Custom Elements</a> – thread on w3c web apps mailing list</li>
+<li><a href="https://adactio.com/journal/8276">Extensibility</a></li>
+<li><a href="http://www.brucelawson.co.uk/2014/on-the-accessibility-of-web-components-again/">On the accessibility of web components. Again.</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Emulating%20failure_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

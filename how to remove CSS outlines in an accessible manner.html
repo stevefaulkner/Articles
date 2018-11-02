@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>how to remove CSS outlines in an accessible manner?</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/04/how-to-remove-css-outlines-in-an-accessible-manner/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">how to remove CSS outlines in an accessible manner?</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-8 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Anybody with any real  world accessibility experience knows that using CSS <code>:focus {outline:none}</code> as recommended in the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis">WHATWG HTML living standard</a> is <strong>not a solution</strong> to any problem, it only replaces one accessibility issue with another. This why I <a href="http://www.w3.org/html/wg/wiki/ChangeProposals/outlinenone">worked hard</a> to get the advice still present in the ‘living standard’ removed from the <a href="http://dev.w3.org/html5/spec/editing.html#element-level-focus-apis">W3C HTML5 specification</a>.</p>
+
+<h2>killing CSS outlines for mouse users only</h2>
+<blockquote cite="https://twitter.com/#!/stevefaulkner/status/194707575550390272"><p><strong>Note:</strong> I am not advocating removal of CSS outlines, but if you must, do it in a way that does not screw keyboard users</p></blockquote>
+<h3>The problem</h3>
+<p><img src="how%20to%20remove%20CSS%20outlines%20in%20an%20accessible%20manner_files/outline.png" alt="'test link' with dotted oultine displayed" width="104" height="41"><br>
+Some developers/designers/clients do not like the default focus 
+rectangle that is displayed when a user clicks on an interactive element
+ such as a link. Methods to remove it such as <code>onfocus="blur()"</code> result in keyboard users being unable to interact with the link or control. While use of CSS <code>outline:none</code>
+ results in the link or control being focusable but with no visible 
+indication of focus for keyboard users. Neither method provides an 
+accessible user interface.</p>
+<h3>An accessible solution?</h3>
+<p><img src="how%20to%20remove%20CSS%20outlines%20in%20an%20accessible%20manner_files/nooutline.png" alt="'test link' without a dotted outline" width="112" height="40"></p>
+<p>Starting with the page having no CSS outline:none rules applied. Apply CSS outline:none rules using JavaScript <strong>ONLY IF</strong> mouse user depressesing the mouse button is detected. Remove the rules again <strong>IF </strong>keyboard interaction is detected.</p>
+<h4><strong>Example code:</strong></h4>
+<p><code>&lt;!DOCTYPE HTML&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+<strong>&lt;style id="poot"&gt;&lt;/style&gt;</strong><br>
+&lt;/head&gt;<br>
+&lt;body <strong>onmousedown="document.getElementById('poot').innerHTML='a{outline:none}';" onkeydown="document.getElementById('poot').innerHTML=''"</strong>&gt;<br>
+&lt;a href="#"&gt;test link&lt;/a&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></p>
+<h4><strong>Notes:</strong></h4>
+<ul>
+<li> A <a href="http://www.html5accessibility.com/tests/outline.html">test page</a> is available</li>
+<li>Example only suppresses outline on links for mouse users.</li>
+<li>Tested with Firefox, IE, Chrome, Opera and Safari on Windows.</li>
+<li>Use of inline event handlers is for demonstration purposes only.</li>
+<li>If you create a more sophisticated script based on this idea please share
+<ul>
+<li><a href="https://twitter.com/#!/arglazer">Aireh Glazer</a> has created a <a href="https://gist.github.com/2470777"><span id="description">Cross-Lib accessible outline removal</span></a> script</li>
+<li><a href="http://twitter.com/lindsayevans/">Lindsay Evans</a> has created <a href="https://github.com/lindsayevans/outline.js">outline.js</a></li>
+</ul>
+</li>
+<li>If you encounter any issues provide feedback</li>
+<li>how it works with touch based interfaces has not been investigated much:
+<ul>
+<li>using Opera mini and Safari on iPad, the links still show their 
+default activation indicator and the same using webkit on android 
+(feedback from <a href="https://twitter.com/#sideshowbarker">@sideshowbarker</a>), which is the best outcome for usability/accessibility.</li>
+</ul>
+</li>
+</ul>
+<h3>The back story</h3>
+<p>The <a href="http://dev.w3.org/html5/spec/editing.html#element-level-focus-apis">W3C HTML5 specification</a> now states:</p>
+<blockquote>
+<dl>
+<dt><var>element</var> . <code title="dom-blur"><a href="http://dev.w3.org/html5/spec/editing.html#dom-blur">blur</a></code>()</dt>
+<dd>Unfocuses the element. Use of this method is discouraged. Focus     another element instead.&nbsp;
+<p>Do not use this method to hide the focus ring. Do not use any     
+other method that hides the focus ring from keyboard users,in     
+particluar do not use a CSS rule to override the ‘outline’ property. 
+Removal of the focus ring leads to serious accessibility issues for 
+users who navigate and interact with interactive content using the 
+keyboard.</p>
+</dd>
+</dl>
+</blockquote>
+<h3>The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis">WHATWG Living Standard</a> makes claims it provides advice on how to remove focus outlines in an ‘accessible manner’:</h3>
+<blockquote>
+<p>The W3C HTML specification omits some advice about how to<strong> remove focus outlines in an accessible manner</strong>
+ (instead only urging     authors not to remove them without giving an  
+alternative to address     the “they’re ugly” use case), because of a <a href="http://lists.w3.org/Archives/Public/public-html/2012Mar/0786.html">working     group chair decision from March 2012</a>.</p>
+</blockquote>
+<h3>The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis">WHATWG HTML living standard</a> continues to state:</h3>
+<blockquote cite="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis">
+<p><code>element . blur()</code>Unfocuses the element. Use of this method is discouraged. Focus another element instead.</p>
+<p>Do not use this method to hide the focus ring if you find the  focus 
+ring unsightly. Instead, use a CSS rule to override the ‘outline’  
+property. (Be aware, however, that this makes the page significantly  
+less usable for some people, especially those with reduced vision who  
+use focus outlines to help them navigate the page.)</p>
+<p>For example, to hide the outline from links, you could use:</p>
+<p><code>:link:focus, :visited:focus { outline: none; }</code></p>
+</blockquote>
+<h3>The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#element-level-focus-apis">WHATWG HTML living standard</a> does not contain advice on how to remove focus outlines in an ‘accessible manner’</h3>
+<p>By its own admission the ‘living standard’ states the recommended alternative to using <code>.blur()</code> is bad for accessibility:</p>
+<blockquote>
+<p>Be aware, however, that this makes the page significantly  less 
+usable for some people, especially those with reduced vision who  use 
+focus outlines to help them navigate the page.</p>
+</blockquote>
+<p><strong>Note:</strong> This warning also contains a factual innacuracy as use of outline:none makes the page <strong>significantly less accessible to any keyboard only user</strong>,
+  not only those with reduced vision. Not providing a visible indication
+  of focus makes the user interface unusable for keyboard only users in 
+any  circumstance where the page has more than a few focusable elements.</p>
+<div id="_mcePaste">
+<p>The WHATWG Living Standard makes claims it provides advice on how to remove focus outlines in an ‘accessible manner’:</p>
+<p>The W3C HTML specification omits some advice about how to remove 
+focus outlines in an accessible manner (instead only urging authors not 
+to remove them without giving an alternative to address the “they’re 
+ugly” use case), because of a working group chair decision from March 
+2012.</p>
+<p>The WHATWG HTML living standard contains the following advice:</p>
+<p>element . blur() Unfocuses the element. Use of this method is discouraged. Focus another element instead.</p>
+<p>Do not use this method to hide the focus ring if you find the focus 
+ring unsightly. Instead, use a CSS rule to override the ‘outline’ 
+property. (Be aware, however, that this makes the page significantly 
+less usable for some people, especially those with reduced vision who 
+use focus outlines to help them navigate the page.)</p>
+<p>For example, to hide the outline from links, you could use:</p>
+<p><code>:link:focus, :visited:focus { outline: none; }</code></p>
+<p>The WHATWG HTML living standard does not contain advice on how to remove focus outlines in an ‘accessible manner’</p>
+<p>By its own admission the ‘living standard’ states the recommended alternative to using .blur() is bad for accessibility:</p>
+<p>Be aware, however, that this makes the page significantly less usable
+ for some people, especially those with reduced vision who use focus 
+outlines to help them navigate the page.</p>
+<p>Note: This warning also contains a factual innacuracy as it makes the
+ page significantly less accessible to any keyboard only user not only 
+those with reduced vision. Not providing a visible indication of focus 
+makes it unusable for keyboard only users in amny circumstances.</p>
+</div>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="how%20to%20remove%20CSS%20outlines%20in%20an%20accessible%20manner_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

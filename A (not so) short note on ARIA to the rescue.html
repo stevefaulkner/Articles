@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>A (not so) short note on ARIA to the rescue</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2016/10/a-not-so-short-note-on-aria-to-the-rescue/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">A (not so) short note on ARIA to the rescue</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="A%20(not%20so)%20short%20note%20on%20ARIA%20to%20the%20rescue_files/aria5.png" alt="ARIA and HTML5" width="200" height="252">Native <a href="http://w3c.github.io/html/">HTML elements</a>
+ don’t require the addition of ARIA attributes to expose the semantics 
+they have, as, for the most part, browsers expose this information: <strong>YAY.<br>
+</strong></p>
+<p>This is expressed in the <a href="https://www.w3.org/TR/wai-aria-1.1/#implicit_semantics">ARIA specification</a>:</p>
+<blockquote><p>…there are many situations in which <abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> semantics are redundant with host language semantics.</p></blockquote>
+<p>It is also expressed in HTML as <a href="https://www.w3.org/TR/html-aria/#docconformance">a set of rules</a> to dissuade developers from unecessarily adding ARIA attributes, acting under the falsehood that it is somehow beneficial.</p>
+
+<blockquote><p>Setting an <abbr title="Accessible Rich Internet Applications">ARIA</abbr><code>role</code> and/or <code>aria-*</code> attribute that matches the default implicit <abbr title="Accessible Rich Internet Applications">ARIA</abbr> semantics is unnecessary and is <em title="NOT RECOMMENDED">not recommended</em> as these properties are already set by the browser.</p>
+<p>Default Implicit <abbr title="Accessible Rich Internet Applications">ARIA </abbr>semantics – <em title="SHOULD NOT">should not </em>be used</p></blockquote>
+<p>This why developers who do so and <a href="https://validator.w3.org/nu/">check their HTML conformance</a> with the HTML standard will get warnings like this:</p>
+<p><img src="A%20(not%20so)%20short%20note%20on%20ARIA%20to%20the%20rescue_files/Capture.png" alt="Warning! The heading role is unnecessary for element h1." moz-reader-center="true" width="734" height="140"></p>
+<p>And this is a <strong>good thing</strong>. Although in most circumstances the presence of ARIA semantics that duplicates <em>default implicit semantics</em> will not have a detrimental effect, addition of unecessary attributes leads to extra work, code bloat, and can lead to errors.</p>
+<h2>SHOULD NOT, because sometimes…</h2>
+<p>We have a client, who has set on an environment for particular 
+reasons, that uses a locked down version of Chrome and allows only JAWS 
+as a screen reader.</p>
+<p>JAWS does not officially support Chrome and while Chrome does a <a href="http://www.html5accessibility.com/">good job</a>
+ at exposing the correct information for Assistive Technology (AT), 
+sometimes the AT falls short in making use of the information or does 
+not interpret the information correctly.</p>
+<p>Sometimes the issue may be a regression in a new version of the 
+software and will hopefully be fixed in the next version. Other times 
+it’s a long standing bug in the browser or AT. As accessibility 
+practioners/engineers/developers (call yourself what you will), we have 
+to take a view on whether to advise the client to implement a work 
+around or code the workaround ourselves, or whether users can take a 
+hit, as it’s a temporary problem and not a show stopper for users.</p>
+<p>In the case above the issue was that JAWS in combination with Chrome 
+(as of version &lt;=51) does not correctly identify heading (<a href="https://w3c.github.io/html/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">H1-h6</a>)
+ levels, so content structure/hierarchy is not conveyed. The problem 
+here is with JAWS, Chrome exposes&nbsp;headings correctly in the <a href="https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">accessibility tree</a>. i.e. a <code>&lt;h1&gt;</code> has a <code>role=heading</code> and a <code>level=1</code>, a <code>&lt;h3&gt;</code> has a <code>role=heading</code> and a <code>level=3</code>, but JAWS reports all headings (<code>h1-h6</code>) as “heading level 2” doh!</p>
+<p>As mentioned earlier, the environement is a set version of chrome 
+(51) and a set version of JAWS (17) so me thinks this is not an issue 
+that will go away soon, and users of this system will be at a 
+disadvantage because of this. The initial advice was to <em>at least</em> provide some information up front to JAWS users, so they were aware of the issue. Then I thought I would try adding the <code>aria-level</code> attribute to the headings with a value that matches the default level of the heading:</p>
+<pre><span>&lt;<span>h1</span> <span>aria-level</span>=<span>"1"</span>&gt;</span>...
+<span>&lt;<span>h2</span>&gt;</span>...
+<span>&lt;<span>h3</span> <span>aria-level</span>=<span>"3"</span>&gt;</span>...
+</pre>
+<p>I wasn’t super optimistic about this having an effect, as I know that
+ the attributes through which ARIA can be used to manipulate the browser
+ accessibility tree properties are exposed via the platform 
+accessibility API properties/values (where they exist) rather than any 
+ARIA magic, and both <code>level</code> and <code>role=heading</code> are standard across accessibility APIs. To my surprise use of <code>aria-level</code> worked, you can try it yourself in chrome/JAWS:</p>
+
+
+<p>That it worked told me that JAWS is likely doing some DOM hacking and picking up the <code>aria-level </code>
+ attribute rather than reading the correct value already conveyed by 
+chrome through the Accessibility Tree. Point is it worked and the client
+ can be advised on a simple workaround to support the correct semantics 
+for users.</p>
+<h2>NOTE</h2>
+<p>This is a tale of a particular circumstance where going against the 
+general rule of ARIA not being required to expose native HTML semantics,
+ was of benefit.&nbsp; It is in <strong>no way</strong> meant to suggest that adding <code>aria-level</code> to <code>h1-h6</code> is required or recommended in general. It is a bug in JAWS that needs to be fixed.</p>
+<h2>Further reading</h2>
+<ul>
+<li><a href="https://www.paciellogroup.com/blog/2015/08/short-note-on-html-conformance-checking/">Short Note on HTML conformance checking</a></li>
+<li><a href="http://html5doctor.com/on-html-belts-and-aria-braces/">On HTML belts and ARIA braces</a> (The Default Implicit ARIA semantics they didn’t want you to know about)</li>
+</ul>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="A%20(not%20so)%20short%20note%20on%20ARIA%20to%20the%20rescue_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 semantics and accessibility</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/11/html5-semantics-and-accessibility/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 semantics and accessibility</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>This&nbsp; is a comment I made on the article <a href="http://coding.smashingmagazine.com/2011/11/12/pursuing-semantic-value/">Pursuing Semantic Value</a> The <a href="http://twitter.com/#!/adactio/status/136096758408294400">author requested</a> that I post it separately, so I have.<span id="more-1203"></span></p>
+<h3>Stating the obvious</h3>
+<p>Semantics are not just about accessibility, accessibility is not just
+ about assistive technology. But semantic information (name, role, 
+states and properties) carried by HTML elements and attributes is 
+integral to making content on the web accessible, especially for those 
+who rely upon assistive technology to access and interact with web 
+content.<br>
+Historically and currently accessibility support for HTML features in 
+browsers lags behind other facets of feature implementation, and 
+unfortunately accessibility support is not taken into account when 
+browsers announce support for a feature. Which is why we get claims 
+about HTML5 structural elements being implemented in browsers. What is 
+actually meant, pretty much, is that visual styling has been 
+implemented.</p>
+<h3>HTML accessibility support</h3>
+<p>Where there are clearly defined semantics already available via <a href="http://www.paciellogroup.com/blog/2011/10/brief-history-of-browser-accessibility-support/">acccessibility APIs</a>
+ for new HTML5 features, it is easy for browsers to implement the 
+support and no excuse for AT to not understand and convey the 
+appropriate information to users.<br>
+The accessibility implementation and semantics of particular HTML5 
+elements is still being worked out. This is mostly due to the semantics,
+ from an accessibility support perspective, not being well specified or 
+specified at all in the HTML5 specification. The <a href="http://rawgit.com/w3c/aria/master/html-aam/html-aam.html">HTML to accessibility API implementation guide</a> is intended to help with this, but it is still in early development</p>
+<h3>hgroup – an element in search of a cowpath</h3>
+<p>For example, the <a href="http://dev.w3.org/html5/spec/sections.html#the-hgroup-element">hgroup element</a>
+ is a mess. Why? because it is an element in search of a cowpath. As 
+currently specified it does not provide a useful semantic to assistive 
+technology users, in fact it does the opposite, it removes potential 
+information about subheadings/subtitles/taglines etc, by forcing 
+implementers to collapse the subheading semantics into the parent 
+heading. That is why hgroup is at risk in the W3C HTML5 specification, 
+with <a href="http://dev.w3.org/html5/status/issue-status.html#ISSUE-164">5 detailed proposals</a> to either abolish or replace it.</p>
+<p><strong>Update</strong> 22/02/2015: hgroup is <a href="http://www.w3.org/TR/html5/">obsolete in HTML5</a></p>
+<h3>header – useful or not?</h3>
+<p>Another example is the <a href="http://dev.w3.org/html5/spec/sections.html#the-header-element">header</a> element from <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=610650">discussions</a>
+ with browser and AT implementers, it is considered that the header 
+element does not add much value as it does not provide anything that 
+currently available semantics does not. To understand why, it is useful 
+understand the ways in which screen readers can expose <a href="http://www.paciellogroup.com/blog/2011/03/html5-accessibility-chops-section-elements/">HTML element information</a> to users. As a consequence it may well not be implemented in browsers or AT.</p>
+<p><strong>Update</strong> 22/02/2105: A <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-header-element">header</a> element that is not a descendant of an <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-article-element">article</a> or <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-section-element">section</a> element is exposed with a banner role (as per <a href="http://stevefaulkner.github.io/html-mapping-tests/">HTML5 implementation requirements</a>) in all modern browsers, except Internet Explorer.</p>
+<h3>HTML5 outline algorithm</h3>
+<p>In regards to the outline algorithm, Jeremy states “The new outline 
+algorithm in HTML5 will make life a lot easier for future assistive 
+technology” which suggests that he is not aware of the implementation of
+ the <a href="http://www.accessibleculture.org/articles/2011/10/jaws-ie-and-headings-in-html5/">outline algorithm in JAWS 12/13</a>,
+ unfortunately the current implementation can actually undermine users 
+ability to navigate and understand document structure. Note, also it 
+does not take hgroup into account.</p>
+<p><strong>Update</strong> 22/02/2015: The outline algorithm is still <a href="https://www.w3.org/wiki/HTML/Usage/Headings/h1only">not implemented in browsers</a> and the JAWS implementation was removed in JAWS 14.</p>
+<h3>figure and figcaption – meaning in the pipeline</h3>
+<p>The figure and figcaption elements currently have no semantic 
+meaning. This is partly because the semantics are not defined in 
+accessibility APIs and partly because the available role semantics and 
+labelling relationships have not yet been implemented in browsers. There
+ is active work going on to change that.&nbsp; As part of working out 
+how the semantics of these new elements could work I wrote <a href="https://developer.paciellogroup.com/blog/2011/11/2011/08/html5-accessibility-chops-the-figure-and-figcaption-elements/" rel="nofollow">a post about the challenges of defining the semantics</a>. At the <a href="http://www.w3.org/2011/11/TPAC/">W3C TPAC meetings</a>
+ last week we discussed the addition of a figure role in ARIA 1.1. There
+ is also moves afoot to add a figure role to the iAccessible2 API, and 
+Firefox are <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=658272" rel="nofollow">making progress (Firefox bug)</a> on the implementation of the labelling relationship for figcaption/figure and role implementation for figcaption.</p>
+<h3>Browsers have an integral part to play in accessibility support</h3>
+<p>For a long time, the refrain from certain quarters has been, screen 
+readers don’t support feature X its been in HTMLX for ages, F#@King 
+screen reader vendors. They are an easy target. Part of what <a href="http://www.html5accessibility.com/">HTML5Acessibility</a>
+ was set up to do was draw attention to the browser vendors role in 
+providing accessibility support. I suggest that browser implementation 
+is an integral aspect of HTML accessibility support, without it there is
+ not chance of robust, interoperable access to web content for AT users.
+ Take a look at the debacle with longdesc, AT for the most part cannot 
+be relied upon, and should not need to be relied upon to implement 
+accessibility features, without the browsers doing their part.</p>
+<h3>HTML5 a work in progress, get involved!</h3>
+<p>HTML5 is still a work in progress, but it’s at a stage now where 
+significant changes must not be handed down from upon high, the 
+community must have the opportunity to be involved in affecting change. 
+Involvement in the <a href="http://www.w3.org/html/wg/">W3C HTML working group</a> provides that opportunity, get involved!</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20semantics%20and%20accessibility_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

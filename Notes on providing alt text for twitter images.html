@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on providing alt text for twitter images</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/01/notes-on-providing-alt-text-for-twitter-images/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on providing alt text for twitter images</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						
+<p>I use twitter a lot via the twitter web UI. Often I see images in my <a href="https://twitter.com/stevefaulkner">twitter stream</a>
+ that contain interesting information and text content. Unsurprisingly 
+this content is not available to people who cannot see the images or 
+have difficulty interpreting graphical content.<br>
+<span id="more-3254"></span><br>
+Unfortunately the twitter UI does not provide a built in method for providing text alternatives using the standard&nbsp;<a href="http://www.w3.org/TR/html5/">HTML</a> methods for doing so. You cannot add an <a href="http://www.w3.org/TR/html5/embedded-content-0.html#attr-img-alt">alt</a> attribute to images and/or provide a caption using the <a href="http://www.w3.org/TR/html5/embedded-content-0.html#when-a-text-alternative-is-not-available-at-the-time-of-publication">figure and figcaption</a> elements.<br>
+What you <em>can do</em> pretty easily is provide the alt text as text 
+in the same tweet as the image (if it fits) or if it is a tweet from 
+someone else or there is not enough space to provide in the same tweet 
+you can reply to the tweet with an alt text.</p>
+<h2>Examples</h2>
+<blockquote lang="en"><p>Philosoraptor wonders: Does HTML4 have the ‘right to be forgotten’? <a href="http://t.co/pvbYqyBWe8">pic.twitter.com/pvbYqyBWe8</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/544924891993341952">December 16, 2014</a></p></blockquote>
+
+<blockquote data-cards="hidden" lang="en"><p>
+alt text for — Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/551004283219767296">January 2, 2015</a>
+</p></blockquote>
+<p><img src="Notes%20on%20providing%20alt%20text%20for%20twitter%20images_files/B6V713vIQAAq9KC.jpg" alt=""></p>
+<p><strong>Note:</strong> You can often find the text version of quotes 
+and other text embedded in graphics by sticking the first few words of 
+the text in <a href="https://www.google.com/search?q=the+strength+of+a+civilization&amp;ie=utf-8&amp;oe=utf-8">Google</a>, (the <a href="http://en.wikiquote.org/wiki/Talk:Gene_Roddenberry">Gene Roddenberry quote</a> for example) you can then simply provide a link to the text source for everyone \0/.</p>
+
+<h2>It’s a bit more work</h2>
+<p>Providing text alternative for images on twitter is a bit more work, 
+but it makes the interesting stuff available to anybody that follows you
+ on twitter. (same goes for Facebook)</p>
+<p>Sometimes, I find graphics whose alt text simply don’t fit into 140 characters or would benefit from structured <a href="http://www.w3.org/TR/html5/">HTML</a> markup, if I think its really interesting and I have the time, I will make it available using a service such as <a href="http://codepen.io/stevef/pen/bmnuf">codepen</a> and then publish the link on twitter:</p>
+<blockquote lang="en"><p>A meditation on 2 photographs – leunig <a href="http://t.co/lLYdRXkICk">http://t.co/lLYdRXkICk</a>? <a href="http://t.co/WWxjdYIzR7">pic.twitter.com/WWxjdYIzR7</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/551021076223111168">January 2, 2015</a></p></blockquote>
+<p><strong>Note:</strong> The <a href="http://www.easychirp.com/">Easy Chirp</a> twitter client also provides a method to provide text alternatives amongst many other accessibility features.</p>
+<h2>Addendum</h2>
+<p>Posted a few music video’s on twitter, for example:</p>
+<blockquote lang="en"><p>
+PIL – This is not a love song [lyrics] <a href="https://t.co/PypgSGqTsz">https://t.co/PypgSGqTsz</a></p>
+<p>— Steve Faulkner (@stevefaulkner) <a href="https://twitter.com/stevefaulkner/status/552038897308696576">January 5, 2015</a>
+</p></blockquote>
+
+<p>Thinking that using <a href="https://gist.github.com/">Gist</a> is a simple way to to add lyrics to songs.</p>
+<h2>Further Reading</h2>
+<p>Adrian Roselli – (<em>ranting</em>) <a href="http://blog.adrianroselli.com/2014/12/dont-tweet-pictures-of-text.html">Don’t Tweet Pictures of Text</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20providing%20alt%20text%20for%20twitter%20images_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

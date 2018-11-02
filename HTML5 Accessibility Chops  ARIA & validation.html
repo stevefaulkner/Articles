@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: ARIA &amp; validation</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/06/html5-accessibility-chops-aria-validation/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: ARIA &amp; validation</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>I <a href="http://twitter.com/#!/stevefaulkner/status/75590739345670144">tweeted</a> the other day, suggesting people switch to the HTML5 doctype as the use of <a href="http://dev.w3.org/html5/spec-author-view/wai-aria.html#wai-aria">ARIA is conforming in HTML5</a>.
+ As things stand, if ARIA roles, states and properties are used on HTML 
+elements with a doctype other than &lt;!DOCTYPE html&gt; a developer 
+will get unhelpful error messages when using an <a href="http://validator.w3.org/">HTML validator</a>
+ simply because the DOCTYPE they are using does not recognise ARIA 
+attributes as valid. This is not likely to change. So make the switch!<br>
+<span id="more-951"></span></p>
+<h2>FUD error messages</h2>
+<p><strong>Using ARIA with any flavour of HTML works equally well</strong>. It does not make one iota of difference to ARIA support in browsers or assistive technology, whether you use:</p>
+<p><strong>this HTML 4.01 doctype<br>
+</strong></p>
+<pre><code><span><span>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></span>
+</code></pre>
+<p><strong>or this XHTML 1.0 strict doctype<br>
+</strong></p>
+<pre><code><span><span>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></span></code></pre>
+<p><strong>or this HTML5 doctype</strong></p>
+<pre><code><span><span>&lt;!DOCTYPE html&gt;</span></span></code></pre>
+<p>at the top of your <code>&lt;html lang="en"&gt;</code> file. What 
+using a DOCTYPE other than the HTML5 doctype will do is cause you much 
+pain and consternation if you run your code through the <a href="http://validator.w3.org/">W3C HTML validator</a>,
+ as you will get an error reported for each use of an ARIA attribute. 
+You will not be told whether your use of the ARIA attribute in a given 
+context is correct or whether the value you are using for a particular 
+attribute is incorrect, you will only be told that it is an error… 
+pretty useless.</p>
+<p>The following are both reported as errors when checked against HTML 
+4, not helpful since one is not a specified&nbsp; role value and the 
+other is.</p>
+<pre><span>&lt;<span>div</span> <span>role</span>=<span>"dribble"</span>&gt;</span>
+
+<span>&lt;<span>div</span> <span>role</span>=<span>"main"</span>&gt;</span></pre>
+<p>The HTML 4.0 error message:</p>
+<blockquote><p><strong>there is no attribute “ROLE”</strong></p></blockquote>
+<p>Now if the HTML5 doctype is used the results are much more useful:</p>
+<blockquote><p><strong>Bad value dribble for attribute role on element div.</strong></p></blockquote>
+<p>If a developer is using ARIA to improve the accessibility of the HTML
+ content and interaction she wants to know whether she is using ARIA in a
+ way which works, not that, due to the archane rules of doctypes, she is
+ not allowed to use it.</p>
+<h3>Work in progress</h3>
+<p>Be aware that none of the available HTML5 conformance checkers have a
+ fully implemented or up to date set of ARIA conformance rules, so you 
+may get some funky results. If you do Please <a href="http://bugzilla.validator.nu/">report any bugs</a> you find.</p>
+<p>Like much of HTML5, the implementation of conformance checking is a 
+work in progress and there is still much to do. This work is being done 
+by <a href="http://twitter.com/#!/hsivonen">Henri Sivonen</a> and <a href="http://twitter.com/#!/sideshowbarker">Mike <sup>tm</sup> Smith</a>, their collective efforts can be tested on the <a href="http://w3.org/html/check">Nu Markup Validation Service.</a></p>
+<h3>Sting in the tail</h3>
+<p>If you use attributes such as <a href="http://juicystudio.com/article/purpose-of-the-summary-attribute.php">summary</a> or <a href="http://juicystudio.com/article/html5-image-element-no-alt.php#longdesc">longdesc</a>, while these are valid in HTML &lt;5 and XHTML , they are currently obsoleted in HTML5,</p>
+<p>For example, if you have an image such as this:</p>
+<pre><code><span><span>&lt;</span><span><span><span>img</span></span></span><span> </span><span><span><span>src</span></span></span><span>=</span><span><span><span>"bit.jpg"</span></span></span><span> </span><span><span><span>alt</span></span></span><span>=</span><span><span><span>"poot"</span></span></span><span> </span><span><span><span>longdesc</span></span></span><span>=</span><span><span><span>"pooter"</span></span></span><span>&gt;</span></span></code></pre>
+<p>you will get an unhelpful error message, rather than being informed 
+that the longdesc value is incorrect as it needs to be an URL:</p>
+<blockquote><p>The longdesc attribute on the img element is obsolete. Use a regular a element to link to the description.</p></blockquote>
+<p>Like ARIA attributes in HTML 4, obsoleted attributes still work in 
+browsers and AT when using the HTML5 doctype, you just get told not to 
+use them, rather than whether you are using them so they will work.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20ARIA%20&amp;%20validation_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>
