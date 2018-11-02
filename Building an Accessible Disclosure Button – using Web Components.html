@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Building an Accessible Disclosure Button – using Web Components</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/06/accessible-disclosure-button-using-web-components/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Building an Accessible Disclosure Button – using Web Components</h1>
+      <div class="credits reader-credits">Cédric Trévisan</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">7-8 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><a href="http://www.paciellogroup.com/wp-content/uploads/2014/05/webcomponents-a11y.png"><img src="Building%20an%20Accessible%20Disclosure%20Button%20%E2%80%93%20using%20Web%20Components_files/webcomponents-a11y.png" alt="web components and accessibility" width="186" height="270"></a>Web components are the next step in building modern web applications and a great way to prototype accessible widgets.</p>
+<p>Today we are going to build a disclosure widget, by extending the native <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#the-button-element">HTML button</a> element.</p>
+<p><a href="http://w3c.github.io/webcomponents/explainer/">Web components</a>
+ are a collection of several standards (Templates, Shadow DOM, Custom 
+elements, Imports) that allow us to create reusable elements and 
+encapsulate the complexity of code and style into the component.</p>
+
+
+<p>The support for Web components varies amongst browsers. So in order to use it now we are going to use the <a href="http://www.polymer-project.org/">Polymer library</a>.</p>
+<h2>Registering the component.</h2>
+<p>Before using our component, we need to register it. For usability and
+ clean separation, we are going to declare our component in a separate 
+file: <code>w3c-disclosure.html</code></p>
+<p>The first thing we need to add in our file, is to import the polymer 
+library, in order to enable the shadow DOM, custom elements, …</p>
+<pre><code>&lt;link rel="import" href="components/polymer/polymer.html"&gt;
+</code></pre>
+<p>Then we declare the component like this:</p>
+<pre><code>&lt;polymer-element name="w3c-disclosure" extends="button"&gt;</code></pre>
+<ul>
+<li>The <a href="http://webcomponents.org/articles/how-should-i-name-my-element/">element name</a> for the component, (‘w3c-disclosure’) must always contain a dash (-).</li>
+<li>The <code>extends</code> directive indicates that the component is an extension of the existing HTML <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#the-button-element">button</a> element .</li>
+</ul>
+<p>We also create a base template structure for the shadow DOM subtree, and a JavaScript constructor.</p>
+<p>So now our component code looks like this:</p>
+<pre><code>&lt;link rel="import" href="components/polymer/polymer.html"&gt;
+
+&lt;polymer-element name="w3c-disclosure" extends="button"&gt;
+    &lt;template&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        Polymer('w3c-disclosure', {
+            ready: function() {
+            },
+        });
+    &lt;/script&gt;
+&lt;/polymer-element&gt;</code></pre>
+<h2>&nbsp;Using the component</h2>
+<p>On the page where the component will be used, you need to load the 
+Polymer platform library before any other JavaScript library, in the <code>&lt;head&gt;</code> section.</p>
+<pre><code>&lt;script src="components/platform/platform.js"&gt;&lt;/script&gt;</code></pre>
+<p>Then we need to import the component description.</p>
+<pre><code>&lt;link rel="import" href="w3c-disclosure.html"&gt;</code></pre>
+<p>Now we can use our component in the page like any HTML element:</p>
+<pre><code>&lt;button <mark>is="w3c-disclosure"</mark>&gt;Expand section 1&lt;/button&gt;</code></pre>
+<p>Custom elements that inherit from native elements are called <em>type extension custom elements</em>. They inherit from a specialized version of HTMLElement and that means it can’t be used directly as a tag (<code>&lt;w3c-disclosure&gt;&lt;/w3c-disclosure&gt;</code>), instead we need to use the ‘<code>is</code>’ syntax.</p>
+<h2>Adding accessibility logic and style.</h2>
+<p>So far our component does nothing more than a regular button. So we 
+are now going to see how to extend the button behaviour to add our <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/dn742409.aspx">disclosure</a> feature.</p>
+<p>In the components declaration use the ‘attributes’ directive to 
+declare added public attributes. For our button we are going to add two 
+attributes: <code>controlfor</code> and <code>expanded</code></p>
+<pre><code>&lt;polymer-element name="w3c-disclosure" extends="button" 
+attributes="controlfor expanded" on-click="{{buttonClick}}"&gt;</code></pre>
+<ul>
+<li><code>controlfor</code>, references the disclosed section <code>id</code></li>
+<li><code>expanded</code>, if present, the section will be expanded on page load</li>
+<li><code>on-click</code> attribute is bound to the ‘<code>click</code>’ event so the <code>buttonClick</code> function is called on each button click event</li>
+</ul>
+<p>Now we update the component in the page, to use those attributes.</p>
+<pre><code>&lt;button is="w3c-disclosure" controlfor="details1"&gt;Expand section 1&lt;/button&gt;
+&lt;section id="details1"&gt;
+    Lorem ipsum …
+&lt;/section&gt;</code></pre>
+<p>Next we need to add the button logic, into the Web Component JavaScript.</p>
+<p>The <code>ready</code> function: is the component constructor. Called on the <code>WebComponentsReady</code> event.<br>
+With this function we initialize states and an aria attribute when the component is loaded.</p>
+<pre><code>ready: function() {
+    // If the expanded attribute is present, then the initial state is expanded.
+    if (this.expanded === null) this.expanded = false;
+    else this.expanded = true;
+    // We map the controlfor attribute to the aria-controls attribute.
+    this.setAttribute('aria-controls', this.controlfor);
+    // We set a pointer to the disclosed content
+    this.target = document.querySelector('#' + this.controlfor);
+},</code></pre>
+<p>The <code>buttonClick</code> function: is called on every ‘<code>click</code>’ event.</p>
+<p>When the button is clicked, we toggle the expanded state.</p>
+<pre><code>buttonClick: function(event, detail, sender) {
+    this.expanded = !this.expanded;
+},</code></pre>
+<p>The <code>expandedChanged</code> function: is called when the expanded variable has been updated.</p>
+<p>The Polymer data-binding feature automatically links the ‘<code>expanded</code>’ attribute to <code>expandedChanged</code> function so the function is called when the value for the variable has changed.</p>
+<p>In this function we set aria states, and toggle the disclosed content.</p>
+<pre><code>expandedChanged: function(oldValue, newValue) {
+    // We map the expanded value to the aria-expanded state
+    this.setAttribute('aria-expanded', newValue);
+    // We hide/show the content using the hidden attribute
+    this.target.hidden = !newValue;
+    //For backward compatibility, we also set the CSS display attribute
+    if (newValue) { // expanded is true
+        this.target.style.display='block';
+    } else {
+        this.target.style.display='none';
+    }					
+},
+</code></pre>
+<h2>Styling</h2>
+<p>The widget has now all the logic implemented, and we are going to add a little icon to visually indicate the expanded state.</p>
+<p>In the template area, we add the following CSS rules:</p>
+<pre><code>&lt;style type="text/css"&gt;
+    :host #icon:before {
+        content:"?"; font-size: 1em;
+    }
+    :host #icon.expanded:before {
+        content:"?"; font-size: 1em;
+    }
+&lt;/style&gt;</code></pre>
+<p>Many other techniques can be used for displaying icons. We used this one, with the ‘<code>content</code>’ attribute, for simplicity, in our demo.</p>
+<p>The <code>:host</code> element represents the custom element itself, and allows the component to be styled from outside.</p>
+<p>One last little trick: when your page is hosted online, you may notice <a href="http://en.wikipedia.org/wiki/Flash_of_unstyled_content">some delay</a>,
+ for the disclosure content, to be hidden, when the page loads. It is 
+due to the time the browser needs to load Polymer and apply the 
+component polyfill.</p>
+<p>For this issue Polymer provides a solution that hides the page content, until all elements are loaded. Add the ‘<code>unresolved</code>’ attribute to body:</p>
+<pre><code>&lt;body <mark>unresolved</mark>&gt;</code></pre>
+<h3>Example use of w3c-disclosure button</h3>
+<p>Multiple w3c-disclosure buttons could be used<code></code> in a list to allow the user to collapse a set of fields down to a small set of headings, with the ability to open each one.</p>
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2014/06/disc.png"><img src="Building%20an%20Accessible%20Disclosure%20Button%20%E2%80%93%20using%20Web%20Components_files/disc.png" alt="" width="267" height="138"></a></p>
+<h2>In conclusion.</h2>
+<p>If you already know <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML</a>
+ and JavaScript, Web Components are easy to create and give us a great 
+way to extend and improve regular HTML elements. And thanks to the <a href="http://www.polymer-project.org/">Polymer</a> or <a href="http://www.x-tags.org/">X-tags</a>
+ polyfill libraries, you can use it right now to create out-of-the-box 
+accessible widgets, or improve existing Web Components by adding ARIA 
+roles and attributes.</p>
+<h2>Resources:</h2>
+<ul>
+<li><a href="http://thepaciellogroup.github.io/disclosure-button/example2.html">disclosure-button – working demo 1</a> and <a href="http://thepaciellogroup.github.io/disclosure-button/">working demo 2</a></li>
+<li><a href="https://github.com/ThePacielloGroup/disclosure-button">disclosure-button repo</a> on github</li>
+<li><a href="http://w3c.github.io/aria-in-html/">Notes on Using <abbr title="Accessible Rich Internet Applications">ARIA</abbr> in HTML</a></li>
+<li><span><a href="http://www.paciellogroup.com/blog//2014/05/disclosure-button-custom-control/">disclosure-button custom control</a></span></li>
+<li><span><a href="http://www.paciellogroup.com/blog//2014/04/usability-accessibility-opportunities-web-compenent-world/">Usability and accessibility opportunities in a web component world</a></span></li>
+</ul>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message">Loading…</div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>
