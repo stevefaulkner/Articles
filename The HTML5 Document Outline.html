@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>The HTML5 Document Outline</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2013/10/html5-document-outline/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">The HTML5 Document Outline</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="The%20HTML5%20Document%20Outline_files/pinkunicorn.png" alt="pink unicorn with a rainbow of h1 elements trailing behind" width="200" height="119">Is a concept that <a href="http://www.w3.org/TR/html5/sections.html#outlines">lives in the HTML specification</a>, but is essentially a fiction in the real world. It is a fiction because <a href="http://en.wikipedia.org/wiki/User_agent">user agents</a> have not implemented it and there is no indication that any will.<span id="more-2139"></span></p>
+<h2>&nbsp; The <a href="http://www.w3.org/TR/html5/sections.html#outlines">HTML5 Document Outline</a> is a dangerous fiction</h2>
+<p>It is dangerous because it can lead unsuspecting developers to think 
+that using the nesting of heading elements in sectioning elements 
+actually has some effect for users who consume heading semantics. 
+Overwhelmingly the opposite is true. For example If you code a heading 
+as a <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h1</a> element and nest it 5 deep in sectioning elements, the document outline leads us to believe that the heading will be a <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h6</a>, back in the real world the heading is a <a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h1</a>.</p>
+<pre><span>&lt;!DOCTYPE html&gt;</span>
+...
+<span>&lt;<span>body</span>&gt;</span>
+<strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text<span>&lt;/<span>h1</span>&gt;</span>
+ <span>&lt;<span>section</span>&gt;</span><del><span>&lt;<span>h1</span>&gt;</span></del><strong><span>&lt;<span>h2</span>&gt;</span></strong>heading text...
+  <span>&lt;<span>section</span>&gt;</span><del><span>&lt;<span>h1</span>&gt;</span></del><strong><span>&lt;<span>h3</span>&gt;</span></strong>heading text...
+   <span>&lt;<span>section</span>&gt;</span><del><span>&lt;<span>h1</span>&gt;</span></del><strong><span>&lt;<span>h4</span>&gt;</span></strong>heading text...
+    <span>&lt;<span>section</span>&gt;</span><del><span>&lt;<span>h1</span>&gt;</span></del><strong><span>&lt;<span>h5</span>&gt;</span></strong>heading text...
+      <span>&lt;<span>section</span>&gt;</span><del><span>&lt;<span>h1</span>&gt;</span></del><strong><span>&lt;<span>h6</span>&gt;</span></strong>heading text...
+      <span>&lt;/<span>section</span>&gt;</span>
+     <span>&lt;/<span>section</span>&gt;</span>
+   <span>&lt;/<span>section</span>&gt;</span>
+  <span>&lt;/<span>section</span>&gt;</span>
+<span>&lt;/<span>section</span>&gt;</span>
+<span>&lt;/<span>body</span>&gt;</span>
+ 
+<span>&lt;<span>body</span>&gt;</span>
+<strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text<span>&lt;/<span>h1</span>&gt;</span>
+ <span>&lt;<span>section</span>&gt;</span><strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text
+  <span>&lt;<span>section</span>&gt;</span><strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text
+   <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text
+    <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text
+      <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text...
+
+
+<span>&lt;<span>body</span>&gt;</span>
+<strong><span>&lt;<span>h1</span>&gt;</span></strong>heading text<span>&lt;/<span>h1</span>&gt;</span>
+ <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h2</span>&gt;</span></strong>heading text...
+  <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h3</span>&gt;</span></strong>heading text...
+   <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h4</span>&gt;</span></strong>heading text...
+    <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h5</span>&gt;</span></strong>heading text...
+      <span>&lt;<span>section</span>&gt;</span><del></del><strong><span>&lt;<span>h6</span>&gt;</span></strong>heading text...</pre>
+<h3><strong>Practical advice</strong></h3>
+<p>If you as a developer want to provide a meaningful document structure, use the <code><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h1</a></code>–<code><a href="http://www.w3.org/html/wg/drafts/html/master/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h6</a></code> elements to express document structure. DO NOT rely upon the HTML5 document outline. By all means use the <a href="http://www.w3.org/TR/html5/sections.html#sections">HTML5 section elements</a>,
+ but do not rely upon them to convey a meaningful structure. If at some 
+point in the future the HTML5 document outline ceases to be a fiction, 
+you will be covered as the use of <code>h1-h6</code> is backwards compatible.</p>
+<p>The <a href="http://www.w3.org/TR/html5/sections.html#outlines">advice in the HTML specification</a> is clear on this:</p>
+<blockquote><p>Sections may contain headings of any <a href="http://www.w3.org/TR/html5/sections.html#rank">rank</a>, and <strong>authors are strongly encouraged to use headings of the appropriate <a href="http://www.w3.org/TR/html5/sections.html#rank">rank</a> for the section’s nesting level.</strong></p></blockquote>
+<p>There is now (16/04/14) a warning in section <a href="http://www.w3.org/TR/html5/sections.html#outlines">4.3.10.1 Creating an outline</a> of the HTML spec</p>
+<blockquote><p>There are currently no known implementations of the 
+outline algorithm in graphical browsers or assistive technology user 
+agents, although the algorithm is implemented in other software such as 
+conformance checkers. Therefore the <a href="http://www.w3.org/TR/html5/sections.html#outline">outline</a> algorithm cannot be relied upon to convey document structure to users. Authors are advised to use heading <a href="http://www.w3.org/TR/html5/sections.html#rank">rank</a> (<code><a href="http://www.w3.org/TR/html5/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h1</a></code>–<code><a href="http://www.w3.org/TR/html5/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements">h6</a></code>) to convey document structure.</p></blockquote>
+<p>If you don’t think it is <strong>clear enough</strong>, please <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?comment=&amp;product=HTML%20WG&amp;component=HTML5%20spec">file a bug</a>.</p>
+<h3>Further reading</h3>
+<ul>
+<li><a href="http://www.w3.org/TR/WCAG20-GENERAL/H42.html">Using h1-h6 to identify headings</a></li>
+<li><a href="http://www.456bereastreet.com/archive/201104/html5_document_outline_revisited/">HTML5 document outline revisited</a></li>
+<li><strong>Related bugs:</strong>
+<ul>
+<li><a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=25003">modify required heading mappings to reflect reality – HTML spec bug</a></li>
+<li><a href="https://code.google.com/p/chromium/issues/detail?id=365070">expose (heading) level in acc layer based on heading elements outline depth – chrome bug</a></li>
+<li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=998590">expose heading level in acc layer based on outline depth not heading numeric value – Firefox bug</a></li>
+<li><a href="https://bugs.webkit.org/show_bug.cgi?id=131920">AX: expose (heading) level based on heading elements outline depth – Webkit bug</a></li>
+<li><a href="http://connect.microsoft.com/IE/feedback/details/856898/expose-output-of-html5-outline-algorithm-as-a-dom-method">expose output of html5 outline algorithm as a DOM method – IE bug</a></li>
+</ul>
+</li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="The%20HTML5%20Document%20Outline_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

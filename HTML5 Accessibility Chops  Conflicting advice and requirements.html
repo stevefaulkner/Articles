@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: Conflicting advice and requirements</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/06/html5-accessibility-chops-conflicting-advice-and-requirements/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: Conflicting advice and requirements</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>HTML is currently defined in multiple documents, each purporting to be <em>THE</em>
+ definition of HTML/HTML5. The documents are developed, published and 
+maintained by 2 separate organisations. The 2 organisations have 
+differing development models, one (W3C) employs <a href="http://dev.w3.org/html5/decision-policy/decision-policy.html">a consensus process</a>
+ for resolving conflicts about the normative and informative content of 
+the HTML specification, in the other (WHATWG) all decisions about what 
+is in the specification are <a href="http://wiki.whatwg.org/wiki/FAQ#Which_group_has_authority_in_the_event_of_a_dispute.3F">made by one person</a> (the editor, Ian Hickson).</p>
+
+<p>The W3C process has over time resulted in <a href="http://www.w3.org/html/wg/#events">consensus based decision’s</a>
+ that Ian Hickson has not agreed with, the end result being that 
+normative and informative content changes have been made to the <a href="http://dev.w3.org/html5/spec/spec.html">W3C HTML5 specification</a> that have not been made to the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">WHATWG HTML living standard</a>
+ and vice versa. It is interesting to note that the majority of these 
+differences relate to accessibility. Below are the intentional 
+accessibility related differences introduced by Ian Hickson, so far:</p>
+<h3>Working Group Decision on ISSUE-131 <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0271.html">caret-location-api</a></h3>
+<p>The WHATWG living standard omits a <a href="http://dev.w3.org/html5/2dcontext/#focus-management">whole section</a> of implementation requirements for making canvas content more accessible to people with disabilities.</p>
+<h3>Working Group Decision on ISSUE-66 – <a href="http://lists.w3.org/Archives/Public/public-html/2010Jun/0001.html">Image Analysis Heuristics</a></h3>
+<p>The WHATWG Living standard includes a paragraph of implementation 
+advice    in regards to image analysis heuristics that is considered not
+ helpful to anyone.</p>
+<h3>Working Group Decision on ISSUE-109 <a href="http://lists.w3.org/Archives/Public/public-html/2011Mar/0161.html">aria-section-title</a></h3>
+<p>The WHATWG living standard omits a paragraph encouraging implementers
+ to make WAI-ARIA features useful to a wider range of people with 
+disabilities and anybody else who they may be useful to.</p>
+<h3>Working Group Decision on ISSUE-122 <a href="http://lists.w3.org/Archives/Public/public-html/2011Mar/0691.html">shalott-example</a></h3>
+<p>The WHATWG living standard defines normative requirements that forbid
+ authors from providing text alternatives for emotionally rich images.</p>
+<h3>ISSUE-161:&nbsp; <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0016.html">defining mappings from html elements to platform accessibility apis</a></h3>
+<p>The WHATWG Living standard omits a link to <a href="http://dev.w3.org/html5/html-api-map/overview.html">HTML to Platform Accessibility APIs Implementation Guide</a>, a work in progress designed to provide the significant amount of accessibility implementation advice not provided in HTML.</p>
+<h3>Working Group Decision on ISSUE-130: <a href="http://lists.w3.org/Archives/Public/public-html/2011Mar/0245.html">table-layout</a></h3>
+<p>The WHATWG living standard omits advice on how authors can mitigate the negative accessibility effects of layout tables.</p>
+<h3>Working Group Decision on ISSUE-31 / ISSUE-80 <a href="http://www.paciellogroup.com/blog/2011/04/html5-accessibility-chops-the-alt-decision/#d4">validation survey</a></h3>
+<p>The WHATWG living standard allows authors of HTML emails to omit text alternatives for images.</p>
+<h3><a href="http://lists.w3.org/Archives/Public/public-html/2011May/0018.html">Working group chair decision from May 2011 -Use of ARIA</a></h3>
+<p>The WHATWG living standard includes a clause that requires 
+conformance    checkers to emit errors for use of ARIA roles in cases 
+where their use improves the accessibility of the content.</p>
+<h3><a href="http://lists.w3.org/Archives/Public/public-html/2011Jun/0083.html">Working group chair decision from June 2011</a></h3>
+<p>WHATWG living standard includes a clause that requires conformance   
+  checkers to emit errors for use of ARIA roles in cases where their use
+  improves the accessibility of canvas content.</p>
+<h3>Who benefits?</h3>
+<p>Who exactly benefits from the divergence of normative requirements 
+and advice across documents claiming to authoritatively define HTML? 
+If&nbsp; forking is bad for HTML what are the parties involved doing to 
+to remedy it? I have <a href="http://lists.w3.org/Archives/Public/public-html/2011Jun/0173.html">asked</a> <a href="http://lists.w3.org/Archives/Public/www-archive/2011Jun/0013.html">people</a> involved, but as yet no answers have been forthcoming.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20Conflicting%20advice%20and%20requirements_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: ARIA role=alert browser support</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-aria-rolealert-browser-support/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: ARIA role=alert browser support</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2012/06/aria-5small.png"><img title="aria-5small" src="HTML5%20Accessibility%20Chops%20%20ARIA%20role=alert%20browser%20support_files/aria-5small.png" alt="Custom ARIA - HTML5 logo" width="123" height="154"></a>ARIA <code>role=alert</code> is supported across modern browsers and assistive technology, but implementation in browsers differ, which can lead to <code>role=alert</code> appearing to be unsupported.<br>
+<span id="more-1605"></span></p>
+<h2><code>role=alert</code> what does it do?</h2>
+<p>When an element has a <code>role=alert</code> is displayed it 
+triggers an alert event in the browsers implemented accessibility APIs. 
+This is picked up by assistive technology (AT) and the text content of 
+the element is announced, usually suffixed or prefixed by the word 
+“alert”. It <strong>does not</strong> move focus in the browser or 
+assistive technology to the element, it just causes the text content of 
+the element to be announced. This is useful because on screen messages 
+can be conveyed to AT users without breaking the flow of their page 
+navigation or current focus. They get a similar experience to other 
+users when a text message is displayed.</p>
+<p>The <a href="http://www.w3.org/WAI/PF/aria-practices/#LiveRegions">WAI-ARIA Authoring Guide</a> states:</p>
+<blockquote><p>Use the <a href="http://www.w3.org/WAI/PF/aria/roles#alert"><code>alert</code></a>
+ role for a one-time notification which shows for a period of time and 
+goes away and is intended to alert the user that something has happened.</p></blockquote>
+<p><strong>Note: </strong><code>role=alert</code> is one of the <a href="http://www.paciellogroup.com/blog/2010/04/html5-and-the-myth-of-wai-aria-redundance/">numerous ARIA features</a> that are not available as <a href="http://dev.w3.org/html5/spec/spec.html">native HTML</a> features.</p>
+<h2>Different methods</h2>
+<p>There are numerous methods for displaying content on the page after 
+the page has loaded. Trouble is in some browsers the differing methods <strong>do not</strong> all have the desired effect of triggering the <em>alert</em> event in the browser when <code>role=alert</code> is present on the displayed content.</p>
+<h3>Method 1 createElement(), insertAttribute(), createTextNode() and appendchild()</h3>
+<p>Using this method a text alert can be displayed on the page by:</p>
+<ol>
+<li>creating a new element</li>
+<li>adding a role attribute with a value of alert</li>
+<li>creating the text content</li>
+<li>appending the text content to the created element</li>
+</ol>
+<p><strong>Note:</strong> this method only currently works with FireFox and Chrome</p>
+<h3>Method 2 innerHTML</h3>
+<p>Using this method an element with a role attribute with a value of alert and text content can be added to the page:</p>
+<p>elementX.innerHTML = “&lt;div role=’alert’&gt;alert text&lt;/div&gt;”;</p>
+<p><strong>Note:</strong> this method only currently works with FireFox and Chrome</p>
+<h3>Method 3 display:none to display:block|inline etc.</h3>
+<p>Using this method an element already in the DOM with a role attribute
+ with a value of alert and text content can be displayed on the page.</p>
+<p><strong>Note:</strong> this method only currently works with IE, FireFox and Chrome</p>
+<h3>Method 4: createTextNode + constraints</h3>
+<p><strong>Note:</strong> unfortunately method 4 is a big hack, but it is the only method that provides support across browsers/AT and platforms.</p>
+<p>Using this method, an existing element with no text content can have 
+text content added. There are additional constraints on this method to 
+make it work with IE, Chrome and Safari (Mac/iPhone/iPad). Working 
+example: <a href="http://www.html5accessibility.com/tests/alert-test-4.html">Test Page – method 4</a></p>
+<p><strong>basic:</strong></p>
+<pre>alertText = <span>document</span>.createTextNode(<span>"alert text"</span>);
+ elementX.appendChild(alertText);</pre>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The element cannot be hidden (For safari) prior to adding the text so used CSS clip() and change before additon of text.</li>
+<li>The elements CSS visibility property must be toggled (for IE)</li>
+<li>Need an additional <code>role=alert</code> on outer container element and then only set the <code>role=alert</code> on the inner element via scripting prior to adding text.</li>
+</ul>
+<p>To achieve this&nbsp; outer element has its CSS <code>clip</code> property initially set to <code>rect(0px,0px,0px,0px)</code>, the inner element has <code>role=alert</code> added and the outer element CSS clip property is set to auto via scripting (for Chrome), then <strong>after </strong>(for Safari) the text node is added, the CSS <code>visibility</code> property is toggled (for IE).</p>
+<p><strong>HTML:</strong></p>
+<pre><span>&lt;<span>div</span> <span>id</span>=<span>"display2"</span> <span>role</span>=<span>"alert"</span>&gt;</span>
+ <span>&lt;<span>span</span> <span>id</span>=<span>"add1"</span>&gt;</span><span>&lt;/<span>span</span>&gt;</span>
+ <span>&lt;/<span>div</span>&gt;</span></pre>
+<p><strong>JavaScript:</strong></p>
+<pre><span><span>function</span> <span>addError</span><span>()</span>{</span>
+ 
+ elem1.setAttribute(<span>"role"</span>, <span>"alert"</span>);
+ ? 
+ document.getElementById(<span>'display2'</span>).style.clip=<span>'auto'</span>;
+ 
+ alertText = document.createTextNode(<span>"alert via createTextnode()"</span>);
+ elem1.appendChild(alertText);
+ 
+ elem1.style.visibility=<span>'hidden'</span>;
+ elem1.style.visibility=<span>'visible'</span>;
+ }</pre>
+<p><strong>CSS:</strong></p>
+<pre>
+<span>#elem1</span> <span>{
+
+<span><span>clip</span>:<span><span>rect(<span>0</span>px,<span>0</span>px,<span>0</span>px,<span>0</span>px)</span></span></span>;
+
+<span>}</span></span></pre>
+<p><strong>Note:</strong> this method as described works with FireFox, Chrome, IE on Windows and Safari (Mac, iPhone and iPad?).</p>
+<h2>Which browsers support which methods?</h2>
+<p>If the display of the alert text triggered an MSAA&nbsp; <code>SYS_ALERT</code> event (on Windows) the method is considered as supporting <code>role=alert</code>,
+ after ad hoc testing with NVDA and JAWS.&nbsp; On Mac, iPhone and iPad?
+ if VoiceOver announces the alert text the method is considered as 
+supporting <code>role=alert</code>.</p>
+<p><strong>Note:</strong> Results marked with an asterisk indicate that 
+while a particular method is supported, support is brittle as , for 
+example, an alert is not triggered if the method is reinstantiated on 
+the same page after the initial use. In other words the only browser 
+with robust support is Firefox.</p>
+
+<h2>Differing browser implementations are a pain in the A</h2>
+<p>As can be seen from the above information, due to the IE and Safari support issues getting <code>role=alert</code>
+ to work cross browser &amp; cross AT is extremely painful, but as shown
+ it is possible. Perhaps I am missing something and a lot simpler 
+solution is out there, If so please share!</p>
+<h3>Testing methodology</h3>
+<div id="attachment_1612" class="wp-caption"><p><img title="Capture" src="HTML5%20Accessibility%20Chops%20%20ARIA%20role=alert%20browser%20support_files/Capture1.png" alt="" width="503" height="106"></p><p class="wp-caption-text">accevent application with a SYS_ALERT event displayed</p></div>
+<ul>
+<li><a href="http://www.html5accessibility.com/tests/alert-test.html">Test page – all methods</a></li>
+<li><a href="http://www.html5accessibility.com/tests/alert-test-4.html">Test Page – method 4</a></li>
+</ul>
+<p>On Mac, iPhone and iPad, VoiceOver was used with Safari, to test the 
+various methods. On windows for Firefox, IE and Chrome, accevent was 
+used to listen for the SYS_ALERT event to fire when the text alert was 
+displayed. Also JAWS, and NVDA were used to verify wheter the alert text
+ was announced.</p>
+<p><strong>Note:</strong> JAWS worked fine with IE for all methods as it does not rely upon the SYS_ALERT event, but NVDA only works in IE with <a href="http://www.html5accessibility.com/tests/alert-test-4.html">method 4</a> as it does rely on the SYS_ALERT event.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

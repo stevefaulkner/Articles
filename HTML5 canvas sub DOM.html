@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 canvas sub DOM</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/02/html5-canvas-sub-dom/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 canvas sub DOM</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>All modern browser implement the HTML5 specification’s <code>canvas</code> element fallback concept. This means that the content inside a <code>canvas</code>
+ elements start and end tags is exposed to assistive technology users 
+even when the browser supports canvas. It also means that any 
+interactive elements, inside a <code>canvas</code> elements start and end tags such as links or form controls will be included in a documents default tab order <em>even</em> when the browser supports canvas.</p>
+
+<h3>Canvas has a navigable sub DOM</h3>
+<p>The <a href="http://www.w3.org/TR/html5/scripting-1.html#the-canvas-element">HTML5 specification states</a>:</p>
+<blockquote cite="http://dev.w3.org/html5/spec/the-canvas-element.html#the-canvas-element"><p>When a <code>canvas</code> element represents embedded content, the user can still focus descendants of the <code>canvas</code>
+ element (in the fallback content). When an element is focused, it is 
+the target of keyboard interaction events (even though the element 
+itself is not visible). This allows authors to make an interactive 
+canvas keyboard-accessible: authors should have a one-to-one mapping of 
+interactive regions to focusable elements in the fallback content. 
+(Focus has no effect on mouse interaction events.)</p></blockquote>
+<p>Which translates as meaning the content inside a <code>canvas</code> element:</p>
+<p>If interactive, should be included in the tab order and operable with
+ the keyboard. All content is accessible to assistive technology such as
+ screen readers. So in the <a href="http://www.html5accessibility.com/tests/canvas.html">canvas example</a>, the text alternative should be announced by screen readers and the links are navigable and operable using the keyboard.</p>
+<p>If you are using any modern browser with the keyboard to navigate interactive elements, you can tab to the links in the <a href="http://www.html5accessibility.com/tests/canvas.html">canvas example</a>. If you are using a screen reader, you can also access the text alternative (in this case) content inside the <code>canvas</code> element.</p>
+<p><a href="http://www.html5accessibility.com/tests/canvas.html">Canvas example</a> with a text alternative and interactive elements (links) inside the canvas element.</p>
+<h3><a href="http://www.html5accessibility.com/tests/canvas.html">Canvas example</a> HTML code:</h3>
+<pre><span>&lt;<span>canvas</span> <span>id</span>=<span>"example"</span> <span>width</span>=<span>"260"</span> <span>height</span>=<span>"200"</span>&gt;</span>
+<span>&lt;<span>h2</span>&gt;</span>Shapes<span>&lt;/<span>h2</span>&gt;</span>
+<span>&lt;<span>p</span>&gt;</span>A rectangle with a black border. In the background is a pink
+circle. Partially overlaying the
+<span>&lt;<span>a</span> <span>href</span>=<span>"http://en.wikipedia.org/wiki/Circle"</span>
+<span>onfocus</span>=<span>"drawCircle();"</span> <span>onblur</span>=<span>"drawPicture();"</span>&gt;</span>circle<span>&lt;/<span>a</span>&gt;</span>.
+Partially overlaying the circle is a green
+<span>&lt;<span>a</span> <span>href</span>=<span>"http://en.wikipedia.org/wiki/Square"</span> <span>onfocus</span>=<span>"drawSquare();"</span>
+<span>onblur</span>=<span>"drawPicture();"</span>&gt;</span>square<span>&lt;/<span>a</span>&gt;</span> and a purple
+<span>&lt;<span>a</span> <span>href</span>=<span>"http://en.wikipedia.org/wiki/Triangle"</span>
+<span>onfocus</span>=<span>"drawTriangle();"</span> <span>onblur</span>=<span>"drawPicture();"</span>&gt;</span>triangle<span>&lt;/<span>a</span>&gt;</span>,
+both of which are semi-opaque, so the full circle can be seen
+underneath.<span>&lt;/<span>p</span>&gt;</span>
+<span>&lt;/<span>canvas</span>&gt;</span></pre>
+<h3><a href="http://www.nvda-project.org/">NVDA</a> announces Canvas sub DOM content (from <a href="http://www.html5accessibility.com/tests/canvas.html">example page</a>):</h3>
+<p>“Shapes <em>heading&nbsp; level 2</em><br>
+A rectangle with a black border. In the background is a pink circle. Partially overlaying the<em> visited&nbsp; link</em> circle. Partially overlaying the circle is a green <em>visited&nbsp; link</em> square and a purple <em>visited&nbsp; link</em> triangle, both of which are semi-opaque, so the full circle can be seen underneath.”</p>
+<h2>Other examples:</h2>
+<ul>
+<li><a href="http://codepen.io/stevef/pen/WbXRwr">Hello (hello hello) World!</a> – the dirty &lt;canvas&gt; accessibility hack.</li>
+<li><a href="http://codepen.io/stevef/pen/OPxvZX">Funky canvas coat for a wallflower checkbox</a></li>
+</ul>
+<h2>Video demo’s:</h2>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=ABeIFlqYiMQ">NVDA reading canvas sub-DOM content in Firefox</a></li>
+<li><a href="http://www.youtube.com/watch?v=0LoC5sLPJ9s">ZoomText reading canvas sub-DOM content in Firefox</a></li>
+</ul>
+<h3>Some Potential Issues</h3>
+<ul>
+<li>Where content is currently included in canvas, it is almost 
+exclusively of the “get a better browser that supports canvas” variety, 
+so screen reader users will encounter this when using any modern 
+browser.</li>
+<li>Authors will most likely continue to provide useless information (for screen reader users) as the general definition of “<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#fallback-content">fallback content</a>” in the HTML5 specification is at odds with how <code>canvas</code> content is presented to keyboard and AT users in browsers that support the <code>canvas</code> element and at odds with how the term is used in reference to other <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#embedded-content">embedded content</a> elements where the fallback content is <strong>ONLY</strong> available to users if the prmary content is not supported.</li>
+<li>Keyboard focus is lost if interactive elements are included inside the canvas, because while elements inside the <code>canvas</code>
+ element are focusable by default, there is no corresponding default 
+indication of focus to identify where current focus is. This means that 
+developers <strong>must</strong> provide pseudo focus rings that are displayed when an interactive element in the canvas sub DOM receives focus, <a href="http://www.html5accessibility.com/tests/canvas.html">an example</a> of this is provided triggered by inline (for demo purposes only) onfocus/onblur event handlers. There is <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#drawing-paths-to-the-canvas">a proposal</a> for dedicated <code>canvas </code>API methods for the display of focus rings, but these have not yet been agreed upon or implemented.</li>
+</ul>
+<h2>Developers Be(a)ware</h2>
+<p>In Firefox and IE and Chrome and Opera and Safari HTML content inside the <code>canvas</code>
+ element is available at all times to assistive technology users and 
+keyboard users can&nbsp;operate links and controls and they are included
+ in the default tab order. So please provide alternatives to on screen 
+canvas content and interactivity in the <code>canvas</code> sub DOM. <strong>DO NOT</strong> include a <em>dumb</em> message telling the user that they need to get a browser that supports canvas!</p>
+<h2>HTML5 definition of ‘<a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#fallback-content">fallback content</a>‘</h2>
+<blockquote><p>Some embedded content elements can have <dfn id="fallback-content">fallback content</dfn>:
+ content that is to be used when the external resource cannot be used 
+(e.g. because it is of an unsupported format). The element definitions 
+state what the fallback is, if any.</p></blockquote>
+<p>This general definition of <em>fallback content</em> is problematic, 
+because in the case of canvas and how its use pertains to assistive 
+technology and keyboard users. In modern browsers the &lt;canvas&gt; 
+element is supported, so the content in the sub DOM is not fallback. The
+ example I provided could&nbsp; have had hit testing on the shapes drawn
+ on the canvas so that a click event could be passed to the links in the
+ sub DOM. The use of the term ‘fallback’ for the contents of the sub DOM
+ helps to mislead developers about sub DOM use. An example of erroneous 
+information is provided in the video: <a href="http://www.youtube.com/watch?v=0eV6yL162Kw">HTML5 Canvas Fallback Content Tutorial</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20canvas%20sub%20DOM_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

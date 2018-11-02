@@ -1,0 +1,65 @@
+#events_details_meta_box input,
+#events_details_meta_box label {
+	display: block;
+}
+
+#events_details_meta_box label {
+	font-weight: bold;
+}
+
+#events_details_meta_box input {
+	margin-bottom: 1em;
+}
+
+#events_details_meta_box input[type=text] {
+	width: 100%;
+}
+
+.widget_basic_events_listing_widget ul {
+	list-style: none;
+	padding: 0;
+}
+
+.widget_basic_events_listing_widget li {
+  clear: both;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px #DDD solid;
+}
+
+.widget_basic_events_listing_widget span {
+  display: block;
+}
+
+.widget_basic_events_listing_widget span.event_dates {
+  float: left;
+  padding: 0 0.25em 0 0;
+}
+
+.widget_basic_events_listing_widget span.date_start,
+.widget_basic_events_listing_widget span.date_end {
+	float:left;
+}
+
+.widget_basic_events_listing_widget span.date_end {
+  font-size: 0.65em;
+  margin-top: 0.165em;
+}
+
+.widget_basic_events_listing_widget span.date_day {
+  font-size: 1.25em;
+  line-height: 0.95;
+}
+
+.widget_basic_events_listing_widget span.date_month {
+  line-height: 0.95;
+}
+
+.widget_basic_events_listing_widget span.event_details {
+  margin-left: 5em;
+}
+
+.widget_basic_events_listing_widget span.location {
+  font-size: 0.8em;
+}
+

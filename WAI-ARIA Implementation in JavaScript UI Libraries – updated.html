@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>WAI-ARIA Implementation in JavaScript UI Libraries – updated</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2009/07/wai-aria-implementation-in-javascript-ui-libraries/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">WAI-ARIA Implementation in JavaScript UI Libraries – updated</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>A number of popular Javascript UI Libraries are in the process 
+of adding WAI-ARIA support to their widgets and components. What is the 
+current status and future plans for WAI-ARIA implementation in these 
+libraries?<br>
+<span id="more-313"></span></p>
+<h2>BBC Glow Widgets</h2>
+<p>Some of the <a href="http://www.bbc.co.uk/glow/docs/1.5/api/glow.widgets.shtml">Glow widgets</a> have ARIA support:</p>
+<ul>
+<li><a href="http://www.bbc.co.uk/glow/docs/1.5/furtherinfo/widgets/infopanel/">Info Panel</a></li>
+<li><a href="http://www.bbc.co.uk/glow/docs/1.5/furtherinfo/widgets/overlay/">Overlay</a></li>
+<li><a href="http://www.bbc.co.uk/glow/docs/1.5/furtherinfo/widgets/slider/">Slider</a></li>
+<li><a href="http://www.bbc.co.uk/glow/docs/1.5/furtherinfo/widgets/timetable/">Time Table</a></li>
+</ul>
+<p>The BBC Glow Library does not provide any documentation as to its conformance WCAG Guidelines.</p>
+<h2>Dojo (Dijit)</h2>
+<p>All Dojo 1.0 core widgets (Dijit) are claimed to be accessible via keyboard, ARIA, as well as in High Contrast mode.</p>
+<ul>
+<li><a href="http://dojocampus.org/explorer/">Dojo (Dijit) Widget explorer</a></li>
+<li><a href="http://www-03.ibm.com/able/resources/dojo.html">Dojo: an accessible JavaScript toolkit</a></li>
+<li><a href="http://docs.dojocampus.org/dijit-a11y">Dijit Accessibility (a11y)</a></li>
+<li><a href="http://david.atrc.utoronto.ca/mozgrant/dojo-final-report.html">Dojo Toolkit Accessibility Final Report</a> from the ATRC, University of Toronto</li>
+</ul>
+<p>DOJO provides an <a href="http://www.dojotoolkit.org/developer/a11yStatement">Accessibility Statement</a> which states:</p>
+<blockquote><p>“While Dojo does not make an explicit claim of compliance
+ to W3C WCAG 2.0 Level A or to US Section 508, every attempt has been 
+made to meet those guidelines and to make the 1.0 and future versions of
+ the core widget set, dijit, accessible to keyboard, low vision and 
+assistive technology users. “</p></blockquote>
+<h2>EXTJS</h2>
+<p><a href="http://extjs.com/products/extjs/"><strong>(Extjs)</strong></a> – It has been <a href="http://extjs.com/blog/2009/05/04/ext-js-30-rc11-released/">reported</a>
+ that there are “Accessibility improvements – Section 508 and ARIA 
+support” in Ext JS version 3.0, but no details are provided. No 
+documentation could be found on what ARIA is implemented and what 
+aspects of Section 508 or the WCAG Guidelines Extjs conforms to.</p>
+<p>There is an <a href="http://extjs.com/deploy/dev/examples/tree/aria-tree.html">ARIA Enabled Tree</a> example provided for the Ext JS version 3.0, but no other samples appear to have ARIA support.</p>
+<p>The <a href="http://extjs.com/examples/explorer.html#overview">Ext GWT 2.0 Explorer</a> contains some ARIA mark up, but it is unclear at this time which widgets have ARIA support added.</p>
+<h2>Fluid Infusion</h2>
+<blockquote cite="http://fluidproject.org/products/infusion/"><p><a href="http://fluidproject.org/products/infusion/">Fluid Infusion</a>
+ includes ready-to-use components as well as a framework to build your 
+own. Infusion combines JavaScript, CSS, HTML and user-centered design, 
+rolling them all into a single package that sits on top of the popular <strong>jQuery toolkit</strong>.</p></blockquote>
+<p>Fluid Infusion components using ARIA:</p>
+<ul>
+<li><a href="http://fluidproject.org/releases/1.1/standalone-demos/quick-start-examples/inlineEdit/html/InlineEdit.html">Inline edit</a></li>
+<li><a href="http://fluidproject.org/releases/1.1/standalone-demos/quick-start-examples/reorderer/html/Reorderer.html">Reorderer</a></li>
+<li><a href="http://fluidproject.org/releases/1.1/standalone-demos/progress/html/pop-up-progress.html">Progress bar</a></li>
+<li><a href="http://fluidproject.org/releases/1.1/components/uiOptions/html/UIOptions.html">Use interface options</a></li>
+<li><a href="http://fluidproject.org/releases/1.1/components/uploader/html/Uploader.html">File uploader</a></li>
+</ul>
+<p>Fluid infusion does not provide any documentation as to its 
+conformance to Section 508 or WCAG Guidelines, but it does state that 
+“assistive technology like screen readers are tested extensively with 
+our codebase”</p>
+<h2>Google Web Toolkit</h2>
+<p>GWT 1.5 Widgets have ‘baked in’ ARIA roles and states, and methods to
+ add ARIA role and properties. It is unclear what the extent of the ARIA
+ implementation is, a quick review of the <a href="http://gwt.google.com/samples/Showcase/Showcase.html">GWT Feature Showcase</a> indicates ARIA use in many Widgets:</p>
+<ul>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwCustomButton">Custom Button </a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwDatePicker">Date Picker</a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwSuggestBox">Suggest Box</a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwTree">Tree</a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwMenuBar">Menu Bar</a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwRichText">Rich text</a></li>
+<li><a href="http://gwt.google.com/samples/Showcase/Showcase.html#CwTabPanel">Tab Panel</a></li>
+</ul>
+<p>GWT Widgets that do not currently make use ARIA, on which users would
+ benefit from its use include the Stack Panel, Basic pop up, Dialog box 
+and Split Panels. GWT does not provide any documentation as to its 
+conformance to Section 508 or WCAG Guidelines.</p>
+<h3>GWT ARIA Resources</h3>
+<ul>
+<li><a href="http://googlewebtoolkit.blogspot.com/2008/09/built-in-accessibility-in-gwt-15.html">Built-in Accessibility in GWT 1.5 Applications</a></li>
+<li><a href="http://code.google.com/docreader/#p=google-web-toolkit-doc-1-5&amp;s=google-web-toolkit-doc-1-5&amp;t=DevGuideAccessibilityHOWTO">Adding Accessibility Support to GWT Widgets: A Guide for Widget Developers</a></li>
+</ul>
+<h2>JQuery UI</h2>
+<p>Use of ARIA is being actively worked on. JQuery have a <a href="http://jqueryui.pbworks.com/Team#">UI accessibility sub-team</a>, and a <a href="http://groups.google.com/group/jquery-a11y">JQuery Accessibility email group</a>. Limited ARIA support was introduced in version1.7.</p>
+<p>ARIA enabled JQuery UI widgets:</p>
+<ul>
+<li><a href="http://jqueryui.com/demos/accordion/">accordion </a></li>
+<li><a href="http://jqueryui.com/demos/dialog/">dialog</a></li>
+<li><a href="http://jqueryui.com/demos/progressbar/default.html">progress bar</a></li>
+</ul>
+<p>Full ARIA implementation planned for<a href="http://jqueryui.com/"> JQuery UI</a> version 2.0 (2009?). JQuery UI does not provide any documentation as to its conformance to Section 508 or WCAG Guidelines.</p>
+<h2>Yahoo! User Interface Library (YUI)</h2>
+<p>There are ARIA <a href="http://developer.yahoo.com/yui/3/plugin/">plugins</a> for a number of <a href="http://developer.yahoo.com/yui/">YUI</a> widgets. The following YUI widgets currently have an ARIA plugin (as of October 2008):</p>
+<ul>
+<li><a href="http://developer.yahoo.com/yui/examples/button/button-ariaplugin.html">Button</a></li>
+<li><a href="http://developer.yahoo.com/yui/examples/carousel/carousel-ariaplugin.html">Carousel</a></li>
+<li><a href="http://developer.yahoo.com/yui/examples/container/container-ariaplugin.html">Container</a></li>
+<li><a href="http://developer.yahoo.com/yui/examples/menu/menuwaiaria.html">Menu</a></li>
+<li><a href="http://developer.yahoo.com/yui/examples/tabview/tabview-ariaplugin.html">TabView</a></li>
+<li><a href="http://developer.yahoo.com/yui/examples/grids/grids-landmarks.html">Grids CSS</a></li>
+</ul>
+<p>Yahoo! UI does not provide any documentation as to its conformance to Section 508 or WCAG Guidelines, though it has been <a href="http://www.evengrounds.com/blog/accessible-yahoo-widgets">suggested</a> that “most of the widgets would stand a rigorous Section 508 testing”. Victor Tsaran, an accessibility engineer at Yahoo!, <a href="http://twitter.com/vick08/status/2020828723">stated recently</a> that further ARIA support will be implemented in the upcoming version of YUI (3.0).</p>
+<h2>Libraries with no implemented ARIA support</h2>
+<ul>
+<li><a href="http://www.asp.net/ajax/ajaxcontroltoolkit/samples/"><strong>ASP.NET AJAX Control Toolkit</strong></a> – The <a href="http://aspnet.codeplex.com/Wiki/View.aspx?title=Ajax%20Roadmap">ASP.NET AJAX Roadmap</a> includes WAI-ARIA support in quarter 2 2009.</li>
+<li><a href="http://www.icefaces.org/"><strong>Icefaces</strong></a> is the successor to Sun’s opens source library <a href="https://woodstock.dev.java.net/index.html">Woodstock</a>. In the <a href="http://www.icefaces.org/main/ajax-java/jsf-components.iface">Icefaces introduction</a>,
+ Iceface accessibility is discussed, but there is no mention of WAI-ARIA
+ implementaion. It states “Current accessibility standards have not yet 
+caught up will modern Ajax techniques”, which suggests that ARIA has not
+ been considered as yet. There is an <a href="http://jira.icefaces.org/secure/attachment/11270/WAI%2BGuidelines%2Bfor%2BICEfaces-1.7.2.xls">ICEfaces Accessibility Spreadsheet</a>
+ available which details level of conformance of Icefaces JSF components
+ in respect to WCAG 1.0. There are no indications in the <a href="http://jira.icefaces.org/browse/ICE?report=com.atlassian.jira.plugin.system.project:roadmap-panel">Icefaces Road Map</a> that WAI-ARIA implementation is being planned.</li>
+<li><a href="http://mootools.net/"><strong>Moo Tools</strong></a> – No information can be found on WAI -ARIA support or intention to support.</li>
+<li><a href="http://www.telerik.com/products/aspnet-ajax.aspx"><strong>Telerik ASP.NET AJAX Components</strong></a> – Claim <a href="http://www.telerik.com/products/aspnet-ajax/resources/accessibility-support.aspx">conformance to WCAG 1.0 guidelines</a>. No information can be found on WAI -ARIA support or intention to support.</li>
+<li><a href="http://www.zkoss.org/"><strong>ZK Direct RIA</strong></a> – Documentation refers to <a href="http://www.zkoss.org/zk508/ARIArole.html">planned WAI-ARIA support</a>, but has noot been updated since 2007. A check of the ZK widgets indicates no ARIA implementation. Information about ZK’s <a href="http://www.zkoss.org/zk508/">Section 508 Compliance</a>.</li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="WAI-ARIA%20Implementation%20in%20JavaScript%20UI%20Libraries%20%E2%80%93%20updated_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

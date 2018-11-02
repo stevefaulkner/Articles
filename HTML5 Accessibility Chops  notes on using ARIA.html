@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: notes on using ARIA</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: notes on using ARIA</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>I have jotted down some notes on ARIA concepts and usage that may be useful for developers.</p>
+<p><span id="more-1585"></span><br>
+<strong>Note:</strong> this information is now being actively maintained as part of <a href="http://dvcs.w3.org/hg/aria-unofficial/raw-file/tip/index.html">Using ARIA in HTML</a>.</p>
+<hr>
+<h2><a href="http://www.paciellogroup.com/wp-content/uploads/2012/06/aria-5small.png"><img src="HTML5%20Accessibility%20Chops%20%20notes%20on%20using%20ARIA_files/aria-5small.png" alt="Custom ARIA - HTML5 logo" width="123" height="154"></a>The first rule of ARIA use</h2>
+<p>If you <em>can</em> use a <a href="http://dev.w3.org/html5/spec/spec.html">native HTML</a> element or attribute instead of an ARIA role, state or property, <strong>then do so</strong>.</p>
+<h3>Under what circumstances may this not be possible?</h3>
+<ul>
+<li>If the visual design constraints rule out the use of a particular  
+native element, because the element cannot be styled as required.</li>
+<li>If the feature is <a href="http://www.paciellogroup.com/blog/2010/04/html5-and-the-myth-of-wai-aria-redundance/">not currently available in HTML</a>.</li>
+<li>If the feature is <a href="http://dev.w3.org/html5/spec/spec.html">available in HTML</a> but it is not implemented or it is implemented, but <a href="http://www.html5accessibility.com/">accessibility support</a> is not.</li>
+</ul>
+<h2>The Second rule of ARIA use</h2>
+<p>Do not change native  semantics, unless you really have to.</p>
+<p>For example: Developer wants to build a heading that’s a button.</p>
+<p>Do not do this:</p>
+<p><code>&lt;h1 role=button&gt;heading button&lt;/h1&gt;</code></p>
+<p>Do this:</p>
+<p><code>&lt;h1&gt;&lt;span role=button&gt;heading button&lt;/span&gt;&lt;/h1&gt;</code></p>
+<p>Or better, do this:</p>
+<p><code>&lt;h1&gt;&lt;button&gt;heading button&lt;/button&gt;&lt;/h1&gt;</code></p>
+<p><strong>Note:</strong> it is OK to use native HTML elements, that have similar semantics to ARIA roles used, for fallback. For example using HTML <a href="http://dev.w3.org/html5/spec-author-view/the-ul-element.html#the-ul-element">list elements</a> for the skeleton of an ARIA enabled, scripted <a href="http://hanshillen.github.com/jqtest/#goto_tree">tree widget</a>.</p>
+<h2>What does adding a role do to the native semantics?</h2>
+<p>Adding an ARIA role <strong>overrides</strong> the native role semantics.</p>
+<p>For example:</p>
+<p><code>&lt;h1 role=button&gt;text&lt;/h1&gt;</code></p>
+<p>Becomes this in the <a href="http://www.w3.org/WAI/PF/aria-implementation/#def_accessibility_tree">accessibility tree</a>:</p>
+<p><code>&lt;button&gt;text&lt;/button&gt;</code></p>
+<h3>What  adding a role does not do?</h3>
+<p>Adding an ARIA role <strong>does not</strong> change the  behaviours, states and properties</p>
+<p>For example:</p>
+<p>This:</p>
+<p><code>&lt;button role=heading&gt;</code>text<code>&lt;/button&gt;</code></p>
+<p>Becomes this in the accessibility tree:</p>
+<p><code>&lt;heading&gt;text&lt;/heading&gt;</code></p>
+<p><strong>But</strong> it is can still be pressed, it is still in the default tab order,  still looks like a <code>button</code>, still triggers any associated actions when  pressed. That’s why it is a HTML5 conformance error to change a <code>button</code> into a <code>heading</code>.</p>
+<p>Note: likewise, changing the role of an element <strong>does not</strong> add behaviours, properties or states of the role used. You must <a href="http://www.paciellogroup.com/blog/2011/04/html5-accessibility-chops-just-use-a-button/">add those yourself</a>.</p>
+<h2>Add ARIA inline or via script?</h2>
+<p>If the ARIA <code>role</code> or <code>aria-*</code> attribute does 
+not rely on scripting to  provide interaction behaviour, then it is safe
+ to include the ARIA  markup inline. For example, it is fine to add <a href="http://www.paciellogroup.com/blog/2010/10/using-wai-aria-landmark-roles/">ARIA landmark roles</a> or <a href="http://www.w3.org/WAI/PF/aria-practices/#relations_labeling">ARIA labelling and describing roles</a> inline. If the content and interaction is only supported in a  scripting enabled browsing context, for example <a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/docs.google.com/">Google docs</a> applications require JavaScript enabled to work, so  it is safe for them to include the ARIA  markup inline.</p>
+<div id="attachment_1589" class="wp-caption"><p><img src="HTML5%20Accessibility%20Chops%20%20notes%20on%20using%20ARIA_files/Capture-300x168.png" alt="" width="300" height="168"></p><p class="wp-caption-text">Google spreadsheet application displaying a message 'Your browser must support JavaScript.'</p></div>
+<p><strong>Otherwise</strong> add ARIA via scripting.</p>
+<h2>ARIA validation</h2>
+<p>The easiest method is to use the <a href="http://dev.w3.org/html5/spec/syntax.html#the-doctype">HTML5 DOCTYPE</a> with ARIA markup and validate using the <a href="http://validator.w3.org/nu/">W3C Nu Markup Validation Service</a>.
+   ARIA works equally well with any other DOCTYPE, but validation tools 
+ will produce errors when they encounter ARIA markup as the associated  
+DTDs have not been updated to recognise ARIA markup and it is unlikely  
+they ever will be.</p>
+<h2>Use of role=presentation</h2>
+<p><a href="http://www.w3.org/WAI/PF/aria-practices/#presentation_role"><code>role=presentation</code></a> removes the semantics from the element it is on.</p>
+<p>For example.</p>
+<p>This:</p>
+<p><code>&lt;h1 role=presentation&gt;text&lt;/h1&gt;</code></p>
+<p>becomes this:</p>
+<p><code>&lt;&gt;text&lt;/&gt;</code></p>
+<p>For elements with <a href="http://www.w3.org/WAI/PF/aria-practices/#presentation_inheritance">no required children</a>, any elements nested inside the element with <code>role=presentation</code> preserve their semantics.</p>
+<p>For example.</p>
+<p>This:</p>
+<p><code>&lt;h1 role=presentation&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/h1&gt;</code></p>
+<p>becomes this:</p>
+<p><code>&lt;&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/&gt;</code></p>
+<p>For elements with  required children (such as ul or table any required child elements nested inside the element with <code>role=presentation</code> also have their semantics removed.</p>
+<p>For example,</p>
+<p>This:</p>
+<p><code>&lt;table role=presentation&gt;</code></p>
+<p><code>&lt;tr&gt;&lt;td&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/td&gt;&lt;tr&gt;</code></p>
+<p><code>&lt;/table&gt;</code></p>
+<p>becomes this:</p>
+<p><code>&lt;&gt;</code></p>
+<p><code>&lt;&gt;&lt;&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/&gt;&lt;/&gt;</code></p>
+<p><code>&lt;/&gt;</code></p>
+<p><strong>Note:</strong> Any elements that are not required children of
+ the element with a role=presentation keep their semantics. This 
+includes other elements with required children.</p>
+<p>For example;</p>
+<p><code>&lt;table role=presentation&gt;</code></p>
+<p><code>&lt;tr&gt;&lt;td&gt;</code></p>
+<p><code>&lt;table&gt;</code></p>
+<p><code>&lt;tr&gt;&lt;td&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/td&gt;&lt;tr&gt;</code></p>
+<p><code>&lt;/table&gt;</code></p>
+<p><code>&lt;/td&gt;&lt;tr&gt;</code></p>
+<p><code>&lt;/table&gt;</code></p>
+<p>Becomes this:</p>
+<p><code>&lt;&gt;</code></p>
+<p><code>&lt;&gt;&lt;&gt;</code></p>
+<p><code>&lt;table&gt;</code></p>
+<p><code>&lt;tr&gt;&lt;td&gt;&lt;abbr&gt;API&lt;/abbr&gt;&lt;/td&gt;&lt;tr&gt;</code></p>
+<p><code>&lt;/table&gt;</code></p>
+<p><code>&lt;/&gt;&lt;&gt;</code></p>
+<p><code>&lt;/&gt;</code></p>
+<h2>aria-labelledby and aria-describedby</h2>
+<p>Currently <code>aria-labelledby and </code><code>aria-describedby</code> are only robustly supported for associating text content to a subset of<a href="http://dev.w3.org/html5/spec/content-models.html#interactive-content-0"> interactive content</a> elements, they <strong>do not</strong> work correctly on <a href="http://dev.w3.org/html5/spec/the-a-element.html#the-a-element">links</a>, support on <a href="http://dev.w3.org/html5/spec/content-models.html#embedded-content-0">embedded content</a> is unknown, but can be safely used on form controls inlcuding the many<code><a href="http://dev.w3.org/html5/spec/the-input-element.html#the-input-element"> input</a></code> types.</p>
+<p>In Internet Explorer, if you use <code>aria-labelledby</code> with multiple <code>id</code> references or <code>aria-describedby</code> with single or multiple <code>id</code> references, the referenced elements <strong>must be</strong> what Microsoft terms as <a href="http://msdn.microsoft.com/en-us/library/ie/gg701963%28v=vs.85%29.aspx#Accessible_HTML_Elements">accessible HTML elements</a>.</p>
+<p>The following example of <code>aria-labelledby</code> with multiple references uses the <code>label</code> element as it makes sense and it’s an accessible element (in IE terms). The example could have used a <code>span</code> (for example) but then <code>tabindex=-1</code> would have to be added. Refer to <a href="http://msdn.microsoft.com/en-us/library/ie/gg701963%28v=vs.85%29.aspx#Making_Nonaccessible_Elements_Accessible">Making Non accessible Elements Accessible</a></p>
+<p><code>&lt;label id="l1" for="f3"&gt;label text &lt;/label&gt;<br>
+&lt;input type="text" id="f3" aria-labelledby="l1 l2"&gt;<br>
+&lt;p&gt;other content&lt;/p&gt;<br>
+&lt;label id="l2"&gt;more label text&lt;/label&gt;</code></p>
+<h2>Abstract roles</h2>
+<p>Do not use the following <a href="http://www.w3.org/TR/wai-aria/roles#abstract_roles">abstract roles </a>as they <strong>do not do anything</strong>!</p>
+<blockquote cite="http://www.w3.org/TR/wai-aria/roles#abstract_roles"><p>Abstract roles are used for the ontology. Authors <strong>MUST NOT</strong> not use abstract roles in content.</p>
+<ul>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#command"><code>command</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#composite"><code>composite</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#input"><code>input</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#landmark"><code>landmark</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#range"><code>range</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#roletype"><code>roletype</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#section"><code>section</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#sectionhead"><code>sectionhead</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#select"><code>select</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#structure"><code>structure</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#widget"><code>widget</code> (abstract role)</a></li>
+<li><a href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/roles#window"><code>window</code> (abstract role)</a></li>
+</ul>
+</blockquote>
+
+
+<h2>Further reading:</h2>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria-practices/"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> 1.0 Authoring Practices</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2012/06/html5-accessibility-chops-when-to-use-an-aria-role/">HTML5 Accessibility Chops: When to use an ARIA role</a></li>
+<li><a rel="bookmark" href="http://www.paciellogroup.com/blog/2010/04/html5-and-the-myth-of-wai-aria-redundance/">HTML5 and the myth of WAI-ARIA redundance</a></li>
+</ul>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

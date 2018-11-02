@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>WCAG 2.0 parsing error bookmarklet</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/02/wcag-2-0-parsing-error-bookmarklet/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">WCAG 2.0 parsing error bookmarklet</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>While reading Jared Smith’s excellent article <a href="http://webaim.org/blog/wcag-next/">WCAG Next</a> I was drawn to the following statement “next to impossible to evaluate” in reference to the checking of <a href="http://www.w3.org/TR/WCAG20/#ensure-compat-parses">WCAG 2.0 success criterion 4.1.1 Parsing</a>.</p>
+
+<p>It is true (as far as I know) that there is no currently available dedicated service or software for checking <a href="http://www.w3.org/TR/WCAG20/#ensure-compat-parses">4.1.1 Parsing</a>. What I do and advise clients to do is use the <a href="http://validator.w3.org/">W3C validation service</a>
+ to check their code as the checks required for parsing criterion 
+conformance are a subset of the checks that are made when validating 
+HTML code.</p>
+<h3>Identifying relevant errors and warnings</h3>
+<p>A problem with using a standard HTML validator to check for this 
+subset is that many other conformance errors and warnings are also 
+reported and while these may or may not be important to fix, they are 
+not a requirement within the scope of the success criterion. What I have
+ been doing is checking pages against the HTML5 doctype as this 
+minimizes the occurance of errors and warnings that are unrelated to 
+parsing, but still a page can contain many non parsing errors, making it
+ difficult to identify the relevant results.</p>
+<p>I have also had discussions with Mike Smith (<a href="http://validator.w3.org/nu/">W3C Nu Markup Validation Service</a>) and Henri Sivonen (<strong><a href="http://about.validator.nu/">Validator.nu</a>)</strong>
+ about providing a method to filter conformance results to display only 
+parsing issues. There are apperently some design reasons why this would 
+be difficult (not impossible) from a backend code perspective, so I 
+thought a reasonable place to start would be with a client side script 
+that filtered the display of results from a validator.</p>
+<h3>Parsing error bookmarklet</h3>
+<p>The WCAG parsing only bookmarklet is an experimental script that loops through the results displayed when using <a href="http://validator.w3.org/nu/">W3C Nu Markup Validation Service</a>.
+ It looks for certain text strings in the results output and if it does 
+not find them in the text for a particular result it hides that result 
+using CSS display:none.</p>
+<h3>Check results other than the followoing are filtered:</h3>
+<ul>
+<li>Elements have complete start and end tags</li>
+<li>Elements are nested according to their specifications</li>
+<li>Elements do not contain duplicate attributes</li>
+<li>Any IDs are unique</li>
+<li>Unquoted attributes (under certain circumstances)</li>
+<li>Duplicate attributes</li>
+<li>Mismatched quotes on attributes</li>
+<li>Attributes not space seperated</li>
+<li>Mismatched element start and end tags</li>
+<li>malformed attributes</li>
+</ul>
+<h3>Trying out the parsing only bookmarklet</h3>
+<ol>
+<li>save the WCAG parsing only as a bookmark.</li>
+<li>open the <a href="http://validator.w3.org/nu/">W3C Nu Markup Validation Service</a> in your browser</li>
+<li>validate a page (<a href="http://www.html5accessibility.com/tests/parsing.html">test page</a>)</li>
+<li>activate the bookmarklet</li>
+<li>To view the unfiltered list of results again – refresh the page</li>
+<li>you can download the <a href="http://www.html5accessibility.com/tests/parsing.js">parsing.js</a> code</li>
+<li>HTML conformance checking and result filtering is also built in to the <a href="http://www.paciellogroup.com/blog/2012/04/web-accessibility-toolbar-2012/">Web Accessibility Toolbar 2012</a></li>
+</ol>
+<h3>WARNING</h3>
+<p>This is an experiment only, due to various constraints the method 
+used to filter the results is not the most robust as it relies upon text
+ string matching.</p>
+<p><strong>Note: </strong>this experiment would not have been possible 
+without the help of my friends and colleagues Hans Hillen and Gez Lemon,
+ who although they thought the method used was crappy, helped me anyway.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="WCAG%202.0%20parsing%20error%20bookmarklet_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

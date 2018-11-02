@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Short note on use of alt=”” and the title attribute</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2016/02/short-note-on-use-of-alt-and-the-title-attribute/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Short note on use of alt=”” and the title attribute</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>A <a href="http://w3c.github.io/a11ySlackers/archives/2016/02/2016-02-09.html#wcagq">discussion occured</a> on <a href="https://gitter.im/w3c/a11ySlackers">A11ySlackers gitter channel</a> last evening about whether use of the following markup pattern was a WCAG 2.0 failure:</p>
+<p><code>&lt;img src="a.gif" alt="" title="some text"&gt;</code></p>
+
+<h2>The Important Question</h2>
+<p>The more important question is this – does this markup pattern result in the desired outcome? i.e. is the <code>title</code> attribute content conveyed to users?</p>
+<p>From <em>adhoc</em> testing (<a href="http://s.codepen.io/stevef/debug/bEOGre">test page</a>)
+ with Firefox, Safari, IE, Chrome, Edge, Window Eyes, JAWS, Narrator and
+ VoiceOver, it was found that neither of the following work reliably 
+across browser and screen reader combinations.</p>
+<p><strong>non empty <code>title</code> with empty <code>alt</code></strong></p>
+<p><code>&lt;img src="a.gif" alt="" title="some text"&gt;</code></p>
+<p>or this pattern:</p>
+<p><strong>non empty <code>title</code> with no <code>alt</code></strong></p>
+<p><code>&lt;img src="a.gif" title="some text"&gt;</code></p>
+<p>There a number of reasons for this:</p>
+<ul>
+<li><code>alt=""</code> is a standardised indication to screen reader software that the <code>&lt;img&gt;</code> is decorative and can be safely ignored. Testing by Powermapper from 2015: <a href="http://www.powermapper.com/tests/screen-readers/labelling/img-title/">IMG with null ALT and non-null TITLE attributes </a> found issues with <code>alt=""</code> + non-empty <code>title</code>.</li>
+<li>Absence of an <code>alt</code> attribute results, in some screen reading screen reader software, not conveying the <code>&lt;img&gt;</code> to users.
+<ul>
+<li><strong>Note:</strong> Found this issue with JAWS 17 and Chrome 48 on Windows 10. Testing by Powermapper from 2015: <a href="http://www.powermapper.com/tests/screen-readers/labelling/img-title/">IMG with TITLE Screen reader compatibility</a> found no issues with this pattern.</li>
+</ul>
+</li>
+<li>Some browsers implement the HTML5 requirement that <a href="https://www.w3.org/TR/html-aam-1.0/#el-img-emptyalt"><code>alt=""</code> is equal to <code>role="presentation"</code></a> which results in the <code>&lt;img&gt;</code> being removed from the <a href="https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">accessibility tree</a>, so despite there being a non empty <code>title</code>, the <code>&lt;img&gt;</code> is hidden.</li>
+</ul>
+<h3>Notes:</h3>
+<p>Absence of an <code>alt</code> attribute on the &lt;img&gt; element 
+is non conforming in HTML5, except under very limited circumstances, 
+although it is not considered a WCAG 2.0 failure. Refer to a <a href="https://www.paciellogroup.com/blog/2014/04/short-note-alt/">Short note on alt in HTML</a>.</p>
+<p>Use of the <code>title</code> attribute is known to be an unreliable method to visually convey information to users. Refer to <a href="https://www.paciellogroup.com/blog/2013/01/using-the-html-title-attribute-updated/">Using the HTML title attribute</a>. This is part of the reason why the use of the <code>title</code> attribute to provide a text alternative for an image was deemed non conforming in HTML5. <a href="https://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20091203">Some history</a>.</p>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Short%20note%20on%20use%20of%20alt=%E2%80%9D%E2%80%9D%20and%20the%20title%20attribute_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: SVG text alternative example</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: SVG text alternative example</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The W3C HTML5 specification contains an SVG (<a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics">Scalable Vector Graphics</a>) based <a href="http://dev.w3.org/html5/spec/content-models.html#kinds-of-content">interactive Venn diagram</a>.
+ The diagram illustrates the relationship between HTML content 
+categories. Currently the content and interactivity of the diagram is 
+not accessible to some users.<span id="more-1058"></span> A bug <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=13447">SVG content model VENN diagram needs to be made accessible</a> was filed. The <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=13447#c1">HTML5 editors’ response</a>:</p>
+<blockquote><p><strong>Status:</strong> Rejected<br>
+<strong>Change Description:</strong> no spec change<br>
+<strong>Rationale:</strong> The entire diagram is completely redundant 
+with information already in the spec. The spec itself is its alternative
+ text. It’s just a way to expose the information to visual users in a 
+way optimised for visual users. Non-visual users already have the 
+information presented in a way optimised for them.</p></blockquote>
+<p>There are a few issues with the response:</p>
+<ol>
+<li>It assumes that a text description of the relationships between 
+content categories depicted in the diagram has no value for ‘non-visual’
+ users.</li>
+<li>It assumes that either users are ‘visual’ or ‘non-visual’, when in 
+fact many people with vision impairments and indeed even those 
+considered legally blind have some vision.</li>
+<li>It makes the somewhat bizarre claim that the 800 pages of the HTML5 
+specification is an appropriate text alternative for the information 
+depicted in the diagram, while at the same time providing a partial text
+ alternative for the img element <a href="#fallback">fallback content</a>.</li>
+<li>It does not consider the issue for keyboard users.</li>
+</ol>
+<h3 id="fallback">SVG fallback content</h3>
+<p><img src="HTML5%20Accessibility%20Chops%20%20SVG%20text%20alternative%20example_files/content-venn.png" alt="Sectioning content, heading content, phrasing content, and embedded content are all types of flow content. Embedded content is also a type of phrasing content."></p>
+<p><strong>Code for fallback content:</strong></p>
+<p><code>&lt;img alt="Sectioning content, heading content, phrasing content, and embedded content are all types of flow content. Embedded content is also a type of phrasing content." src="http://dev.w3.org/html5/spec/images/content-venn.png"&gt;</code></p>
+<p>The fallback content is an image, due to the way browsers support <a href="http://dev.w3.org/html5/spec/content-models.html#fallback-content">fallback content</a> on the <a href="http://dev.w3.org/html5/spec/the-iframe-element.html#the-object-element">object element</a> (used to display the SVG) it is not available to anyone unless the browser does not support SVG.</p>
+<h3>The current experience for screen reader users</h3>
+<p><strong>Note:</strong> SVG content has little accessibility support in browsers and assistive technology.</p>
+<p>The following is announced when using NVDA and Firefox to access the <a href="http://dev.w3.org/html5/spec/content-models.html#kinds-of-content">Venn diagram</a><strong>:<br>
+Note: </strong>the text content immediately before and after the Venn diagram is included to provide context.</p>
+<blockquote><p>These categories are related as follows:<br>
+<strong>IFrame </strong><br>
+<strong>http://dev.w3.org/html5/spec/images/content-venn.svg</strong><br>
+<strong>out of IFrame</strong><br>
+Other categories are also used for specific purposes, e.g. form   
+controls are specified using a number of categories to define common   
+requirements. Some elements have unique requirements and do not fit   
+into any particular category.</p></blockquote>
+<p>From the example above it is obvious that the current content does not make sense.</p>
+<h3>A suggested solution</h3>
+<ul>
+<li>Provide a description of the relationships in text below the diagram which is available to ALL users</li>
+<li>Provide links in the description that point to the same information 
+for ALL users, that is currently only available, in context, for some 
+users.</li>
+</ul>
+<h4><strong>Example:</strong></h4>
+<blockquote><p><em>These categories are related as follows:</em></p>
+<p><img src="HTML5%20Accessibility%20Chops%20%20SVG%20text%20alternative%20example_files/content-venn.png" alt="venn diagram depicting content category relationships" width="512" height="288"></p>
+<p>[suggested description start]</p>
+<p><a href="http://dev.w3.org/html5/spec/content-models.html#sectioning-content-0">Sectioning content</a>, <a href="http://dev.w3.org/html5/spec/content-models.html#heading-content-0">heading content</a>, <a href="http://dev.w3.org/html5/spec/content-models.html#phrasing-content-0">phrasing content</a>, <a href="http://dev.w3.org/html5/spec/content-models.html#interactive-content">interactive content</a> and  <a href="http://dev.w3.org/html5/spec/content-models.html#embedded-content-0">embedded content</a> are all types of <a href="http://dev.w3.org/html5/spec/content-models.html#flow-content-0">flow content</a>.&nbsp;   A subset of <a href="http://dev.w3.org/html5/spec/content-models.html#metadata-content">metadata content</a>
+ is also flow content. Embedded content  is  also phrasing content. 
+Subsets of interactive and metadata content  are&nbsp;  phrasing 
+content. A subset of&nbsp; the interactive content which is&nbsp;   
+phrasing content is also embedded content.</p>
+<p>[suggested description end]</p>
+<p><em>Other categories are also used for specific purposes, e.g. form  
+  controls are specified using a number of categories to define common  
+  requirements. Some elements have unique requirements and do not fit   
+ into any particular category.</em></p></blockquote>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>Links to the listing of elements in each category have been added in
+ the suggested descriptive text. These links provide access for keyboard
+ and AT users to the same level of detail for each category as is 
+provided in the diagram for mouse users. This may not be an exact 
+replication of the interactivity, but it is an improvement on what is 
+offered currently.</li>
+<li>The fallback image, used for demonstrative purposes here, has a 
+modified text alternative, taking onto account its modified context:<br>
+<code>&lt;img src="content-venn.png" alt="venn diagram depicting content category relationships"&gt;</code></li>
+</ul>
+<h3>Addendum</h3>
+<p>I have looked into how to label the venn diagram so it is not&nbsp; announced as “IFrame<br>
+http://dev.w3.org/html5/spec/images/content-venn.svg out of IFrame” by NVDA. Adding a <code>title="venn diagram depicting content category relationships."</code> attribute and an ARIA <code>role="img"</code> to the <code>object</code> element results in NVDA announcing:</p>
+<blockquote><p><code>graphic, venn diagram depicting content category relationships.</code></p></blockquote>
+<p>The reason for using <code>role="img"</code> is that NVDA does not 
+recognise the object element and does not announce the accessible name 
+(title attribute content) without it. There is a <a href="http://www.html5accessibility.com/tests/SVG.html">test page</a> so you can try it out for yourself.</p>
+<h3>Further reading:</h3>
+<ul>
+<li><a href="http://webaim.org/blog/future-web-accessibility-svg/">Future Web Accessibility: SVG</a></li>
+<li><a href="http://w3c.github.io/alt-techniques/">HTML5: Techniques for providing useful text alternatives</a></li>
+</ul>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20SVG%20text%20alternative%20example_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

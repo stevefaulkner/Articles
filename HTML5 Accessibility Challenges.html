@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Challenges</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/01/html5-accessibility-challenges/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Challenges</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>It has been claimed that <a href="http://dev.w3.org/html5/spec/spec.html">HTML5</a>
+ will do a lot to improve the accessibility of web content and web based
+ applications. In theory this is true. The introduction of new form 
+controls in HTML5 is promising, because developers will have to do less 
+bolting on of accessibility information themselves, as it will hopefully
+ have been bolted on by the browser vendors.</p>
+
+<p>The current accessibility support implemented in browsers lags behind
+ their implementations of the sexy new features themselves. These are 
+still early days in the implementation of HTML5 features, so lets keep 
+our fingers crossed that Google,&nbsp; Apple (Safari on Windows) and 
+Opera will get their acts together to provide <em>at least</em> a basic 
+level&nbsp; of HTML support in their browsers&nbsp;for assistive 
+technology users. Equally it is hoped&nbsp; Mozilla, Apple (Safari on 
+Mac) and Microsoft will strive to have their rate of accessibility 
+support match their rapid implementation of the new HTML5 features.</p>
+<p>Information about accessibility support for implemented HTML5 features is available&nbsp;at <a href="http://www.html5accessibility.com/">www.HTML5accessibility.com</a>.</p>
+<p>The challenge further extends to&nbsp;standardizing the 
+implementation of accessibility features.&nbsp;To this end some people 
+including myself&nbsp;have started work on a document&nbsp;at the <a href="http://www.w3.org/"><span>W3C</span></a> called the <a href="http://dev.w3.org/html5/html-api-map/overview.html">HTML to Platform Accessibility APIs Implementation Guide</a> (early draft).</p>
+<p>An issue that the implementation guide is being designed to help 
+avoid is differences between browsers about how and what information 
+they convey to users of assistive technology. For example, Firefox and 
+Webkit currently have differing ways of providing labels for form 
+controls when using text from the <a href="http://dev.w3.org/html5/spec/common-input-element-attributes.html#the-placeholder-attribute">HTML5 placeholder attribute</a>,
+ this divergence will cause issues for both users and authors as there 
+is no clear way to provide a text label that will be uniformly presented
+ to users regardless of browser.&nbsp;&nbsp;As a consequence&nbsp;it is 
+planned to include information in the implementation guide&nbsp;on what 
+and how to use the content of elements and attributes to provide text 
+labels.</p>
+<p>Details&nbsp;of the current Firefox and&nbsp;Webkit form control labeling issues:&nbsp;&nbsp;&nbsp;<a href="http://www.html5accessibility.com/tests/placeholder-labelling.html">HTML5 placeholder attribute tests</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Challenges_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

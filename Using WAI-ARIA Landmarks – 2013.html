@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Using WAI-ARIA Landmarks – 2013</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Using WAI-ARIA Landmarks – 2013</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Adding ARIA landmarks to your existing site, or to a site you 
+are developing, provides useful global navigation features and aids 
+understanding of content structure for users. Over time the necessity of
+ explicitly assigning landmarks will lessen as <a href="http://html5accessibility.com/">browsers build in</a> ARIA landmark roles to newer HTML element semantics. There is <a href="http://www.paciellogroup.com/blog/2011/07/html5-accessibility-chops-aria-landmark-support/">widespread support</a> for ARIA landmarks in browsers and screen readers.</p>
+
+<h2>How ARIA landmark roles help screen reader users</h2>
+<p>In this video <a href="https://twitter.com/LeonieWatson">Leonie Watson </a>demonstrates <a href="https://www.youtube.com/watch?v=IhWMou12_Vk">how ARIA landmark roles help screen reader users</a> understand the purpose of different areas of a web page, such as search, navigation or main content.</p>
+<h2>ARIA Landmark Roles</h2>
+<p>The <a href="http://www.w3.org/WAI/PF/aria/">WAI ARIA specification</a>
+ defines a set of specialised “landmark” roles. These roles provide a 
+method to programmatically identify commonly found sections of web page 
+content in a consistent way. <strong>they can be used now</strong> in 
+whatever flavour of (X)HTML you prefer. This allows assistive 
+technologies to provide users with features which they can use to 
+identify and navigate to sections of page content.</p>
+<p>Information about WAI – ARIA landmarks from <a href="http://www.w3.org/WAI/PF/aria-practices/#kbd_layout">WAI-ARIA Best Practices</a> (Editors’ Draft 6 August 2010)</p>
+<blockquote><p><strong>Landmarks are a vast improvement over the 
+rudimentary “skip to main content” technique employed prior to WAI-ARIA.
+ If possible it is best to use these as landmarks.</strong><br>
+…</p></blockquote>
+<blockquote><p><strong>The presence of common, semantic, navigation 
+landmarks allows each site to support the same standard and allows your 
+assistive technology to provide a consistent navigation experience</strong>
+ – an important feature for screen readers and alternate input 
+solutions. For users with cognitive and learning disabilities the 
+landmark information could be used to expand and collapse these regions 
+of your page to aid in simplifying the user experience by allowing the 
+user to manage the amount of information processed at any one time.</p></blockquote>
+<blockquote><p>There are also mainstream benefits of providing 
+navigation landmarks. Your browser may assign key sequences to move 
+focus to these sections as they can be set on every site. Navigation to 
+these landmarks is device independent. A personal digital assistant 
+(PDA) could assign a device key to get to them in your document.</p></blockquote>
+<h3>How to use landmark roles</h3>
+<p>It is a painless process to add landmark roles to existing (and new) 
+pages. Simply add a role attribute to a container element, using the 
+most appropriate role value for the content of the container, for 
+example:</p>
+<p><code>&lt;main <strong>role="main"&gt;</strong></code></p>
+<ul>
+<li>An <a href="http://www.html5accessibility.com/tests/roles-land.html">example page</a> with ARIA landmark roles</li>
+<li>A list and descriptions of landmark roles is available in <a href="#tablex">Table 1</a></li>
+</ul>
+<p><strong>Please note:</strong></p>
+<blockquote><p>Probably the most important rule for applying landmarks 
+is to ensure all content resides in a landmark region to ensure no 
+content is orphaned. This way a screen reader user can safely use 
+landmark navigation without missing content.</p>
+<p><cite><a href="http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/#comment-24064">Rich Schwerdtfeger</a></cite></p></blockquote>
+<h3>Adding Landmark Roles to WordPress</h3>
+<p>I added them to the TPG blog (uses WordPress) in about 20 minutes, it
+ involved the editing of the following WordPress files: sidebar.php 
+(added <code>complementary</code>, <code>navigation</code> (x2) and <code>search</code> landmarks), header.php (added <code>banner</code> landmark), single.php (added <code>main</code> landmark), footer.php (added <code>contentinfo</code> landmark) &amp; index.php (added <code>main</code> landmark). The results can be visualised using <a href="https://addons.mozilla.org/en-US/firefox/addon/9108">The Juicy Studio Accessibility Toolbar</a> document landmarks feature:</p>
+<p><img src="Using%20WAI-ARIA%20Landmarks%20%E2%80%93%202013_files/tpg-landmarks.gif" alt="TPG blog page with banner, main, complementary, search and navigation landmark role usage visualised."></p>
+<h3>Support for Landmark Roles</h3>
+<p>Landmark roles are supported in <a href="http://www.freedomscientific.com/products/fs/jaws-product-page.asp">JAWS</a>, <a href="http://www.nvda-project.org/">NVDA</a>, ORCA, Chromevox, Window Eyes and <a href="http://en.wikipedia.org/wiki/Voice-over">VoiceOver</a> and via a <a href="http://www.linkedin.com/groups/Firefox-plugin-allows-all-users-2419815.S.107259458">FireFox addon</a> for keyboard users.</p>
+<h4>Landmark Support behaviour in JAWS version 10 and above</h4>
+<p>For JAWS version 10 and above, landmark keyboard navigation in virtual mode is:</p>
+<ul>
+<li>next landmark <kbd>;</kbd> (semi-colon)</li>
+<li>previous landmark <kbd>SHIFT + ;</kbd> (semi-colon)</li>
+<li>list landmarks <kbd>CTRL + INS + ;</kbd> (semi-colon)</li>
+</ul>
+<p>When cycling through landmarks using the semi-colon key, the landmark
+ role name +”landmark” is announced. A user can then cursor (down arrow 
+key) to the content. If a landmark is a container for other landmarks it
+ is not included within the cycle order, but is included within the list
+ order. By default the list does not display nested landmarks, but when a
+ nested landmark container item receives focus, it is announced to the 
+user that the list item is closed, informing the user that the item has 
+sub items. A user can then use the right arrow key to open the sub list.</p>
+<p><img src="Using%20WAI-ARIA%20Landmarks%20%E2%80%93%202013_files/jaws-landmark1.gif" alt="JAWS landmark dialog list 'complementary content' landmark item closed"></p>
+<p><img src="Using%20WAI-ARIA%20Landmarks%20%E2%80%93%202013_files/jaws-landmark.gif" alt="JAWS landmark dialog list 'complementary content' landmark item open, displaying sub items"></p>
+<h3>ARIA Landmark Role Tests</h3>
+<p>Detailed information about current assistive technology support can be found in the accompanying document <a href="http://www.html5accessibility.com/tests/landmarks.html">ARIA Landmark Role Tests</a> (November, 2011).</p>
+<h3 id="table1">What about the new Sectioning Elements in HTML5</h3>
+<p>The new sectioning elements in HTML5 have some overlap with ARIA 
+landmark roles, but in a majority of cases there is no equivalent for 
+the ARIA landmark roles in HTML5. It is suggested that where there is a 
+similarity the ARIA roles can be used to provide semantic identification
+ that has a practical use now, for example if you want to use the HTML5 <code>nav</code> element, add <code>role="navigation"</code> to it, so supporting Assistive Technology (AT) can convey the semantic information to users. When HTML5 elements such as <code>nav</code> are supported by AT, you can then remove the role as it will no longer be required.</p>
+<p><code>&lt;nav <strong>role="navigation"</strong>&gt;</code></p>
+<p>For an example of the use of HTML5 elements and ARIA landmark roles have a look at code of <a href="http://www.brucelawson.co.uk/"> Bruce Lawson’s site</a>.</p>
+<h3>Comparison of ARIA landmark roles and HTML5 structural elements</h3>
+
+<p><strong>Role and element descriptions from:</strong></p>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria/#roleattribute_inherits">WAI-ARIA 1.0 draft specification </a></li>
+<li><a href="http://www.w3.org/html/wg/drafts/html/master/">W3C HTML 5.1 draft Specification</a></li>
+</ul>
+<h2>Further reading:</h2>
+
+<ul>
+<li><a href="http://www.iheni.com/usable-landmarks-across-desktop-and-mobile/">Usable landmarks across desktop and mobile</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2012/04/2011/11/latest-aria-landmark-support-data/" rel="bookmark">Latest ARIA landmark support data</a> (2011) note support was widespread 2 years ago and has improved since!</li>
+<li><a href="http://www.paciellogroup.com/blog/2012/04/html5-accessibility-chops-real-world-aria-landmark-use/">HTML5 Accessibility Chops: ‘real world’ ARIA landmark use</a></li>
+<li><a href="https://dvcs.w3.org/hg/aria-unofficial/raw-file/tip/index.html">Using ARIA in HTML</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Using%20WAI-ARIA%20Landmarks%20%E2%80%93%202013_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

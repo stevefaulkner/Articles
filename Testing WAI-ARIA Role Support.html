@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Testing WAI-ARIA Role Support</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2008/12/testing-wai-aria-role-support/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Testing WAI-ARIA Role Support</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>For WAI-ARIA to be useful, to people with disabilities who use 
+assistive technology, access to the information that ARIA roles and 
+properties provides must be well supported across a range of browsers 
+and assistive technologies. One of the activities going on over at <a href="http://wiki.codetalks.org/wiki/index.php/Main_Page">codetalks</a>
+ is the development and testing of ARIA test cases. As part of this 
+effort, I have been developing simple test cases for ARIA role support 
+and testing them using the Firefox browser and a range of commonly used 
+assistive software.</p>
+<h3><span id="more-100"></span> ARIA Roles</h3>
+<p>ARIA Roles are categorized as follows:</p>
+<ol>
+<li><a href="http://www.w3.org/TR/wai-aria/#taxonomic">Taxonomy Roles</a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/#userinput">User Input Controls</a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/#ui">User Interface Elements</a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/#structural">Document Structure</a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/#regions">Specialized Regions</a></li>
+</ol>
+<p>The taxonomy roles do not require implementaion testing as they are 
+abstract definitions and not used in content. To understand how and if 
+the other roles are correctly supported by browsers and assistive 
+technology they need to be tested. I have so far carried out testing of 
+the User Input Control roles with the latest version of JAWS, Window 
+Eyes, NVDA, and Zoomtext.</p>
+<h3>ARIA user input role test results:</h3>
+<p><a href="http://www.paciellogroup.com/blog/aria-tests/user-input-widgets.html">ARIA User Input Widget role tests – Firefox 3 + Assistive Technology</a></p>
+<h3>Further Reading</h3>
+<ul>
+<li><a href="http://wiki.codetalks.org/wiki/index.php/Set_of_ARIA_Test_Cases">Sets of ARIA test cases </a></li>
+<li><a href="http://www.w3.org/TR/wai-aria/">Accessible Rich Internet Applications (WAI-ARIA) Version 1.0</a> (W3C Working  Draft 6 August 2008)</li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Testing%20WAI-ARIA%20Role%20Support_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: ARIA landmark support</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/07/html5-accessibility-chops-aria-landmark-support/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: ARIA landmark support</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The ARIA landmark roles can be used in HTML5 to markup regions 
+of a page. Landmark roles add a new means to navigate page content for 
+users of supporting assistive technology. They can be used on 
+semantically neutral elements such as the <code>div</code> element or they can be added, to HTML5 elements that have&nbsp; implied semantics such as <code>header</code> or <code>footer</code>, to fill in current gaps in accessibility support.<br>
+<span id="more-1020"></span></p>
+<h3>ARIA Landmark usage</h3>
+<p>ARIA landmarks are present on many popular sites, for example:</p>
+<ul>
+<li><a href="http://www.google.co.uk/search?sourceid=navclient&amp;hl=en-GB&amp;ie=UTF-8&amp;rlz=1T4DKUK_en-GBGB282GB282&amp;q=landmarks#hl=en&amp;pq=landmarks&amp;xhr=t&amp;q=HTML5+accessibility&amp;cp=8&amp;pf=p&amp;sclient=psy&amp;rlz=1T4DKUK_en-GBGB282GB282&amp;source=hp&amp;aq=0&amp;aqi=&amp;aql=&amp;oq=HTML5+ac&amp;pbx=1&amp;bav=on.2,or.r_gc.r_pw.&amp;fp=d415fe1ec17e895e&amp;biw=1440&amp;bih=764">Google search</a></li>
+<li><a href="http://www.bbc.co.uk/">BBC</a></li>
+<li><a href="http://www.bbc.co.uk/">Yahoo!</a></li>
+</ul>
+<h3>Landmark Role Current Support</h3>
+<p>ARIA landmark roles are currently supported by:</p>
+<ul>
+<li>NVDA and JAWS when using Internet Explorer 9 or Firefox 3+.</li>
+<li>VoiceOver when using Safari on iOS 4+</li>
+<li><a href="http://live.gnome.org/Orca/Firefox">Orca</a> (Linux screen reader) using Firefox 3+ supports landmarks (not tested).</li>
+</ul>
+<p>Detailed <a href="http://www.html5accessibility.com/tests/landmarks.html">results of testing</a> for JAWS, NVDA, VoiceOver and Window eyes</p>
+<h3>What does supported mean?</h3>
+<p>Users can navigate page content using ARIA landmarks</p>
+<p>For JAWS 10-12 landmark keyboard navigation in virtual mode is:</p>
+<ul>
+<li> next landmark ; (semi-colon)</li>
+<li>previous landmark SHIFT + ; (semi-colon)</li>
+<li>list landmarks CTRL + INS + ; (semi-colon</li>
+</ul>
+<p><img title="jaws-landmarks" src="HTML5%20Accessibility%20Chops%20%20ARIA%20landmark%20support_files/jaws-landmarks1.gif" alt="" width="389" height="317"></p>
+<p>For NVDA 2011.2 the landmark keyboard combination in virtual buffer mode is:</p>
+<ul>
+<li>next landmark D</li>
+<li>previoius landmark shift + D</li>
+<li>list landmarks (and list/headings) NVDA + F7</li>
+</ul>
+<p><img title="nvda-landmark-lisr" src="HTML5%20Accessibility%20Chops%20%20ARIA%20landmark%20support_files/nvda-landmark-lisr1.gif" alt="" width="260" height="465"></p>
+<p>VoiceOver users can navigate a page via landmarks (if present), by 
+choosing ‘landmarks’ in the ‘web rotor’, then finger flicking up or down
+ will move to the next or previous landmark.</p>
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2011/07/rotor.gif"><img title="rotor" src="HTML5%20Accessibility%20Chops%20%20ARIA%20landmark%20support_files/rotor.gif" alt="" width="500" height="436"></a></p>
+<h3>Important Note on <code>role=application</code>:</h3>
+<p>When navigated to, <code>role=application</code> causes some screen 
+readers to change modes. Therefore application role must only be used on
+ interactive content for which the application mode is appropriate. <strong>It is to be used with extreme caution! </strong>The article <a href="http://www.paciellogroup.com/blog/2010/10/jaws-support-for-aria/">JAWS support for ARIA</a> is a must read for understanding how JAWS modes work and how JAWS interacts with <code>role=application</code>. Also worth reading <a title="When should you use ARIA role=”application”?" rel="bookmark" href="http://yaccessibilityblog.com/library/when-aria-role-application.html">When should you use ARIA role=”application”?</a> and <a href="http://www.accessibleculture.org/research/not-all-aria-widgets-deserve-role-application/">Not All ARIA Widgets Deserve </a><code><a href="http://www.accessibleculture.org/research/not-all-aria-widgets-deserve-role-application/">role="application"</a>.</code></p>
+<h3>Addendum:</h3>
+<p>Roger johannson reports that <a href="http://www.456bereastreet.com/archive/201107/accessibility_in_mac_os_x_107_lion/">VoiceOver on OSX 10.7 Lion</a> now supports ARIA landmarks:</p>
+<blockquote><p>VoiceOver now lets you use ARIA landmarks, if they are 
+present, to  navigate web pages. If Quick Nav is active you can use the w
+ and W keys  to navigate to the next or previous landmark. When you use 
+the arrow  keys to navigate around a page, VoiceOver announces when you 
+enter and  leave landmarks, including the type of landmark (for example 
+“Leaving  main landmark, entering complementary landmark”).</p></blockquote>
+<h3>Further information about landmark roles:</h3>
+<ul>
+<li><a href="http://www.html5accessibility.com/tests/landmarks.html">ARIA Landmark role support tests</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2010/10/using-wai-aria-landmark-roles/">Using WAI ARIA Landmark Roles – updated</a></li>
+<li><a href="http://www.youtube.com/watch?v=IhWMou12_Vk">Video – How ARIA landmark roles help screen reader users – Léonie Watson</a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria-practices/#kbd_layout"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr> 1.0 Authoring Practices</a></li>
+</ul>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20ARIA%20landmark%20support_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

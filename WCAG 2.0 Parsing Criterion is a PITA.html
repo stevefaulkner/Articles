@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>WCAG 2.0 Parsing Criterion is a PITA</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/11/wcag-2-0-parsing-criterion-is-a-pita/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">WCAG 2.0 Parsing Criterion is a PITA</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-8 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/question.png" alt="Question mark" width="75" height="65"><strong>Any change in WCAG 2.1? Nope, 2.1 <a href="https://www.w3.org/TR/WCAG21/#parsing">parsing criterion</a> is still a PITA</strong></p>
+<p>The <a href="http://www.w3.org/TR/WCAG20/#ensure-compat-parses">WCAG 2.0 Parsing Criterion</a> is a <em>Pain In The Ass</em>
+ (PITA) because the checking of it throws up lots of potential errors 
+that if required to fix, may result in a lot of extra work (in some 
+cases <a href="https://en.wikipedia.org/wiki/Busy_work"><em>busy work</em></a>) for developers. This is largely due to the lack of robust tools for producing a set of specific issues that require fixing.<span id="more-4066"></span></p>
+<p>I have discussed the parsing criterion previously in <a href="https://www.paciellogroup.com/blog/2012/02/wcag-2-0-parsing-error-bookmarklet/">WCAG 2.0 parsing error bookmarklet</a> also providing a bookmarklet that helps to filter out <em>some</em> <a href="https://validator.w3.org/nu/">HTML conformance checker</a> errors that are definitely (<em>maybe</em>) not potential accessibility issues.</p>
+<h2>IMPORTANT NOTE:</h2>
+<p>I <strong>am not</strong> saying here that checking and fixing HTML 
+Conformance errors is not an important and useful part of web 
+development process, only that fixing all HTML conformance errors is not
+ a requirement for accessibility. There are good reasons to <a href="https://validator.w3.org/nu/about.html#why-validate">validate your HTML</a> as part of the development process.</p>
+<h2>What the WCAG parsing criterion requires?</h2>
+<p>Is really, only, <strong>a very limited subset</strong> of the errors and warnings that may be produced when checking with the only available tools (i.e. <a href="https://validator.w3.org/nu/">HTML conformance checkers</a>) for testing the WCAG parsing Criterion. You can use a <a href="https://validator.w3.org/nu/">HTML conformance checker</a> to find such errors, but the errors that need fixing for accessibility purposes can often be <a href="http://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.facebook.com%2F">needles in a haystack</a>.</p>
+<h3>1. Complete start and end tags</h3>
+<p><strong>note:</strong> <em>but only when this is required by the specification</em></p>
+<h4>Examples of what happens:</h4>
+<p><strong>This:</strong></p>
+<pre><code>fieldset&gt;<span><span>&lt;</span><span><span><span>input</span></span></span><span>&gt;</span></span><span><span>&lt;/</span><span><span><span>fieldset</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong>Displays this on page:</strong></p>
+<p><mark>fieldset&gt;</mark></p>
+<p>or</p>
+<p><strong>This:</strong></p>
+<pre><code>&lt;img src=<span><span>"HTML5_Logo.png"</span></span> alt=<span><span>"HTML5"</span></span>
+&lt;p&gt;test&lt;/p&gt;</code></pre>
+<p><strong>Produces this in DOM:</strong></p>
+<pre><code>&lt;img <mark>&lt;p=<span><span>""</span></span></mark> alt=<span><span>"HTML5"</span></span> src=<span><span>"HTML5_Logo.png"</span></span>&gt; <mark>test</mark>
+<mark>&lt;p&gt;&lt;/p&gt;</mark></code></pre>
+<p>i.e. unintended empty <code>p</code> element with intended text not contained and a <em>mutant</em> attribute <code>&lt;p=""</code> sprouted on the <code>img</code> element.</p>
+<h3>What this requirement does not mean</h3>
+<p>Adding end tags to every element:</p>
+<pre><code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"> <span><span>&lt;</span><span><span><span>input</span></span></span><span>&gt;</span></span><mark><span><span>&lt;/</span><span><span><span>input</span></span></span><span>&gt;</span></span></mark></code> <code>...</code> <code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;</span><span><span><span>li</span></span></span><span>&gt;</span></span>list item <mark><span><span>&lt;/</span><span><span><span>li</span></span></span><span>&gt;</span></span></mark></code> <code>...</code></pre>
+<p>or <em>self closing</em> elements without end tags</p>
+<pre><code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"> <span><span>&lt;</span><span><span><span>input</span></span></span></span><mark><span><span> /</span></span></mark><span><span>&gt;</span></span> <span><span>&lt;</span><span><span><span>img</span></span></span></span><mark><span><span> /</span></span></mark><span><span>&gt;</span></span></code></pre>
+<p>There are rules in <a href="http://www.w3.org/TR/html5/">HTML</a> detailing which elements require end tags and under what circumstances:&nbsp; <a href="http://www.w3.org/TR/html5/syntax.html#syntax-tag-omission">Optional Tags</a>. You can also find this information under <a href="http://www.w3.org/TR/html5/dom.html#element-dfn-tag-omission">Tag omission in text/html</a> in the definition of each element in HTML.</p>
+<blockquote><p><strong>4.5.9 The <dfn><code>abbr</code></dfn> element</strong><br>
+…</p>
+<p><strong>Tag omission in text/html:</strong></p>
+<p>Neither tag is omissible</p>
+
+</blockquote>
+<p>Good news is that most <a href="http://s.codepen.io/stevef/debug/pjGddB">code errors of this type</a>
+ will be fairly obvious as they will show up as text strings in the 
+rendered code or effect style/positioning of content and produce <em>funky</em> attributes in the DOM.</p>
+<h3>2. Malformed attribute and attribute values</h3>
+<h4>quoted attributes</h4>
+<p>Any <a href="http://www.w3.org/TR/html5/index.html#attributes-1">attributes</a> that take <a href="http://www.w3.org/TR/html5/dom.html#attribute-text">text</a> strings or a <a href="http://www.w3.org/TR/html5/infrastructure.html#set-of-space-separated-tokens">set of space-separated tokens</a> or a <a href="http://www.w3.org/TR/html5/infrastructure.html#set-of-comma-separated-tokens">set of comma-separated tokens</a> or a <a href="http://www.w3.org/TR/html5/infrastructure.html#valid-list-of-integers">valid list of integers</a>, need to be quoted:</p>
+<p><strong>Do this:</strong></p>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span><span><span><span>class</span></span></span><span>=</span><span><span><span>"poot pooter"</span></span></span><span>&gt;</span></span>some text about poot<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span>
+<span><span>&lt;</span><span><span><span>img</span></span></span><span> </span><span><span><span>alt</span></span></span><span>=</span><span><span><span>"The Etiology of poot."</span></span></span><span> </span><span><span><span>src</span></span></span><span>=</span><span><span><span>"poot.png"</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong>Not this:</strong></p>
+<pre><code>//missing <span><span><span><span>end</span></span></span><span> quote </span><span><span><span>on</span></span></span><span> class attribute </span><span><span><span>with</span></span></span><span> multiple </span><span><span><span>values</span></span></span><span>: 
+</span></span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;p class=</span><span><span><span>"poot pooter&gt;some text about poot&lt;/p&gt;
+
+//no quotes on class attribute with multiple values: 
+</span></span></span></span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span><span><span>&lt;p class=poot pooter&gt;some text about poot&lt;/p&gt;
+
+//missing start quote on alt attribute
+</span></span></span></span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span><span><span>&lt;img alt=The Etiology of poot."</span></span></span><span> src=</span><span><span><span>"poot.png"</span></span></span><span>&gt;
+
+//</span><span><span><span>no</span></span></span><span> quotes </span><span><span><span>on</span></span></span><span> alt attribute
+</span></span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;img alt=The Etiology </span><span><span><span>of</span></span></span><span> poot. src=</span><span><span><span>"poot.png"</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong>Note:</strong> although some attributes do not require <a href="http://www.w3.org/TR/html5/syntax.html#unquoted">quoted</a> values, the <em>safest</em> and <em>sanest</em> thing to do is <strong>quote all attributes</strong>.</p>
+<h4>Spaces between attributes</h4>
+<p><strong>Do this:</strong></p>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span><span><span><span>class</span></span></span><span>=</span><span><span><span>"poot"</span></span></span></span><mark><span><span>&nbsp;</span></span></mark><span><span><span><span>id</span></span></span><span>=</span><span><span><span>"pooter"</span></span></span><span>&gt;</span></span>some text about poot<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span>
+<span><span>&lt;</span><span><span><span>img</span></span></span><span> </span><span><span><span>alt</span></span></span><span>=</span><span><span><span>"The Etiology of poot."</span></span></span></span><mark><span><span>&nbsp;</span></span></mark><span><span><span><span>src</span></span></span><span>=</span><span><span><span>"poot.png"</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong>Not this:</strong></p>
+<pre><code>//no space between class and id attributes: 
+<img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><mark><span><span><span><span>class</span></span></span><span>=</span><span><span><span>"poot"</span></span></span><span><span><span>id="pooter"</span></span></span></span></mark><span><span>&gt;</span></span>some text about poot<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span>
+
+//no space between alt and src attributes:
+<img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;</span><span><span><span>img</span></span></span><span> </span></span><mark><span><span><span><span>alt</span></span></span><span>=</span><span><span><span>"The Etiology of poot."</span></span></span><span><span><span>src="poot.png"</span></span></span></span></mark><span><span>&gt;</span></span></code></pre>
+<p><strong>Further reading on attributes:</strong> <a href="http://www.w3.org/TR/2015/NOTE-WCAG20-TECHS-20150226/F70">Failure of Success Criterion 4.1.1 due to incorrect use of start and end tags or attribute markup</a></p>
+<h3>3. Elements are nested according to their specifications</h3>
+<p>What this requirement means is that you cannot do something silly like having a list item <code>li</code> without it having a <code>ul</code> or <code>ol</code> as a parent:</p>
+<pre><span>&lt;<span>div</span>&gt;</span>
+<code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;</span><span><span><span>li</span></span></span><span>&gt;</span></span>list item<span><span>&lt;/</span><span><span><span>li</span></span></span><span>&gt;</span></span> </code> <code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span><span>&lt;</span><span><span><span>li</span></span></span><span>&gt;</span></span>list item<span><span>&lt;/</span><span><span><span>li</span></span></span><span>&gt;</span></span></code> <span>&lt;/<span>div</span>&gt;</span></pre>
+<p>or multiple controls inside a label element:</p>
+<pre><code><span><span>&lt;</span><span><span><span>label</span></span></span><span>&gt;</span></span>
+first name <span><span>&lt;</span><span><span><span>input</span></span></span><span> </span><span><span><span>type</span></span></span><span>=</span><span><span><span>"text"</span></span></span><span>&gt;</span></span> </code> <code><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!">last name <code><span><span>&lt;</span><span><span><span>input</span></span></span><span> </span><span><span><span>type</span></span></span><span>=</span><span><span><span>"text"</span></span></span><span>&gt;</span></span></code> <span><span>&lt;/</span><span><span><span>label</span></span></span><span>&gt;</span></span></code></pre>
+<h4>Examples of what happens:</h4>
+<p>For “a list item <code>li</code> without it having a <code>ul</code> or <code>ol</code>
+ as a parent” depending on browser, the semantics of the list item 
+including&nbsp; the role, list size and position of an item in the list,
+ are lost. It also results in funky rendering across browsers.</p>
+<p>For “multiple controls inside a label element” depending on the browser, the <a href="http://w3c.github.io/aria/html-aam/html-aam.html#glossary">accessible name</a>
+ for each of the controls is a concatenation of the text inside the 
+label, so in the example case, each control has an accessible name of 
+“first name last name”. Also clicking, with the mouse, on either text 
+label will move focus to the first control in the label element.</p>
+<h3>4. Elements do not contain duplicate attributes</h3>
+<p>Pretty simple, don’t do this:</p>
+<pre><span>&lt;<span>img</span> <span>alt</span>=<span>"html5"</span> </span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span> </span><mark><span><span>alt</span>=<span>"html6"</span>&gt;</span></mark></pre>
+<p><strong>Note:</strong> although this is a requirement in the WCAG 
+criteria and a HTML conformance requirement, it causes no harm 
+accessibility wise unless the 2nd instance of the duplicate attribute is
+ one that exposes&nbsp; required information, the usual processing 
+behaviour for duplicate attributes is that the first instance is used, 
+further instances are ignored.</p>
+<h3>5. Any IDs are unique</h3>
+<p>Again, pretty simple, don’t do this</p>
+<pre><span>&lt;<span>body</span>&gt;</span>
+...
+<span>&lt;<span>p</span> <span>id</span>=<span>"IAmUnique"</span>&gt;</span>
+...
+ <span>&lt;<span>div</span> </span><img src="WCAG%202.0%20Parsing%20Criterion%20is%20a%20PITA_files/cross.png" alt="Not this!"><span> </span><mark><span><span>id</span>=<span>"IAmUnique"</span></span></mark><span>&gt;</span> 
+... 
+<span>&lt;/<span>body</span>&gt;</span>
+</pre>
+<p><strong>Note:</strong> although this is a requirement in the WCAG 
+criteria and a HTML conformance requirement, it causes no harm 
+accessibility wise unless the <code>id</code> value is being referenced by a relationship attribute such as <code>for</code> or <code>headers</code> or <code>aria-labelledby</code> etc.</p>
+<h3 id="further">Some further examples of HTML conformance errors that <em>ARE NOT</em> WCAG parsing criterion fails</h3>
+<ul>
+<li>Unrecognized attributes:<br>
+<blockquote><p><strong>Error</strong>: Attribute <code>event</code> not allowed on element <code>a</code> at this point.</p></blockquote>
+</li>
+<li>Unrecognized Elements:<br>
+<blockquote><p><strong>Error</strong>: Element <code>poot</code> not allowed as child of element <code>body</code> in this context.</p></blockquote>
+</li>
+<li>Bad attribute values:<br>
+<blockquote><p><strong>Error</strong>: Bad value <code>grunt</code> for attribute <code>type</code> on element <code>input</code>.</p></blockquote>
+</li>
+<li>Missing attribute values:<br>
+<blockquote><p><strong>Error</strong>: Element <code>meta</code> is missing one or more of the following attributes: <code>content</code>, <code>property</code>.</p></blockquote>
+</li>
+<li>Obsolete elements and attributes:<br>
+<blockquote><p><strong>Error</strong>: The <code>align</code> attribute on the <code>td</code> element is obsolete.</p></blockquote>
+</li>
+</ul>
+
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

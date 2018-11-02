@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>ARIA Role Support in Safari 4.0</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2009/06/aria-role-support-in-safari-40/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">ARIA Role Support in Safari 4.0</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><a href="http://twitter.com/vick08/status/2106004868">Victor Tsarin asked</a> on Twitter</p>
+<blockquote><p>Safari4 final came out but I don’t see any #ARIA improvements. Do you?</p></blockquote>
+<p>The <a href="http://www.apple.com/safari/features.html#accessibility">Safari 4 New features page</a> talks about ARIA support</p>
+<blockquote cite="http://www.apple.com/safari/features.html#accessibility"><p>Safari
+ supports Accessible Rich Internet Applications (ARIA). The ARIA 
+standard helps web developers make dynamic web content more accessible 
+for people with disabilities. With ARIA, sites taking advantage of 
+advanced technologies like AJAX and JavaScript can now easily 
+interoperate with assistive technologies.</p></blockquote>
+<p>This prompted me to update the testing of the ARIA Role Support in 
+Safari. The findings indicate minimal mapping of ARIA roles to the 
+accessibility API’s on MAC and none on Windows.</p>
+<h2><span id="more-390"></span></h2>
+<p>Possible reasons for the disparity between claimed support and testing results:</p>
+<ul>
+<li>Incorrect testing methdology.</li>
+<li>Only supported on latest version of MAC OS.</li>
+<li>Support does not use the standard accessibility API’s.</li>
+<li>Overzealous marketing department.</li>
+</ul>
+<p><strong>Note: </strong>Using the Safari Web Inspector Tool (on MAC or
+ Windows) the role attribute is not listed in the properties tab of 
+elements that have a role attribute.</p>
+<h2>Supported Accessibility Roles (Safari HTML Reference)</h2>
+<p>Having just published this article, I then found the <a href="http://developer.apple.com/safari/library/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/AccessibilityRoles.html">Safari documentation</a> describing accessibility roles from the WAI-ARIA specification that are supported in Safari. It states:</p>
+<blockquote><p>WebKit now has elementary support for the WAI-ARIA specification.</p></blockquote>
+<p>It goes on to list the roles it supports, which are pretty much the same as the results from the testing I conducted</p>
+<h2>Summary</h2>
+<p>WAI-ARIA has 59 possible role values (excluding abstract roles):</p>
+<ul>
+<li>Safari 4 Beta on MAC exposes <strong>15</strong> role values correctly via The MAC accessibility API</li>
+<li>Safari 4.0 on MAC exposes <strong>17</strong> role values correctly via The MAC accessibility API</li>
+<li>Safari 4 Beta on Windows exposes <strong>8</strong> role values correctly via MSAA</li>
+<li>Safari 4.0 on Windows exposes <strong>0</strong> role values correctly via MSAA</li>
+</ul>
+<h2>Software used for testing</h2>
+<ul>
+<li>MAC OS X 10.4.11</li>
+<li>Safari 4 beta</li>
+<li><a href="http://www.apple.com/safari/download/">Safari 4.0</a></li>
+<li>Accessibility <a href="http://developer.apple.com/samplecode/UIElementInspector/index.html">UIElementInspector </a></li>
+</ul>
+<h2><strong>Detailed Results</strong></h2>
+<p><strong><a href="http://s.codepen.io/stevef/debug/KrowXr">ARIA role tests on MAC and Windows – Safari 4 beta &amp; Safari 4.0</a></strong></p>
+<h3><strong>Previous Testing</strong></h3>
+<p><a title="WAI-ARIA role support - How the MAC browsers stack up" href="https://developer.paciellogroup.com/blog/2009/06/?p=123" rel="bookmark">WAI-ARIA role support – How the MAC browsers stack up</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="ARIA%20Role%20Support%20in%20Safari%204.0_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

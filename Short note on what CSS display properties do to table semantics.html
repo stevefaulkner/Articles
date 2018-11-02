@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Short note on what CSS display properties do to table semantics</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2018/03/short-note-on-what-css-display-properties-do-to-table-semantics/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Short note on what CSS display properties do to table semantics</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">display properties</a>
+ are powerful. You can change the visual display of elements to match 
+your desired styling, but sometimes doing this can have an unintended 
+effect of nuking the semantics of the elements, as conveyed to screen 
+reading software, in the <a href="https://developer.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">browser accessibility tree</a>.
+ Screen readers and other assistive tech, in general, do not have direct
+ access to the HTML DOM, they are provided access to a subset of 
+information in the HTML DOM via <a href="https://www.w3.org/TR/wai-aria-1.1/#dfn-accessibility-api">Accessibility APIs</a>. Sometimes what an element represents in the HTML DOM is not how it is represented in the accessibility tree.</p>
+
+<p>If what is represented in the accessibility tree does not represent 
+the developer’s intended UI, it’s either (wittingly/unwittingly) the <strong>fault of the developer or the browser</strong>. But what we can be sure of, in these cases, is that it is <strong>not the fault of the screen reader</strong>.</p>
+<h2>An example</h2>
+<h3>the good</h3>
+<p>A <a href="https://s.codepen.io/stevef/debug/xYBJNd#def">data table with default display properties</a> is represented in the browser accessibility tree with each element’s semantics correctly conveyed:</p>
+<p><img src="Short%20note%20on%20what%20CSS%20display%20properties%20do%20to%20table%20semantics_files/table-no-flex.png" alt="accessibility tree of a data table, with correct semantics displayed." width="473" height="412"></p>
+<p>Each element is represented in the accessibility tree with its appropriate role, for example a <code>table</code> element has a <code>role=table</code>.</p>
+<p><img src="Short%20note%20on%20what%20CSS%20display%20properties%20do%20to%20table%20semantics_files/table-role.png" alt="the table element has a role=table" width="517" height="77"></p>
+<h3>the bad</h3>
+<p>When CSS <code>display:block</code> or <code>display:grid</code> or <code>display:flex</code> is <a href="https://s.codepen.io/stevef/debug/xYBJNd#bloc">set on the table element</a>, bad things happen. The <code>table</code> is no longer represented as a table in the accessibility tree, row elements/semantics are no longer represented in any form.</p>
+<p><img src="Short%20note%20on%20what%20CSS%20display%20properties%20do%20to%20table%20semantics_files/block.png" alt="table semantics are not exposed correctly when display:block is set." width="557" height="607"></p>
+<p>None of the elements are represented in the accessibility tree with data table semantics, they are all given a <code>role=text</code> frame.</p>
+<p><img src="Short%20note%20on%20what%20CSS%20display%20properties%20do%20to%20table%20semantics_files/block-role.png" alt="" width="387" height="79"></p>
+<p>This can be fixed by the developer by adding the semantics back using the ARIA <code>table/row/columnheader/rowheader/cell</code> roles (see the ARIA <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#table">table design pattern</a>) which is a lot of heavy lifting for the developer that should not be needed. In this case <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1005271">the browser should not be messing</a> with the table semantics.</p>
+<p>If nothing else, a developer should be aware that it is not always the fault of the assistive technology when we can’t have <a href="http://kizu.ru/en/blog/variable-order/">nice things</a>.</p>
+<h2>Related reading</h2>
+<p id="Skip"><a href="http://adrianroselli.com/2018/02/tables-css-display-properties-and-aria.html">Tables, CSS Display Properties, and ARIA</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Short%20note%20on%20what%20CSS%20display%20properties%20do%20to%20table%20semantics_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

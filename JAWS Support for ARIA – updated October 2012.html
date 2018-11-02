@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>JAWS Support for ARIA – updated October 2012</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2010/10/jaws-support-for-aria/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">JAWS Support for ARIA – updated October 2012</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">15-19 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><p>Freedom scientific have provided documentation on how the JAWS screen reader supports WAI-ARIA. It is <a href="http://t.co/QOyxzSmo">available as a microsoft word document</a>. Below is the same information in HTML format</p><div cite="http://www.freedomscientific.com/PDF/visionloss/manuals/DevDoc/JAWS-ARIA-Support.doc">
+
+<h2>Preface</h2>
+<p>Before discussing JAWS support for ARIA, it’s important to understand
+ the relationship between the ARIA markup itself, the browser in which 
+the markup is rendered, and JAWS as it provides spoken or Braille 
+information to users.</p>
+<p>First, ARIA markup was designed to insert information useful to 
+assistive technologies into existing HTML code. It exists as a way to 
+label controls and to provide information about their states. But adding
+ ARIA support to a Web page does not change the presentation or behavior
+ of that Web page to sighted users. For example, adding the ARIA role of
+ “checkbox” to a “div” tag within a Web page will produce no visible 
+effect on the page. Instead, if there is a check box on the page which 
+has been rendered without using the “input” tag, the ARIA role of 
+“checkbox” can be added to the code to inform assistive technology users
+ that a check box appears at that point on the page.</p>
+<p>Second, the browser plays a big role in interpreting ARIA markup. 
+Most browsers support some type of accessibility API (application 
+programming interface), and assistive technologies use the API to get 
+information about what is presented on the screen. So, ARIA markup is 
+transformed by the browser into information that fits the accessibility 
+API it supports. Then, the information provided by the API is consumed 
+by the assistive technology. That means JAWS support of ARIA depends 
+heavily on the browser being used.</p>
+<p>Third, JAWS gathers information from the ARIA markup and the 
+browser’s API and presents it in a meaningful way to screen reader 
+users. Because of the above interactions, the quality of JAWS support 
+for ARIA markup is inextricably tied to the careful, thorough 
+application of ARIA markup on a Web page, and comprehensive support 
+provided by the browser in which the markup is rendered.</p>
+<p>For best results, Freedom Scientific recommends that Web page authors read the <a href="http://www.w3.org/TR/wai-aria-practices/">ARIA best practices guide</a>
+ carefully before adding ARIA markup to their pages. Also, concepts such
+ as roles, states, landmarks, and so on are defined as part of the ARIA 
+specification, and are therefore not defined in this document. If you 
+are unfamiliar with these concepts please read through the ARIA 
+documentation before continuing.</p>
+<p><strong>Note:</strong> For the reasons described above, there may be 
+differences in JAWS ARIA support between IE and Firefox. Please test any
+ examples in both browsers. And please specify which browser you’re 
+using when reporting problems to Freedom Scientific.</p>
+<h2>Concepts</h2>
+<p>It’s a good idea to have a firm grasp of the following concepts. 
+These items form the basis of many descriptions throughout the document.</p>
+<h3>Virtual Cursor</h3>
+<p>JAWS presents Web pages using the JAWS Virtual Cursor. This allows 
+users to read and navigate a Web page as though it were a text document.
+ Users press the arrow keys to read line by line, word by word, 
+character by character, and so on. JAWS also provides quick navigation 
+keys, which are alpha-numeric keys that move the Virtual Cursor to 
+features of the page such as links, headings, and form controls. In 
+addition, users can press the <strong>TAB</strong> key to move between focusable elements on the page.</p>
+<p>Using the arrow keys or quick nav keys to change the position of the 
+Virtual Cursor does not change the actual focus point in the 
+application. This means that even if JAWS reads the text of a given link
+ on a Web page for example, that link doesn’t necessarily have the 
+keyboard focus. Note: The keyboard focus is typically represented 
+visually as a highlighted area surrounding a control.</p>
+<p>Conversely, pressing the <strong>TAB</strong> or <strong>SHIFT+TAB</strong> key to navigate moves the focus point and the Virtual Cursor follows the focus.</p>
+<h3>Forms mode</h3>
+<p>Because JAWS uses the arrow keys and alpha-numeric keys for Virtual 
+Cursor navigation, these keyboard commands are not passed through to 
+interactive controls (form fields) on the page. This approach has the 
+added benefit of protecting users from inadvertently changing form field
+ values or activating controls on the page while simply reviewing the 
+content.</p>
+<p>Forms mode is when JAWS turns over processing of the above keys to 
+form controls so that users can interact with them. For example, when 
+using the Virtual Cursor, pressing the letter F moves the Virtual Cursor
+ to the next form field on the Web page; in forms mode, pressing the 
+letter F types the character “f”.</p>
+<h3>Auto Forms Mode</h3>
+<p>Before JAWS 10, JAWS users had to enter and exit forms mode manually.
+ Users navigated to a given control using the Virtual Cursor, and would 
+then press the <strong>ENTER</strong> key to go into forms mode. The PC Cursor key (<strong>NUMPAD PLUS</strong>) caused JAWS to exit forms mode.</p>
+<p>When forms mode is manually activated on a given form control, focus is set to that control.</p>
+<p>Auto forms mode is a feature that tells JAWS to be smart about when 
+to enter and exit forms mode. This is a setting which is on by default. 
+This approach provides a seamless experience for JAWS users when both 
+reading and interacting with a Web page.</p>
+<p>The behavior of auto forms mode depends on the type of form field in 
+question and the keyboard command used to navigate to it. The following 
+is a description of the keyboard commands and how they affect Web page 
+form fields:</p>
+<p><strong>ARROW Keys:</strong></p>
+<p>When the Virtual Cursor is active, JAWS enters forms mode upon 
+encountering an edit field. Focus is moved to the edit control, and 
+users can begin typing.</p>
+<p>In forms mode, the <strong>ARROW</strong> keys move the caret within the edit field.</p>
+<p>In forms mode, if an <strong>ARROW</strong> key is pressed and the 
+caret has already reached the boundary of the edit field, JAWS exits 
+forms mode and resumes using the Virtual Cursor.</p>
+<p>In forms mode, pressing <strong>ESC</strong> or <strong>NUMPAD PLUS</strong> will cause JAWS to exit forms mode.</p>
+<p>Edit fields are the only controls for which JAWS enters or exits 
+forms mode automatically based on the arrow keys. For other controls, if
+ JAWS is using the Virtual Cursor, it will continue to use the Virtual 
+Cursor. This is so that users don’t accidentally change the value of a 
+control while attempting simply to navigate past it. If JAWS is already 
+in forms mode, <strong>ARROW</strong> keys will not cause JAWS to leave 
+forms mode. This is so that users won’t unintentionally leave forms mode
+ while interacting with a control. When <strong>ARROW</strong> keys are used to navigate to non-edit controls, users must activate forms mode manually by pressing <strong>ENTER</strong>.</p>
+<p><strong>TAB Keys:</strong></p>
+<p>Using the <strong>TAB</strong> key always causes the focus point to 
+move. When focus changes to a given form control, JAWS auto forms mode 
+activates forms mode based on the type of the control in question.</p>
+<p>For edit fields, combo boxes, spin controls, list controls, tab 
+controls, menu bars, tree views, and grid cells, JAWS enters forms mode 
+automatically.</p>
+<p>For buttons and check boxes, JAWS exits forms mode.</p>
+<p>In forms mode, pressing <strong>ESC</strong> or <strong>NUMPAD PLUS</strong> will cause JAWS to exit forms mode.</p>
+<p><strong>Note:</strong> It is possible to move to a form field by using <strong>TAB</strong> keys and to move away from that form field using <strong>ARROW</strong> keys, and vice versa.</p>
+<p><strong>Different Control Types:</strong></p>
+<p>In terms of Forms Mode, there are two groups of controls: those that 
+require Forms Mode to interact with them, and those controls that never 
+require Forms Mode to interact with them.</p>
+<p>Forms Mode is required for&nbsp;edit fields, combo boxes, spin 
+controls, list controls, tab controls, menu bars, tree views, and grid 
+cells. For these controls, press <strong>ENTER</strong> or <strong>SPACEBAR</strong> to enter Forms Mode, and <strong>ESC</strong> or <strong>NUM PAD PLUS</strong> to exit Forms Mode.</p>
+<p>For buttons and check boxes, use <strong>ENTER</strong> or <strong>SPACEBAR</strong> to activate the control at the location of the Virtual Cursor. Users interact with these controls simply by pressing <strong>ENTER</strong> or <strong>SPACEBAR</strong>;
+ so forms mode is unnecessary. Auto Forms Mode causes JAWS to leave 
+Forms Mode when it encounters these control types because they are just 
+as usable without Forms Mode.</p>
+<p>For combo boxes only, <strong>ALT+DOWN ARROW</strong> causes JAWS to enter Forms Mode and drop down the list of combo box items. <strong>ALT+UP ARROW</strong> closes the list of combo box items and causes JAWS to exit Forms Mode.</p>
+<p>Finally, JAWS Auto Forms Mode behavior for radio buttons is a little 
+different from its behavior with other types of controls. This is 
+because unlike other controls, it is possible to interact with radio 
+buttons in both Forms Mode and with the Virtual Cursor. When navigating 
+with the <strong>TAB</strong> key, JAWS will stay in Forms Mode if it is already on, and it will not enter Forms Mode if it is off. Users can press <strong>SPACEBAR</strong> to choose a specific radio button when using the Virtual Cursor, and pressing the <strong>ARROW</strong> keys will not change the value of the radio button group. Users can also press <strong>ENTER</strong> to activate Forms Mode, and subsequent presses of the <strong>UP</strong> and <strong>DOWN ARROW</strong>
+ keys will change the value of the radio button group. The following 
+table contains the expected behavior for radio buttons with Auto Forms 
+Mode.</p>
+
+<h3>Forms Mode and Application Controls</h3>
+<p>A page author may mark up a Web page using the ARIA role of 
+application.&nbsp; This role indicates that the page author takes 
+responsibility for handling of the <strong>ARROW</strong> and <strong>ESC</strong>
+ keys while the cursor is inside the application region.&nbsp; The goal 
+is to have JAWS act as though it is inside a standard desktop 
+application. This means that as the user tabs from control to control, 
+JAWS will remain in Forms Mode and pass on all <strong>ARROW</strong> keys and the ESC key to the Web page.</p>
+<p>When inside an application region, JAWS treats any interactive 
+element as a form control. This means that links, checkboxes, radio 
+buttons, and so on are all treated like form controls requiring forms 
+mode. This is in contrast to the manual and auto Forms Mode behaviors 
+described earlier in this document. However, as with Forms Mode in other
+ circumstances, users are still able to exit Forms Mode on application 
+controls by pressing <strong>NUM PAD PLUS</strong> and they can re-enter Forms Mode either by tabbing to a new control or by pressing <strong>ENTER</strong> on a control.</p>
+<p>The user can identify controls inside an application region because 
+they are all announced as “application controls” by jaws as the user 
+moves through the Web page using <strong>TAB</strong> or the <strong>ARROW</strong>
+ keys. For example, when a user encounters a link to google inside an 
+application region, JAWS will announce, “application control link 
+google.” An edit control will be announced as “edit application 
+control.”</p>
+<p><strong>Note:</strong> there is no distinction between regions of the
+ page marked as applications and the case where the entire Web page is 
+marked as an application. Previous versions of JAWS treated 
+role=”application” on the body of a page differently from 
+role=”application in other parts of a Web page. Note also that if a 
+region is marked as a document and this region is inside an application 
+region, the controls inside the document are treated as ordinary form 
+controls and the standard forms mode behavior applies.</p>
+<h4>Note for developers</h4>
+<p>Controls containing text and without a visible caret should not be 
+given a role of application, nor should they be nested inside an element
+ with role of application.</p>
+<p>This is because when a user tabs to such an item they will automatically be in a mode in which they can’t use the <strong>ARROW</strong> keys to review the text with out explicitly leaving application mode, something that isn’t intuitive.</p>
+<p>If you have a block of text meeting the above criteria nested within 
+an application, you can give sucha block a role of document or nest it 
+within an element with role of document.</p>
+<p>If you expect the user to be able to tab to this area, be sure to give it an appropriate tabindex.</p>
+
+<h2>ARIA Roles</h2>
+<p>The ARIA roles listed below are common control types that should be 
+familiar to Windows users. These are controls that have been supported 
+by JAWS in the Windows operating system for many years. Therefore, the 
+expected behavior for each control type is not presented in detail. 
+Sufficed to say, in Forms Mode, JAWS should behave comparably between 
+controls presented on Web pages and their counterparts in standard 
+desktop applications. Likewise, most of these control types have existed
+ in HTML for a long time, and JAWS has supported those controls using 
+the Virtual Cursor. In Virtual Cursor mode, JAWS behavior between a 
+combo box created with standard HTML for example should be no different 
+from JAWS behavior with a properly constructed JavaScript-based combo 
+box and ARIA markup. In a few cases, ARIA markup allows for control 
+types which were not available before in HTML. In these cases, notes may
+ appear next to the roles in question.</p>
+<p>An important thing to understand about ARIA roles is that several 
+roles may be combined to form the framework of one control on a page. 
+For example, an editable grid consists of an object with the role of 
+“grid”, having children with the role of “row”, having children with the
+ role of “rowheader”, “columnheader”, or “gridcell”. Such controls are 
+composed of expected patterns of roles which are described in the ARIA 
+best practices document. If the construction of these controls is done 
+in a way other than that described by the best practices document, JAWS 
+may not behave as the author intends.</p>
+<p>Furthermore, states and roles also relate closely to one another. 
+ARIA roles have a list of valid states provided in the ARIA 
+documentation. Although the specific set of states supported by JAWS is 
+not listed with each role, a reasonable standard of common usage applies
+ to the acceptable states for each role. For example, the state of 
+“aria-required” makes no sense when applied to a graphic. And the state 
+of “aria-readonly” is superfluous when applied to a check box. JAWS 
+attempts to filter out extraneous information for certain control types.
+ So, page Authors should use the ARIA documentation as a guide, and 
+report any discrepancies to Freedom Scientific.</p>
+<p><strong>Note:</strong> Some supported roles, such as those for 
+landmark regions, have been omitted from the below list, but will be 
+discussed later in this document.</p>
+
+<h3>ARIA States</h3>
+<p>The same principle of reasonable common usage applies to ARIA states as applied above to roles.</p>
+<p><strong>Note:</strong> Some states, such as those related to drag and
+ drop, have been omitted from the below list, but will be discussed 
+later in this document.</p>
+<p>The following is a list of states which JAWS recognizes:</p>
+
+<h3>ARIA Relationships</h3>
+<p>Using ARIA, a page author can specify relationships among elements. JAWS supports the use of the following relationships:</p>
+
+<h3>Document Regions</h3>
+<p>JAWS announces the type and text of document regions, and provides 
+navigation to the next and previous document region on the page using 
+the <strong>SEMICOLON</strong> and <strong>SHIFT+SEMICOLON</strong> Navigation Quick Keys. In addition, pressing <strong>INSERT+CONTROL+SEMICOLON</strong>
+ brings up a list of document regions. Note that JAWS treats a number of
+ elements as regions. This includes all the ARIA landmark regions along 
+with several other region types listed below. This table also provides 
+the text JAWS uses in the virtual buffer to indicate the start of a 
+region.</p>
+
+<h3>Live Regions</h3>
+<p>JAWS supports use of the “aria-live” attribute and any of its 
+acceptable values: “polite”, “assertive”, or “off”. JAWS will also treat
+ regions with the ARIA role of “log” or “status” as a live region. In 
+addition, JAWS supports use of the “aria-atomic” state on live regions. 
+JAWS does&nbsp; support use of the “aria-relevant” state in firefox.</p>
+<p><strong>Note: </strong>Since the “aria-live” value of “rude” is no 
+longer supported by the standard, the use of it is deprecated in JAWS, 
+but still supported.</p>
+<h3>Drag and Drop</h3>
+<p>JAWS supports the ARIA drag-and-drop properties “aria-grabbed” and 
+“aria-dropeffect”. When a Web page author applies these properties to 
+objects on a Web page, JAWS will identify such objects as grabbable, 
+grabbed, or droppable.</p>
+<p><strong>The keystroke WINDOWS Key+CTRL+EQUALS</strong> opens the ARIA
+ Drag and Drop dialog box, which shows a list of droppable objects on 
+the page. When you select one of these objects, JAWS will move focus to 
+it. If no droppable objects are available, JAWS will announce the 
+message, “No droppable elements were found on the page” instead of 
+opening the dialog box.</p>
+<p><strong>Note:</strong> JAWS does not implement the drag and drop 
+functionality in the sense that JAWS doesn’t grab or drop objects 
+itself. According to the ARIA specification, that functionality should 
+be provided by the page author. JAWS simply announces to the user that a
+ given element is grabbable, grabbed, or droppable.</p></div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

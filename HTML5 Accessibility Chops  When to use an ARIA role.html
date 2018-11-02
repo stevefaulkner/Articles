@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: When to use an ARIA role</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/06/html5-accessibility-chops-when-to-use-an-aria-role/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: When to use an ARIA role</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="HTML5%20Accessibility%20Chops%20%20When%20to%20use%20an%20ARIA%20role_files/aria-5small.png" alt="Custom ARIA - HTMl5 logo" width="123" height="154"> There has been <a href="http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Jun/0097.html">discussion</a>
+ of late on whether authors should be allowed to include an ARIA role 
+value on an HTML element that matches the default implicit ARIA role as <a href="http://dev.w3.org/html5/spec/wai-aria.html#wai-aria">defined in HTML5</a>.&nbsp;
+ The divergent opinions are mirrored in the differing author conformance
+ requirements between the W3C HTML5 specification and the WHATWG living 
+standard.</p>
+
+<p><strong>Note:</strong> this information is now being actively maintained as part of <a href="http://dvcs.w3.org/hg/aria-unofficial/raw-file/tip/index.html">Using ARIA in HTML</a>.</p>
+<hr>
+<h2>The W3C HTML5 specification</h2>
+<p>Does not prohibit authors from applying the default implicit role as defined in the <a href="http://dev.w3.org/html5/spec/wai-aria.html#wai-aria">WAI-ARIA section</a> of the specification.</p>
+<h2>The WHATWG living standard</h2>
+<p><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/elements.html#wai-aria">Does prohibit</a> authors/developers from adding default implicit ARIA semantics to HTML elements:</p>
+<blockquote><p>Authors must not set the ARIA <code title="attr-aria-role">role</code> and <code title="attr-aria-*">aria-*</code> attributes to values that match the default implicit ARIA semantics</p></blockquote>
+<h2>Addition of default implicit roles – what does it do?</h2>
+<p>For example, the default implied ARIA role for an <code><a href="http://dev.w3.org/html5/spec/the-a-element.html#the-a-element">a</a></code> element that creates a <a href="http://dev.w3.org/html5/spec/links.html#hyperlink">hyperlink</a> is the ARIA <a href="http://www.w3.org/TR/wai-aria/roles#link">link</a> role. So in the W3C HTML5 specification it is not forbidden to do this:</p>
+<p><code>&lt;a href="http://www.html5accessibility.com" <strong>role="link"</strong>&gt;HTML5 Accessibility&lt;/a&gt;</code></p>
+<p>The addition of the role <strong>does nothing</strong> as the <code>a</code> element has been around for yonks and the <a href="http://dvcs.w3.org/hg/html-api-map/raw-file/tip/Overview.html#el-1">role value mapped in accessibility APIs</a>, in browsers that support accessibility, is already implemented by the browser. So in effect it is the same as this:</p>
+<p><code>&lt;a href="http://www.html5accessibility.com"&gt;HTML5 Accessibility&lt;/a&gt;</code></p>
+<p>When the information being exposed by Accessibility APIs is viewed using an<a href="http://www.paciellogroup.com/blog/2012/05/aviewer-2012-alpha/"> inspect tool</a>,
+ it can be seen that there is no difference between the 2 examples, both
+ expose (in the case of FireFox on Windows via MSAA and IAcessible2) the
+ following:</p>
+<h3>MSAA</h3>
+<ul>
+<li>Name:	HTML5 Accessibility</li>
+<li>Value:	http://www.html5accessibility.com/</li>
+<li><strong>Role:	link</strong></li>
+<li>State:	focusable , focused , linked , traversed</li>
+<li>Description:	(none)</li>
+</ul>
+<h3>IAccessible2</h3>
+<ul>
+<li>Name:	HTML5 Accessibility</li>
+<li>Value:	http://www.html5accessibility.com/</li>
+<li><strong>Role:	link</strong></li>
+<li>State:	Horizontal, Opaque, Selectable text</li>
+<li>Description:	(none)</li>
+</ul>
+<h3>Redundant roles</h3>
+<p>The ARIA role in this case is redundant as the browser has already 
+done the job of conveying the semantics. The addition of the role has no
+ effect, it is <strong>not necessary</strong> but does no harm. Authors do not need to and <strong>should</strong> be made aware that they <strong>do not need</strong> to add roles for the default semantics of accessibility supported elements, but if they do its not the end of the world.</p>
+<h2>Accessibility Supported elements</h2>
+<p>Authors/developers can safely assume that any element that has been around since <a href="http://www.w3.org/TR/REC-html40/">HTML 4.0</a> is already accessibility supported in <a href="http://www.paciellogroup.com/blog/2012/02/rough-guide-browsers-operating-systems-and-screen-reader-support/">browsers that support accessibility</a>. So they <strong>do not </strong>need a default implicit role added. The situation for <a href="http://www.html5accessibility.com/">new HTML5 elements is different</a>
+ and likely to remain so for some time. It will be years before New 
+HTML5 elements get robust accessibility support implemented across 
+browsers and platforms. This is particularly so for non interactive 
+elements such as the new <a href="http://www.paciellogroup.com/blog/2011/03/html5-accessibility-chops-section-elements/">HTML5 structural elements </a>because&nbsp; accessibility APIs in general do not have defined roles for many non interactive elements. In this case it is <strong>recommended</strong> to add the appropriate ARIA roles to elements that are meant to convey meaning but are effectively meaningless due to <a href="http://www.html5accessibility.com/">lack of implemented accessibility support</a>.</p>
+<p>For example, adding <code><a href="http://www.w3.org/TR/wai-aria/roles#navigation">role=navigation</a></code> to a <code><a href="http://dev.w3.org/html5/spec/the-nav-element.html#the-nav-element">nav</a></code>
+ element fills the gaps in support for HTML5 semantics as ARIA&nbsp; is 
+more robustly&nbsp; supported by most modern browsers and assistive 
+technology:</p>
+<p>&lt;nav role=”navigation”&gt;</p>
+<p>Unlike the WHATWG living standard, the W3C HTML5 specification has a 
+more realistic stance towards the use of default implicit roles, as it 
+allows authors to use ARIA to fill the gaps in browser implementation 
+support.</p>
+<h2>What do Validation tools do?</h2>
+<p>Currently, the 2 main HTML5 conformance checkers (<a href="http://validator.nu/">validator.nu</a> and <a href="http://validator.w3.org/nu/">W3C Nu markup Validation Service</a>)
+ do not flag the presence of a default implicit role as an error, so in 
+this respect they follow the HTML5 specification author conformance 
+requirements for use of the ARIA role attribute.</p>
+<h3>What should Validation tools do?</h3>
+<p>HTML documents should not be considered invalid due to the addition of implicit roles.</p>
+<p>Given that it has not been shown that the addition of implicit roles 
+does any harm, is unnecessary in some cases, but useful in other cases, 
+it is suggested a nuanced warning message, not an error would be 
+appropriate.</p>
+<h2>Further Reading</h2>
+<ul>
+<li><a href="http://dvcs.w3.org/hg/aria-unofficial/raw-file/tip/index.html">Using ARIA in HTML</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2012/06/html5-accessibility-chops-using-aria-notes/">HTML5 Accessibility Chops: notes on using ARIA</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20When%20to%20use%20an%20ARIA%20role_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

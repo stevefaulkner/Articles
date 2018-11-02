@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on fixing incorrect table structure using ARIA</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/10/notes-on-fixing-incorrect-table-structure-using-aria/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on fixing incorrect table structure using ARIA</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<h2>Notes:</h2>
+<p><strong>Use with caution for static table fixes</strong>:<br>
+The <code>role=grid</code> and <code>gridcell</code> don’t map to the static <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML</a> <code>table</code> and <code>td</code> elements.</p>
+<p>From the <a href="http://www.w3.org/TR/wai-aria/roles#grid">ARIA 1.0 specification</a>:</p>
+<blockquote><p>A grid is an interactive control [like a spreadsheet (for example)]</p>
+<p>A grid is considered editable unless otherwise specified. To make a grid read-only, set the <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-readonly">aria-readonly</a> attribute of the grid to true.</p>
+
+</blockquote>
+<p>As such its use effects the behaviour of some AT; certain keystrokes 
+are passed through to the browser and interaction instructions may be 
+announced (For example the screen reader JAWS identifies a structure 
+with <code>role=grid</code> as a “grid” not a “table”), use of <code>aria-readonly="true"</code> can mitigate some of this. There is currently work going on for <a href="http://rawgit.com/w3c/aria/master/spec/aria.html">ARIA 1.1</a> to add <code>role=table</code>
+ which will map directly to the HTML table element so it will be able to
+ be used to create a custom table structure out of other elements.</p>
+<p>As always <a href="http://w3c.github.io/aria-in-html/#first-rule-of-aria-use">the best advice</a> is<strong> use native HTML elements whenever possible</strong>.</p>
+<h2>Broken table structure (2 tables visually presented as one table)</h2>
+
+<h3>code</h3>
+<pre><span>&lt;<span>table</span>&gt;</span> 
+<span>&lt;<span>tr</span>&gt;</span>
+<span>&lt;<span>th</span>&gt;</span>Dog Names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;<span>th</span>&gt;</span>Cat Names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;<span>th</span>&gt;</span>Cow names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;/<span>table</span>&gt;</span>
+
+<span>&lt;<span>table</span>&gt;</span>
+<span>&lt;<span>tr</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Fido<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Whiskers<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Clarabella<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;<span>tr</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Woofie<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Claws<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span>&gt;</span>Glenn<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;/<span>table</span>&gt;</span></pre>
+<h3><a href="http://www.w3.org/TR/core-aam-1.1/#intro_treetypes">Accessibility Tree</a> representation</h3>
+<p><img src="Notes%20on%20fixing%20incorrect%20table%20structure%20using%20ARIA_files/broken.png" alt="The header row is in a separate table to the data rows." width="303" height="260"></p>
+<h2>Aria Fix applied to broken table structure</h2>
+<p><strong>note:</strong> use <a href="http://www.html5accessibility.com/tests/aria-table-fix.html">test page</a> as WordPress stripped ARIA attributes in the table below.</p>
+
+<h3>Code:</h3>
+<pre><span>&lt;<span>div</span> </span><mark><span><span>role</span>=<span>"grid"</span></span></mark><span> </span><mark><span><span>aria-readonly</span>=<span>"true"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>table</span> </span><mark><span><span>role</span>=<span>"presentation"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>tr</span> </span><mark><span><span>role</span>=<span>"row"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>th</span> </span><mark><span><span>role</span>=<span>"columnheader"</span></span></mark><span>&gt;</span>Dog Names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;<span>th</span> </span><mark><span><span>role</span>=<span>"columnheader"</span></span></mark><span>&gt;</span>Cat Names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;<span>th</span> </span><mark><span><span>role</span>=<span>"columnheader"</span></span></mark><span>&gt;</span>Cow names<span>&lt;/<span>th</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;/<span>table</span>&gt;</span>
+<span>&lt;<span>table</span> </span><mark><span><span>role</span>=<span>"presentation"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>tr</span> </span><mark><span><span>role</span>=<span>"row"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>td</span> </span><mark><span><span>role</span>=<span>"gridcell"</span></span></mark><span>&gt;</span>Fido<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span> </span><mark><span><span>role</span>=<span>"gridcell"</span></span></mark><span>&gt;</span>Whiskers<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span> <span>role</span>=<span>"gridcell"</span>&gt;</span>Clarabella<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;<span>tr</span> </span><mark><span><span>role</span>=<span>"row"</span></span></mark><span>&gt;</span>
+<span>&lt;<span>td</span> </span><mark><span><span>role</span>=<span>"gridcell"</span></span></mark><span>&gt;</span>Woofie<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span> </span><mark><span><span>role</span>=<span>"gridcell"</span></span></mark><span>&gt;</span>Claws<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;<span>td</span> </span><mark><span><span>role</span>=<span>"gridcell"</span></span></mark><span>&gt;</span>Glenn<span>&lt;/<span>td</span>&gt;</span>
+<span>&lt;/<span>tr</span>&gt;</span>
+<span>&lt;/<span>table</span>&gt;</span>
+<span>&lt;/<span>div</span>&gt;</span></pre>
+<h3><a href="http://www.w3.org/TR/core-aam-1.1/#intro_treetypes">Accessibility Tree</a> representation</h3>
+<p><img src="Notes%20on%20fixing%20incorrect%20table%20structure%20using%20ARIA_files/fixed.png" alt="The header row and data rows are in the same table." width="303" height="237"></p>
+<p><strong>Note:</strong> thanks to <a href="https://twitter.com/hanshillen">Hans Hillen</a>, for the example on which this article is based</p>
+<h2>Further reading</h2>
+<p><a href="http://juicystudio.com/article/accessible_data_tables_static_headers.php">Accessible Data Tables with Static Headers</a> by <a href="https://twitter.com/gezlemon">Gez Lemon</a></p>
+<h2>Questions?</h2>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20fixing%20incorrect%20table%20structure%20using%20ARIA_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

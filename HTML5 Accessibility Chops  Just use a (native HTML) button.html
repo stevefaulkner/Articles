@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: Just use a (native HTML) button</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/04/html5-accessibility-chops-just-use-a-button/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: Just use a (native HTML) button</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Many User interface widgets can be developed using HTML, CSS 
+and JavaScript, in some cases developers build custom versions of native
+ HTML controls because they cannot achieve the exact look and feel or 
+behaviour they desire with a native control. <span id="more-894"></span><br>
+Where ever possible it is <strong>recommended that native HTML controls be used over custom controls</strong> as their accessibility support is likely to be more robust and it’s much less work.</p>
+<p>However, if you do have a need to develop a custom control there are a
+ number of steps you will have to take to ensure it is accessible. In <a href="http://w3c.github.io/html/">HTML5</a> it is conforming to use <a href="http://w3c.github.io/html-aria/">ARIA</a> to help in the creation of an accessible custom control.</p>
+<h3>A standard button (input type=”button”)</h3>
+
+<p><strong>code:</strong></p>
+<p><code>&lt;input type="button" value="search" onclick="alert('submitted');"&gt;</code></p>
+<h2>Example requirements for creating an accessible custom control</h2>
+<p><strong>Note:</strong> The following is a demonstration of the steps to create an accessible custom button. <strong>It is not</strong> recommended that:</p>
+<ul>
+<li>a custom button is created using an image.</li>
+<li>a custom control be used instead of a native <a href="http://w3c.github.io/html/sec-forms.html#the-input-element">HTML control</a> (unless <a href="http://www.html5accessibility.com/">accessibility support</a> is not implemented for a particular control.)</li>
+<li>event attributes are added inline.</li>
+</ul>
+<h3>Starting with an image</h3>
+<p><strong>NOTE:</strong> the use of an image is for <strong>demonstrating the steps required</strong>
+ to make a non interactive HTML element into an accessible interactive 
+element. If you want to create an image based control use <a href="http://w3c.github.io/html/sec-forms.html#image-button-state-typeimage"><code>input type=image</code></a>.</p>
+<p>The image below looks and acts like a button for mouse users who can 
+see, you can click it and something happens and&nbsp; it has a label.</p>
+<p>For other users there are problems:</p>
+<ol>
+<li>it only has a visual label.</li>
+<li>it’s identified in the code as an image not a button.</li>
+<li>it cannot be used with the keyboard
+<ol>
+<li>it is not focusable</li>
+<li>it does not respond to the expected keys for activating a button</li>
+</ol>
+</li>
+</ol>
+<p><img src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/button.gif" alt=""></p>
+<p><strong>code:</strong></p>
+<p><code>&lt;img src="button.gif" onclick="alert('submitted');"&gt;</code></p>
+<h3>1. Adding an accessible label</h3>
+<p>An accessible label can be added to the image using the alt attribute.</p>
+<p><img src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/button.gif" alt="search"></p>
+<p><strong>Code:</strong></p>
+<p><code>&lt;img src="button.gif" <span><strong>alt="search"</strong></span> onclick="alert('submitted');"&gt;</code></p>
+<h4><strong>Reference:</strong></h4>
+<p><a href="https://www.w3.org/TR/2014/WD-html-alt-techniques-20141023/">HTML5: Techniques for providing useful text alternatives</a></p>
+<h3>2. Adding a role to identify the control</h3>
+<p>To provide the correct identity for the element so users of assistive
+ technology are aware they are dealing with a user interface element 
+that has the behaviour of a button, not an image the <a href="https://www.w3.org/TR/wai-aria-1.1/#button">WAI-ARIA button role</a> can be used.</p>
+<p><strong>Note:</strong>adding a button role <strong>does not</strong> 
+make the element operable as a button for assistive technology or 
+keyboard users. It only identifies the element as a button and AT may 
+provide some usage instructions. For example, when the element receives 
+focus (see step 3.A. below) a screen reader such as JAWS will announce 
+“search <em>button</em>, press spacebar to press.” Unless you add the required keyboard behaviour (step 4.B. below) it <strong>will not be usable!</strong></p>
+<p><img src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/button.gif" alt="search"></p>
+<h4><strong>Code:</strong></h4>
+<p><code>&lt;img src="button.gif" alt="search" <span><strong>role="button"</strong></span> onclick="alert('submitted');"&gt;</code></p>
+<h3>3. A. Navigation via the keyboard</h3>
+<p>To provide access to the control for&nbsp; keyboard users, it must be
+ focusable and in the tab order of the page. To do this tabindex with a 
+value of “0” can be&nbsp; added. This puts the element in the default 
+tab order of the page.</p>
+<p><img tabindex="0" src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/button.gif" alt="search"></p>
+<h4><strong>Code:</strong></h4>
+<p><code>&lt;img src="button.gif" alt="search" role="button" <span><strong>tabindex="0" </strong></span> onclick="alert('submitted');"&gt;</code></p>
+<h4><strong>Reference:</strong></h4>
+<p><a href="http://w3c.github.io/aria/practices/aria-practices.html#focus_tabindex">Using Tabindex to Manage Focus among Widgets</a> (WAI-ARIA)</p>
+<h3>3. B. expected keyboard behaviour for buttons</h3>
+<p>A native HTML button has 2 keys associated with it that will operate 
+it: The enter key and the space. You will need to add scripting that 
+listens for these keys being pressed and activates the custom button 
+action.</p>
+<p><img tabindex="0" src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/button.gif" alt="search"></p>
+<h4><strong>Code:</strong></h4>
+<p><code>&lt;img src="button.gif" alt="search" role="button" tabindex="0" <span><strong>onkeypress="if(event.keyCode==32||event.keyCode==13){alert('submitted')};" </strong></span> onclick="alert('submitted');"&gt;</code></p>
+<h4><strong>Reference:</strong></h4>
+<p><a href="http://w3c.github.io/aria-practices/#button">Button design pattern</a> (WAI-ARIA)</p>
+<h2>Other considerations:</h2>
+<ul>
+<li>Ensuring other relevant control <a href="https://www.w3.org/TR/wai-aria-1.1/#states_and_properties">states and properties</a> such as <a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-disabled">disabled</a> are conveyed using WAI-ARIA</li>
+<li><a href="http://www.w3.org/TR/WCAG-TECHS/G195.html">Providing a clear indication of focus</a></li>
+<li><a href="http://hanshillen.github.com/aegisdemo/">Providing custom controls that support windows high contrast mode (examples)</a></li>
+<li><a href="http://w3c.github.io/aria-practices/#aria_ex">General Steps for Building an Accessible Widget with WAI-ARIA</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20Just%20use%20a%20(native%20HTML)%20button_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

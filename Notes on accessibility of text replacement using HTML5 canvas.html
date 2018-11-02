@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on accessibility of text replacement using HTML5 canvas</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2009/06/notes-accessibility-of-text-replacement-using-html5-canvas/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on accessibility of text replacement using HTML5 canvas</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Roger Johannson recently blogged on issues with <a href="http://www.456bereastreet.com/archive/200905/cufon_and_screen_readers/">Cufon Accessibility</a> in relation to Assistive Technology, which is well worth a read. It prompted me to do a little testing:<span id="more-299"></span></p>
+<p>One of the examples of the utility of <code>canvas</code> that has emerged is its use in rendering text using custom fonts. <a href="http://wiki.github.com/sorccu/cufon/about">Cufon</a>, for example, is a text replacement tool using <code>canvas</code> for browsers that support it and VML (for Internet Explorer). So it is quite obvious that the <a href="http://dev.w3.org/html5/spec/Overview.html#the-canvas-element">advice in the HTML 5 specification</a>
+ to refrain from using canvas “when a more suitable element is 
+available” is likely to be widely ignored, as can be seen from examples 
+of use linked from the <a href="http://wiki.github.com/sorccu/cufon/demos">Cufón Demos page</a>.</p>
+<h3>Providing an Accessible Alternative</h3>
+<p>From a reading of the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">HTML 5 specification</a>, providing an accessible alternative, to text rendered as a bitmap using canvas, can in theory be handled easily:</p>
+<blockquote cite="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html"><p>When authors use the <code>canvas</code>
+ element, they must also provide content that, when presented to the 
+user, conveys essentially the same function or purpose as the bitmap 
+canvas. This content may be placed as content of the canvas element. The
+ contents of the <code>canvas</code> element, if any, are the element’s fallback content.</p></blockquote>
+<p>So providing a text fallback for a canvas based text replacement like Cufón can be achieved by placing text inside the <code>canvas</code> element:</p>
+<p><code>&lt;canvas&gt; text &lt;/canvas&gt;</code></p>
+<p>Other HTML elements can be included inside the <code>canvas</code> element:</p>
+<p><code>&lt;canvas&gt;&lt;p&gt; text &lt;/p&gt;&lt;/canvas&gt;</code></p>
+<h3>User Agent Behaviour</h3>
+<p>The results of this should be:</p>
+<ul>
+<li>For browsers which support canvas and have JavaScript enabled, the content inside the canvas element is not displayed.</li>
+<li>For browsers that do not support canvas or have JavaScript disabled, the content inside the canvas element is displayed.</li>
+<li>Assistive technologies such as screen readers can announce the content inside the canvas element, accessing it via the HTML DOM.</li>
+</ul>
+<p>These are the results for browsers in most cases, but Firefox does 
+not display the fallback content when JavaScript is disabled. 
+Unfortunately at this point in time, <strong>no assistive technology (that I know of) announces the content contained within the <code>canvas</code> element in browser with canvas support</strong>.
+ I contacted the developers of JAWS (no reply), Window Eyes (no firm 
+date for support) and NVDA (initial investigation indicates there is an <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=495912">issue in Firefox</a>). So the reality for AT users is, if they use a browser that supports <code>canvas</code>, an accessible alternative is not currently available to them if the content is contained within the canvas element.</p>
+<h3>Providing an accessible alternative when the canvas element is self closing</h3>
+<p>In the case of Cufón, the <code>canvas</code> element is added to the page using <code>document.createElement("canvas")</code>. This method does not result in an element with start and end tags, but rather:</p>
+<p><code>&lt;canvas /&gt;</code></p>
+<p>Adding a canvas element to a page using scripting appears to be quite
+ a common method, so in many cases fallback will not be contained within
+ the canvas element. Cufón does add ‘fallback’ text which is hidden from
+ visual display using the CSS ‘<code>display:none</code>‘, unfortunately this also hides the text from AT that supports CSS (JAWS for example).</p>
+<p><code>&lt;canvas /&gt; &lt;span style="display:none"&gt; text &lt;/span&gt;</code></p>
+<p>The use of ‘display:none’ in Cufón appears to be due to the reason 
+for the provision of the fallback being for printing purposes (text is 
+set to be displayed in the print stylesheet), not for providing an 
+accessible text alternative for the images of text.</p>
+<p>For the Cufón fallback text, or any accessible content alternatives 
+for &lt;canvas /&gt; to be hidden from display, but available to AT, the
+ content should be hidden offscreen using CSS:</p>
+<h4>Example class for hiding content offscreen:</h4>
+<p><code>span.fallback{<br>
+position: absolute;<br>
+left: -999em;<br>
+width: 0.1em;<br>
+overflow: hidden;<br>
+}</code></p>
+<p><code>&lt;canvas /&gt; &lt;span class="fallback"&gt; text &lt;/span&gt;</code></p>
+<p>Any span element that is assigned the ‘.fallback’ class is positioned
+ absolutely outside of the main viewport. The content of the span is 
+very slim with its overflow property set to hidden to help ensure that 
+the content doesn’t bleed into the main viewport.</p>
+<h3>Further Reading</h3>
+<ul>
+<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">4.8.11 The <code>canvas</code> element</a></li>
+<li><a href="http://www.paciellogroup.com/blog/?p=362">Thinking About HTML 5 canvas Accessibility</a></li>
+<li><a href="http://john.foliot.ca/thoughts-towards-an-accessible-canvas/">Thoughts towards an accessible canvas</a></li>
+<li><a href="https://developer.mozilla.org/En/Document.createElement">document.createElement</a></li>
+<li><a href="http://www.paciellogroup.com/blog/?p=8">Providing Context for Ambiguous Link Phrases</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20accessibility%20of%20text%20replacement%20using%20HTML5%20canvas_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

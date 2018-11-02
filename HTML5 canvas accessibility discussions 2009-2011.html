@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 canvas accessibility discussions 2009-2011</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/12/html5-canvas-accessibility-discussions-2009-2011/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 canvas accessibility discussions 2009-2011</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">9-11 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p id="body">Charles Pritchard has taken the time to provide an email overview of <a href="http://lists.w3.org/Archives/Public/public-canvas-api/2011OctDec/0061.html">Canvas accessibility discussions</a> which have taken place on the <a href="http://lists.w3.org/Archives/Public/public-canvas-api/">public-canvas-api</a>
+ over the past 3 years. I have reformatted it here and added some 
+headings, as it is an excellent resource for understanding where we have
+ been and where we are with HTML5 canvas accessibility:</p>
+
+<h3>The Canvas API <a href="http://lists.w3.org/Archives/Public/public-canvas-api/">mailing list</a></h3>
+<blockquote><p>This list is intended to serve as a dedicated thread for 
+matters  specific to the Canvas API and its intersection with other DOM 
+ interfaces and with markup.</p></blockquote>
+<p>The bulk of the work the past three years has been in advocating for 
+ accessibility frameworks. There has been exhaustive discussion with  
+developers from several browser vendors, stemming from an early  
+recommendation that the Canvas sub-tree be supported.</p>
+<blockquote><p>All accessibility frameworks are dependent on the ability
+ to have an  object model to provides a hierarchy that provides context 
+to a user and  which can provide interfaces to an assistive technology 
+[for example] a  2D chart has dynamically changing data it could be 
+replaced with an HTML  table marked asa live region or even a grid.”</p></blockquote>
+<h3>Accessibility remains unresolved</h3>
+<p>Programmatic access is a conformance principle of the Web Content  
+Accessibility Guidelines.&nbsp; Accessibility remains unresolved and <a href="http://www.w3.org/2002/09/wbs/40318/html5-last-call-poll/results">an issue</a> in last call procedures for <a href="http://dev.w3.org/html5/spec/spec.html">HTML5</a> as of December 2011:</p>
+<blockquote><p>“There are numerous accessibility issues/bugs that will need to be  addressed, before the spec. leaves last call”</p></blockquote>
+<ul>
+<li><a href="http://lists.w3.org/Archives/Public/public-html-a11y/2011May/0457.html">Concerns and unaddressed issues for the HTML 5 specifications</a></li>
+<li><a href="http://lists.w3.org/Archives/Public/public-canvas-api/2011JulSep/0237.html">Status of Canvas A11y Bug Reports</a></li>
+</ul>
+<h3>3 years on</h3>
+<p>Work on resolving Canvas accessibility issues <a href="http://lists.w3.org/Archives/Public/public-html/2009Jul/0562.html">took shape in July 2009</a>.</p>
+<blockquote><p>It has been decided to form a task force to work on 
+specifying  additions to the CANVAS API, that will result in canvas 
+content being  natively accessible.</p></blockquote>
+<p>The merits of supporting Canvas and DOM tree interaction were discussed  in a late <a href="http://lists.w3.org/Archives/Public/public-html/2009Aug/1125.html">2009 accessibility call</a>.</p>
+<blockquote><p>[Supporting] focus for ‘widgets’ inside the canvas could 
+also be  handled via DOM, by adding a requirement that anything inside 
+the  canvas’s DOM subtree with a tabindex must still participate in the 
+tab  cycle and produce focus events</p></blockquote>
+<h3>Canvas element  sub-tree support</h3>
+<p>Microsoft <a href="http://www.paciellogroup.com/blog/2010/09/html5-canvas-accessibility-in-internet-explorer-9/">added support</a> for focus events inside the Canvas element  sub-tree in their release of IE9. Other vendors are expected to follow  suit.</p>
+<p>WebKit <a href="https://bugs.webkit.org/show_bug.cgi?id=50126">reviewed</a> but eventually rejected an early patch in February  2011.</p>
+<blockquote><p>[Do not use RenderReplaced,] the best way to fix it is to make  RenderHTMLCanvas a RenderBlock and more like a form control</p></blockquote>
+<h3>Focus ring support</h3>
+<p><a href="http://www.w3.org/TR/2dcontext/#dom-context-2d-drawfocusring">drawFocusRing</a>,
+ a new Canvas Context 2d method, was added to the  specification. It’s 
+purpose to display a focus box within the canvas  element when focus 
+events are received.</p>
+<p>Currently, <a href="http://en.wikipedia.org/wiki/Comparison_of_layout_engines_(HTML5_Canvas)">no vendors support</a>
+ the drawFocusRing method, though there is  broad consensus that it 
+should be supported.&nbsp;   Mozilla has been discussing support for 
+some time. Their <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=540456">bug report</a>
+ follows the whatwg specification, which recommends two methods:  
+drawSystemFocusRing(element) and drawCustomFocusRing(element) whereas  
+the w3c specification recommends one method with an optional boolean  
+attribute: drawFocusRing(element, boolean).&nbsp; The drawFocusRing 
+method was chosen over <a href="http://www.w3.org/html/wg/wiki/ChangeProposals/Map4NotAdom">&lt;map&gt; element / useMap</a>
+ extensions proposed in early 2010.&nbsp; drawFocusRing demonstrates 
+that the Canvas sub-tree is available for  focus management and that the
+ Canvas 2d path API is being exposed, in  some manner to the system 
+accessibility API. It’s an important  milestone.</p>
+<h3>Canvas clickable regions</h3>
+<p>The various issues that have been discussed are <a href="http://www.w3.org/html/wg/wiki/AddedElementCanvas">catalogued</a>
+ on  a W3C wiki page.&nbsp; There is consensus that the useMap property,
+ based on HTML4 &lt;map&gt;,  should not be used with Canvas. The 
+competing focus ring and caret  tracking proposals were moved 
+forward.&nbsp; Unfortunately, the group has had mixed consensus about 
+approaching  clickable regions in Canvas.  We’ve not been able to 
+develop broad consensus. Many spec editors and  developers who work for 
+[browser] vendors have suggested that use cases involving  interactive 
+elements are not appropriate uses of HTML5 and should not be  
+encouraged. There has been <a href="http://krijnhoetmer.nl/irc-logs/whatwg/20090710#l-75">strong push-back</a> suggesting that Canvas not  be used for such cases and that SVG be used.</p>
+<blockquote><p>[In cases where] you only have a few active regions, then you probably  only have a few shapes, and you can use SVG</p></blockquote>
+<h3>Just use SVG</h3>
+<p>This lead to a <a href="http://lists.w3.org/Archives/Public/public-canvas-api/2011AprJun/thread.html">lengthy series of threads</a> about the pros and cons of <a href="http://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0CDAQFjAA&amp;url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FScalable_Vector_Graphics&amp;ei=u2_XTpa2CYT98gOvq9HrDQ&amp;usg=AFQjCNHwzB1_zBM2SsUj21RvYFXo3V_0Pg&amp;sig2=RktL1l9_OGa7dPe6I0RuPQ">SVG</a>
+ and Canvas development and the repeated suggestion that interactive  
+regions in Canvas should not be encouraged (nor supported) by [browser] 
+vendors,  as they are better suited by retained vectors in SVG.</p>
+<blockquote><p>You are attempting to recreate a retained-mode API in an immediate-mode  API. Why is ‘use SVG’ not sufficient for this?</p></blockquote>
+<p>Many developers who work for [browser] vendors have simply said that 
+SVG should be  used instead of Canvas for interactive applications. The <a href="https://plus.google.com/107429617152575897589/posts">HTML5 editor</a>
+ has repeatedly suggested that interactive elements not be allowed 
+within  the Canvas sub-tree. The HTML5 has repeatedly specified that 
+button and  checkbox, anchor and radio be the only widget types allowed 
+in the  Canvas sub-tree. These specification changes were reverted in 
+respect  for W3C procedure. Note, the restriction is still present in 
+the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#the-canvas-element">WHATWG  specification</a>.</p>
+<blockquote><p>Transparent, but with no interactive content descendants 
+except for a  elements, button elements, input elements whose type 
+attribute are in  the Checkbox or Radio Button states, and input 
+elements that are buttons.</p></blockquote>
+<h3>Use of CSS overlays</h3>
+<p>Canvas developers rarely use CSS overlays to handle focus management 
+and  other interactivity. This is likely because of the difficult 
+management  of z-index ordering as well as the manual computation of 
+bounding boxes.  This difficulty is avoided with the drawFocusRing 
+method of Canvas 2d,  but no vendors currently support the method, and 
+so CSS overlays are the  only real-world practice available today 
+(December 2011).  There are now multiple proposals for enabling 
+clickable regions through  the use of the Canvas sub-tree, DOM events, 
+and new methods to the  Canvas Context 2d API. Other participants in the
+ working group have  gone forward with <a href="http://lists.w3.org/Archives/Public/public-canvas-api/2011JulSep/0214.html">attempting to support</a> more complex widget types.</p>
+<h3>Proposals: 2 simple examples</h3>
+<p>These proposals, as envisioned can be expressed by two simple 
+examples,  both of them forward events into the Canvas sub-tree to 
+bubble up the  DOM in standard fashion.  ( setDrawingFor proposal ): 
+beginElement(elem1); … drawing operations here … endElement();   This 
+proposal captures paths when fill*() and drawImage calls are made,  
+starting from the time beginElement is called, and binding those paths  
+to the target element in the Canvas sub-tree.  (setClickableRegion 
+proposal) beginPath(); … drawing operations here … 
+setClickableRegion(element);   Like drawFocusRing, the 
+setClickableRegion proposal only uses the  current path in the Canvas 
+state, and binds that path to the target  element.</p>
+<p>Both of the methods are shown in the context of the input  type=checkbox demonstration:<a href="http://pastebin.com/gGHQdDZQ">Canvas 2d Pointer Checkbox</a></p>
+
+<h3>Other strong disagreements: the W3C and WHATWG specifications remain divided</h3>
+<p>Outside of this active proposal there exist strong disagreements 
+about  text handling, whether it be rich text editing or reporting on 
+the caret  position and selection. The group has yet to build wide 
+consensus that  Canvas widgets are and will be regular staples of web 
+application  deployments. As such, most of the existing demonstrations 
+of Canvas  applications <a href="http://lists.w3.org/Archives/Public/public-canvas-api/2010OctDec/0001.html">have not been accepted</a>
+ as Canvas use cases.&nbsp; It’s consistent to argue that HTML5 should 
+prohibit the use of “canvas”  to create text editors.  New developments,
+ such as <a href="http://andreasgal.com/2011/06/15/pdf-js/">Mozilla’s PDF.js</a>
+ and the W3C Chair decision to  include caret tracking have loosened 
+some of these positions against  Canvas-based complex widgets. Still, 
+the WHATWG and W3C specifications  remain divided as does the consensus 
+of this working group.</p>
+<h3>Lack of progress: hindering accessibility</h3>
+<p>The lack of  progress, and the bulk of thread-traffic on this list has been related  to a <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0673.html">fundamental disagreement</a>
+ about the scope of the Canvas element and  the public-canvas-api list. 
+Should Canvas-based ARIA widgets be supported? Complex Canvas-based  
+widgets are being authored. There are many examples on the web today.  
+These examples work, but they are not [generally] programmatically  
+accessible: testing and automation tools as well as assistive  
+technologies are not granted exposure to the values they need to work.  
+This is, at times, a self-imposed limitation of the developer, having  
+used HTML5 Canvas instead of HTML4 and/or SVG. But, these are also  
+limitations imposed by developers who work for vendors, having decided  
+that they will not support Canvas accessibility on principal and in  
+practice.</p>
+<p>Where developers have jumped in, head-first, putting money and 
+resources  into Canvas-based user interfaces, vendors have a 
+responsibility to  their users. Though there are many reasonable 
+arguments as to why  authors should use SVG, those arguments do little 
+to support users who  are trying to access Canvas-based interfaces. 
+Those users are excluded.  The bar is simply set to high for most 
+authors to support them. Several  proposals have been put out in order 
+to lower that bar.</p>
+<blockquote><p>There remains a  fundamental disagreement about whether 
+or not the problem should be  fixed — about whether there is an 
+accessibility problem.  At present, there are only minor disagreements 
+in how to fix the problem.</p></blockquote>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

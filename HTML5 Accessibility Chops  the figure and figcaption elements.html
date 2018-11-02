@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: the figure and figcaption elements</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/08/html5-accessibility-chops-the-figure-and-figcaption-elements/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: the figure and figcaption elements</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">7-9 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The <a href="http://www.w3.org/TR/html51/semantics.html#the-figure-element">figure</a> and <a href="http://www.w3.org/TR/html51/semantics.html#the-figcaption-element">figcaption</a>
+ elements are 2 of the new elements in HTML5. Together they provide the 
+promise of being able to mark-up, with meaning, the structure and 
+relationship between a piece of content and associated content that acts
+ as a descriptive label. Currently as <a href="http://html5accessibility.com/">implemented in browsers</a> the semantics of figure and figcaption are practically non existent.<br>
+<span id="more-1074"></span></p>
+<h3>What the HTML5 specification says</h3>
+<p><strong><code>figure</code> element</strong></p>
+<blockquote><p>The <code><a href="http://www.w3.org/TR/html51/semantics.html#the-figure-element">figure</a></code>
+ element represents some flow content, optionally with a caption, that 
+is self-contained and is typically referenced as a single unit from the 
+main flow of the document.</p>
+<p>The element can thus be used to annotate illustrations, diagrams, 
+photos, code listings, etc, that are referred to from the main content 
+of the document, but that could, without affecting the flow of the 
+document, be moved away from that primary content, e.g. to the side of 
+the page, to dedicated pages, or to an appendix.</p></blockquote>
+<p><strong><code>figcaption</code> element</strong></p>
+<blockquote><p>The <code>figcaption</code> element represents a caption or legend for the rest of the contents of the <code>figcaption</code> element’s parent <code>figure</code> element, if any.</p></blockquote>
+<h3>Code example</h3>
+<p><code><strong>&lt;figure&gt;</strong><br>
+<strong>&lt;figcaption&gt;</strong>Figure 1. JavaScript alert code example<strong>&lt;/figcaption&gt;<br>
+</strong><br>
+&lt;code&gt;<br>
+function warning()<br>
+{alert('Warning!')}<br>
+&lt;/code&gt;</code></p>
+<p><code><strong>&lt;/figure&gt;</strong></code></p>
+<h3><strong>Current practical meaning conveyed by elements in the example:</strong></h3>
+<p><code><del><strong>&lt;figure&gt;</strong></del><strong> &lt;div&gt;</strong><br>
+<del><strong>&lt;figcaption&gt;</strong></del> <strong>&lt;div&gt;</strong>Figure 1. JavaScript alert code example<strong> &lt;/div&gt; <del>&lt;/figcaption&gt;</del><br>
+</strong><br>
+<del>&lt;code&gt;</del> &lt;span&gt;<br>
+function warning()<br>
+{alert('Warning!')}<br>
+<del>&lt;/code&gt;</del> &lt;/span&gt;</code></p>
+<p><del><code><strong>&lt;/figure&gt;</strong></code></del><code><strong> &lt;/div&gt;</strong></code></p>
+<h3>All very interesting but what can I as a developer do now?</h3>
+<p>For the general use cases, until the semantics of <code>figure</code> and <code>figcaption</code> have been implemented in browsers and AT it is suggested that:</p>
+<ol>
+<li>Use a descriptive word at the start of the <code>figcaption</code> content to give users an idea of what the content is labelling something, for example “Figure X:” or “Chart Y:”</li>
+<li>Be consistent in your <code>figcaption</code> labelling within and across pages.</li>
+<li>Place the figcaption (in the code) before the content to be labelled so it is announced prior to the content it is labelling.</li>
+<li>For example of use with images refer to <a href="http://www.w3.org/TR/2014/WD-html-alt-techniques-20141023/">HTML5: Techniques for providing useful text alternatives</a>:
+<ol>
+<li><a href="http://www.w3.org/TR/2014/WD-html-alt-techniques-20141023/#images-of-pictures-1">3.9 Images of Pictures</a></li>
+<li><a href="http://www.w3.org/TR/2014/WD-html-alt-techniques-20141023/#when-a-text-alternative-is-not-available-at-the-time-of-publication-1">3.12 When a text alternative is unknown at the time of publication</a></li>
+</ol>
+</li>
+</ol>
+<h2>The background for these recommendations</h2>
+<h3>How to convey the semantics?</h3>
+<p>The semantics of&nbsp; figcaption can be conveyed visually by the 
+placement of the figcaption, above or below the content it labels and 
+through its proximity to such content. From observations of how figures 
+etc are currently marked up, in some cases the figure element semantics 
+will not be indicated visually, though it may be indicated as part of 
+the figcaption text and/or by the addition of a border or background 
+color. Such visual indications do not provide much value for users who 
+cannot make use of them. While proximity provides some indication of a 
+semantic relationship it alone does not suffice.</p>
+<p>The standard method to convey semantics to assistive technology (AT) 
+is by the use of defined roles and relationships provided by <a href="http://dev.w3.org/html5/html-api-map/overview.html">Accessibility API’s</a>.
+ These roles and relationships are typically mapped to HTML elements by 
+the browser and AT accesses the information from the API exposed by the 
+browser. A problem arises with figure and figcaption, because figure 
+does not have a specified role and while figcaption can be mapped to a 
+caption role in some Accessibility API’s others do not provide this 
+role. Element names can be passed through accessibility API properties, 
+but this does not confer a defined accessibility semantic for a given 
+element, thus no common definition of what a particular element is and 
+does is provided, this can and does lead to interoperability issues 
+across browsers and AT. Making it much harder for both users and 
+developers to realize a common user experience across software, devices 
+and platforms.</p>
+<h3>ARIA to the rescue?</h3>
+<p>ARIA can help, but does not offer a complete solution:</p>
+<ul>
+<li>It does not include a <code>caption</code> role.</li>
+<li>It does not include a <code>figure</code> role.</li>
+<li><code>aria-labelledby</code> and/or <code>aria-describedby</code> 
+may be used to associate figcaption content with figure content, but 
+their use does not provide the role semantics to differentiate the <code>figure</code> and <code>figcaption</code> semantics from the standard labelling methods of the title attribute and in the case of images the alt attribute.</li>
+</ul>
+<p>In order for ARIA to really help it is suggested that the addition of 2 new roles may be required:</p>
+<p><strong>caption </strong></p>
+<blockquote><p>The object contains descriptive information, usually 
+textual, about another user interface element such as a table, chart, or
+ image.</p></blockquote>
+<p><strong>figure</strong></p>
+<blockquote><p>The object is a container for a user interface element such as a table, chart, or image and a caption which labels the element.</p></blockquote>
+<h3>Different scenarios</h3>
+<p>Whether the additonal roles are needed depends on what will provide 
+the best user experience. Do users want to be made aware of both 
+structures? Should the figcaption content be associated with the figure 
+or the content it contains? Should none , one or both of the structures 
+be voiced by AT? Should&nbsp; the caption always be announced prior to 
+the figure content or after or depend on the caption placement 
+(before/after)?</p>
+<h4>The following scenarios are also available on a <a href="http://www.html5accessibility.com/tests/figure-scenarios.html">test page</a> which has the role information included inline to simulate what would be available to the AT user for each scenario.</h4>
+<h4><strong>Scenario 1</strong></h4>
+<p>The presence of both figure and caption are announced, the figure 
+start and end are voiced. the caption is announced before the content. 
+(Simulates the figure being labelled by the figcaption)</p>
+<h4><strong>Scenario 2</strong></h4>
+<p>The presence of figure but <strong>not caption</strong> is announced,
+ the figure start and end are voiced. the caption content is announced 
+before the figure content. (Simulates the figure being labelled by the 
+figcaption)</p>
+<h4><strong>Scenario 3</strong></h4>
+<p>The presence of caption but <strong>not figure</strong> is announced, the caption content is announced <strong>before</strong> the figure content. (Simulates the figure content being labelled by the figcaption)</p>
+<h4><strong>Scenario 5</strong></h4>
+<p>The presence of caption but <strong>not figure</strong> is announced, the caption content is announced <strong>after </strong>the figure content. (Simulates the figure being labelled by the figcaption)</p>
+<h4><strong>Scenario 5</strong></h4>
+<p>The presence of caption or figure is not announced, the caption 
+content is announced dependent on the placement in the code 
+(before/after)</p>
+<p><strong>Note:</strong> Scenario 5 is what users currently experience.</p>
+<h4><strong>Code example for all scenarios</strong></h4>
+<p><code><strong>&lt;figure&gt;</strong></code></p><code>
+</code><p><code>&lt;code&gt;<br>
+function warning()<br>
+{alert('Warning!')}<br>
+&lt;/code&gt;</code></p>
+<p><code><strong>&lt;figcaption&gt;</strong>JavaScript alert code example<strong>&lt;/figcaption&gt;</strong></code><code></code></p>
+<p><code><strong>&lt;/figure&gt;</strong></code></p>
+<h4><strong>AT output example Scenario 1</strong></h4>
+<p><strong><em>Figure start, </em></strong></p>
+<p><strong><em>Caption</em>.</strong> JavaScript alert code example</p>
+<p><code>function warning()<br>
+{alert('Warning!')}</code></p>
+<p><em><strong>figure end</strong></em></p>
+<h4><strong>AT output example Scenario 2</strong></h4>
+<p><strong><em>Figure start,</em></strong></p>
+<p>JavaScript alert code example</p>
+<p><code>function warning()<br>
+{alert('Warning!')}</code></p>
+<p><em><strong>figure end</strong></em></p>
+<h4><strong>AT output example Scenario 3</strong></h4>
+<p><strong><em>Caption,</em></strong></p>
+<p>JavaScript alert code example</p>
+<p><code>function warning()<br>
+{alert('Warning!')}</code></p>
+<h4><strong>AT output example Scenario 4</strong></h4>
+<p><code>function warning()<br>
+{alert('Warning!')}</code></p>
+<p><strong><em>Caption,</em></strong></p>
+<p>JavaScript alert code example</p>
+<h4><strong>AT output example Scenario 5</strong></h4>
+<p><code>function warning()<br>
+{alert('Warning!')}</code></p>
+<p>JavaScript alert code example</p>
+<h3>What do users want?</h3>
+<p>I have coded a <a href="http://www.html5accessibility.com/tests/figure-scenarios.html">test page</a>
+ with examples, from the scenarios above, simulating what information 
+could be announced and ordered, please give it a try in your favourite 
+AT and provide comments.</p>
+
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

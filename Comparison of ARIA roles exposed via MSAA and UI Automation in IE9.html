@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Comparison of ARIA roles exposed via MSAA and UI Automation in IE9</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/02/comparison-of-aria-roles-exposed-via-msaa-and-ui-automation-in-ie9/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Comparison of ARIA roles exposed via MSAA and UI Automation in IE9</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The Microsoft MSAA API cannot provide mapping for all ARIA 
+roles as it does not have defined roles and properties for all those 
+defined by The ARIA specification, the Microsoft UI Automation API can. 
+UI automation provides exposure of all WAI-ARIA roles and properties via
+ the <code>ControlType</code> and <code>AriaRole</code> properties.</p>
+
+<h3>Testing UI Automation AriaRole support</h3>
+<p><strong>The testing of IE9 shows no change in support <a href="http://www.paciellogroup.com/blog/2009/05/comparison-of-aria-roles-exposed-via-msaa-and-ui-automation-in-ie8/">compared to IE8</a>, any changes in results are due to fixes in testing methodology.</strong></p>
+<p>Testing of the <code>AriaRole</code> properties support requires the 
+Windows 7 operating system and the use of an updated inspect tool, 
+currently only available as part of the Windows 7 SDK. Results from 
+initial testing show that all possible ARIA role values are correctly 
+exposed via the UI automation AriaRole property, but the <a href="http://msdn.microsoft.com/en-us/library/cc891505(VS.85).aspx">stated mapping</a> of the ARIA roles to UI automation <code>ControlType</code>
+ is incomplete.  I have also re-tested MSAA role mapping taking into 
+account roles that Microsft documented as unsupported via MSAA:</p>
+<ul>
+<li><strong>44 out of 49</strong> – Of the <strong>49</strong> WAI-ARIA role (excluding abstract roles) values that can be mapped to MSAA: Internet explorer 9.0.8080.16413 maps <strong>44 correctly</strong>.</li>
+<li><strong>35 out of 50</strong> – Of the <strong>50</strong> WAI-ARIA 
+role (excluding abstract roles) values that can be mapped to UI 
+automation ControlType: Internet explorer 9.0.8080.16413 maps <strong>35</strong> correctly.</li>
+<li><strong>59 out of 59</strong> – Of the <strong>59</strong> WAI-ARIA 
+role (excluding abstract roles) values that can be mapped via UI 
+automation AriaRole property: Internet explorer 9.0.8080.16413 maps <strong>59 correctly</strong>.</li>
+</ul>
+<p><strong>Full Test Results:</strong> <a href="http://www.paciellogroup.com/blog/aria-tests/IE9-UIA-MSAA-ARIA.html">Comparison of ARIA roles exposed via MSAA and UI Automation in IE9</a></p>
+<h3>Further reading:</h3>
+<ul>
+<li> <a href="http://www.paciellogroup.com/blog/2009/05/comparison-of-aria-roles-exposed-via-msaa-and-ui-automation-in-ie8/#ram">Practical Ramifications of these results</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2009/05/comparison-of-aria-roles-exposed-via-msaa-and-ui-automation-in-ie8/comment-page-1/#comment-8070">James Teh’s comments</a></li>
+<li><a href="http://html5accessibility.com/">HTML5 Accessibility updated for IE9</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Comparison%20of%20ARIA%20roles%20exposed%20via%20MSAA%20and%20UI%20Automation%20in%20IE9_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

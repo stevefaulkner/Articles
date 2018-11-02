@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Shortish note on JAWS support for regions</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2018/07/shortish-note-on-jaws-support-for-regions/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Shortish note on JAWS support for regions</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The JAWS screen reader has fairly recently changed the way it 
+supports the announcement of ARIA landmark roles and HTML5 elements that
+ map to landmark roles. This has lead to some confusion for people when 
+testing the support for these features.<span id="more-6783"></span></p>
+<h2>Tester expectations and implementation realities</h2>
+<p>There are defined requirements that browsers follow for interoperable implementations of features in the accessibility layer.</p>
+<ul>
+<li id="title"><a href="https://w3c.github.io/html-aam/"><abbr title="Hypertext Markup Language">HTML</abbr> Accessibility <abbr title="application programming interface">API</abbr> Mappings 1.0</a></li>
+<li id="title"><a href="https://www.w3.org/TR/core-aam-1.1/">Core Accessibility <abbr title="Application Programming Interface">API</abbr> Mappings 1.1</a></li>
+<li id="title"><a href="https://www.w3.org/TR/accname-1.1/">Accessible Name and Description Computation 1.1</a></li>
+<li id="title"><a href="https://www.w3.org/TR/svg-aam-1.0/"><abbr title="Scalable Vector Graphics">SVG</abbr> Accessibility <abbr title="Application Programming Interfaces">API</abbr> Mappings</a></li>
+</ul>
+<p>These specifications define, for example, what is to be exposed in the <a href="https://developer.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">browser accessibility tree</a> for a <a href="https://w3c.github.io/html-aam/#el-button">button element</a>.</p>
+<p>What the specifications do not say is how this is to be presented to the user in an <a href="https://developer.paciellogroup.com/blog/2015/10/thus-spoke-html/">aural UI</a>.
+ There is a general expectation that this information will be conveyed 
+to users, but in what contexts and in what forms, no requirements are 
+defined.</p>
+<p>There is some advice provided for some elements in the <a href="https://www.w3.org/TR/html52/sections.html#the-nav-element">HTML specification</a>, for example:</p>
+<blockquote><p>Assistive Technology may convey the semantics of the <code><a id="ref-for-elementdef-nav④" href="https://www.w3.org/TR/html52/sections.html#elementdef-nav" data-link-type="element">nav</a></code> to users. This information can provide a hint to users as to the type of content. For example the <code>role</code> of the element, which in this case is “navigation”, can be announced by screen reader software when a user navigates to an <code><a id="ref-for-elementdef-nav⑤" href="https://www.w3.org/TR/html52/sections.html#elementdef-nav" data-link-type="element">nav</a></code> element. User Agents may also provide methods to navigate to <code><a id="ref-for-elementdef-nav⑥" href="https://www.w3.org/TR/html52/sections.html#elementdef-nav" data-link-type="element">nav</a></code> elements.</p></blockquote>
+<p>But these are not normative requirements and do not dictate the form of support.</p>
+<p>There are not defined requirements for how Assistive Technology, such
+ as screen readers express the information conveyed in the browsers 
+accessibility layer.</p>
+<p>Some of the ways accessibility layer information is supported by screen readers:</p>
+<ul>
+<li>Identification of an element by role as the user moves through the content.</li>
+<li>Announcement of the text content of an element.</li>
+<li>Announcement of the start and end of an element.</li>
+<li>Change in voice as the content of an element is announced.</li>
+<li>Announcement of states and properties.</li>
+<li>Announcement of an elements accessible name and/or description.</li>
+<li>Announcement of states and properties.</li>
+<li>Emission of a beep or other sound when an element with a particular state or property receives <a href="http://juicystudio.com/article/making-ajax-work-with-screen-readers.php#jawsvirtual">virtual focus</a>.</li>
+<li>Instructions on how to operate interactive elements such as form controls.</li>
+<li>Navigation of elements by keyboard and “quick access” lists of a 
+particular elements, list items are linked to each instance of an 
+element on the page.</li>
+</ul>
+<p>Which brings us back to JAWS and landmark support. JAWS supports 
+landmark regions, but how that support is expressed depends on the “Web 
+Verbosity” settings in JAWS.</p>
+<p>JAWS has a “Web Verbosity Level: Low/Medium/High” You can view/set 
+this by opening the Settings Center and expanding the “Web/HTML/PDF” 
+tree item and selecting the “Reading” item. The default verbosity level 
+is “Medium” If you press the “Medium…” button the configuration dialog 
+will be displayed. What this shows is a list of HTML features and if a 
+feature is checked it will be announced during virtual cursor 
+navigation, <em>arrowing through</em> the content, or during “say all” 
+or when navigated to using the virtual navigation quick keys. (A list of
+ these navigation keys is documented in the <a href="https://freedomscientific.github.io/VFO-standards-support/html.html">JAWS HTML standards support documentation</a>).</p>
+<p>What you will note is that at the default “medium” verbosity, only a 
+subset of the landmark regions are checked, thus only these regions will
+ be announced. Note this does not mean that the user cannot navigate to 
+the unchecked regions using the region navigation keys: <kbd>R</kbd>/<kbd>Shift</kbd>+<kbd>R</kbd>, it means that when navigated to the content of the region will be announced without denoting the regions start and end.</p>
+<h2>Too much information</h2>
+<p>Why is the announcement of some features turned off by default? In 
+talking with users and the JAWS developers the answer is that some users
+ sometimes find web pages “too chatty” and want some aspects of the 
+support provided (navigation), without the noise (announcements).</p>
+<p>This behavior can lead some people to think that JAWS does not 
+support a particular feature, when it does, but not in the way you 
+expected.</p>
+<p><strong>JAWS Reading&nbsp; – web verbosity level UI:</strong></p>
+<p><img src="Shortish%20note%20on%20JAWS%20support%20for%20regions_files/jaws-settings-1.png" alt="the UI consists of a select list of 3 items: low/medium/high and 3 buttons: low/medium/high to view/change what is announced." moz-reader-center="true" width="767" height="447"></p>
+<p><strong>Medium (default) Virtual Cursor verbosity preferences dialog:</strong></p>
+<p><img src="Shortish%20note%20on%20JAWS%20support%20for%20regions_files/jaws-med.png" alt="A tree list with a subset of features checked." moz-reader-center="true" width="640" height="608"></p>
+<p><strong>Low Virtual Cursor verbosity preferences dialog:</strong></p>
+<p><img src="Shortish%20note%20on%20JAWS%20support%20for%20regions_files/jaws-low.png" alt="Only the Table or Grid checkbox is selected." moz-reader-center="true" width="641" height="596"></p>
+<p><strong>High Virtual Cursor verbosity preferences dialog:</strong></p>
+<p><img src="Shortish%20note%20on%20JAWS%20support%20for%20regions_files/jaws-high.png" alt="All checkboxes are selected" moz-reader-center="true" width="647" height="604"></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Shortish%20note%20on%20JAWS%20support%20for%20regions_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

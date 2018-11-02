@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 and the myth of WAI-ARIA redundance</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2010/04/html5-and-the-myth-of-wai-aria-redundance/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 and the myth of WAI-ARIA redundance</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">8-10 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Will <a href="http://dev.w3.org/html5/spec/spec.html">HTML5</a> make the use of <a href="http://www.w3.org/WAI/PF/aria/">WAI-ARIA</a>
+ in HTML redundant? the short answer is definitley not. There are many 
+ARIA roles and properties that are not provided by native elements and 
+attributes in HTML5.  Also developers still  have the desire to roll 
+their own interactive controls  even though they have been available in 
+HTML as native elements for 11 years, why would this suddenly change 
+when HTML5 arrives?</p>
+
+<h3>Examples: a button and a link</h3>
+<p>Developers have had for 11 years number of <a href="http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.2.1">native elements</a> they can use for buttons and the <a href="http://www.w3.org/TR/REC-html40/struct/links.html#h-12.2"><code>a</code> element</a>
+ for links, provided in HTML 4, all of which provide built in mouse and 
+keyboard interaction and convey role, state and name properties to 
+accessibilityAPIs:</p>
+<ul>
+<li><code>input type="button"</code></li>
+<li><code>input type="image"</code></li>
+<li><code>button</code> element</li>
+<li><code>a</code> element</li>
+</ul>
+<p>But still in 2010 companies like Google, choose to emulate a button 
+with code (not to mention the associated scripting) such as this:</p>
+<p><img src="HTML5%20and%20the%20myth%20of%20WAI-ARIA%20redundance_files/searchmail.gif" alt="search mail button." width="81" height="30"></p>
+<p><code>&lt;DIV id=:rk class="J-K-I J-J5-Ji L3 J-K-I-JO" tabIndex=0<br>
+unselectable="on" closure_hashCode_l16mgm="182" act=""&gt;<br>
+&lt;DIV class="J-J5-Ji J-K-I-Kv-H" unselectable="on"&gt;<br>
+&lt;DIV class="J-J5-Ji J-K-I-J6-H" unselectable="on"&gt;<br>
+&lt;DIV class=J-K-I-KC unselectable="on"&gt;<br>
+&lt;DIV class=J-K-I-K9-KP unselectable="on"&gt;&amp;nbsp;&lt;/DIV&gt;<br>
+&lt;DIV class=J-K-I-Jz unselectable="on"&gt;Search Mail&lt;/DIV&gt;<br>
+&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</code></p>
+<p>and a link like this:</p>
+<p><img src="HTML5%20and%20the%20myth%20of%20WAI-ARIA%20redundance_files/filterlink.gif" alt="Create filter link." width="80" height="16"></p>
+<p><code>&lt;SPAN id=:rg class=toxOdd role=link tabIndex=0 closure_hashCode_l16mgm="177"&gt;<br>
+Create a filter&lt;/SPAN&gt;</code></p>
+<p><strong>Note:</strong> Examples are taken from Googles Gmail application.</p>
+<p>The reason is probably because they cannot apply the styles they want
+ to native interactive elements, but who knows? What is important for 
+accessibility is <em>if developers choose to code in this way</em>, they
+ now have a method to provide the needed accessibility information. It 
+would be preferable that they used the available native HTML elements, 
+but if they do not, then ARIA provides what HTML alone cannot.</p>
+<h3>Further reading:</h3>
+<ul>
+<li><a href="http://annevankesteren.nl/2010/04/clean-markup-plea">Clean markup plea</a> : Anne van kesteren ramps up the rhetoric on the issue.</li>
+<li><a href="http://alastairc.ac/2010/04/accessibility-and-html5/">HML5 and WAI-ARIA</a>: Alastair Campbell explores the issue further.</li>
+</ul>
+<h2>Aria roles and properties not available in HTML5</h2>
+<p>Below are listed the ARIA roles and properties. Those roles and 
+properties suffixed with a “+”  are features not considered to be 
+available natively in HTML5. It is clear that many roles and properties 
+provided by ARIA which can be used to convey information to users are 
+not available in HTML5.</p>
+<h3>ARIA Roles</h3>
+<h3>5.3.2. Widget Roles</h3>
+<p>The following roles act as user interface widgets that do not provide
+ a defined structure. All roles are linked to their definitions in the 
+WAI-ARIA 1.0 specification.</p>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#alert"><code><strong>alert +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#alertdialog"><code><strong>alertdialog +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#button"><code>button</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#checkbox"><code>checkbox</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#combobox"><code>combobox</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#dialog"><code><strong>dialog +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#gridcell"><code><strong>gridcell +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#link"><code>link</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#log"><code><strong>log +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#marquee"><code><strong>marquee +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#menuitem"><code>menuitem</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#menuitemcheckbox"><code>menuitemcheckbox</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#menuitemradio"><code>menuitemradio</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#option"><code>option</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#progressbar"><code>progressbar</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#radio"><code>radio</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#radiogroup"><code>radiogroup</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#scrollbar"><code><strong>scrollbar +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#slider"><code>slider</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#spinbutton"><code>spinbutton</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#status"><code><strong>status +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#tab"><code><strong>tab +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#tabpanel"><code><strong>tabpanel +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#textbox"><code>textbox</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#timer"><code><strong>timer +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#tooltip"><code><strong>tooltip +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#treeitem"><code><strong>treeitem +</strong></code></a></li>
+</ul>
+<p>The following roles act as composite user interface widgets that 
+provide a defined structure. These roles typically act as containers 
+that manage other, contained widgets.</p>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#grid"><code><strong>grid +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#listbox"><code>listbox</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#menu"><code>menu</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#menubar"><code>menubar</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#tablist"><code><strong>tablist +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#toolbar"><code>toolbar</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#tree"><code><strong>tree +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#treegrid"><code><strong>treegrid +</strong></code></a></li>
+</ul>
+<h3><span>5.3.3. </span>Document Structure</h3>
+<p>The following <a href="http://www.w3.org/WAI/PF/aria/terms#def_role">roles</a> describe structures that organize content in a page. Document structures are not usually interactive.</p>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#article"><code>article</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#columnheader"><code>columnheader</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#definition"><code><strong>definition +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#directory"><code><strong>directory +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#document"><code><strong>document +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#group"><code><strong>group +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#heading"><code>heading</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#img"><code>img</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#list"><code>list</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#listitem"><code>listitem</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#math"><code><strong>math +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#note"><code><strong>note +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#presentation"><code><strong>presentation +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#region"><code><strong>region +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#row"><code>row</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#rowheader"><code>rowheader</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#separator"><code>separator</code></a></li>
+</ul>
+<h3>5.3.4. Landmark Roles</h3>
+<p>The following <a href="http://www.w3.org/WAI/PF/aria/terms#def_role">roles</a> are regions of the page intended as navigational <a href="http://www.w3.org/WAI/PF/aria/terms#def_landmark">landmarks</a>.</p>
+<ul>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#application"><code><strong>application +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#banner"><code><strong>banner +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#complementary"><code>complementary</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#contentinfo"><code><strong>contentinfo +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#form"><code>form</code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#main"><code><strong>main +</strong></code></a></li>
+<li><a href="http://www.w3.org/WAI/PF/aria/roles#navigation"><code>navigation</code></a></li>
+<li><strong><a href="http://www.w3.org/WAI/PF/aria/roles#search"><code>search +</code></a></strong></li>
+</ul>
+<h3>ARIA States and Properties (all aria-* attributes)</h3>
+<p>Below is an alphabetical list of <abbr title="Accessible Rich  Internet Applications">WAI-ARIA</abbr> <a href="http://www.w3.org/WAI/PF/aria/terms#def_state">states</a> and <a href="http://www.w3.org/WAI/PF/aria/terms#def_property">properties</a> to be used by rich internet application authors. A detailed definition of each <abbr title="Accessible Rich  Internet Applications">WAI-ARIA</abbr> state and <a href="http://www.w3.org/WAI/PF/aria/terms#def_property">property</a> follows this compact list.</p>
+<div>
+<dl>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-activedescendant"><code><strong>aria-activedescendant +</strong></code></a></dt>
+<dd>Identifies the currently active descendant of a composite widget.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-atomic"><code><strong>aria-atomic +</strong></code></a></dt>
+<dd>Indicates whether assistive technologies will present all, or only 
+parts of, the changed region based on the change notifications defined 
+by the aria-relevant attribute. Also see aria-relevant.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-autocomplete"><code>aria-autocomplete</code></a></dt>
+<dd>Indicates whether user input completion suggestions are provided.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-busy"><code>aria-busy</code> (state) +</a></strong></dt>
+<dd>Indicates whether an element, and its subtree, are currently being updated.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-checked"><code>aria-checked</code> (state)</a></dt>
+<dd>Indicates the current “checked” state of checkboxes, radio buttons, and other widgets. Also see aria-pressed and aria-selected.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-controls"><code>aria-controls +</code></a></strong></dt>
+<dd>Identifies the element (or elements) whose contents or presence are controlled by the current element. Also see aria-owns.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-describedby"><code>aria-describedby +</code></a></strong></dt>
+<dd>Identifies the element (or elements) that describes the object. Also see aria-labelledby.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-disabled"><code>aria-disabled</code> (state)</a></dt>
+<dd>Indicates that the element is perceivable but disabled, so it is not
+ editable or otherwise operable. Also see aria-hidden and aria-readonly.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-dropeffect"><code>aria-dropeffect +</code></a></strong></dt>
+<dd>Indicates what functions can be performed when the dragged object is
+ released on the drop target. This allows assistive technologies to 
+convey the possible drag options available to users, including whether a
+ pop-up menu of choices is provided by the application. Typically, drop 
+effect functions can only be provided once an object has been grabbed 
+for a drag operation as the drop effect functions available are 
+dependent on the object being dragged.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-expanded"><code>aria-expanded</code> (state) +</a></strong></dt>
+<dd>Indicates whether an expandable/collapsible group of elements is currently expanded or collapsed.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-flowto"><code>aria-flowto +</code></a></strong></dt>
+<dd>Identifies the next element (or elements) in the recommended reading
+ order of content, overriding the general default to read in document 
+source order.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-grabbed"><code>aria-grabbed</code> (state) +</a></strong></dt>
+<dd>Indicates an element’s “grabbed” state in a drag-and-drop operation.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-haspopup"><code>aria-haspopup +</code></a></strong></dt>
+<dd>Indicates that the element has a popup context menu or sub-level menu.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-hidden"><code>aria-hidden</code> (state)</a></dt>
+<dd>Indicates that the element is not visible or perceivable to any user. Also see aria-disabled.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-invalid"><code>aria-invalid</code> (state)</a></dt>
+<dd>Indicates the entered value does not conform to the format expected by the application.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-label"><code>aria-label +</code></a></strong></dt>
+<dd>Defines a string value that labels the current element when included
+ as an attribute of the current element. Also see aria-labelledby.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-labelledby"><code>aria-labelledby +</code></a></strong></dt>
+<dd>Identifies the element (or elements) that labels the current element. Also see aria-label and aria-describedby.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-level"><code>aria-level +</code></a></dt>
+<dd>Defines the hierarchical level of an element within a structure.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-live"><code>aria-live +</code></a></strong></dt>
+<dd>Indicates that an element will be updated, and describes the types 
+of updates the user agents, assistive technologies, and user can expect 
+from the live region.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-multiline"><code>aria-multiline</code></a></dt>
+<dd>Indicates whether a text box accepts only a single line, or if it can accept multiline input.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-multiselectable"><code>aria-multiselectable</code></a></dt>
+<dd>Indicates that the user may select more than one item from the current selectable descendants.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-orientation"><code>aria-orientation +</code></a></strong></dt>
+<dd>Indicates whether the element and orientation is horizontal or vertical.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-owns"><code>aria-owns +</code></a></strong></dt>
+<dd>Identifies an element (or elements) in order to define a visual, 
+functional, or contextual parent/child relationship between DOM elements
+ where the DOM hierarchy cannot be used to represent the relationship. 
+Also see aria-controls.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-posinset"><code>aria-posinset +</code></a></strong></dt>
+<dd>Defines an element’s number or position in the current set of 
+listitems or treeitems. Not required if all elements in the set are 
+present in the DOM. Also see aria-setsize.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-pressed"><code>aria-pressed</code> (state) +</a></strong></dt>
+<dd>Indicates the current “pressed” state of toggle buttons. Also see aria-checked and aria-selected.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-readonly"><code>aria-readonly</code></a></dt>
+<dd>Indicates that the element is not editable, but is otherwise operable. Also see aria-disabled.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-relevant"><code>aria-relevant +</code></a></strong></dt>
+<dd>Indicates what user agent change notifications (additions, removals,
+ etc.) assistive technologies will monitor within a live region. Also 
+see aria-atomic.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-required"><code>aria-required</code></a></dt>
+<dd>Indicates that user input is required on the element before a form may be submitted.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-selected"><code>aria-selected</code> (state)</a></dt>
+<dd>Indicates the current “selected” state of various widgets. Also see aria-checked and aria-pressed.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-setsize"><code>aria-setsize +</code></a></strong></dt>
+<dd>Defines the number of items in the current set of listitems or 
+treeitems. Not required if all elements in the set are present in the 
+DOM. Also see aria-posinset.</dd>
+<dt><strong><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort"><code>aria-sort +</code></a></strong></dt>
+<dd>Indicates if items in a table or grid are sorted in ascending or descending order.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-valuemax"><code>aria-valuemax</code></a></dt>
+<dd>Defines the maximum allowed value for a range widget.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-valuemin"><code>aria-valuemin</code></a></dt>
+<dd>Defines the minimum allowed value for a range widget.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-valuenow"><code>aria-valuenow</code></a></dt>
+<dd>Defines the current value for a range widget. Also see aria-valuetext.</dd>
+<dt><a href="http://www.w3.org/WAI/PF/aria/states_and_properties#aria-valuetext"><code>aria-valuetext</code></a></dt>
+<dd>Defines the human readable text alternative of aria-valuenow for a range widget.</dd>
+</dl>
+</div>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20and%20the%20myth%20of%20WAI-ARIA%20redundance_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

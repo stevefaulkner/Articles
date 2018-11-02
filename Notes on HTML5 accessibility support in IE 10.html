@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on HTML5 accessibility support in IE 10</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/08/notes-on-html5-accessibility-support-in-ie-10/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on HTML5 accessibility support in IE 10</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/ie.png" alt="Internet Explorer" width="62" height="61">I am in the process of updating&nbsp; <a href="http://www.html5accessibility.com/">HTML5Accessibility.com</a>
+ (ETA mid September) to take into account the changes in accessibility 
+implementation support in the latest browser versions. I have decided <strong>not to update</strong>
+ support information for Safari/Webkit on Windows and Opera on Windows 
+or Mac as these browser/OS combinations&nbsp; show no sign of active 
+HTML accessibility implementation support. If and when they do, I will 
+do detailed tests of theses browsers once again.</p>
+<p>Internet Explorer 10 on Windows 8 meanwhile, includes implementation 
+of a number of new HTML5 features and improved accessibility support for
+ other features. <span id="more-1796"></span></p>
+<h2>new HTML5 feature accessibility support in IE 10</h2>
+<h3>The progress element</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/progress.PNG" alt="" width="340" height="38"></p><p class="wp-caption-text">Default display of the progress element in IE 10 on Windows 8</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;progress&nbsp; value="30" max="100"&gt;30%&lt;/progress&gt;</code></p>
+<p>As implemented the <a href="http://dev.w3.org/html5/spec/the-progress-element.html#the-progress-element">progress element</a> exposes the appropriate accessibility information via the MSAA and UI automation accessibility APIs.</p>
+<h3>input type=range</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/slider.PNG" alt="" width="360" height="36"></p><p class="wp-caption-text">Default display of input type=range (slider) element in IE 10</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;input type="range" max="11" min="0" value="7"&gt;</code></p>
+<p>As implemented the <a href="http://dev.w3.org/html5/spec/states-of-the-type-attribute.html#range-state-%28type=range%29">input type=range element</a>
+ exposes the appropriate accessibility information via the MSAA and UI 
+automation accessibility APIs. It supports operation with the keyboard 
+using the up/down/left/right arrow keys (incremental) or via the home 
+and end keys (minimum/maximum).</p>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/slider2.PNG" alt="" width="256" height="68"></p><p class="wp-caption-text">current value is displayed as a tooltip when the user drags the slider thumb with the mouse</p></div>
+<p>As illustrated above, a tooltip is displayed displaying the current slider value, but <strong>only</strong> when using a mouse, not when using the keyboard.</p>
+<h3>The datalist element</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/datalist.PNG" alt="" width="255" height="99"></p><p class="wp-caption-text">Default display of the datalist element in IE 10</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;input type="text" <strong>list="mylist"</strong>&gt;</code></p>
+<p>&gt;&lt;datalist id=”mylist”&gt;<br>
+<code>&lt;option value="Miss" label="Miss"&gt;&lt;/option&gt;<br>
+&lt;option value="Mr" label="Mr"&gt;&lt;/option&gt;<br>
+&lt;option value="Ms" label="Ms"&gt;&lt;/option&gt;<br>
+&lt;option value="Mad Professor" label="Prof"&gt; &lt;/option&gt;<br>
+<strong>&lt;/datalist&gt;</strong></code></p>
+<p>As implemented the <a href="http://dev.w3.org/html5/spec/the-datalist-element.html#the-datalist-element">datalist element</a>
+ when associated with a text input , turns it into a ComboBox. It 
+exposes some of the appropriate accessibility information via the MSAA 
+and UI  automation accessibility APIs. The presence of the list is not 
+indicated via the role, state or properties of the input element, but 
+the list and list items are exposed correctly. It supports operation 
+with the keyboard: the list is displayed when the text input receives 
+focus, the up/down arrow keys can be used to navigate the list items and
+ the enter key selects a list item. A quick test with <a href="http://tink.co.uk/2012/03/windows-8-narrator-overview/">Narrator</a>
+ (built in Windows 8 screen reader) did not reveal any information being
+ announced about the list or the list item and no indication about the 
+presence of the list.</p>
+<h3>the required attribute</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/required.PNG" alt="" width="293" height="111"></p><p class="wp-caption-text">A message is displayed when a user submits a form without filling in required fields.</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;input type="text" required&gt;</code></p>
+<p>The <a href="http://dev.w3.org/html5/spec/common-input-element-attributes.html#attr-input-required">required attribute</a>
+ is supported for visual users only. When an input that is required is 
+not filled in by a user and the form is submitted, a red border appears 
+around the input and a message is displayed (side note: the message is 
+built using SVG). Note further, this occurs for each input that is in 
+error, not only for the first input in the form, which is the current 
+(not very useful) behaviour for other browsers that support required by 
+displaying a message (e.g. Opera and FireFox). There appears to be no 
+accessibility information reported via either MSAA or UI automation. A 
+quick test with Narrator did not reveal any information being announced 
+about required fields or their state.</p>
+<h3>the audio element</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/audio.PNG" alt="" width="535" height="43"></p><p class="wp-caption-text">audio element user interface</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;audio controls&gt;&lt;/audio&gt;</code></p>
+<p>The <a href="http://dev.w3.org/html5/spec/the-audio-element.html#the-audio-element">audio element</a>
+ has full keyboard and accessibility information support including 
+accessible name, description, and accessKey information. Each control 
+can be navigated to and operated using the keyboard.</p>
+<h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/audio1.PNG" alt="The control container has a role=grouping, the play skip back, skip forward and mute controls are role=button, the seek and volume controls are role=slider" width="278" height="123"></p><p class="wp-caption-text">Accessibility tree representation of the audio element in IE 10</p></div></h3>
+<h3>the video element</h3>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/video.PNG" alt="" width="318" height="238"></p><p class="wp-caption-text">video element user interface with volume slider displayed.</p></div>
+<p><strong>code example</strong></p>
+<p><code>&lt;video controls&gt;&lt;/video&gt;</code></p>
+<p>The <a href="http://dev.w3.org/html5/spec/the-audio-element.html#the-audio-element">video element</a>
+ has full keyboard and accessibility information support including  
+accessible name, description, and accessKey information. Each control  
+can be navigated to and operated using the keyboard. Note the volume 
+slider is represented in the accessibility tree, but is activated by 
+focusing on the mute button then using the up/down arrow keys to modify 
+the volume level.</p>
+<div class="wp-caption"><p><img src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/video1.PNG" alt="The control container has a role=grouping, the play skip back, skip forward, full screen and mute controls are role=button, the seek and volume controls are role=slider" width="309" height="181"></p><p class="wp-caption-text">Accessibility tree representation of the video element in IE 10</p></div>
+<h3>The placeholder attribute</h3>
+<p>The <a href="http://dev.w3.org/html5/spec/common-input-element-attributes.html#the-placeholder-attribute">placeholder attribute</a> value is used as the accessible name for the control if no other accessible name is provided. So from the <a href="http://www.html5accessibility.com/tests/placeholder-labelling.html">placeholder attribute test page</a>, only in the first test is the placeholder text used, otherwise it is not exposed in the MSAA or UIA accessibility APIs.</p>
+<p><strong>code example</strong></p>
+<p><code>&lt;input type=text placeholder="poot"&gt;</code></p>
+<h2>Conclusion</h2>
+<p>Microsoft are doing things well in many respects, but there are 
+gaps.&nbsp; I particularly like the audio and video implementations 
+which make it much easier for keyboard users to operate the controls 
+without having to remember keyboard shortcuts. It is unfortunate though 
+that each browser that supports accessibility and supports the 
+placeholder attribute has implemented its use in accessible name 
+calculation <a href="http://www.html5accessibility.com/tests/placeholder-labelling.html">differently</a>, its a an interoperability nightmare for developers and users.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20HTML5%20accessibility%20support%20in%20IE%2010_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

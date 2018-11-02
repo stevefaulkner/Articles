@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: Block Links</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/06/html5-accessibility-chops-block-links/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: Block Links</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>It is <a href="http://html5doctor.com/block-level-links-in-html-5/">conforming in HTML5</a> for links to include block level elements such as headings and paragraphs, this was forbidden in previous versions of HTML. A <a href="http://simplyaccessible.com/article/html5-block-links/">recent article</a> by <a href="http://twitter.com/#!/feather">@feather </a>concludes that the inclusion of block level elements inside a link causes some Assistive Technology (AT) to misbehave.<span id="more-973"></span></p>
+<h3>Block Links in HTML5</h3>
+<p>The <a href="http://dev.w3.org/html5/spec-author-view/the-a-element.html#the-a-element">HTML5 specification</a> says:</p>
+<blockquote><p>The <code><a id="a_17" href="#the-a-element">a</a></code>
+ element may be wrapped around entire paragraphs, lists, tables, and so 
+forth, even entire sections, so long as there is no interactive content 
+within (e.g. buttons or other links).</p></blockquote>
+<p>Reading the article prompted me to dig a bit deeper into the issues: <a href="http://www.html5accessibility.com/tests/blocklink.html">HTML5 block link tests</a></p>
+<h3>Summary of results</h3>
+<p>I created some <a href="http://www.html5accessibility.com/tests/blocklink.html">test cases</a> to tease out the different behaviours I was finding from testing permuations of the example in @feather’s <a href="http://simplyaccessible.com/article/html5-block-links/">article</a>.</p>
+<ul>
+<li>JAWS, NVDA and Window Eyes all treat text in a link that is 
+contained both inside and outside of a block level element as separate 
+links when the user navigates through the content using the cursor keys.
+<ul>
+<li><code>&lt;a href="#"&gt;&lt;p&gt;link one&lt;/p&gt; link 2 &lt;/a&gt;</code></li>
+</ul>
+</li>
+<li>Jaws skips link content outside of the block level element when a 
+user navigates using the link shortcuts keys (in Internet Explorer 
+only).
+<ul>
+<li><code>&lt;a href="#"&gt;&lt;p&gt;link one&lt;/p&gt; <del>link 2</del> &lt;/a&gt;</code></li>
+</ul>
+</li>
+<li>NVDA announces ‘link’ for each line of text content in a link containing line breaks.</li>
+</ul>
+<p>VoiceOver has bugs that cause it to repeat link text in a number of 
+situations, 2 of which are unrelated to the change in conforming use of 
+the <a href="https://www.w3.org/TR/html5/text-level-semantics.html#the-a-element">a element</a> in HTML5:</p>
+<ol>
+<li>a link includes a text within <a href="https://developer.mozilla.org/en/HTML/Block-level_elements">block level element</a> and text in the link.
+<ol>
+<li><code>&lt;a href="#"&gt;&lt;p&gt;paragraph element&lt;/p&gt; and some text&lt;/a&gt;</code></li>
+</ol>
+</li>
+<li>a link includes both text and an image with a non empty alt attribute.
+<ol>
+<li><code>&lt;a href="#"&gt;link text and &lt;img src="tick.png" alt="image"&gt;&lt;/a&gt;</code></li>
+</ol>
+</li>
+<li>a link includes a line break.
+<ol>
+<li><code>&lt;a href="#"&gt;some text before a line brake &lt;br&gt; and some more text after.&lt;/a&gt;</code></li>
+</ol>
+</li>
+</ol>
+<p><strong>Note:</strong> Also found that in Firefox, the default 
+underline style for links is removed for text content inside a block 
+level element contained in a link.</p>
+<h3>Conclusion</h3>
+<p>A link should contain a brief description of the link target, the 
+possibility of links containing paragraphs of text is a potential issue 
+that requires users to speak up about. Main advice is to include the key
+ information at the start of a link. The current behaviour in the 
+Windows screen readers does not appear problematic or broken.&nbsp; The 
+VoiceOver issues are not due to inclusion of block level elements <em>per se</em>, but a symptom of a more general bug that needs to be fixed.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20Block%20Links_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

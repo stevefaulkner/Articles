@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>aria-labelledby and aria-describedby support in popular Windows browsers</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/06/aria-labelledby-aria-describedby-support-popular-windows-browsers/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">aria-labelledby and aria-describedby support in popular Windows browsers</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img alt="Internet Explorer" src="aria-labelledby%20and%20aria-describedby%20support%20in%20popular%20Windows%20browsers_files/ie.png" width="64" height="64">Back in 2010 I filed a bug on Internet Explorer about its lack of support for exposing the <a href="http://www.w3.org/TR/wai-aria/roles#namecalculation">calculated values</a> of <code>aria-labelledby</code> and <code>aria-describedby</code> in the MSAA accessibility API. After some <a href="http://lists.w3.org/Archives/Public/www-archive/2010Jul/thread.html#msg3">back and forth</a> a partial fix was implemented.<span id="more-2443"></span></p>
+<h2>Partial Fix</h2>
+<p>The upshot was that IE would correctly convey the name and description for an element if the elements referenced by the <code>aria-labelledby</code> and <code>aria-describedby</code> attributes were what IE classed as <a href="http://msdn.microsoft.com/en-us/library/ms528445%28v=VS.85%29.aspx#acc_elements">accessible HTML elements</a>. <a href="#notes">Notes from IE team on IE’s partial fix</a> (below) for details.</p>
+<p><strong>Note:</strong> Despite IE’s limited support, screen readers may still support <em>labelledby</em> and <em>describedby</em> in IE, depending on whether they have implemented their own workarounds.</p>
+<h2>Workarounds (added burdens)</h2>
+<p>Since 2010’s IE implementation I have been advocating the use of a 
+number of methods to work around the limitation in IE’s implementation.</p>
+<h3>Use of tabdindex=”-1″</h3>
+<p>This is the <a href="http://msdn.microsoft.com/en-us/library/ms528445%28v=VS.85%29.aspx#acc_elements">Microsoft documented method</a>:</p>
+<blockquote><p>You can make non-accessible elements accessible by specifying a value for the element’s TABINDEX attribute.</p></blockquote>
+<h4>Example:</h4>
+<pre><span>&lt;<span>p</span> <span>tabindex</span>=<span>"-1"</span> <span>id</span>=<span>"label-1"</span>&gt;</span>label text<span>&lt;/<span>p</span>&gt;</span>
+...
+<span>&lt;<span>input</span> <span>type</span>=<span>"text"</span> <span>aria-labelledby</span>=<span>"label-1"</span>&gt;</span></pre>
+<h3>Use of the &lt;label&gt; element</h3>
+<p>The &lt;label&gt; element works (although not listed as an accessible
+ element) and usually descriptions associated with controls are extended
+ labels</p>
+<h4>Example:</h4>
+<pre><span>&lt;<span>input</span> <span>type</span>=<span>"text"</span> <span>aria-describedby</span>=<span>"desc-1"</span>&gt;</span>
+...
+<span>&lt;<span>label</span> <span>id</span>=<span>"desc-1"</span>&gt;</span>instructions<span>&lt;/<span>label</span>&gt;</span></pre>
+<p>Of late I have dropped the <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#the-label-element">&lt;label&gt;</a> element advocacy as it was viewed as a misuse of &lt;label&gt; by some in the web standards community.</p>
+<h2>Where are we at in 2014?</h2>
+<p>Following a <a href="http://lists.w3.org/Archives/Public/public-pfwg/2014Jun/thread.html#msg36">recent discussion</a> I have <a href="http://www.html5accessibility.com/tests/aria-labelledby-input.html">tested support in popular <em>modern</em> browsers</a> on Windows</p>
+<h3><strong>Summary</strong></h3>
+<ul>
+<li><strong>Firefox 29 supports</strong> <code>aria-labelledby</code> and <code>aria-describedby</code> with single or multiple <code>id</code> references.</li>
+<li><strong>Chrome 35 supports</strong> <code>aria-labelledby</code> and <code>aria-describedby</code> with single or multiple <code>id</code> references.</li>
+<li><strong>IE 11 does not support</strong> <code>aria-labelledby</code> or <code>aria-describedby</code> with single or multiple <code>id</code> references <strong>unless</strong>
+ the referenced element is what Microsft classes as an accessible 
+element. IE non accessible elements can be made into accessible elements
+ by the addition of <code>tabindex="-1"</code> as documented or via the addition of an ARIA <code>role</code> (when appropriate).</li>
+</ul>
+<p>A new <a href="https://connect.microsoft.com/IE/feedback/details/893109/limited-support-for-aria-labelledby-and-aria-describedby-in-ie">Internet Explorer bug</a> has been filed</p>
+<h2 id="notes" tabindex="-1">Notes from IE team on IE’s partial fix (2010)</h2>
+<p>This is the text from the response by the IE team to the bug I filed (note: <a href="https://connect.microsoft.com/IE/feedback/details/555280/ie-platform-preview-does-not-support-multiple-values-in-aria-labelledby-and-does-not-support-aria-describedby">actual bug</a> is no longer available)</p>
+<blockquote><p>As we evaluated this bug report and the repro page, we found that the test cases failed because of three different issues:</p>
+<p>1.When presented with multiple labeledby and describedBy elements IE 
+did not concatenate the values from those elements into the MSAA name or
+ description.</p>
+<p>2.When an element contained a native accessibility attribute (title 
+or alt) the aria-labeledBy and describedBy attributes did not take 
+precedence over the native attributes.</p>
+<p>3.The value of the elements pointed at by the aria-labeledby and 
+describedby is only available to the accessibility properties if the 
+elements themselves are accessible objects.<span>&nbsp; </span>Not all IE elements are accessible objects as is described here: <a href="http://msdn.microsoft.com/en-us/library/ms528445%28v=VS.85%29.aspx#acc_elements" target="_blank">http://msdn.microsoft.com/en-us/library/ms528445(v=VS.85).aspx#acc_elements</a> (*Note – I have asked Cullen to check this documentation as I’m not sure how accurate it is but it was the best I could find.<span>&nbsp; </span>It doesn’t mention that adding an aria-role to an element also makes it accessible.)</p>
+<p>We fixed the first two issues. IE9 will now concatenate the value of 
+multiple labeledby/describedby elements and use labeledby/described by 
+to trump native accessibility attributes if the labeledby/describedby 
+elements are accessible objects.<span>&nbsp; </span>The list of elements which are automatically accessible objects is here: <a href="http://msdn.microsoft.com/en-us/library/ms528445%28v=VS.85%29.aspx#acc_elements" target="_blank">http://msdn.microsoft.com/en-us/library/ms528445(v=VS.85).aspx#acc_elements</a> and you can easily make any other element an accessible object by adding a tabindex or an aria role to it.<span>&nbsp; </span></p>
+<p>While we investigated fixes for the third issue, it will not be resolved in IE9.<span>&nbsp; </span>However, we will revisit this in the future.<span>&nbsp; </span>Since the test page requires all three issues to be fixed, you won’t see the expected behavior on that page.<span>&nbsp; </span>The
+ workaround is to add a role=’tooltip’ attribute on elements l1, l2, l3,
+ d1 and d2 on the test page then you will see all the tests working.</p>
+<p><span>Regards, The Microsoft Connect Team.</span></p></blockquote>
+
+					</article><div id="entry-author-info">
+							<p><img alt="" src="aria-labelledby%20and%20aria-describedby%20support%20in%20popular%20Windows%20browsers_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>WAI-ARIA role support – How the MAC browsers stack up</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2009/03/wai-aria-role-support-how-the-mac-browsers-stack-up/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">WAI-ARIA role support – How the MAC browsers stack up</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>For the roles defined in WAI-ARIA it is expected that browsers 
+expose the role values via an accessibility API, on the Apple OS X 
+platform the information is exposed using the <a href="http://developer.apple.com/DOCUMENTATION/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXModel/OSXAXmodel.html#//apple_ref/doc/uid/TP40001078-CH208-TPXREF101">Mac OS X Accessibility Protocol</a>.
+ Use of an Accessibility API means that Assistive Technology can access 
+the role information ARIA provides employing the same methods they use 
+to access role information of native HTML and desktop controls.</p>
+<p>Therefore an important piece of the ARIA support puzzle on a MAC OS 
+is the support browsers have for exposing ARIA roles using the The Mac 
+OS X Accessibility Protocol.</p>
+<p>The study <a href="http://www.paciellogroup.com/blog/aria-tests/ARIA-MACRoleTests.html">ARIA role tests on MAC</a> provides tests of the major browsers available for MAC OS X.</p>
+<h3><a href="http://www.paciellogroup.com/blog/aria-tests/ARIA-MACRoleTests.html">ARIA role tests on MAC – Safari 4 beta Firefox 3 (minefield) &amp; Opera 10 Alpha</a> – Summary</h3>
+<p>WAI-ARIA has 59 possible role values (excluding abstract roles):</p>
+<ul>
+<li>Firefox (Minefield) 3.2a1pre exposes <strong>0</strong> role values correctly via the MAC accessibility API</li>
+<li>Opera 10 Alpha exposes <strong>14</strong> role values correctly via the MAC accessibility API</li>
+<li>Safari 4 Beta exposes <strong>15</strong> role values correctly via The MAC accessibility API</li>
+</ul>
+<h2>Notes:</h2>
+<p>The inital motivation for collecting this data was a post by Roger Johansson – <a href="http://www.456bereastreet.com/archive/200903/safari_4_public_beta_with_wai-aria_support_or_not/">Safari 4 public beta with WAI-ARIA support. Or not?</a>,
+ which prompted me to start looking more at how ARIA is supported by 
+Safari on MAC. (thanks Roger!) I was also mindful of the use of such 
+information in general terms for helping to work out which bit of the 
+implementation is broken; Is it my code or the browser or the assistive 
+tech that is not working as it should? Furthermore as part of my work 
+for the <a href="http://www.w3.org/WAI/PF/">W3C Protocols and Formats Working Group</a>, who are responsible for the <a href="http://www.w3.org/TR/wai-aria/">WAI ARIA</a> specification, I thought this information would be a useful resource.</p>
+<p>Yesterday’s post<a href="https://developer.paciellogroup.com/blog/2009/03/?p=114" rel="bookmark"> WAI-ARIA role support – How the browsers stack up</a> lead to some <a href="http://weblogs.mozillazine.org/asa/archives/2009/03/apple_doesnt_ca.html">unfortunate statements being made</a>
+ about the relative priorities of browser vendors when it comes to 
+accessibility. While I do think when it comes to accessibility and 
+support for WAI ARIA in particular, Mozilla leads the pack and Microsoft
+ is doing good work (some may think suprisingly), all browser vendors 
+are making an effort to support WAI ARIA and in the process improving 
+the general accessibility of their browsers and web content to Assistive
+ Technology.</p>
+<p>In regards to Google chrome: I wrote about the <a href="http://www.paciellogroup.com/blog/?p=92">Accessibility of Google Chrome</a> when it was first released, which I think was and still is underwhelming, but <a href="http://www.linkedin.com/in/jonasklink">Jonas Klink</a> from Google has been doing some great work , details of which can be found in the Chrome <a href="http://sites.google.com/a/chromium.org/dev/developers/design-documents/accessibility">Accessibility Design and Implementation Roadmap</a>. It would be nice though, to see Google put more resources into Chrome accessibility…</p>
+<p>So all in all we are moving in the right direction, while some are moving slower than others, they are still moving.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="WAI-ARIA%20role%20support%20%E2%80%93%20How%20the%20MAC%20browsers%20stack%20up_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

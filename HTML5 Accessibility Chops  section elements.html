@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: section elements</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/03/html5-accessibility-chops-section-elements/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: section elements</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>HTML5 introduces new <a href="http://dev.w3.org/html5/spec-author-view/sections.html">section elements</a>. The new elements include <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-header-element">header</a>, <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-footer-element">footer</a>, <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-section-element">section</a>, <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-article-element">article</a>, <a href="http://dev.w3.org/html5/spec/sections.html#the-nav-element">nav</a> and <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-aside-element">aside</a>. What is the accessibility potential of these new elements for users of assistive technology such as screen readers?<span id="more-794"></span><br>
+To understand the potential of these new elements to provide a better 
+experience for screen reader users it is useful to understand how the 
+semantics of current structural elements such as the  <a href="http://dev.w3.org/html5/spec-author-view/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements"><code>h1</code>, <code>h2</code>,   <code>h3</code>, <code>h4</code>,   <code>h5</code>, and <code>h6</code></a> elements is exposed to users.</p>
+<h3>How HTML elements are supported by screen readers</h3>
+<p>Typical support patterns of HTML elements by screen readers:</p>
+<ul>
+<li>Identification of an element by role as the user moves through the content.</li>
+<li>Announcement of the text content of an element.</li>
+<li>Announcement of the start and end of an element.</li>
+<li>Change in voice as the content of an element is announced.</li>
+<li>Announcement of an elements accessible name and/or description</li>
+<li>Announcement of states and properties.</li>
+<li>Emission of a beep or other sound when an element with a particulat state or property receives <a href="http://juicystudio.com/article/making-ajax-work-with-screen-readers.php#jawsvirtual">virtual focus</a>.</li>
+<li>Instructions on how to operate interactive elements such as form controls.</li>
+<li>Navigation of elements by keyboard and “quick access” lists of a 
+particular elements, list items are linked to each instance of an 
+element on the page.</li>
+</ul>
+<p><strong>Note:</strong> The combination of patterns supported varies 
+from element to element and support for a particular element varies 
+between screen reader software.</p>
+<h3>Examples of HTML element support by screen reader software</h3>
+<p>The following table illustrates support and interaction features for a
+ number of structural HTML elements. The information is based on support
+ for these elements by the <a href="http://www.freedomscientific.com/products/fs/jaws-product-page.asp">JAWS screen reader</a>.</p>
+
+<h3>What form will support for the new HTML5 section elements take?</h3>
+<blockquote><p>Authors can already apply ARIA roles to <a href="http://dev.w3.org/html5/spec-author-view/sections.html#sections">section elements</a> where appropriate.</p></blockquote>
+<p>One possibility is that the elements can be mapped to WAI-ARIA roles,
+ most of which are supported by screen readers now. Browser implementors
+ are starting to add <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=610650">experimental support</a> for some of the new elements. Authors can already apply ARIA roles to <a href="http://dev.w3.org/html5/spec-author-view/sections.html">section elements</a> where appropriate:</p>
+<p><strong>Note: </strong>there are <a href="http://www.accessibleculture.org/research/html5-aria/">some issues</a> with outdated buggy assistive technology not playing well with HTML5 elements on their own or when ARIA roles are added.</p>
+
+<h3>ARIA Landmark Roles</h3>
+<p>A subset of HTML5 section elements map onto <a href="http://www.paciellogroup.com/blog/2010/10/using-wai-aria-landmark-roles/">ARIA landmark roles</a>.
+ Landmark roles already have good support in screen reader such as JAWS,
+ VoiceOver (on iOS), NVDA and Orca. So when implemented in browsers some
+ of the new section elements will be included as ARIA Landmarks without 
+the need to explicitly apply an ARIA role attribute. For the other new 
+section elements, how and when they will be accessibility supported is 
+less clear.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20section%20elements_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

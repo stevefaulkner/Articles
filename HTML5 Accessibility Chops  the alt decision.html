@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: the alt decision</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/04/html5-accessibility-chops-the-alt-decision/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: the alt decision</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">50-63 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>A <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0451.html">recent decision</a> by the <a href="http://www.w3.org/html/wg/">W3C HTML working group</a> has caused <a href="http://twitter.com/#%21/search/%23html5%20%23a11y">much discussion</a> and some consternation within the accessibility community and wider web development community.</p>
+
+<h2>If you want change get involved!</h2>
+<p>As per W3C policy the decision made by the HTML working group is not 
+the end of the road. It can be re-opened or a formal objection can be 
+lodged. Both of these options are being actively pursued by the <a href="http://www.w3.org/WAI/PF/html-task-force">HTML working group accessibility taskforce</a>. Anybody can join the <a href="http://www.w3.org/html/wg/#who">HTML working group</a> and participate in the continuing development of HTML5 and beyond. Also the <a href="http://dev.w3.org/html5/spec/spec.html">HTML5 specification</a> will be going into <a href="http://lists.w3.org/Archives/Public/public-html/2010Sep/0074.html">Last Call</a> next month, at this stage public comment will be invited. But you can comment on the spec at any time using <a href="http://dev.w3.org/html5/spec/spec.html#status-of-this-document">the form</a> at the top of the spec or via the <a href="mailto:public-html-comments@w3.org">public mailing list</a>.</p>
+<h3>What does the decision mean?</h3>
+<h4><a href="#d1">The presence of aria-labelledby does not make missing alt conforming:</a></h4>
+<p>HTML validators <strong>WILL</strong> flag this as an error:</p>
+<pre><strong><span>&lt;<span>img</span> <span>src</span>=<span>"chart.gif"</span> <span>aria-labelledby</span>=<span>"a1"</span>&gt;</span></strong>
+<span>&lt;<span>p</span> <span>id</span>=<span>"a1"</span>&gt;</span>description of data in chart<span>&lt;/<span>p</span>&gt;</span></pre>
+<h4><a href="#d2">The presence of role=presentation does not make missing alt conforming.</a></h4>
+<p>HTML5 validators <strong>WILL</strong> flag this as an error:</p>
+<pre><strong><span>&lt;<span>img</span> <span>src</span>=<span>"spacer.gif"</span> <span>role</span>=<span>"presentation"</span>&gt;</span></strong></pre>
+<h4><strong><a href="#d3">The presence of &lt;meta name=generator&gt; makes missing alt conforming.</a></strong></h4>
+<p>HTML5 validators <strong>WILL NOT</strong> flag this as an error:</p>
+<pre><span>&lt;!DOCTYPE HTML&gt;</span>
+<span>&lt;<span>html</span>&gt;</span>
+<span>&lt;<span>head</span>&gt;</span>
+ <span>&lt;<span>title</span>&gt;</span>photos<span>&lt;/<span>title</span>&gt;</span>
+ <span>&lt;<span>meta</span> <span>name</span>=<span>generator</span>&gt;</span>
+<span>&lt;/<span>head</span>&gt;</span>
+<span>&lt;<span>body</span>&gt;</span>
+<strong><span>&lt;<span>img</span> <span>src</span>=<span>"dsksk231.jpg"</span>&gt;</span></strong>
+<span>&lt;/<span>body</span>&gt;</span>
+<span>&lt;/<span>html</span>&gt;</span></pre>
+<h4><a href="#d5">The presence of title makes missing alt conforming.</a></h4>
+<p>HTML5 validators <strong>WILL NOT</strong> flag this as an error:</p>
+<pre><strong><span>&lt;<span>img</span> <span>src</span>=<span>"chart.gif"</span> <span>title</span>=<span>"poot"</span>&gt;</span></strong></pre>
+<h4><a href="#d6">The presence of figcaption makes missing alt conforming.</a></h4>
+<p>HTML5 validators <strong>WILL NOT</strong> flag this as an error:</p>
+<pre><span>&lt;<span>figure</span>&gt;</span>
+<strong><span>&lt;<span>img</span> <span>src</span>=<span>"dsksk231.jpg"</span>&gt;</span></strong>
+<span>&lt;<span>figcaption</span>&gt;</span>photo dsksk231.jpg<span>&lt;/<span>figcaption</span>&gt;</span>
+<span>&lt;/<span>figure</span>&gt;</span></pre>
+<h2>The decision</h2>
+<p>The decision is long, multi-faceted and complex, reading it in a 
+plain text email I found problematic so I have produced an HTML version 
+of the W3C HTML working group <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0451.html">decision on alt validity requirements</a>.</p>
+<p><strong>NOTE: </strong>The text has been re-ordered the first 3 
+sections below “Decision of the Working Group”, “Appealing this 
+Decision” and “Revisiting the Issue” are at the end of the text in the <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0451.html">original document</a>. They are placed at the top here, as they provide a summary of the decision and what can be done to change the decision.</p>
+<h3>Decision of the Working Group</h3>
+<p>Therefore, the HTML Working Group hereby decides that:</p>
+<ul>
+<li><a href="#d1">The presence of aria-labelledby does not make missing alt conforming.</a></li>
+<li><a href="#d2">The presence of role=presentation does not make missing alt conforming.</a></li>
+<li><a href="#d3">The presence of &lt;meta name=generator&gt; makes missing alt conforming.</a></li>
+<li><a href="#d4">Use of private communications does not, in itself, make missing alt conforming.</a></li>
+<li><a href="#d5">The presence of title makes missing alt conforming.</a></li>
+<li><a href="#d6">The presence of figcaption makes missing alt conforming.</a></li>
+</ul>
+<p>The two Change Proposals closest to these results are those identified as <a href="http://lists.w3.org/Archives/Public/public-html/2010Jul/0050.html">Requirement Set 1</a> and <a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100707">Requirement Set 4</a>:
+ These Change Proposals agree with each other and with the WG decision 
+on aria-labeldby, role=presentation and figcaption. On the generator 
+mechanism and the title attribute, <a href="http://lists.w3.org/Archives/Public/public-html/2010Jul/0050.html">Requirement Set 1</a> aligns with the WG decision: On the email exception, <a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100707">Requirement Set 4</a> aligns with the WG decision:</p>
+<p>Thus, overall, the WG adopts the Requirement Set 1 proposal with 
+regards to aria-labelledby, role=presentation, &lt;meta 
+name=generator&gt;, title and figcaption; but Requirement Set 4 with 
+regards to the email exception.</p>
+<h3>Appealing this Decision</h3>
+<p>If anyone strongly disagrees with the content of the decision and 
+would like to raise a Formal Objection, they may do so at this time. 
+Formal Objections are reviewed by the Director in consultation with the 
+Team. Ordinarily, Formal Objections are only reviewed as part of a 
+transition request.</p>
+<h3>Revisiting this Issue</h3>
+<p>This issue can be reopened if new information comes up.</p>
+<p>Examples of possible relevant new information include:</p>
+<ul>
+<li>Use cases that specifically require the use of aria-labelledby with alt omitted.</li>
+<li>Use cases that specifically require the use of role=presentation with alt omitted.</li>
+<li>Examples of authors mistakenly or deliberately omitting alt when 
+they might have otherwise, due to the generator mechanism exception.</li>
+<li>Evidence that a great number of authoring tools are making wide use 
+of the generator exemption, and that this interferes with proper 
+inclusion of alt. (A list of possible generator values was provided in a
+ Change Proposal, but there was no explanation of where it came from. 
+Testing of content generators or direct statements of intent from 
+implementors would provide sufficient evidence.)</li>
+<li>A demonstrated trend towards more authoring tools fully supporting 
+ATAG2, including the requirement to prompt for textual equivalents for 
+images.</li>
+<li>Examples of actual users who hand-author HTML emails incorporating images, and would find it overly burdensome to include alt.</li>
+<li>Examples of other uses for the private communication exemption that are not covered by other exemptions.</li>
+<li>Evidence that the number of implementations exposing title in an 
+accessible way is decreasing, or that some existing implementations are 
+unwilling or unable to expose it in an accessible way.</li>
+<li>Evidence that implementations are unwilling or unable to expose the figcaption association to assistive technologies.</li>
+</ul>
+<h2>The decision in detail</h2>
+<p><strong>The decision follows.</strong> The chairs made an effort to 
+explicitly address all arguments presented in the Change Proposals on 
+this topic in addition to arguments posted as objections in the poll.</p>
+<h2>Question before the Working Group</h2>
+<p><strong>There is a basic disagreement in the group on the validity requirements for alt.</strong></p>
+<p>The result was two issues, six change proposals, and a straw poll for objections:</p>
+<h3>2 issues</h3>
+<ul>
+<li><a href="http://www.w3.org/html/wg/tracker/issues/31">http://www.w3.org/html/wg/tracker/issues/31</a></li>
+<li><a href="http://www.w3.org/html/wg/tracker/issues/80">http://www.w3.org/html/wg/tracker/issues/80</a></li>
+</ul>
+<h3>6 change proposals</h3>
+<ul>
+<li><a href="http://lists.w3.org/Archives/Public/public-html/2010Jul/0050.html">http://lists.w3.org/Archives/Public/public-html/2010Jul/0050.html</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20090126">http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20090126</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100706">http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100706</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100707">http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100707</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100510">http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100510</a></li>
+<li><a href="http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100504">http://www.w3.org/html/wg/wiki/ChangeProposals/ImgElement20100504</a></li>
+</ul>
+<h3>1 straw poll</h3>
+<ul>
+<li><a href="http://www.w3.org/2002/09/wbs/40318/issue-31-80-validation-objection-poll/results">http://www.w3.org/2002/09/wbs/40318/issue-31-80-validation-objection-poll/results</a></li>
+</ul>
+<p><strong>Note: </strong>other aspects of these issues included other Change Proposals and led to separate polls.</p>
+<h3>Points in Dispute</h3>
+<p>Six separate markup features were proposed as possible exemptions to 
+the general requirement to specify an alt attribute. In other words, for
+ each construct, there was a proposal that it is a conforming 
+replacement for alt. Each proposal had separate pro and con arguments, 
+but the structure of each dispute was broadly similar:</p>
+<ul>
+<li>For each construct, some argued that there is a valid use case for 
+allowing this particular exemption, which cannot be satisfied in any 
+other way.</li>
+<li>In many cases, the validity of proposed use cases was disputed. It 
+was argued that the use case is improper or should not be served.</li>
+<li>In many cases, there were objections based on redundancy; it was claimed that other mechanisms can serve the same use cases.</li>
+<li>Notwithstanding use cases, many objections indicated that Omitting 
+alt may have negative consequences, and that tese could be worse than 
+the consequences of denying a use case.</li>
+</ul>
+<p>These lines of argument all have some validity. However, for the 
+various proposed exemptions, the balance of the arguments was affected 
+by the specific details of that exemption. The Chairs made an effort to 
+evaluate the arguments in a consistent way.</p>
+<p>In particular, if strong objections establish a valid, non-redundant 
+use case for omitting alt in a specific case, even after accounting for 
+objections based on validity or redundancy, then the bar for negative 
+consequences was fairly high. The negative consequences claimed would 
+have to constitute stronger objections than objections based on failing 
+to serve the use case.</p>
+<p>On the other hand, if no valid use cases were established for a 
+particular case of omitting alt, or if there were strong objections 
+based on validity or redundancy, then the bar for negative consequences 
+was fairly low. Even relatively weak objections based on negative 
+consequences could prevail in such a case.</p>
+<p><strong>Examining the individual questions:</strong></p>
+<h3 id="d1">Should it be permitted to omit alt when an aria-labelledby attribute is specified?</h3>
+<p>At least one Change Proposal argued that when the aria-labelledby 
+attribute is specified, it should be permitted to omit the alt 
+attribute.</p>
+<p>A Change Proposal argued that aria-labelledby has a valid use case:</p>
+<blockquote><p>For visual users an image can have an implied label due 
+to proximity and placement in relation to the image. The aria-labelledby
+ attribute provides a method to explicitly associate a text alternative 
+with an image, like the alt attribute.</p>
+<p>The difference being that the text is available to all by default 
+facilitating universal design. This technique would be especially useful
+ for image galleries with the developer adding the aria-labelledby 
+attribute to the template. Author adding a text alternative via a text 
+field.</p></blockquote>
+<p>No one disputed the need to serve these use cases.</p>
+<p>Thus, the need to serve these use cases was established as valid and could potentially make for a strong objection.</p>
+<p>However, one survey comment argued (paraphrasing) that it’s not 
+necessary to allow missing alt when aria-labelledby is also specified; 
+authors already have options that satisfy these use cases.</p>
+<p>Furthermore, responses on other survey questions proposed figcaption to serve similar use cases.</p>
+<p>No one disputed the claims of redundancy. Thus, the arguments based on redundancy are a strong objection.</p>
+<p>Overall, then, while omitting alt when aria-labelledby is specified 
+was found to have valid use cases, it was also found to be redundant 
+with other constructs. Therefore, the bar for establishing negative 
+consequences is low in this case.</p>
+<p>Attention then turns to whether there are negative consequences 
+omitting alt when aria-labelledby is specified. One argument was that 
+it’s problematic to let ARIA affect the conformance of non-ARIA 
+constructs:</p>
+<blockquote><p>The aria-labelledby=”” attribute should be allowed, but 
+should not affect conformance criteria of non-ARIA content since ARIA is
+ only an annotation mechanism for accessibility APIs.</p></blockquote>
+<p>And similarly:</p>
+<blockquote><p>Not having any mention of technologies from other layers,
+ e.g. ARIA or RDFa, prevents layering violations and avoids abusing 
+annotation technologies for core conformance.</p></blockquote>
+<p>These objections lacked specifics on the harm that would be caused, so was relatively weak, but no one disputed them.</p>
+<blockquote><p>To permit the omission of @alt because there is 
+@aria-labelledby, is a permission to omit the @alt of a 
+non-presentational image. I believe there should never be permission to 
+drop @alt on any non-presentational image as it represents a 
+complication of the rules that authors have to cope with…</p></blockquote>
+<p>This objection is moderate in strength. Complexity is a valid objection to features that have no valid, unique use cases.</p>
+<p>Although the objections based on negative consequences ranged from 
+relatively weak to moderately strong, aria-labelledby was established to
+ be redundant, and so the bar for negative consequences was low.</p>
+<p>Therefore, on balance, the proposal to still require alt when 
+aria-labelledby is specified drew weaker objections, compared to the 
+proposal to allow alt to be omitted when aria-labelledby is present. 
+Specific problems of varying severity were identified. Combined with the
+ fact that omitting alt when aria-labelledby is specified was found to 
+be redundant for its use cases, this constitutes a strong objection.</p>
+<h3 id="d2">Should it be permitted to omit alt when role=presentation is specified?</h3>
+<p>At least one Change Proposal argued that when the role attribute is 
+specified with a value of “presentation”, it should be permitted to omit
+ the alt attribute.</p>
+<p>The case for allowing role=presentation to replace alt was relatively limited:</p>
+<blockquote><p>Why allow role=”presentation” to act as an alternative to alt=””?</p>
+<p>It is specified and implemented to do what alt=”” is specified to do.
+ It is non specific, it works on all elements. As per the rules 
+specified in current spec pertaining to its use [24], the use of 
+role=”presentation” is not dis-allowed on the img element it is in fact 
+stated that it is the only role that can be applied to an img that has 
+an alt=””…</p></blockquote>
+<p>This was the only argument presented, and it does not seem to state a
+ use case that specifically requires role=presentation instead of alt 
+with an empty value. It argues that the role=presentation exemption 
+*could* be allowed, but it doesn’t make the case that it *should* be 
+allowed, or that there is any problem caused by disallowing. Thus, this 
+was taken to be a weak objection.</p>
+<p>Since no effective case was made that omitting alt when 
+role=presentation is specified has a non-redundant, valid use case, the 
+bar for establishing negative consequences was extremely low.</p>
+<p>A number of Change Proposal and survey comments objected to allowing 
+alt to be left off when role=presentation is specified. One comment 
+argued that this state is self-contradictory:</p>
+<blockquote><p>I object to allowing role=”presentation” to be specified 
+without an alt=”” attribute because it would allow a state that is 
+contradictory. Making a page self-contradictory is an authoring mistake.
+ Authoring conformance criteria should help authors catch mistakes.</p></blockquote>
+<p>This objection was moderately weak, as it lacks detail. Why is it 
+self-contradictory to allow role=”presentation” without an alt=”” 
+attribute, but apparently not self-contradictory to allow alt=”” without
+ role=”presentation”?</p>
+<p>On the other hand, no one disputed this argument.</p>
+<p>Another comment objected to the role=presentation exemption on the basis of simplicity:</p>
+<blockquote><p>We should have a simple rule that img role requires a 
+empty @alt when the role is presentational, regardless of whether the 
+presentational role is explicit or implicit.</p></blockquote>
+<p>And another objection along similar lines also argued for a simpler rule:</p>
+<blockquote><p>By permitting role=presentation as a full replacement for
+ the empty alt, we – for no good reason – takes away the focus on 
+correct use of @alt, and this – in a situation where @role can *help 
+authors* to use @alt as intended. By insisting that there must be an 
+empty alt even when there is a role=presentation, we are consequent with
+ regard to what has been the rule until now. We are stable.</p></blockquote>
+<p>These objections are moderate in strength. Complexity is a valid 
+objection to features that have no valid, unique use cases. Another 
+objection (framed as a positive effect for a different proposal) made a 
+point related to simplicity, namely that ARIA should not affect the 
+non-ARIA validation rules:</p>
+<blockquote><p>Not having any mention of technologies from other layers,
+ e.g. ARIA or RDFa, prevents layering violations and avoids abusing 
+annotation technologies for core conformance.</p></blockquote>
+<p>This was taken to be a weak objection in itself, since it presents no
+ details of the claimed layering violations or abuse. However, the 
+following comment provides more detail on the problems that could be 
+created by such layering violations:</p>
+<blockquote><p>Lack of @alt in combination with role=presentation, in 
+general poses no issue to sighted users, unless the @src URL is rotten 
+or image display is not supported or temporarily disabled (during page 
+load). In that case, then user agents generates replacement text such as
+ [image] for the lacking alt. Sighted users are able to live with this, 
+although they may perceive the image to be an important one rather than a
+ presentational one, and if there are many, it disturbs. Users may see 
+the @alt text while the page loads etc. Should validation ignore such 
+issues? I don’t think so. By setting the role to “presentation”, these 
+problems are hidden from users of ARIA supporting AT. And this fine. 
+However validators should help authors. More precisely they should help 
+them to care for also those user groups that are disturbed by the lack 
+of empty @alt on presentational images and also to avoid visual 
+annoyance that they themselves may care for. And it should help authors 
+to author consequent markup. And should therefore complain about the 
+lack of an empty @alt for images with role=presentation.</p></blockquote>
+<p>This is a moderately strong objection. It provides specific examples 
+of the problems that could be created by specifying role=presentation 
+without explicitly specifying empty alt=””. This is somewhat weakened by
+ the fact that these problems are mostly minor and only affect edge 
+cases.</p>
+<p>Yet another objection argues:</p>
+<blockquote><p>Consider a GUI authoring tool used by end-users, not 
+professional Web developers or content authors. Such tools generate 
+&lt;img&gt; elements, but it is not always appropriate for such tools to
+ pause and demand alt text from the user before continuing. Expecting 
+such a tool to generate role=presentation instead of its current 
+behavior (generating no alt attribute) results in unnecessarily verbose 
+markup for no additional benefit.</p></blockquote>
+<p>This objection seems somewhat tangential to the point, but is taken 
+as weak supporting evidence that there is not a strong use case for 
+role=presentation without alt being specified. Although the objections 
+based on negative consequences ranged from weak to only moderately 
+strong, omitting alt when role=presentation is specified was not found 
+to have any valid, non-redundant use cases, and so the bar for negative 
+consequences was extremely low.</p>
+<p>Overall, the proposal to still require alt when role=presentation is 
+specified drew weaker objections, compared to the proposal to allow alt 
+to be omitted when role=presentation is present. Specific problems of 
+varying severity were identified. Combined with the fact that there was 
+no clearly identified use case that specifically required use of 
+role=presentation without alt, this constitutes an overall strong 
+objection.</p>
+<h3 id="d3">Should it be permitted to omit alt when the generator mechanism is present?</h3>
+<p>At least one Change Proposal argued that when a page is created by an
+ automated content generation tool, and that tool indicates this using 
+&lt;meta name=generator&gt;, it should be permitted to omit the alt 
+attribute.</p>
+<p>It was argued that there was a valid use case for the generator 
+exemption, namely automated content generators which cannot produce alt 
+themselves and for various reasons cannot or will not demand alt from 
+the user. The following objection, though entered for role=presentation,
+ directly argues one such use case:</p>
+<blockquote><p>Consider a GUI authoring tool used by end-users, not 
+professional Web developers or content authors. Such tools generate 
+&lt;img&gt; elements, but it is not always appropriate for such tools to
+ pause and demand alt text from the user before continuing.</p></blockquote>
+<p>Several objectors cited this use case, and further pointed out that 
+if content generators are forced to generate nonconforming markup to 
+satisfy this use case, they may instead enter bogus alt values, which 
+would merely exacerbate the problem:</p>
+<blockquote><p>If an authoring tool or other generator does not have 
+sufficient information to include either alternative text or a caption, 
+there is nothing the tool can do. If we say that in those cases the 
+authoring tool would be non-conforming if it didn’t provide alternative 
+text or a caption, then the tool will just provide bogus (placebo) 
+alt=”” attribute values, which just makes the problem 
+non-machine-detectable instead. To address this, therefore, we should 
+allow generator tools to include images without alternative text or 
+captions if absolutely necessary.</p></blockquote>
+<p>Also:</p>
+<blockquote><p>I object to treating the absence of the alt attribute as a
+ validation error when the generator mechanism is used, because if it is
+ treated as an error in that case, generator developers are incented to 
+generate bogus values in order to make their products emit markup that 
+doesn’t trigger errors. (There are always generator developers who want 
+to make the output of their programs validate.)</p></blockquote>
+<p>The use case of GUI tools that do not prompt for alt seems well established.</p>
+<p>Some disputed the validity of the use case. For example, it was argued that:</p>
+<blockquote><p>Application developers should follow ATAG <a href="http://www.w3.org/TR/ATAG20/">http://www.w3.org/TR/ATAG20/</a></p></blockquote>
+<p>However, it’s clear that there are tools which do not follow ATAG in 
+this respect, and no evidence was provided that this would change.</p>
+<p>A more detailed form of this argument was also made:</p>
+<blockquote><p>When an authoring tool doesn’t have anything useful to 
+put in for the alt text, the tool shouldn’t put anything in. A good 
+authoring tool will check for missing alt text and offer to assist the 
+user in repairing the content. If an author is adamant they’re not going
+ to provide alt text, there is no requirement that says the authoring 
+tool should provide it in place of the author. In fact, it’s just the 
+opposite, as the authoring tool could not possibly know the author’s 
+intent. In this scenario, the authoring tool should not include the alt 
+attribute at all, and the resulting markup should be considered invalid.
+ It should be considered invalid because it is inaccessible, and not 
+perceivable by some people. If the tool allows alt text to be provided, 
+then the tool would be considered compliant (on this particular issue), 
+even though the resulting markup would not be compliant, as the user 
+chose not to make the content compliant.</p></blockquote>
+<p>This argument is based on what tools *should* do, but in practice 
+often don’t. Since no evidence was provided that common practice is 
+changing, this was taken to be a weak objection.</p>
+<p>Another commenter makes the case more explicitly:</p>
+<blockquote><p>Unfortunately, despite what the specification says, users
+ will consider an authoring tool non-conforming (buggy) if the documents
+ it outputs are not flagged as conforming by validators.Therefore we 
+need a way for validators and authoring tools to coordinate so that 
+validators will not criticise conforming authoring tools when a problem 
+(in this case missing alternative text) is the user’s fault and not the 
+author tool’s. The simplest solution here is to reuse the existing 
+document-wide flag that indicates that a document was created by an 
+authoring tool, and have conformance checkers silently ignore the 
+missing alternative text in that situation (or at least phrase the error
+ in a way to indicate that the authoring tool is not to blame).</p></blockquote>
+<p>Once again, this argument didn’t give specific examples of the 
+claimed bad incentive, so it was relatively weak. It is noteworthy 
+however that several respondents took this incentive structure as a 
+given, and none denied that it exists.</p>
+<p>After considering all these arguments, it seems established that 
+there is a valid use case for allowing the alt attribute to be omitted 
+when the generator mechanism is specified. This use case makes for a 
+moderately strong objection. However, the claim of negative consequences
+ to disallowing this use case was somewhat weakened by the lack of 
+concrete evidence that bogus values have been used in the past or would 
+be used in the future. So overall, this makes for a medium objection.</p>
+<p>Some of the objections based on validity could also, in theory, be 
+interpreted as objections based on redundancy. In particular, arguing 
+that authoring tools should just generate invalid content seems to argue
+ that producing invalid content is sufficient to address the use 
+case.However, since the question is one of conformance for authors and 
+authoring tools, generating invalid markup does not seem to be a full 
+alternative solution to the use case.</p>
+<p>Related to redundancy, it was also argued that if alt may be omitted 
+when the generator mechanism is used, then the email and private 
+communication exemption would be rendered largely redundant. In fact, 
+this was the strongest objection to the email and private communications
+ exception. As a result, accepting the generator exemption would allow 
+us to reject another exemption. This constitutes an additional 
+moderately strong objection.</p>
+<p>Thus, overall, the objection based on use cases for the generator 
+mechanism was taken to be a medium objection. It’s validity was 
+disputed, but these objections were outweighed by those that argued for 
+its validity. It’s non-redundancy was also disputed, but such objections
+ were found to be weak. Thus, overall, the bar for establishing negative
+ consequences is intermediate between high and low.</p>
+<p>Some argued that omitting alt and using the generator mechanism had harmful consequences:</p>
+<blockquote><p>Hence, the generator mechanism should not have any 
+bearing on the @alt requirements as the generator string/mechanism has 
+no bearing on the attributes of the &lt;img&gt; or the context in which 
+the img appears in. The negative effects of omission of an empty or 
+non-empty @alt are in no way made up for by the presence of the 
+generator mechanism.</p></blockquote>
+<p>This statement in itself lacks specifics, but there were some concrete arguments supporting the case for negative consequences:</p>
+<blockquote><p>The generator mechanism facilitates the creation of inaccessible content.</p></blockquote>
+<p>No evidence was provided that more inaccessible content would be 
+created if the generator exemption is allowed than otherwise. So this 
+was taken to be a weak objection.</p>
+<p>A list was provided of example &lt;meta generator&gt; values, and 
+from this a conclusion was drawn that a tremendous amount of Web content
+ would make use of the generator exemption. However, it’s not clear 
+where this list came from. It is not present in the spec, and does not 
+seem to align with the spec’s definition of a content generator. In 
+particular, it includes many text editors which do not seem to qualify 
+as automated markup generators. Was this list derived from the output of
+ actual authoring tools? Was it found by looking at real Web content? In
+ the absence of information about where this list came from, it was 
+taken to have no evidentiary value.</p>
+<p>Another objection was based on the possibility of authoring mistakes:</p>
+<blockquote><p>The generator mechanism is actively harmful to 
+accessibility. If the generator option is left at document level, it 
+would be far too easy for authors to have the software automatically 
+insert “generator” and then forget to provide any text alternatives for 
+images.</p></blockquote>
+<p>If supported by concrete evidence, this would have been a strong 
+objection. This seems like a plausible authoring mistake which would 
+have negative consequences. But it was weakened by lack of any specific 
+evidence that this problem has actually occurred in practice. This 
+provision has been in HTML WG Editor’s Drafts and <a href="http://dev.w3.org/cvsweb/html5/spec/Overview.html?rev=1.2915">Working Drafts</a> since September 3, 2009.</p>
+<p>This should be enough time to see at least anecdotal evidence of the 
+claimed problem. Even though normally lack of supporting evidence would 
+render an objection weak, in this case, there is a plausible-sounding 
+argument even in the absence of evidence, so the objection based on 
+authoring mistakes is overall taken as moderately weak.</p>
+<p>Yet another objection was based on standards and guidelines:</p>
+<blockquote><p>The generator mechanism breaks standards and guidelines requiring text equivalents on an individual element basis.</p></blockquote>
+<p>Many specific standards and guidelines were listed. However, these 
+guidelines were generally created before the generator mechanism 
+exemption was invented, so it’s not clear if the disagreement indicates a
+ problem, or just failure to update. Thus, this was taken to be a weak 
+objection.</p>
+<p>Another objection was that the generator exemption breaks the structure of the img element:</p>
+<blockquote><p>Requiring a set of programmatically determinable valid 
+options helps ensure that images have complete structure. Complete 
+structure of the &lt;img&gt; element requires both src and text 
+alternatives.</p></blockquote>
+<p>This claim seems to be based on a circular argument. Omitting alt 
+should not be allowed, because that would make the img element have 
+incomplete structure, because img requires alt. Thus, the objection 
+fails to make its case and was given no weight.</p>
+<p>Another objection argues that the generator mechanism fails to have certain benefits:</p>
+<blockquote><p>The generator mechanism does not improve user experience 
+or the chances of accessible content being produced. It does not help 
+authors catch mistakes. It does not help educate developers.</p></blockquote>
+<p>No one disputed this argument; but conversely, no one argued that 
+generator has these benefits or should be allowed because of such 
+benefits. With no concrete argument as to why the generator exception 
+ought to have these benefits, this was taken to be a weak objection.</p>
+<p>An argument was made that the sole benefit of the generator mechanism exemption would be one that may not be desirable:</p>
+<blockquote><p>The only benefit is that most tool vendors will 
+automatically adhere to HTML5, as very few adhere to existing standards.
+ The exception is a way to codify and bless bad tools.</p></blockquote>
+<p>No evidence was provided that the other claimed benefits (e.g. 
+avoiding the creation of perverse incentives to include bogus alt) would
+ not materialize, thus, this claim based on “the only benefit” was taken
+ as a weak objection.</p>
+<p>A further objection based on the blind photographer use case was 
+entered; however, that use case was not claimed for this particular 
+mechanism. That objection was instead applied to mechanisms where it is 
+relevant (title and figcaption), and was given no weight for this 
+question.</p>
+<p>Overall, there were many claimed disadvantages that flow from the 
+generator exception, ranging from weak to moderately weak. They were 
+generally unsupported by details or concrete evidence. Even though the 
+use case for omitting alt when the generator mechanism is used was 
+disputed and only found to be a medium objection, it still outweighs 
+these claimed disadvantages, as they were all found to be weak or 
+moderately weak.</p>
+<p>Thus, on the whole, the proposal to allow alt to be omitted when the 
+generator mechanism is used was found to draw weaker objections, 
+compared to the proposal to still require alt, even when the generator 
+mechanism is used.</p>
+<h3 id="d4">Should it be permitted to omit alt in email or other private communications?</h3>
+<p>At least one Change Proposal argued that when content comprises email
+ or other private communications, it should be permitted to omit the alt
+ attribute. The use case was expounded at some length, giving the 
+example of a complex image in private e-mail:</p>
+<blockquote><p>3. PRIVATE USE: In some cases, extremely complex images 
+may be sent from one user to another as part of a private HTML document 
+or HTML e-mail. Such images may be so complex that writing useful 
+alternative text would be a significant endeavour of its own, tantamount
+ to recasting the entire image as text. Ordinarily, that work would be 
+worth the effort, since not all users are able to see the images; the 
+specification should in fact require that work ordinarily. However, we 
+would be ignored (and likely ridiculed) if we required people to write 
+such text in the case of private HTML documents or HTML e-mails amongst 
+users who know each other and are aware of each other’s abilities (both 
+technical and physical) to access visual images. Therefore we should 
+have an exception in the requirements for this specific case. …</p>
+<p>Now, we do not want conformance checkers to “allow” anyone to omit 
+alternative text just in case they are in this situation, so we should 
+further constrain conformance checkers to not allow this unless they 
+have been specifically configured. If we fail to do this, we would 
+undermine the entire attempt at making pages more accessible by 
+requiring alternative text for images in the normal case.</p></blockquote>
+<p>Furthering this argument, it was claimed that alt is often 
+unnecessary in private communications, and would be omitted anyway, and 
+therefore the spec should not make a requirement that would not be 
+followed:</p>
+<blockquote><p>It makes no sense to require an author to provide content
+ in two forms (image and text) when one of those forms can be handled by
+ the entire target audience for the content. (A requirement requiring 
+that one’s wife write a description of every photo sent to one’s husband
+ is just going to be ignored, so there’s no point having such a 
+requirement.)</p></blockquote>
+<p>Others argued that, since people engaged in private communication 
+would disregard the alt requirement anyway, no provision needs to be 
+made for it:</p>
+<blockquote><p>Private situation does not need to be mentioned in the 
+spec, just as copyright licenses typically do not mention what the user 
+is authorized by law to do in private with the said thing. Man and wife 
+do not validate before they communicate with each others. It improves 
+nothing to put this particular exception in the spec – in instead 
+creates an *artificial* permission which really doesn’t permit anything:
+ It is similar to adding restrictions or rights which the copyright 
+holder nevertheless cannot whether permit or restrict this right.</p></blockquote>
+<p>Similarly:</p>
+<blockquote><p>It is an author’s prerogative not to provide text 
+alternatives for images because they’re writing for themselves, close 
+friends or relatives. However, a HTML &lt;img&gt; element without both 
+src and text alternative is still not complete. Therefore, it should not
+ be considered valid.</p></blockquote>
+<p>These were taken to be an objections based on validity or redundancy 
+(it’s not clear which was intended). Arguing that something should be 
+allowed because people will do it anyway seems like a marginally 
+stronger objection than arguing that something need not be allowed 
+because people will disregard the spec. The set of valid use cases has 
+generally been taken to be a strong influence on what markup should be 
+conforming.</p>
+<p>For one specific form of the use case, specifically the case where a 
+complex image requires a long description, validity was was disputed:</p>
+<p>Regarding Proposal 1’s statement about a complex image use case in an
+ email, it is not applicable. ISSUE 31- missing alt is about short text 
+alternatives not long ones. No one expects a long description for alt 
+text. In fact that would be incorrect. Complex images would be covered 
+by ISSUE 30- Longdesc.</p>
+<p>Since longdesc is not currently allowed, per WG decision, this does 
+not seem like a relevant objection. Further, complex images requiring 
+long descriptions were not the only use case cited. So this was taken to
+ be a weak objection.</p>
+<p>Examining the question of redundancy, one commenter wrote:</p>
+<blockquote><p>Consider the same sort of GUI authoring tool I described 
+above, [..] For such tools, this option is essentially redundant with 
+the generator exception option. If both of these exceptions were 
+allowed, we would prefer tools to use the generator mechanism. That 
+leaves the use case of hand-authored content in private communication, 
+which doesn’t seem common enough for the spec to explicitly address.</p></blockquote>
+<p>This objection argues that the private communication exemption is largely redundant if the generator exemption is allowed.</p>
+<p>Looking into the matter deeper, no one specifically claimed a 
+personal interest in hand-authoring private communications in HTML 
+format without specifying alt. Nor did anyone claim interest in 
+implementing a validator feature to implement a special “private 
+communications” mode. This strengthens the claim that the true core of 
+the use case is covered by the generator exception.</p>
+<p>Thus, while the private communication exception was established to 
+have a valid use case via marginally strong objections, this was greatly
+ weakened by the objection that most of the use case, and perhaps nearly
+ all in practice, is sufficiently well served by another mechanism. 
+Therefore, the bar for objections based on negative consequences was 
+low.</p>
+<p>On the topic of harm following from this exception, somer argued that
+ senders or recipients of private communication may derive ancillary 
+benefits from including alt:</p>
+<blockquote><p>And it is not a future proof rule: users keep e-mail 
+archives for years. One never knows: after agreeing to not include an 
+alt, the receiver may turn blind, he/she may unexpectedly be hindered 
+from using a graphical e-mail program and the sender himself/herself may
+ loose the image (because the program allows to delete attachments) etc.</p></blockquote>
+<p>And similarly:</p>
+<blockquote><p>Sighted recipients. They: May have a slow connection and 
+turn off images to speed download. May have an expensive data roaming 
+connection (that is not slow). May have images turned off to decrease 
+bandwidth use in order to lower their Internet usage fees. May have a 
+text-only user agent. May be listening to the page being read out by a 
+voice browser or other voice output, for example, as they drive or 
+otherwise cannot read the web page.</p></blockquote>
+<p>This was taken to be a moderately weak objection, since the writers 
+of this objections also claimed that people could disregard the rule in 
+private communication, even if it made their content non-conforming. 
+This undermines the premise that these benefits are so compelling, that 
+senders of private emails must be required to specify alt. However, this
+ was not as weak as some other objections, since specifics were 
+provided.</p>
+<p>Others argued that allowing this exemption would encourage seeking of loopholes:</p>
+<blockquote><p>Further more, it encourages authors to look for loopholes.</p></blockquote>
+<p>This was taken to be weak, because no specifics were provided.</p>
+<p>It was also claimed that the private communication exception discriminates:</p>
+<blockquote><p>The email exception spec text profiles, targets, and discriminates between people on the basis of ability or disability.</p></blockquote>
+<p>However, no specific evidence was given that this provision is discriminatory. So this was taken to be a weak objection.</p>
+<p>Another objection was on the basis of structural integrity.</p>
+<blockquote><p>The email exception mechanism breaks the structural integrity of the &lt;img&gt; element.</p></blockquote>
+<p>This linked the same argument as for the generator exemption, that 
+omitting alt breaks structural integrity because alt is required. Once 
+again, it was given no weight.</p>
+<p>The objections to allowing alt to be omitted in private 
+communications based on negative consequences ranged from weak to 
+moderately weak. However, because the omitting alt in this case was 
+identified as redundant, the bar for claims of negative consequences was
+ low. Even moderately weak objections are sufficient.</p>
+<p>Thus, overall, the proposal to require alt even in private 
+communications and email (if none of the other exemptions applies) was 
+found to draw weaker objections than the proposal to allow alt to be 
+omitted in all cases in private communications.</p>
+<h3 id="d5">Should it be permitted to omit alt when the title attribute is specified?</h3>
+<p>At least one Change Proposal argued that when an image has a title 
+attribute specified, it should be permitted to omit the alt attribute.</p>
+<p>Change proposals and poll responses argued that there are valid use 
+cases for the title exemption. One use case proposed is that of content 
+authors who cannot provide a true textual equivalent, but can provide a 
+caption; one specific example was blind photographers:</p>
+<blockquote><p>If an author is unable to include alternative text (e.g. 
+they are a blind photographer), then they should still be required to 
+include _some_ information, which could include the image’s caption. The
+ caption belongs in the title=”” attribute or in &lt;figcaption&gt;.</p></blockquote>
+<p>And similarly:</p>
+<blockquote><p>2. EQUALITY: There are certain edge cases where a page 
+producer must reference an image without knowing what the image is. Such
+ a producer cannot, by definition, provide a textual alternative to the 
+image: they do not know what the image is. One example of this would be a
+ blind photographer who has taken a hundred photos during a vacation, 
+without keeping track of any information as to when or where each photo 
+was taken. Faced with these one hundred JPEG images and the desire to 
+write an HTML Web page that exposes those images, the photographer has 
+no ability to provide alternative text.</p></blockquote>
+<p>This seems like a strong objection to dropping both the title and 
+figcaption exemptions; though it does not clearly establish that both 
+need to be allowed.</p>
+<p>An opposed objection argues that this use case is redundant, because 
+it is satisfied by blind photographers or others in this situation 
+creating nonconforming content:</p>
+<blockquote><p>The blind photographer use case in Proposal 1 is a red 
+herring. A blind photographer is not prohibited from publishing photos 
+without text alternatives. They are perfectly free to do so. But no 
+matter if a photographer is sighted or not, if that photographer does 
+not provide a text alternative for an &lt;img&gt; element, it doesn’t 
+change two facts:</p>
+<ul>
+<li>The &lt;img&gt; element is still incomplete.</li>
+<li>A blind USER cannot perceive a photo without a text alternative, even if a blind photographer takes it.</li>
+</ul>
+</blockquote>
+<p>It is true that there are constructs in HTML5 that “work” (in the 
+sense that they have a particular effect), even though they are not 
+“conforming”.</p>
+<p>However, in general, the rules for content conformance have been 
+treated in decisions as being driven largely by the set of valid use 
+cases for authors. The argument that authors could simply create 
+nonconforming content appears to concede the validity of the use case 
+and was thus taken as a weak objection.</p>
+<p>A further claimed use case was distinguishing advisory information from textual equivalents:</p>
+<blockquote><p>Advisory information (what title=”” contains) is 
+generally different from textual equivalents (what alt=”” contains). 
+That said, user agents could expose such content to the A11Y layer in 
+such cases, and this is clearly better than not exposing such content. 
+As such, we support permitting such markup.</p></blockquote>
+<p>Since this lacked specific examples of when such a distinction is 
+needed, it was taken to be a relatively weak objection. However, this 
+objection was not seriously disputed. A comment apparently in opposition
+ to allowing title said:</p>
+<blockquote><p>Authors are advised to only use the title attribute for “additional information” and not as a full equivalent alternative.</p></blockquote>
+<p>Yet this only seems to reinforce the premise that there is a 
+distinction between the two, and thus was taken as an even weaker 
+objection.</p>
+<p>There were no further objections to validity of these use cases.</p>
+<p>One might wonder: since the use cases for omitting alt when title is 
+specified are described as being served by either title or figcaption, 
+is it necessary to allow omitting alt in both cases, or only for one of 
+these constructs? However, both advocates and opponents of these 
+mechanisms pointed out important and relevant differences in behavior. 
+In any case, no objection was made on the grounds of redundancy between 
+these features. Nor was any specific reason given to pick one or the 
+other. Thus, the use cases for title were not found to be redundant.</p>
+<p>On the whole then, strong objections establish that omitting alt when
+ title is specified has valid, non-redundant use cases. Therefore, the 
+bar for objections based on negative consequences is high.</p>
+<p>Examining the claims of negative consequences, some argued that 
+allowing alt to be omitted when title is title specified is problematic,
+ because the title attribute is fundamentally not accessible:</p>
+<blockquote><p>The title attribute is not an acceptable text alternative
+ as it’s content is not displayed to the user unless they can use a 
+mouse and beforehand know the content is there. The content of the image
+ title attribute is also often not detected by AT by default unless the 
+user makes an explicit choice in their preferences to announce the 
+attribute contents.</p></blockquote>
+<p>Similarly:</p>
+<blockquote><p>To reflect the unsuitability of title attribute content 
+to act as a caption when a text alternative is not available, as the 
+content is not displayed to the user unless they can use a mouse and 
+they know the content is there.Refer to Issue 80 for more detail.</p></blockquote>
+<p>And furthermore:</p>
+<blockquote><p>The title attribute has been around for over 10 years and
+ it has never been implemented in a way that would make it a suitable 
+substitute for alt attribute content, and there is no sign from 
+implementors that this situation will change.</p></blockquote>
+<p>Also:</p>
+<blockquote><p>The specification forbids user agents from displaying 
+title attribute content in the same way it displays alt attribute 
+content: “The alt attribute does not represent advisory information. 
+User agents must not present the contents of the alt attribute in the 
+same way as content of the title attribute.”</p>
+<p>This constraint makes it even less likely that at some point in the 
+future a critical mass of browsers will implement title attribute such 
+that its content will be displayed in a manner that provides equivalent 
+access to the content for all users.</p></blockquote>
+<p>Though somewhat tricky to follow, the following passage implies that 
+in at least some assistive technologies, the contents of the title 
+attribute *are* exposed, in an accessible way:</p>
+<blockquote><p>What we *should* avoid is the the situation we have in 
+the W3 HTML4 validation service today: there it is permitted to combine 
+empty @alt with a non-empty @title: &lt;img src=img alt=”” title=”Lorem 
+ipsum.” &gt; VoiceOver, in accordance with my Validity map, treats this 
+example as non-presentational. And, again in accordance with my Validity
+ map, the @alt should therefore at contain an @alt, since the @alt 
+should reflect the role of the &lt;img&gt;. Note that VoiceOver makes no
+ big difference between @alt=”&lt;empty&gt;” and no alt at all. Thus, as
+ far as VoiceOVer is concerned, the need for a non-empty @alt should not
+ only be seen as an accessibility but just as much as a simple rule for 
+authors to follow!</p></blockquote>
+<p>This was combined with a second-hand report, lacking specifics, that other assistive technology products would not do so:</p>
+<blockquote><p>However, reportedly, in other AT than VoiceOver, the lack
+ of @alt in an &lt;img&gt; which has a non-empty @title, creates more or
+ less the same problems whether or not @title is lacking, even if some 
+very (conscious) AT user may get help from @title if they enable support
+ for it. This is an *accessibility* reason to require an @alt even if 
+the &lt;img&gt; has a @title.</p></blockquote>
+<p>Since at least one product is known from testing to expose title=”” 
+in an accessible way, and since no evidence was provided that other 
+products cannot or will not do so, the objection that title is an 
+inaccessible mechanism was taken to be a weak objection. The claim that 
+it can’t or won’t be exposed in an accessible way is outweighed by the 
+concrete example of it being exposed in an accessible way.</p>
+<p>A more subtle objection was the claim that, since many products do 
+not yet expose title in an accessible way, that it is problematic to use
+ it now:</p>
+<blockquote><p>Encouraging use of the title attribute before it is 
+implemented in an accessible way does a disservice to users with 
+disabilities.</p></blockquote>
+<p>Not much evidence was provided that this cannot or will not change, 
+however. At least one product is already known to expose title in an 
+accessible way, and others were reported to do so as an option. Thus, 
+this was also taken as a weak objection.</p>
+<p>Another argument claims that authors may simply specify title and 
+then neglect to specify alt, even if a proper text alternative *is* 
+known:</p>
+<blockquote><p>Suggesting that the title is an adequate substitute may 
+encourage authors to not provide a text alternative using the alt 
+attribute as conformance checkers will not flag the absence of the alt 
+attribute as an issue.</p></blockquote>
+<p>No specific evidence was presented that this would occur, so this was taken to be a weak objection.</p>
+<p>Another objection argued:</p>
+<blockquote><p>Also, an empty @alt should together with a non-empty 
+@atitle should count as *invalid* since the sighted would perceive such 
+an image as non-presentational.</p></blockquote>
+<p>However, this objection failed to explain why the situation described would be a problem, so it was taken to be weak.</p>
+<p>Thus, overall, the objections based on problems created by omitting 
+alt when title is specified were found to be weak. But omitting alt when
+ title is specified was found to serve valid, non-redundant use cases.</p>
+<p>Thus, overall, the proposal to allow alt to be omitted when title is 
+specified was found to draw weaker objections than the proposal to still
+ require alt when title is specified.</p>
+<h3 id="d6">Should it be permitted to omit alt when the image is in a figure with a figcaption?</h3>
+<p>At least one Change Proposal argued that when an image is inside a 
+figure element with a figcaption specified, it should be permitted to 
+omit the alt attribute.</p>
+<p>The same use cases were claimed for the figcaption exemption as for 
+the title exemption. For brevity we do not repeat them here, but we note
+ that overall they were found to constitute strong objections.</p>
+<p>It might be argued that this makes figcaption and title redundant 
+mechanisms, however, both advocates and opponents of these mechanisms 
+pointed out important and relevant differences in behavior.</p>
+<p>In any case, no objection was made on the grounds of redundancy 
+between these features. Thus, as with title, omitting alt when a 
+figcaption is used was found to have valid, non-redundant use cases. 
+Thus, the bar for claims of negative consequences was high.</p>
+<p>One claimed problem with allowing the figcaption exemption was the 
+figure/figcaption association is not present in current assistive 
+technology products:</p>
+<blockquote><p>… based on today’s user agents and AT this is a 
+relationship that is unsupported by AT. We should define this use case, 
+and thus allow AT to use &lt;figcaption&gt; as a label for the image.</p></blockquote>
+<p>However, this lacked specifics on what products were tested. No 
+evidence was provided that such products would not support the 
+relatively new figcaption feature in the future. And it concedes that 
+the use case is valid. Thus, this was taken to be a weak objection.</p>
+<p>Another argument claims that that some placeholder alt value could be included when figcaption provides a caption:</p>
+<blockquote><p>There is little reason to permit the dropping of the @alt
+ when there is a figcaption. The author can just as well identify the 
+image with a short text such “photo” or “figure”, “diagram” or – even – 
+whitespace inside the @alt as this has the same effect and is fast and 
+quick for the author (but whitespace would probably make it invisible to
+ text browsers so this is no good advice – though, not everyone obeys 
+this but treat it as no-alt and generates an @alt text.). Since user 
+agents may repair the lack of @alt if the author doesn’t add it, and 
+this yet another reason for the same. It is nice and well if the 
+figcaption provides a label/caption for the image. However, it is a 
+complicating rule to say that one may drop the @alt.</p></blockquote>
+<p>This argument claims that alt could be provided anyway, even if the 
+primary text to expose is a caption in figcaption. However, no argument 
+is given for why the particular examples chosen (e.g. alt containing 
+only whitespace) are superior to omitting alt and relying on the 
+caption. In fact, one respondent claimed that such a requirement would 
+be excessive:</p>
+<blockquote><p>I object to requiring the presence of the alt attribute 
+when the image is in a figure with figcaption, because excessive 
+requirements will be perceived to lower the seriousness of all 
+requirements and requiring information that authors are likely to 
+consider duplicate information is likely to be perceived as an excessive
+ requirement.</p></blockquote>
+<p>This was found to be a stronger objection than the objection that the figcaption exception is unnecessary.</p>
+<p>Another objection raised the possibility of multiple images in a single figcaption:</p>
+<blockquote><p>One thing to consider, as well, is that we are likely to 
+see many instances when there is more than the image inside the figure –
+ perhaps there is some text there, or two images. What then? Authors are
+ likely to not discern between the one image use case and 
+more-than-just-an-image use case very well. (May be it also isn’t 
+necessary to discern so much – but this remains to be tested.)</p></blockquote>
+<p>No evidence was provided that multiple images in a single figure has 
+created a problem in practice, so this was taken to be a weak objection.</p>
+<p>Another respondent argued that figcaption was a sufficient replacement for alt:</p>
+<blockquote><p>I do not object to the figcaption being permitted without
+ an alt attribute, as it can act as a mechanism to associate a text 
+alternative with an image when the text is appropriate to be viewed in 
+conjunction with the display of the image or when an text alternative 
+has not yet been provided via the alt attribute.</p></blockquote>
+<p>However, this comment does not seem to comprise an objection either way, so it was given no weight.</p>
+<p>All objections based on negative consequences of allowing alt to be 
+omitted when figcaption is used were found to be weak. The bar 
+established by use cases was high.</p>
+<p>Therefore, in summary, the proposal to allow alt to be omitted on 
+images inside a &lt;figure&gt; element with a &lt;figcaption&gt; drew 
+weaker objections, compared to the proposal to still require alt in this
+ case. There was no objection to the claim that figcaption has valid use
+ cases, and little or no specific harm was identified.</p>
+<h3>Next Steps</h3>
+<p>Bug 8646 is to be REOPENED and marked as WGDecision. Since the 
+combination of prevailing Change Proposals does call for a spec change, 
+the editor is hereby directed to make the changes in accordance with the
+ Decision of the Working Group above. Once those changes, as well as 
+changes for the other surveys on these issues, are complete, ISSUE-31 
+and ISSUE-80 are to be marked as CLOSED.</p>
+<h3>Arguments not considered</h3>
+<blockquote><p>However, we should not do this as an attribute on each 
+&lt;img&gt; element, since doing that would make it far more likely that
+ authors will abuse the mechanism to shut up validators raising 
+completely valid problems. Therefore we should limit this mechanism to 
+page-wide “generator” meta tags.</p></blockquote>
+<p>No proposal was made to make the generator mechanism per element, so this was disregarded.</p>
+<blockquote><p>If any generated or missing mechanism is included in 
+HTML5, it should only be included at the element level where it could be
+ dealt with on an image-by-image case with a detection method such as a 
+generated or missing attribute, rather than at the document level.</p></blockquote>
+<p>Disregarded for the same reason.</p>
+<p>Additionally, some arguments were presented that a generator 
+mechanism either should or shouldn’t be at the element level rather than
+ the document level. But since no Change Proposal actually proposed 
+this, arguments for or against this position were disregarded.</p>
+<blockquote><p>As Al Gilman said on behalf of PF,”WCAG WG is chartered 
+to set Accessibility guidelines and HTML WG is not; so HTML5 should be 
+careful to supply features that support WCAG and describe their use in 
+ways that conform to WCAG.”</p></blockquote>
+<p>Gives no specific argument other than citing an authority.</p>
+<blockquote><p>The feature to silence validators for authoring tools 
+could be misused by authors who want to use a validator but don’t want 
+to give alternative text, but if that occurs (which seems unlikely) it 
+is easy to resolve by changing the validator requirements to still 
+clearly announce that the document is invalid while saying it’s not the 
+authoring tool’s fault.</p></blockquote>
+<p>This argues in favor of a mitigation that is not part of any Change Proposal.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

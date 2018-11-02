@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: the placeholder attribute</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2011/02/html5-accessibility-chops-the-placeholder-attribute/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: the placeholder attribute</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<h2>The placeholder attribute:</h2>
+<p>The placeholder attribute can be used to place text inside an empty <code>input type="text"</code> or <code>textarea</code>, the text is removed when the element receives focus.<span id="more-751"></span></p>
+<p><strong><a href="http://www.html5accessibility.com/tests/placeholder-labelling.html">Placeholder browser accessibility support tests updated</a>:</strong> 31/10/2013</p>
+<h3>What the HTML5 specification says:</h3>
+<blockquote cite="http://dev.w3.org/html5/spec/common-input-element-attributes.html#the-placeholder-attribute"><p>The <code><a href="https://www.w3.org/TR/html/sec-forms.html#the-placeholder-attribute">placeholder</a></code> attribute represents a <em>short</em> hint (a word or short phrase) intended to aid the user with data entry.</p>
+<p>The <code><a href="https://www.w3.org/TR/html/sec-forms.html#the-placeholder-attribute">placeholder</a></code> attribute should not be used as an alternative to a <code><a href="https://www.w3.org/TR/html/sec-forms.html#the-label-element">label</a></code>.</p></blockquote>
+<h3>HTML code example:</h3>
+<pre><code><span><span>&lt;</span><span><span><span>label</span></span></span><span>&gt;</span></span>Address: <span><span>&lt;</span><span><span><span>input</span></span></span><span> </span><span><span><span>type</span></span></span><span>=</span><span><span><span>"email"</span></span></span><span> </span><span><span><span>name</span></span></span><span>=</span><span><span><span>"address"</span></span></span><span>
+</span></span><strong><span><span><span><span><span>placeholder</span></span></span><span>=</span><span><span><span>"john@example.net"</span></span></span></span></span></strong><span><span>&gt;</span></span><span><span>&lt;/</span><span><span><span>label</span></span></span><span>&gt;</span></span></code></pre>
+<h3>Default Display Example:</h3>
+<p><a href="http://www.paciellogroup.com/wp-content/uploads/2011/02/paceholder.png"><img src="HTML5%20Accessibility%20Chops%20%20the%20placeholder%20attribute_files/paceholder.png" alt="edit box with a label 'address' to the left and placeholder text 'john@example.net' in the edit area." width="230" height="35"></a></p>
+<h3>Accessibility Issues?</h3>
+<h3>Placeholder text colour</h3>
+<p>The default colour of the placeholder text, in browsers that support 
+placeholder, is not of sufficient contrast with its default background 
+colour. Sufficiency is measured using the WCAG 2.0 criteria <a href="http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast">1.4.3 Contrast (Minimum)</a>: The visual presentation of text and images of text has a <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html#contrast-ratiodef">contrast ratio</a> of at least 4.5:1. There are a <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html#visual-audio-contrast-contrast-resources-head">number of tools</a> you can use to check contrast ratio.</p>
+<h3>Recommendations:</h3>
+<p>If you choose to use the placeholder attribute be aware its support across browsers is <a href="http://diveintohtml5.org/forms.html#placeholder">incomplete</a> and its <a href="http://blog.ajcw.com/2011/02/styling-the-html5-placeholder/">styling support</a> is still experimental. Apply a style to the placeholder attribute text that has a contrast ratio of at least 4.5:1.</p>
+<h3>CSS code example:</h3>
+<p>To target the placeholder text&nbsp; it is currently required that browser specific CSS extensions are used:</p>
+<pre><code><span><span>input:</span></span><span><span>:-webkit-input-placeholder</span></span> {
+&nbsp; &nbsp; <span><span>color:</span></span> &nbsp; &nbsp;</code><code>
+}
+<span><span>input:</span></span><span><span>:-moz-placeholder</span></span> {
+&nbsp; &nbsp; <span><span>color:</span></span> &nbsp; &nbsp;</code><code>
+}
+</code></pre>
+<h3>Placeholder as an alternative to a label</h3>
+<h3>HTML code example:</h3>
+<pre><code>&lt;input <span><span>type</span></span>=<span><span>"email"</span></span> name=<span><span>"address"</span></span><strong> placeholder=<span><span>"address"</span></span></strong>&gt;</code></pre>
+<p>Placeholder text disappears when a text box receives focus:</p>
+<ul>
+<li>For keyboard users this <a href="http://mentalized.net/journal/2010/08/05/dont_use_placeholder_text_as_labels/">can be problematic</a> as they must read ahead of current focus when filling in forms.</li>
+<li>Users, especially those with memory impairments will not have the 
+text label available for reference at the same time as filling in a 
+field.</li>
+</ul>
+<h3>Other issues with placeholders</h3>
+<ul>
+<li>Users may think a text field is already filled in and skip over it. <a href="http://www.uxmatters.com/mt/archives/2010/03/dont-put-hints-inside-text-boxes-in-web-forms.php">Data suggests</a> that this can be an issue.</li>
+<li>If the placeholder hint text is useful information it should be available while the user is filling in the field.</li>
+</ul>
+<h3>Recommendations:</h3>
+<blockquote><p>Use <code>placeholder</code> for what it is intended for, not what the HTML5 conformance criteria permits.</p></blockquote>
+<p>The HTML5 specification says “placeholder <em>should not be used</em> as an alternative to a <code>label</code>.” But it stops short of saying it MUST NOT be used, so <em>it is</em> conforming to use it as an alternative in HTML5 and <em>will be</em> used as a label. To this end&nbsp; <a href="http://www.html5accessibility.com/tests/placeholder-labelling.html">browsers are using</a>
+ the content of the placeholder attribute, in the absence of a label, as
+ the accessible name exposed to accessibility APIs. This does not mean 
+that that it should be used as a text field label. <strong>Always</strong> provide an explicitly associated text label for a text field, using either the <code>label</code> element or the <code>title</code> attribute. Use <code>placeholder</code> for what it is intended for, not what the HTML5 conformance criteria permits.</p>
+<h3>HTML code examples:</h3>
+<pre><code><strong><span><span>&lt;</span><span><span><span>label</span></span></span><span>&gt;</span></span></strong>Address: <span><span>&lt;</span><span><span><span>input</span></span></span><span> </span><span><span><span>type</span></span></span><span>=</span><span><span><span>"email"</span></span></span><span> </span><span><span><span>name</span></span></span><span>=</span><span><span><span>"address"</span></span></span><span>
+</span><span><span><span>placeholder</span></span></span><span>=</span><span><span><span>"john@example.net"</span></span></span><span>&gt;</span></span><strong><span><span>&lt;/</span><span><span><span>label</span></span></span><span>&gt;</span></span></strong>
+</code>
+<code><strong><span><span>&lt;</span><span><span><span>label</span></span></span><span> </span><span><span><span>for</span></span></span><span>=</span><span><span><span>"address"</span></span></span><span>&gt;</span></span></strong>Address: </code><strong><code><span><span>&lt;/</span><span><span><span>label</span></span></span><span>&gt;</span></span></code></strong><code>
+<span><span>&lt;</span><span><span><span>input</span></span></span><span> </span><span><span><span>type</span></span></span><span>=</span><span><span><span>"email"</span></span></span><span> </span><span><span><span>name</span></span></span><span>=</span><span><span><span>"address"</span></span></span><span> </span><span><span><span>id</span></span></span><span>=</span><span><span><span>"address"</span></span></span><span> </span><span><span><span>placeholder</span></span></span><span>=</span><span><span><span>"john@example.net"</span></span></span><span>&gt;</span></span>
+</code>
+<span>&lt;<span>input</span> <span>type</span>=<span>"text"</span></span><code><span> </span><strong><span><span>title</span>=<span>"search"</span></span></strong><span>  <span>placeholder</span>=<span>"enter search term"</span>&gt;</span>
+<span><span>&lt;</span></span></code><span><span>input</span> <span>type</span>=<span>"submit"</span> <span>value</span>=<span>"search"</span>&gt;</span></pre>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20the%20placeholder%20attribute_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

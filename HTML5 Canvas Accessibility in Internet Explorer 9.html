@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Canvas Accessibility in Internet Explorer 9</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2010/09/html5-canvas-accessibility-in-internet-explorer-9/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Canvas Accessibility in Internet Explorer 9</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The recently released Internet Explorer 9 beta implements the HTML5 specification’s <code>canvas</code>
+ element fallback concept. This means that the content inside a canvas 
+elements start and end tags is exposed to assistive technology users 
+even when the browser supports canvas. It also means that any 
+interactive elements, inside a canvas elements start and end tags such 
+as links or form controls will be included in a documents default tab 
+order even when the browser supports canvas.<br>
+<span id="more-670"></span></p>
+<p>A <a href="http://www.maujor.com/blog/2010/09/21/acessibilidade-a-canvas-da-html5-no-ie/">Portuguese translation of this article</a> by Mauricio (Maujor) Samy Silva.</p>
+<h3>Canvas in IE9 has a navigable sub DOM</h3>
+<p>The <a href="http://dev.w3.org/html5/spec/the-canvas-element.html#the-canvas-element">HTML5 specification states</a>:</p>
+<blockquote cite="http://dev.w3.org/html5/spec/the-canvas-element.html#the-canvas-element"><p>When a <code>canvas</code> element represents embedded content, the user can still focus descendants of the <code>canvas</code>
+ element (in the fallback content). This allows authors to make an 
+interactive canvas keyboard-focusable: authors should have a one-to-one 
+mapping of interactive regions to focusable elements in the fallback 
+content.</p></blockquote>
+<p>Which translates as meaning the content inside a <code>canvas</code> element:</p>
+<p><code>&lt;canvas&gt;</code> <strong><code>&lt;p&gt;</code>content<code>&lt;/p&gt;</code></strong><code>&lt;/canvas&gt;</code></p>
+<p>If interactive, should be included in the tab order and operable with
+ the keyboard. All content should be accessible to assistive technology 
+such as screen readers. So in the <a href="http://www.paciellogroup.com/blog/misc/fronteers2010/example.html">canvas example</a>, the text alternative should be announced by screen readers and the link should be navigable and operable using the keyboard.</p>
+<p>Until now, this behaviour had not been implemented in any browser that supports <code>canvas</code>,
+ but with the release of Internet Explorer 9, there is now a browser 
+that does implement it as per the HTML5 specification. So if you are 
+using IE9 with the keyboard to navigate interactive elements, you can 
+tab to the link in the <a href="http://www.paciellogroup.com/blog/misc/fronteers2010/example.html">canvas example</a>. If you are using a screen reader, you can also access the text alternative (in this case) content inside the <code>canvas</code> element.</p>
+<p><a href="http://www.paciellogroup.com/blog/misc/fronteers2010/example.html">Canvas example</a> with a text alternative inside the canvas element.</p>
+<h3><a href="http://www.paciellogroup.com/blog/misc/fronteers2010/example.html">Canvas example</a> HTML code:</h3>
+<p><strong>Note:</strong> added an ARIA role=”img” to identify the canvas object.</p>
+<pre><code><span><span>&lt;</span><span><span><span>canvas</span></span></span><span> </span><span><span><span>id</span></span></span><span>=</span><span><span><span>"example"</span></span></span><span> </span><span><span><span>width</span></span></span><span>=</span><span><span><span>"260"</span></span></span><span> </span><span><span><span>height</span></span></span><span>=</span><span><span><span>"200"</span></span></span><span> </span><span><span><span>role</span></span></span><span>=</span><span><span><span>"img"</span></span></span><span>&gt;</span></span></code>
+  <code><span><span>&lt;</span><span><span><span>p</span></span></span><span>&gt;</span></span>A <span><span>&lt;</span><span><span><span>a</span></span></span><span> </span><span><span><span>href</span></span></span><span>=</span><span><span><span>"http://en.wikipedia.org/wiki/Rectangle"</span></span></span><span>&gt;</span></span>rectangle<span><span>&lt;/</span><span><span><span>a</span></span></span><span>&gt;</span></span></code>
+with a black border. In the background is a pink circle. Partially
+overlaying the circle is a green square and a purple triangle, both
+of which are semi-opaque, so the full circle can be seen underneath.<code><span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code>
+  <code><span><span>&lt;/</span><span><span><span>canvas</span></span></span><span>&gt;</span></span></code></pre>
+<h3>Some Potential Issues</h3>
+<ul>
+<li>Where content is currently included in canvas, it is almost 
+exclusively of the “get a better browser that supports canvas” variety, 
+so screen reader users will likely encounter this when using IE9.</li>
+<li>Authors will most likely continue to provide useless information 
+(for screen reader users) as the concept of “fallback content” in the 
+HTML5 specification is not a suitable concept of what canvas content is 
+for keyboard and AT users in browsers that support the canvas element.</li>
+<li>keyboard focus is lost if interactive elements are included inside 
+the canvas, because while elements inside the canvas element are 
+focusable by default, there is no corresponding default indication of 
+focus to identify where current focus is.</li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Canvas%20Accessibility%20in%20Internet%20Explorer%209_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

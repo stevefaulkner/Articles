@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Firefox 14: image long description via link using aria-describedby</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/05/firefox-14-image-long-description-via-link-using-aria-describedby/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Firefox 14: image long description via link using aria-describedby</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>In his <a href="http://asurkov.blogspot.co.uk/2012/05/firefox-14-whats-new-for-at-developers.html">latest article</a>
+ Mozilla accessibility engineer Alexander Surkov describes an 
+interesting implementation development in FireFox 14, which is a 
+possible solution using ARIA to provide a link to a long description on 
+an image:<br>
+<span id="more-1480"></span></p>
+<h2>Using aria-describedby to provide a long description link on an image</h2>
+<blockquote cite="http://asurkov.blogspot.co.uk/2012/05/firefox-14-whats-new-for-at-developers.html"><p>ARIA
+ aria-describedby attribute used on HTML image element and pointing to 
+HTML a element makes the image accessible to expose showlongdesc action.
+ This action opens an URL provided by @href attribute on HTML a element 
+in a new window.</p></blockquote>
+<p>When the image has focus the screen reader user can press enter to activate the link, because a link action <code>showlongdesc</code> is exposed on the image, it uses the URL from the link referenced via <code>aria-describedby</code>.</p>
+<p><img src="Firefox%2014%20%20image%20long%20description%20via%20link%20using%20aria-describedby_files/linkeddesc.png" alt="aViewer accessibility inspection tool showing the accessible action 'showlongdesc'  exposed in MSAA from a link associated with an image using aria-describedby.y" width="592" height="424"></p>
+<h2>code:</h2>
+<p><strong>Note: </strong>example from the <a href="http://www.html5accessibility.com/tests/firefox-describedby.html">test page</a>.</p>
+<p><code>&lt;figure&gt;<br>
+&lt;img src="shalott.jpg" <strong>aria-describedby="a"</strong> alt="Painting of a&nbsp; young woman with long hair, sitting in a wooden boat."&gt;<br>
+&lt;figcaption&gt;<br>
+A painting inspired by Alfred Tennyson's poem The Lady of Shalott.<br>
+&lt;/figcaption&gt;<br>
+&lt;p&gt;&lt;a <strong>id="a"</strong> href="http://www.tate.org.uk/art/artworks/waterhouse-the-lady-of-shalott-n01543/text-summary"&gt;Further information about the painting.&lt;/a&gt;&lt;/p&gt;<br>
+&lt;/figure&gt;</code></p>
+<h2>Notes:</h2>
+<ul>
+<li>This is an experimental implementaion only I <strong>DO NOT</strong> suggest anyone uses this method for anything other than testing.</li>
+<li>Only works in FireFox 14+</li>
+<li>Although the accessible action is exposed and can be activated from 
+the image when using a screen reader (when  virtual focus is on the 
+image, pressing enter will open the link), there is no indication to 
+user that the link can be activated from the image.</li>
+<li>From initial discussions with implementers and stakeholders, they are not keen this implementation</li>
+<li>Still works when the link is hidden using the HTML5 <code>hidden</code> attribute or CSS <code>display:none</code></li>
+<li>Has the same UI issue as current <code>longdesc</code> attribute implementations: The link <strong>always</strong> opens in a new window/tab.</li>
+<li><a href="http://www.html5accessibility.com/tests/firefox-describedby.html">test page</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Firefox%2014%20%20image%20long%20description%20via%20link%20using%20aria-describedby_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

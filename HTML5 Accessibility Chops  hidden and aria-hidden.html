@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>HTML5 Accessibility Chops: hidden and aria-hidden</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">HTML5 Accessibility Chops: hidden and aria-hidden</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">6-8 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<h2>Latest Update: <a href="https://www.paciellogroup.com/blog/2016/01/the-state-of-hidden-content-support-in-2016/">The state of hidden content support in 2016</a></h2>
+<p>As a developer and also a consultant advising developers on how to 
+develop accessible content, it is important to have and provide up to 
+date and practical knowledge about robust development techniques. A 
+recent <a href="http://stackoverflow.com/questions/10349987/how-to-notify-screen-readers-using-wai-aria-that-a-div-is-now-visible">question</a>
+ on Stack Overflow got me thinking: What is the best method for hiding 
+content for all users? For hiding content for some users? <span id="more-1432"></span></p>
+<p>The standard technique for hiding content for all users has been the use CSS <a href="http://www.w3.org/TR/CSS2/visuren.html#display-prop"><code>display:none</code></a>.
+ Now, both ARIA and HTML5 also provide a semantic indication of content 
+state that indicates content is hidden or should not be available to 
+users:</p>
+<h3><a href="http://w3c.github.io/html/semantics.html#semantics">HTML5 <code>hidden</code></a></h3>
+<p>The HTML5 <a href="http://dev.w3.org/html5/spec/editing.html#the-hidden-attribute"><code>hidden</code></a> attribute provides a semantic indicator<code>:</code></p>
+<blockquote><p>All <a href="http://w3c.github.io/html/semantics.html#semantics">HTML elements</a> may have the <code title="attr-hidden"><a href="http://w3c.github.io/html/editing.html#the-hidden-attribute">hidden</a></code> content attribute set. The <code><a href="http://w3c.github.io/html/editing.html#the-hidden-attribute">hidden</a></code> attribute is a <a href="http://w3c.github.io/html/infrastructure.html#boolean-attribute">boolean attribute</a>.
+ When specified on an element, it indicates that the element is not yet,
+ or is no longer, relevant. User agents should not render elements that 
+have the <code><a href="http://w3c.github.io/html/semantics.html#semantics">hidden</a></code> attribute specified.</p></blockquote>
+<h4><strong>Example code:</strong></h4>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><strong><span><span><span><span>hidden</span></span></span></span></strong><span><span>&gt;</span></span>This content is hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong> HTML5 hidden effects:</strong></p>
+<ul>
+<li>In <a href="http://html5accessibility.com/">supporting browsers</a> the content is not displayed to <strong>any</strong> user.</li>
+<li>semantic indicator of state in HTML code (<code>hidden</code> attribute)</li>
+<li>CSS style of <code>display:none</code> applied by browser.</li>
+<li>Focusable content is not included in tab order.</li>
+<li>Not included in the <a href="http://www.w3.org/WAI/PF/aria-implementation/#def_accessibility_tree">accessibility tree</a>.</li>
+</ul>
+<h3><a href="http://www.w3.org/TR/wai-aria/states_and_properties#aria-hidden">aria-hidden</a></h3>
+<blockquote><p>Indicates that the <a href="http://www.w3.org/TR/wai-aria/terms#def_element">element</a> and all of its descendants are not visible or <a href="http://www.w3.org/TR/wai-aria/terms#def_perceivable">perceivable</a> to <em>any</em> user as implemented by the author.</p></blockquote>
+<h4><strong>Example code:</strong></h4>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><strong><span><span><span><span>aria-hidden</span></span></span><span>=</span><span><span><span>"true"</span></span></span></span></strong><span><span>&gt;</span></span>This content is hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code> <code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><strong><span><span><span><span>aria-hidden</span></span></span><span>=</span><span><span><span>"false"</span></span></span></span></strong><span><span>&gt;</span></span>This content is not hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span>
+
+<strong></strong>
+</code></pre>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><strong><span><span><span><span>aria-hidden</span></span></span><span>=</span><span><span><span>"true"</span></span></span></span></strong><span><span>&gt;</span></span>This content is hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code> <code><span><span>&lt;</span><span><span><span>p</span></span></span><span>&gt;</span></span>This content is not hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code></pre>
+<p><strong><code>aria-hidden</code> effects:</strong></p>
+<ul>
+<li>In <a href="http://html5accessibility.com/">supporting browsers</a> in conjunction with supporting assistive technology the content <strong>is not</strong> conveyed to the user via the assistive technology.</li>
+<li>Content <strong>is</strong> displayed in the browser.</li>
+<li>semantic indicator of state in HTML code (<code>aria-hidden </code>attribute)</li>
+<li>In some browsers its not included in the <a href="http://www.w3.org/WAI/PF/aria-implementation/#def_accessibility_tree">accessibility tree</a> in other browsers it is included in the accessibility tree.
+<ul>
+<li>For browser that include <code>aria-hidden</code> content in the accessibility tree focusable content <strong>is </strong> included in tab order and is navigable and operable for AT users (as well as other users).</li>
+</ul>
+</li>
+<li>In browsers that do include the content in the accessibility tree the content has an accessible MSAA (if supported) state of <code>invisible</code>. If IA2 is supported <code>aria-hidden=true</code> is passed as an object attribute. If UIA is supported <code>aria-hidden=true</code> is passed as an ARIA property.</li>
+<li><code>aria-hidden=false</code> is <a href="http://www.w3.org/WAI/PF/aria-implementation/#mapping_state-property_table"><strong>not mapped</strong></a> in any browser that supports aria-hidden, thus its use has no meaning or in other words has the same meaning as its absence.</li>
+</ul>
+<h3>CSS display:none</h3>
+<p>As mentioned, the standard method to hide content from all users in browsers that support CSS is and has been to use CSS <code>display:none</code>.</p>
+<h4><strong>Example code:</strong></h4>
+<pre><code><span><span>&lt;</span><span><span><span>p</span></span></span><span> </span></span><strong><span><span><span><span>style</span></span></span><span>=</span><span><span><span>"display:none"</span></span></span></span></strong><span><span>&gt;</span></span>This content is hidden.<span><span>&lt;/</span><span><span><span>p</span></span></span><span>&gt;</span></span></code></pre>
+<h4><strong><code>display:none</code> effects:</strong></h4>
+<ul>
+<li>In <a href="http://html5accessibility.com/">supporting browsers</a> the content is not displayed to <strong>any</strong> user.</li>
+<li>Focusable content is not included in tab order.</li>
+<li>Not included in the <a href="http://www.w3.org/WAI/PF/aria-implementation/#def_accessibility_tree">accessibility tree</a> (except for IE)</li>
+<li>In IE the content has an accessible MSAA (if supported) state of <code>invisible</code>.&nbsp; If UIA is supported <code>OffScreen=true</code>.</li>
+</ul>
+<h3>Recommendations:</h3>
+<h4><strong>Hiding content from all users</strong></h4>
+<p>If you want to hide content from all users, use the HTML5 <code>hidden</code> attribute (along with CSS <code>display:none</code> for browsers that do not yet support hidden) There is <strong>no need to use</strong> aria-hidden.</p>
+<h4><strong>Example code:</strong></h4>
+<pre><code>.hidden {display:none}</code> <code>&lt;p <strong>hidden class=<span><span>"hidden"</span></span></strong>&gt;<span><span>this</span></span> content <span><span>is</span></span> hidden <span><span>from</span></span> all users&lt;/p&gt;</code></pre>
+<h4><strong>Hiding non interactive content from visible display</strong></h4>
+<p>Use an&nbsp;<em>off screen</em> technique to remove content from visible display, but still available to screen reader users:</p>
+<h4><strong>Example code:</strong><code> </code></h4>
+<pre><code>.offscreen
+ {
+ clip-path: inset(<span><span>100</span></span>%);
+ clip: rect(<span><span>1</span></span>px <span><span>1</span></span>px <span><span>1</span></span>px <span><span>1</span></span>px); 
+  clip: rect(<span><span>1</span></span>px, <span><span>1</span></span>px, <span><span>1</span></span>px, <span><span>1</span></span>px);
+  height: <span><span>1</span></span>px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: <span><span>1</span></span>px;<code>
+ }
+</code> <code>&lt;div </code><code>class=<span><span>"offscreen"</span></span></code><code>&gt;This text <span><span>is</span></span> <em>visually</em> hidden.&lt;/div&gt;</code></code></pre>
+<p>Modified example code from: <a href="http://webaim.org/techniques/css/invisiblecontent/">WebAIM – CSS in Action: Invisible Content Just for Screen Reader Users</a></p>
+<p id="b76e"><strong>Updated code examples, October 2016,</strong>&nbsp; to take into account new advice from Jessica Beach: <a href="https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe#.2g9wpybl9">Beware smushed off-screen accessible text</a></p>
+<h4><strong>Hiding interactive content from visible display</strong></h4>
+<p>Hiding interactive (focusable) content from visible display using the <em>off screen </em>technique
+ means it is not visible, but still&nbsp; in the tab order and causes 
+issues for keyboard only users. Focusable content <strong>should only</strong> be hidden from visible display if the focusable element becomes visible when it recieves focus:</p>
+<h4><strong>Example code:</strong><code> </code></h4>
+<pre><code>a.offscreen
+{
+ clip: rect(<span><span>1</span></span>px <span><span>1</span></span>px <span><span>1</span></span>px <span><span>1</span></span>px); 
+  clip: rect(<span><span>1</span></span>px, <span><span>1</span></span>px, <span><span>1</span></span>px, <span><span>1</span></span>px);
+  height: <span><span>1</span></span>px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: <span><span>1</span></span>px;<code>
+ }
+
+a.offscreen:focus
+ {
+position:relative;
+ clip:auto;
+ width:auto;
+ height:auto;
+ overflow:auto;
+ }
+
+&lt;a class=<span><span>"offscreen"</span></span> href=<span><span>"test.html"</span></span>&gt;<span><span>this</span></span> link <span><span>is</span></span> offscreen unless it has focus&lt;/a&gt;</code></code></pre>
+<p><strong>Notes by <a href="https://twitter.com/#!/ted_drake">Ted Drake</a>, on use of the off screen technique described:</strong></p>
+<blockquote><p>Using negative position can create long scroll bars when 
+localizing a site for a rtl language. Also, it uses CSS properties that 
+are commonly used and easy to accidentally over-ride.</p>
+<p>The Yahoo Accessibility Lab recommends using clip for content that 
+should be hidden from the visual user, yet available to screen reader 
+users. Thierry Koblentz has a great article on this technique, as well 
+as the underlying philosophy behind using the correct CSS techniques for
+ hiding content.&nbsp;<a href="http://yaccessibilityblog.com/library/css-clip-hidden-content.html">Clip your hidden content for better accessibility</a></p></blockquote>
+<h3>The tests</h3>
+<p>Support for <code>aria-hidden</code>, HTML5 <code>hidden</code> and the <em>off screen</em>
+ technique was tested using JAWS, Window Eyes and NVDA (Windows), 
+ChromeVox (Chrome OS), VoiceOver (iOS and Mac OSX) and Orca (Linux) with
+ supporting browsers for each OS.</p>
+<h3>Result summary</h3>
+<ul>
+<li>Use of HTML5 <code>hidden</code> (+ CSS <code>display:none</code>) worked in <strong>all</strong> screen reader/browser combinations tested.</li>
+<li>Use of the <em>off screen</em> technique worked in <strong>all</strong> screen reader/browser combinations tested.</li>
+<li>Use of <code>aria-hidden=true</code> worked in <strong>some</strong> screen reader/browser combinations tested.</li>
+<li>Use of <code>aria-hidden=false</code> had <strong>no effect</strong> in any of the screen reader/browser combinations tested. In other words if content is hidden from all users using HTML5 <code>hidden</code> or <code>display:none</code> applying <code>aria-hidden=false</code> to the content <strong>does not</strong> make it visible to screen reader users.</li>
+</ul>
+<p>Detailed <a href="http://www.html5accessibility.com/tests/hidden2013.html">tests and test results are available -updated 11/2013</a>.</p>
+<h3>further reading:</h3>
+<p><a href="http://www.paciellogroup.com/blog/2007/12/providing-context-for-ambiguous-link-phrases/">Providing Context for Ambiguous Link Phrases</a></p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="HTML5%20Accessibility%20Chops%20%20hidden%20and%20aria-hidden_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

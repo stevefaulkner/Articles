@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>How Can I Validate (X)HTML + ARIA?</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2009/01/how-can-i-validate-xhtml-aria/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">How Can I Validate (X)HTML + ARIA?</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">7-9 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>An issue with the use of WAI-ARIA in HTML documents is that 
+they don’t validate. When you run a HTML document containing ARIA 
+attributes through the W3C Validator it shows errors in the results for 
+any ARIA attributes. More importantly it does not inform me of errors in
+ the ARIA code, for example, if the role value used is incorrect in 
+reference to the WAI ARIA specification.<span id="more-107"></span></p>
+<blockquote cite="http://www.alistapart.com/stories/doctype/"><p><code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"<br>
+"http://www.w3.org/TR/html4/loose.dtd"&gt;</code></p></blockquote>
+<p>When a validator’s results contains errors related to the use ARIA 
+attributes in a document with the DOCTYPE quoted above, it is quite 
+correct. The <a href="http://www.w3.org/TR/html401/">HTML 4.01</a> specification and its DOCTYPE declarations (DTD) <a href="http://www.w3.org/TR/html401/strict.dtd">Strict</a>, <a href="http://www.w3.org/TR/html401/loose.dtd">Transitional</a>, <a href="http://www.w3.org/TR/html401/frameset.dtd">Frameset</a>,
+ do not include any information about the WAI ARIA attributes and you 
+cannot have a valid HTML 4.01 document which includes, elements, 
+attributes, and attribute values, not detailed in its DTD’s.</p>
+<p>This situation will not change unless the W3C decide to provide 
+updated DTD’s which include ARIA attributes. My understanding is that 
+this is unlikely, I don’t undesrtand the reasons so will leave it to 
+others , more knowledgeable, to explain.</p>
+<h3>Why do I Want To Validate (X)HTML + ARIA?</h3>
+<p>I write HTML documents that include ARIA attributes, I want to know 
+if the ARIA attributes and attribute values I have used are correct in 
+reference to the ARIA specification, at the same time as checking the 
+rest of my HTML code is correct. I don’t want to be told that the use of
+ ARIA attributes are incorrect in HTML.</p>
+<p>Example of result error from the W3C validitor which is of no use to me when testing <a href="http://www.paciellogroup.com/blog/misc/aria-html4.html">a simple page with the HTML4 DOCTYPE</a> that includes the ARIA role attribute:</p>
+<blockquote><p><em>Line 30, Column 22</em>: <strong><span>there is no attribute “ROLE”</span></strong> .</p>
+<p><code>&lt;DIV id="banner" role="spanner"&gt;role="banner"&lt;/DIV&gt;</code></p>
+<p>You have used the attribute named above in your document, but the 
+document type you are using does not support that attribute for this 
+element.</p></blockquote>
+<p>The above result tells me that role is not a valid attribute, (I 
+already know this), but does not tell me that “spanner” is not a valid 
+ARIA role attribute value.</p>
+<p>Example of a useful result error from the W3C validitor:</p>
+<blockquote><p>Line 25, Column 30: <strong>value of attribute “ROLE” cannot be “SPANNER”; must be one of </strong>“ALERT”,
+ “ALERTDIALOG”, “APPLICATION”, “ARTICLE”, “BANNER”, “BUTTON”, 
+“CHECKBOX”, “COLUMNHEADER”, “COMBOBOX”, “COMPLEMENTARY”, “CONTENTINFO”, 
+“DEFINITION”, “DIALOG”, “DIRECTORY”, “DOCUMENT”, “GRID”, “GRIDCELL”, 
+“GROUP”, “HEADING”, “IMG”, “LANDMARK”, “LINK”, “LIST”, “LISTBOX”, 
+“LISTITEM”, “LOG”, “MAIN”, “MARQUEE”, “MATH”, “MENU”, “MENUBAR”, 
+“MENUITEM”, “MENUITEMCHECKBOX”, “MENUITEMRADIO”, “NAVIGATION”, “NOTE”, 
+“OPTION”, “PRESENTATION”, “PROGRESSBAR”, “RADIO”, “RADIOGROUP”, 
+“REGION”, “ROW”, “ROWHEADER”, “SEARCH”, “SEPARATOR”, “SLIDER”, 
+“SPINBUTTON”, “STATUS”, “TAB”, “TABLIST”, “TABPANEL”, “TEXTBOX”, 
+“TIMER”, “TOOLBAR”, “TOOLTIP”, “TREE”, “TREEGRID”, “TREEITEM”.</p>
+<p><code>&lt;DIV id="banner" role="spanner"&gt;role="banner"&lt;/DIV&gt;</code></p>
+<p>The value of the attribute is defined to be one of a list of possible
+ values but in the document it contained something that is not allowed 
+for that type of attribute.</p></blockquote>
+<p>The result above tells me that the role attribute value I have used 
+is incorrect, I have used the value “spanner” instead of “banner”, and 
+lists the possible correct ARIA role values.</p>
+<h3>What about the HTML5+ARIA conformance checker?</h3>
+<p>The W3C Validator now includes an expiremental HTML5 checker which also includes ARIA checking based on <a href="http://hsivonen.iki.fi/aria-html5-bis/">rules devised by Henri Sivonen</a>, a problem with this is these rules do not allow ARIA landmark roles. So when testing a simple <a href="http://www.paciellogroup.com/blog/misc/roles-html5.html">HTML5 test page with landmark roles</a> it returns results like these:</p>
+<blockquote>
+<ol>
+<li><em>Line 30, Column 31</em>: <strong>Bad value spanner for attribute role on element div</strong>. .<br>
+<code>&lt;div id="banner" role="spanner"<strong title="Position where error was detected.">&gt;</strong>role="banner"&lt;/div&gt;</code></li>
+<li><em>Line 31, Column 38</em>: <strong>Bad value navigation for attribute role on element div</strong>.<br>
+<code>&lt;div id="navigation" role="navigation"<strong title="Position where error was detected.">&gt;</strong>role="navigation"&lt;/div&gt;</code></li>
+</ol>
+</blockquote>
+<p>Again, these results are not useful, because they tell me that 
+certain roles are not allowed in HTML5 (as determined by Henri), but not
+ whether I have any incorrect attributes and values in reference to WAI 
+ARIA.</p>
+<h3>Checking not Choking: Using A Custom DTD</h3>
+<p>In order to get the W3C validator to check the role attribute, but 
+not choke on it, I have used a custom DTD. The DTD I have used is the 
+HTML 4.01 loose DTD with ARIA attributes added (<a href="http://www.paciellogroup.com/blog/aria-tests/dtd/HTML4-ARIA.dtd">HTML4-ARIA.DTD</a>).
+ I took the HTML 4.01 loose.dtd and added all the ARIA attributes and 
+attribute values to the core attributes section. I have also added the 
+tabindex attribute to the core attributes, removing it from individual 
+elements, and provided it with a value property which allows negative 
+values. I then uploaded the DTD file to the TPG web server. (<strong>Note: </strong>This is really a quick and dirty edit for the purposes of testing the concept only).</p>
+<p>So when I use a <a href="http://www.paciellogroup.com/blog/misc/aria-custom.html">custom DOCTYPE in a simple test page</a> that references the <a href="http://www.paciellogroup.com/blog/aria-tests/dtd/HTML4-ARIA.dtd">HTML4-ARIA.DTD</a>
+ and run it through the W3C HTML validator, the validator uses the DTD 
+to check my document. What I get as as a result is the ability to check 
+the correctness of my use of ARIA attributes and attribute values, also i
+ don’t get nagged about the use of <code>tabindex="-1"</code> or the <code>tabindex</code> on elements that traditionally do not support its use.</p>
+<h3>Problems</h3>
+<p>Let me state clearly at this stage. I am not advocating the 
+publishing of documents using this or any other custom DTD. I am no 
+expert, but do get the <a href="http://www.w3.org/Style/customdtd">idea that this is bad news</a>.</p>
+<p>Currently the W3C validator does not like the custom DTD because it 
+has too many additional attributes and attribute values. Thus before any
+ error results in the actual code it returns this about 20 times:</p>
+<blockquote><p><em>Line xxx, Column 2</em>: <span>number of attribute names and name tokens (167) exceeds ATTCNT (60)</span></p></blockquote>
+<p>This does not appear to affect the correct reporting of results against the custom DTD, it’s is just really annoying. I have <a href="http://lists.w3.org/Archives/Public/www-validator/2009Jan/0038.html">emailed the W3C validator team</a> to see if they can suppress this error. (<strong>Note:</strong>
+ this has since been fixed by the W3C validator team on the Development 
+version of the validator, so I have modified the bookmarklets to point 
+to the dve validator)</p>
+<p>As I mentioned previously I am not advocating the use of a custom DTD
+ in published documents, but would like to be able to check my ARIA 
+code. A way I have developed to do this is by creating a bookmarklet 
+that takes the innerHTML of a document (without the DOCTYPE) and adds 
+the custom DOCTYPE to it and then sends it to the W3C validator:</p>
+<ul>
+<li><a>HTML4.01-loose+ARIA Checker</a> (add as a favorite to try it out)</li>
+<li><a>HTML4.01-strict+ARIA Checker</a></li>
+</ul>
+<h4>Notes:</h4>
+<p>The (X)THML + ARIA validation is based on attributes and attribute values as defined in the <a href="http://www.w3.org/WAI/PF/aria/">WAI-ARIA (draft) specification 1.0</a>. The DTD’s are not official versions and have not been endorsed by anyone.</p>
+<p>Validation of HTML 4.01 documents using the experimental DTD’s, will 
+detect errors in WAI-ARIA attribute names and values only. The DTD’s 
+allow ARIA attributes to be placed on any element. It will not provide 
+any indication of the correctness of the use of a WAI-ARIA attribute on 
+any given element.</p>
+<h3>Next Steps</h3>
+<p>I have undertaken this exercise, because <a href="http://www.brucelawson.co.uk/2008/speeding-adoption-of-wai-aria/">people</a> <a href="http://www.paciellogroup.com/blog/?p=106#comment-6489">have asked</a>
+ about ARIA validation and I myself wanted to be able to check documents
+ containing ARIA. What I hope is that The W3C validator adds support for
+ (X)HTML +ARIA documents so I when check a document and it contains no 
+errors in the HTML (except for the use of ARIA) and ARIA code, I see a 
+message like this:</p>
+<p><img src="How%20Can%20I%20Validate%20(X)HTML%20+%20ARIA_files/success.gif" alt="this document was successfully checked. Result:passed, 1 warning" width="534" height="76"></p>
+<p>If this does not happen and there is sufficient interest, I will look
+ at hosting a version of the W3C validator which provides HTML+ARIA 
+checking without the reams of unhelpful error results.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>
