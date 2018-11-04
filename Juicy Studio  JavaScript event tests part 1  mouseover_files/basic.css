@@ -1,0 +1,230 @@
+/* ö */
+html, body
+{
+	font: normal 95%/141% helvetica, Verdana, Arial, sans-serif;
+	color:#000;
+	margin: 0;
+	padding: 0;
+}
+
+html
+{
+	background: #fc0;
+}
+
+body
+{
+	padding: 0.5em 0.7em;
+	margin: 0 4em 0 1em;
+	max-width: 55em;
+	border-right: 2px solid #630;
+	border-left: 1px solid #960;
+	border-bottom: 1px solid #960;
+	background: #fff;
+}
+
+a
+{
+	color: #009;
+	background: transparent;
+}
+
+a:visited
+{
+	color:#360;
+	background:transparent;
+}
+
+a:hover, a:focus, a:active
+{
+	color:#000;
+	background-color: #fc0;
+}
+
+span.externallink
+{
+	padding-right: 7px;
+	background: transparent url(/img/external.gif) no-repeat center right;
+}
+
+img
+{
+	border: none;
+}
+
+h1, h2, h3
+{
+	font: normal 170%/100% Garamond, "Times New Roman", serif;
+	margin-bottom: 0;
+	color: #630;
+	background: transparent;
+}
+
+h1
+{
+	padding: 0.2em;
+	border-top: 3px solid #630;
+	border-bottom: 1px solid #630;
+}
+
+h2
+{
+	font: normal 150%/100% Garamond, "Times New Roman", serif;
+}
+
+h3
+{
+	font: normal 140%/120% Garamond, "Times New Roman", serif;
+}
+
+ul
+{
+	margin-left: 1.5em;
+	padding-left: 0;
+	list-style-image: url(/img/arrow.gif);
+}
+
+ul ul
+{
+	list-style-image: url(/img/sub-arrow.gif);
+}
+
+dd dl
+{
+	margin-top: 1em;
+}
+
+dd
+{
+	margin-bottom: 1em;
+}
+
+fieldset
+{
+	padding: 1em;
+	border: 1px solid #c90;
+	margin-bottom: 0.5em;
+}
+
+legend
+{
+	color: #630;
+}
+
+pre
+{
+	overflow: auto;
+	background: #f9f9f9;
+	padding: 0.444em;
+	border: 1px solid #999;
+}
+
+textarea
+{
+	background: #cf9;
+}
+
+blockquote
+{
+	padding: 0.5em;
+	border-top: #960 2px solid;
+	border-bottom: #960 1px solid;
+}
+
+table
+{
+	border: 1px solid #960;
+	border-collapse: collapse;
+}
+
+th, td
+{
+	text-align: left;
+	vertical-align: top;
+	border-right: 1px solid #630;
+	border-bottom: 1px solid #630;
+	padding: 0.3em;
+}
+
+
+caption
+{
+	text-align: left;
+	color: #630;
+}
+
+ins
+{
+	text-decoration: none;
+	border-bottom: 1px dashed #c90;
+}
+
+ul#breadcrumb
+{
+	margin: 0;
+	padding: 1em 0.5em;
+	border-bottom: 1px dashed #ccc;
+}
+
+ul#breadcrumb li
+{
+	display: inline;
+}
+
+ul#breadcrumb li a
+{
+	padding-right: 20px;
+	background: transparent url(/img/next.gif) no-repeat 98% 50%;
+}
+
+p#sitenav a
+{
+	padding-left: 14px;
+	background: transparent url(/img/next.gif) no-repeat 2px 50%;
+}
+
+[aria-invalid=true]
+{
+	outline: 2px solid #c66;
+}
+
+dl#imagelist dt
+{
+	margin-top: 2em;
+}
+
+form div
+{
+	margin: 0.5em 0;
+}
+
+form div.fielderror
+{
+	width: 20em;
+	padding: 0.3em;
+	border: 2px solid #c00;
+}
+
+form#articlecommentform label
+{
+	float: left;
+	width: 4em;
+}
+
+form#articlecommentform label.leave
+{
+	float: none;
+}
+
+figure
+{
+	padding: 0.5em;
+	margin: 1em 0.3em;
+}
+
+figcaption
+{
+	font-weight:bold;
+	color:#630;
+	margin-bottom: 0.5em;
+}

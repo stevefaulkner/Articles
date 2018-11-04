@@ -1,0 +1,36 @@
+/* ö */
+body
+{
+	font: normal 120%/180% helvetica, Verdana, Arial, sans-serif;
+	padding: 0.5em;
+	margin: 0 auto;
+}
+
+div#mission
+{
+	padding: 1em;
+	background: #fff;
+}
+
+#content
+{
+	float: none;
+	width: auto;
+}
+
+#sidebar
+{
+	float: none;
+	width: auto;
+	min-width: auto;
+	margin: 0.5em;
+	background: transparent url(/img/edge.gif) no-repeat left bottom;
+	border-left: none;
+	border: 1px solid #000;
+}
+
+ul#nav
+{
+	width: 95%;
+	max-width: 15em;
+}

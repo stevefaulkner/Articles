@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>What’s ‘large text’ in WCAG 2.0 parlance?</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2012/05/whats-large-text-in-wcag-2-0-parlance/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">What’s ‘large text’ in WCAG 2.0 parlance?</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>I put together an <a href="http://www.html5accessibility.com/tests/small-large.html">example page</a>,
+ mainly for my own use, providing some examples of what in WCAG 2.0 
+terms is considered large and small text. WCAG 2.0 provides the font 
+measurements in terms of points, so I initially used the CSS <code>pt</code> unit to set the font size in the examples, but have changed it to em’s after discussion with <a href="https://twitter.com/#!/goetsu">@goetsu</a>.<span id="more-1502"></span></p>
+<h2>large text, bold text and the color contrast ratio</h2>
+<p>The WCAG 2.0 criterion <a href="http://www.w3.org/TR/WCAG/#visual-audio-contrast-contrast">1.4.3 Contrast (Minimum)</a> states:</p>
+<blockquote><p>The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:(Level AA)</p>
+<ul>
+<li><strong>Large Text: </strong> Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;</li>
+<li><strong>Incidental: </strong> Text or images of text that are part 
+of an inactive user interface component, that are pure decoration, that 
+are not visible to anyone, or that are part of a picture that contains 
+significant other visual content, have no contrast requirement.</li>
+<li><strong>Logotypes: </strong> Text that is part of a logo or brand name has no minimum contrast requirement.</li>
+</ul>
+</blockquote>
+<p>WCAG 2.0 <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">Understanding Success Criterion 1.4.3 [Contrast (Minimum)]</a> defines large text:</p>
+<blockquote><p>Text that is larger and has wider character strokes is 
+easier to read at lower contrast. The contrast requirement for larger 
+text is therefore lower. This allows authors to use a wider range of 
+color choices for large text, which is helpful for design of pages, 
+particularly titles. <strong>18 point text or 14 point bold text is judged to be large enough to require a lower contrast ratio</strong>. (See <a href="http://www.aph.org/edresearch/lpguide.htm">The American Printing House for the Blind Guidelines for Large Printing</a> and <a href="http://www.loc.gov/nls/reference/circulars/largeprint.html">The Library of Congress Guidelines for Large Print</a>).
+ “18 point” and “bold” can both have different meanings in different 
+fonts but, except for very thin or unusual fonts, they should be 
+sufficient. Since there are so many different fonts, the general 
+measures are used and a note regarding fancy or thin fonts is included.</p>
+<p><strong>Note 3:</strong> The actual size of the character that a user
+ sees is dependent both on the author-defined size and the user’s 
+display or user-agent settings. <strong>For many mainstream body text 
+fonts, 14 and 18 point is roughly equivalent to 18.75px and 24px or 1.2 
+and 1.5 em or to 120% or 150% of the default size for body text 
+(assuming that the body font is 100%),</strong> but authors would need 
+to check this for the particular fonts in use. When fonts are defined in
+ relative units, the actual point size is calculated by the user agent 
+for display. The point size should be obtained from the user agent, or 
+calculated based on font metrics as the user agent does, when evaluating
+ this success criterion. Users who have low vision would be responsible 
+for choosing appropriate settings.</p></blockquote>
+<h3>Large, small and bold text reference page</h3>
+<p>I wanted a reference page which illustrated small, small bold and large text as defined in WCAG 2.0 so I created one: <a href="http://www.html5accessibility.com/tests/small-large.html">Large text, bold text and the color contrast ratio</a></p>
+<h3>NOTE: use of pt for screen media is not recommended</h3>
+<p>Use of <code>pt</code> is <a href="http://www.w3.org/Style/Examples/007/units.en.html#units">not recommended for screen media</a> only for print:</p>
+<blockquote><p>The so-called absolute units (cm, mm, in, pt and pc) mean
+ the same in CSS as everywhere else. A length expressed in any of these 
+will appear as exactly that size (within the precision of the hardware 
+and software). They are not recommended for use on screen, because 
+screen sizes vary so much. A big screen may be 60cm (24in), a small, 
+portable screen is maybe only 8cm. And you don’t look at them from the 
+same distance.</p></blockquote>
+<h3>A guide of limited utility</h3>
+<p>Checking the example page on my iPhone I found that all the text is 
+scaled down so what may be considered as large text on a PC screen is 
+not on a phone or other device.</p>
+<div id="attachment_1503" class="wp-caption"><p><img src="What%E2%80%99s%20%E2%80%98large%20text%E2%80%99%20in%20WCAG%202.0%20parlance_files/photo.png" alt="text is much smaller than on a PC." width="300" height="450"></p><p class="wp-caption-text">Screenshot of the example page in the Safari browser on an iPhone.</p></div>
+<h2>Contrast ratio rule of thumb</h2>
+<p>The take away from this is that it is likely your pages will be 
+viewed on a range of devices and screen sizes, so I suggest sticking 
+with the 4.5:1 color ratio for all text.</p>
+<h2>Resources</h2>
+<ul>
+<li><a href="http://www.paciellogroup.com/resources/contrast-analyser.html">Contrast Analyser – Application</a> for Mac and Windows.</li>
+<li><a href="http://juicystudio.com/services/luminositycontrastratio.php">Contrast Ratio Analyser – online service</a></li>
+<li><a href="http://juicystudio.com/article/colour-contrast-analyser-firefox-extension.php">Colour Contrast Analyser – Firefox Extension</a></li>
+<li><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">Understanding Success Criterion 1.4.3 [Contrast (Minimum)] </a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="What%E2%80%99s%20%E2%80%98large%20text%E2%80%99%20in%20WCAG%202.0%20parlance_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

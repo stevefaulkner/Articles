@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Notes on Guidelines For Speech accessible HTML for Dragon NaturallySpeaking</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2013/10/notes-guidelines-speech-accessible-html-dragon-naturallyspeaking/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Notes on Guidelines For Speech accessible HTML for Dragon NaturallySpeaking</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>In a recent tweet Jared Smith linked to Guidelines For Speech accessible <a href="http://www.nuance.com/ucmprod/groups/healthcare/documents/webasset/nd_004979.pdf">HTML for Dragon NaturallySpeaking (PDF)</a>
+ A ‘White Paper’ published in 2009 by Nuance containing ‘guidance’ on 
+how to code HTML to support users of its product.&nbsp; Note that I 
+could not find a link to this document from the Nuance web site and that
+ I could not find a link to more recent guidance on this subject from 
+Nuance.</p>
+<blockquote><p>Speech-accessible HTML – <a href="http://t.co/hlh5dxFv30">http://t.co/hlh5dxFv30</a> In inaccessible PDF, rather ironically. — <cite>Jared Smith (@jared_w_smith) <a href="https://twitter.com/jared_w_smith/statuses/388147061964947456">October 10, 2013</a></cite><br>
+</p></blockquote>
+
+<h2>Unsafe guidance</h2>
+<p>Unfortunately the cited document contains inaccuracies that contradict the web standards for <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML</a> and <a href="http://www.w3.org/TR/WCAG20/">accessibility</a>
+ and do not correspond to interoperable implementations of accessibility
+ support in browsers. Examples of the problematic guidance are detailed 
+below:</p>
+<h3>Nuance guidance on the a element</h3>
+<blockquote><p>anchor elements (&lt;a&gt;…&lt;/a&gt;)<br>
+Text links (anchor elements) naturally provide the text that should be 
+spoken for speech access, and therefore require no specification beyond 
+the guidelines above.<strong> If for some reason an anchor element has no text, Dragon NaturallySpeaking uses its ALT text </strong><em>[emphasis mine]</em></p></blockquote>
+<h4><strong>Guidance&nbsp;notes:</strong></h4>
+<p>The <a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#attr-img-alt">alt attribute</a> is not a conforming attribute for the <a href="http://www.w3.org/html/wg/drafts/html/master/text-level-semantics.html#the-a-element">a element</a> in <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML</a>. i.e. it throws an error when <a href="http://validator.w3.org/nu/">validating</a> the HTML document code. More importantly it is not used in calculating the <a href="http://rawgithub.com/w3c/html-api-map/master/index.html#a-element">accessible name (label) for the <code>a</code> element</a>. What this means is that the <code>alt</code>
+ attribute in this case will not be exposed to assistive technology via 
+the agreed standard methods for identifying an accessible name for 
+an&nbsp;HTML <code>a</code> element.</p>
+<h3>Nuance advice on images used as the sole content of a link</h3>
+<blockquote><p>Two general approaches can be taken to associate text with an image link. First, you can assign <strong>ALT or TITLE attributes </strong><em>[emphasis mine]</em> containing the text that corresponds to the image (or to each individual area of an image map).</p></blockquote>
+<h4><strong>Guidance&nbsp;notes:</strong></h4>
+<p>Any image (including one that is the sole content of a link) MUST have an <code>alt</code> attribute that provides an appropriate text alternative. The <code>title</code> attribute MUST NOT be used as an alternative to the <code>alt</code> attribute. The same applies to an <code>area</code> element, it MUST have an <code>alt</code> attribute.</p>
+<p>Refer to the following for detailed guidance:</p>
+<ul>
+<li><a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#a-link-or-button-containing-nothing-but-an-image">4.8.1.1.3 A link or button containing nothing but an image</a></li>
+<li><a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#a-group-of-images-that-form-a-single-larger-picture-with-links">4.8.1.1.12 A group of images that form a single larger picture with links</a></li>
+<li><a href="http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#icon-images">4.8.1.1.17 Icon Images</a></li>
+</ul>
+<h3>Nuance advice on button labels</h3>
+<blockquote><p>Buttons (&lt;input type=”submit | button” | reset | image”&gt;)<br>
+Dragon uses the button’s caption (the VALUE attribute) as the spoken text, as well as ALT or TITLE attributes if any.</p></blockquote>
+<h4><strong>Guidance&nbsp;notes:</strong></h4>
+<p>The <code>alt</code> attribute is ONLY valid on <code>input type=image</code>, it is not valid on <code>submit, button</code> or <code>reset</code>. <strong>More importantly</strong> the <code>alt</code> attribute is only used as the accessible name for an <code>input</code> when it is <code>type=image</code>.</p>
+<h3>Nuance advice on edit controls</h3>
+<blockquote><p>edit Controls (text entry Fields) (&lt;input type=”text | password”&gt;)<br>
+While Dragon provides commands such as “click text field” to navigate to
+ text fields, it is preferable to be able to reach each field directly 
+by speaking. <strong>These elements have NAME attributes that can be used as the spoken text.</strong> <strong>Although these elements do not typically have ALT </strong><em>[emphasis mine]</em>&nbsp;or TITLE attributes, you can include those attributes as well. <strong>Using the ALT</strong> <em>[emphasis mine]&nbsp;</em>or
+ TITLE attribute may be preferable in software-generated HTML, which 
+often assigns unpronounceable, programmatic NAME values that cannot be 
+easily changed without breaking the functionality of the document.</p></blockquote>
+<h4><strong>Guidance&nbsp;notes:</strong></h4>
+<p>The <a href="http://www.w3.org/html/wg/drafts/html/master/forms.html#attr-fe-name">name attribute</a> is not designed to be used as a human readable label for ANY element. It IS NOT used in the <a href="http://rawgithub.com/w3c/html-api-map/master/index.html#accessible-name-and-description-calculation">accessible name calculation</a> for any element. The <code>alt</code> attribute is not valid or used in the accessible name calculation for <code>input</code> elements other than <code>type=image</code>. Use of the <code>title</code> attribute to provide an accessible label for a control is only <a href="http://www.paciellogroup.com/blog//2013/01/using-the-html-title-attribute-updated/">recommended under very particular circumstances</a> due to its inaccessible and unusable implementation in most browsers and operating systems.</p>
+<h3>Conclusion</h3>
+<p>The document ‘Guidelines For Speech accessible HTML for Dragon 
+NaturallySpeaking’ includes poor guidance for HTML developers that 
+contradicts web standards and may lead to less accessible content. As 
+such it should not be used or cited as a credible resource.</p>
+<h3>Further reading</h3>
+<ul>
+<li><a href="http://webaim.org/blog/at-experiment-dragon/">Assistive Technology Experiment: Dragon NaturallySpeaking</a></li>
+<li><a href="http://www.w3.org/TR/WCAG20/">Web Content Accessibility Guidelines 2.0</a></li>
+<li><a href="http://www.w3.org/html/wg/drafts/html/master/">HTML 5.1</a></li>
+<li><a href="http://rawgithub.com/w3c/html-api-map/master/index.html"><abbr title="HyperText Markup Language">HTML</abbr>&nbsp;to Platform Accessibility&nbsp;<abbr title="Application Programming Interfaces">APIs</abbr>&nbsp;Implementation Guide</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Notes%20on%20Guidelines%20For%20Speech%20accessible%20HTML%20for%20Dragon%20NaturallySpeaking_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

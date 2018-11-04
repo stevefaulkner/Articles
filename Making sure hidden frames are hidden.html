@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Making sure hidden frames are hidden</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2010/04/making-sure-hidden-frames-are-hidden/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Making sure hidden frames are hidden</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>An issue that arises fairly frequently in regards to web applications is the use of hidden <code>iframe</code> elements used for retrieving data using JavaScript. While they can be easily hidden from visual display using CSS <code>display:none</code>,
+ they are sometimes picked up by screen readers and other AT that 
+extract the DOM code from browsers and re-present it to users in a form 
+that can be navigated using specific key strokes.</p>
+<p>For example, the JAWS screen reader provides <a href="http://www.freedomscientific.com/Training/Surfs-up/Quick_Keys.htm"><code>frame</code> navigation keys</a>: <kbd>M</kbd> and <kbd>Shift+M</kbd> to cycle forward and back through <code>frame</code> and <code>iframe</code> elements. JAWS also provides a frames dialog (open using <kbd>insert + F9</kbd> that displays a list of frames and iframes on a page identified by their titles. If the title attribute is not present on the <code>frame/iframe</code> then the URL of the source document for the frame is listed.</p>
+<p><img src="Making%20sure%20hidden%20frames%20are%20hidden_files/frameslist.gif" alt="JAWS farmes list dialog displaying 3 frames: the first with a title of 'empty', the second with an URL as the title and another with a title of 'main'." width="420" height="206"></p>
+<p>Furthermore, when a page loads users of some assistive technology 
+hear information about the content of the page including how many frames
+ are present. So understandably informing users of frames that have no 
+usable content and providng access to them is a sub-optimal outcome.</p>
+<h3>How to ensure an <code>iframe</code> is hidden</h3>
+<p>If an iframe contains content that is not intended for users, there 
+are a number of things you can do to ensure it is not available to any 
+users:</p>
+<ol>
+<li>Use CSS <code>display:none</code></li>
+<li>Set the <code>height</code> and <code>width</code> attributes to “0”</li>
+<li>set the <code>tabindex</code> attribute to “-1”</li>
+<li>And just in case a user still manages to encounter the iframe, set 
+the title attribute with text indicating it does not contain anything.</li>
+</ol>
+<h3>Code example:</h3>
+<p><strong>CSS:</strong></p>
+<p><code>iframe.hidden<br>
+{<br>
+display:none<br>
+}</code></p>
+<p><strong>HTML:</strong></p>
+<p><code>&lt;iframe src="javascript.html" width="0" height="0" tabindex="-1" title="empty" class="hidden"&gt;</code></p>
+<h3>The Future – the <code>hidden</code> attribute</h3>
+<p>HTML5 includes a <a href="http://dev.w3.org/html5/spec/editing.html#the-hidden-attribute">hidden attribute</a> that can be added to any element:</p>
+<blockquote cite="http://dev.w3.org/html5/spec/editing.html#the-hidden-attribute"><p>When
+ specified on an element, it indicates that the element is not yet, or 
+is no longer, relevant. User agents should not render elements that have
+ the <code title="attr-hidden">hidden</code> attribute specified.</p></blockquote>
+<p>When supported, the use of this attribute will make the hiding of 
+elements and element content, such as an iframe, simpler. Unfortunately 
+at this time no browser supports the <code>hidden</code> attribute, so taking into account legacy software it will be some years before the use of the <code>hidden</code> attribute can be recommended, until that point the recommendations outlined above will have to suffice.</p>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Making%20sure%20hidden%20frames%20are%20hidden_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

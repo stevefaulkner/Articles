@@ -1,0 +1,28 @@
+/* ö */
+body
+{
+	font: normal 120%/180% helvetica, Verdana, Arial, sans-serif;
+	padding: 0.75em;
+	margin: 0 auto;
+}
+
+#content
+{
+	float: none;
+	width: auto;
+}
+
+#sidebar
+{
+	float: none;
+	width: auto;
+	min-width: auto;
+	margin: 0.5em;
+	background: transparent url(/img/edge.gif) no-repeat left bottom;
+	border-left: none;
+}
+
+ul#nav
+{
+	width: 20em;
+}

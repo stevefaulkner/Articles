@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Flipboard – React Canvas Accessibility</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2015/02/flipboard-react-canvas-accessibility/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Flipboard – React Canvas Accessibility</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">2-3 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Flipboard <a href="http://engineering.flipboard.com/2015/02/mobile-web/">announced yesterday</a> that they are using <a href="http://www.w3.org/TR/html5/scripting-1.html#the-canvas-element">HTML5 canvas</a> to improve performance on mobile devices. This has accessibility ramifications.<span id="more-3409"></span></p>
+<h2><img src="Flipboard%20%E2%80%93%20React%20Canvas%20Accessibility_files/flipboard-acc-logo.png" alt="flipboard accessibility" width="256" height="128"></h2>
+<p>Testing the <a href="https://flipboard.com/@flipboard/flipboard-picks-8a1uu7ngz">Flipboard site</a>
+ on a mobile device such as an iPhone, quickly reveals that the content 
+is not available to screen reader users. This is because the content is 
+painted onto a canvas element using <a href="https://github.com/flipboard/react-canvas">React Canvas</a>. The words, structure and UI are all visual, there is nothing but pixels.</p>
+<p>Reading the <a href="https://github.com/flipboard/react-canvas#accessibility">React Canvas</a> documentation. It states:</p>
+<blockquote><p><strong>Accessibility</strong></p>
+<p>This area needs further exploration. Using fallback content (the 
+canvas DOM sub-tree) should allow screen readers such as VoiceOver to 
+interact with the content. We’ve seen mixed results with the iOS devices
+ we’ve tested.</p></blockquote>
+<p>I put together a <a href="http://html5accessibility.com/tests/flipboard-canvas.html">very simple example</a> of what Flipboard <em>could do</em> to make the content trapped in the canvas pixels available to other users:</p>
+<p><img src="Flipboard%20%E2%80%93%20React%20Canvas%20Accessibility_files/flipboard.png" alt="screenshot of Flipboard story about John Stewart resigning from the Daily Show, as rendered using HTML5 canvas." width="300" height="533"></p>
+<p>Structured text and interactive content within the <a href="http://www.paciellogroup.com/blog/2015/02/html5-canvas-sub-dom/">canvas sub DOM</a></p>
+<pre><span>&lt;<span>canvas</span> <span>id</span>=<span>"myCanvas"</span> <span>width</span>=<span>"300"</span> <span>height</span>=<span>"533"</span>&gt;</span>
+<span>&lt;<span>header</span>&gt;</span>
+<span>&lt;<span>p</span>&gt;</span>From the daily edition.<span>&lt;/<span>p</span>&gt;</span>
+<span>&lt;<span>h2</span>&gt;</span>
+<span>&lt;<span>a</span> <span>id</span>=<span>"theLink"</span> 
+<span>href</span>=<span>"http://www.buzzfeed.com/jarettwieselman/why-well-miss-jon-stewart-on-the-daily-show"</span> 
+<span>target</span>=<span>"_blank"</span>&gt;</span> 19 Reasons We’ll Miss Jon Stewart On “The Daily Show”<span>&lt;/<span>a</span>&gt;</span>
+<span>&lt;/<span>h2</span>&gt;</span>
+<span>&lt;/<span>header</span>&gt;</span>
+<span>&lt;<span>p</span>&gt;</span>buzzfeed - Jarett Wieselman<span>&lt;/<span>p</span>&gt;</span>
+<span>&lt;<span>p</span>&gt;</span>We’ll need a million Moments of Zen to emotionally endure this loss. Nearly 16 years 
+after he took over from Craig Kilborn as host, Jon Stewart announced on Tuesday that 
+he would be leaving The Daily Show. But it’s hard to imagine a TV future without 
+him for many reasons… Like, the fact that, …
+<span>&lt;/<span>p</span>&gt;</span>
+<span>&lt;/<span>canvas</span>&gt;</span>
+</pre>
+<h2>Notes:</h2>
+<ul>
+<li>Tested with <a href="https://www.apple.com/accessibility/osx/voiceover/">VoiceOver</a> on iPhone 4, the structured HTML content is available and can be interacted with.</li>
+<li>The <a href="http://html5accessibility.com/tests/flipboard-canvas.html">test file</a>
+ only includes one event handler on the canvas that activates the link 
+in the canvas sub DOM (to keep it simple for demo purposes and also 
+because its the limit of my canvas scripting abilities.)</li>
+<li>It is presumed that since all the data that is written to the canvas
+ is available it should not be onerous to include it in the canvas sub 
+DOM and this could occur after the canvas has been painted, so as not to
+ effect the performance benefits.</li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Flipboard%20%E2%80%93%20React%20Canvas%20Accessibility_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

@@ -1,0 +1,42 @@
+/* ö */
+span.comment
+{
+	color: #060;
+	background: transparent;
+}
+
+span.tag
+{
+	color: #900;
+	background: transparent;
+}
+
+span.asptag, span.phptag
+{
+	color: #000;
+	background: #ff0;
+}
+
+span.attribute
+{
+	color: #d90000;
+	background: transparent;
+}
+
+span.keyword, span.attributeValue
+{
+	color: #00c;
+	background: transparent;
+}
+
+span.keyword
+{
+	font-weight: bold;
+}
+
+span.highlight
+{
+	font-weight: bold;
+	background: #ff0;
+	color: #000;
+}

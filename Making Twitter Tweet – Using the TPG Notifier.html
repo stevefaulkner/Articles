@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Making Twitter Tweet – Using the TPG Notifier</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2008/05/making-twitter-tweet-using-the-tpg-notifier/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Making Twitter Tweet – Using the TPG Notifier</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">8-11 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>As part of my presentation at the <a href="http://www.abilitynet.org.uk/accessibility2/">Accessibility 2.0 Conference</a>
+ I demonstrated a preferences module conceived by Hans Hillen, Gez Lemon
+ and I, as a proof of concept(s) for ways to provide cues to users 
+allowing them to benefit from and/or have access to content that changes
+ dynamically without a page refresh. <span id="more-2499"></span>This was presented using the <a href="http://www.twitter.com/">Twitter</a>
+ character countdown feature, which indicates to users the number of 
+characters (140 character limit) they have left to type into a <code>textarea</code>.</p>
+<p>The TPG notifier includes 3 methods to inform a user of how many 
+letters they have left to type in a text area, before the limit is 
+reached. The 3 methods:</p>
+<ol>
+<li>JavaScript alert</li>
+<li>Flash aural cues</li>
+<li>WAI-ARIA Live regions</li>
+</ol>
+<p>Each method has its pros and cons:</p>
+<ol>
+<li>The JavaScript alert requires that focus be moved away from the text
+ area to the alert box and the user to press the ‘OK’ button for the 
+focus to be moved back to its previous position in the text area. But 
+this method is probably the most widely supported across browsers and 
+Assistive Technology.</li>
+<li>The Flash method involves the use of reasonably complex JavaScript 
+and the production of the aural cue files. But is well supported and 
+does not require the AT to support Flash, only that the Browser has the 
+Flash plugin installed.</li>
+<li>The WAI-ARIA live region method is easily implemented, but currently has limited support.</li>
+</ol>
+<p>As previously stated this is a ‘proof of concept’ and has not been 
+tested with assistive technology users. The most important aspect is 
+that it provides <strong>Preferences, </strong>which a user can enable if they choose to. So users are not forced to use any method if they don’t find them useful.</p>
+<h2>Demonstration</h2>
+<p>Have a look at the <a href="http://files.paciellogroup.com/blogmisc/samples/tpgnotifier/index.html?notificationMethod=liveregion">working example</a> or download the <a href="http://files.paciellogroup.com/blogmisc/samples/tpgnotifier/notifier.zip">example sourcecode (zip file)</a>.
+ The example has WAI-ARIA live regions, with a visual fade indicator, 
+set as default. If live regions are unsupported by a user’s browser or 
+Assistive Technology, they can choose from the other methods available.</p>
+<h2>Technical Details</h2>
+<p>Hans Hillen took on the task of developing the concept (thanks Hans!) and provides information on the technical details:</p>
+<p>The TPG notifier can be created as a javascript object by a developer
+ for any specific page. It uses unobtrusive scripting, but does not fall
+ back on a non scripted alternative. User agents that do not support 
+javascript simply will not receive the updates.</p>
+<p>The notifier object allows developers to create different 
+notifications, which can then be sent to the user at any suitable event.
+ Currently there are three different notification types: Auditory Icons 
+(using Adobe Flash), browser alerts, and live regions. The key factor is
+ that the end user can decide which method to use, based on his or her 
+preference and level of support. The Notifier class is easy to extend, 
+allowing additional notification alternatives to be added in the future.
+ For now, let’s have a closer look at the available methods:</p>
+<h3>Audio Updates Using Adobe Flash</h3>
+<p>With this approach, we use Flash to play back sound as a result of a 
+particular event. The Flash movie is a 5kb file that does not contain 
+any actual visual content, only scripted behaviour that handles the 
+loading and playback of sound files. This approach does not require the 
+user to interact with the flash movie at all, as this is all handled by 
+JavaScript. To prevent users from being hassled with messages about 
+missing plugins or plugin versions, we have used the <a href="http://code.google.com/p/swfobject/">swfobject 2.0</a> method (developed by<a href="http://www.bobbyvandersluis.com/"> Bobby van der Sluis</a>).
+ Swfobject makes it easy to inject Flash content to a document in an 
+unobtrusive, cross browser friendly way. This approach also makes use of
+ the TPG notifier a lot easier, as the developer does not have to worry 
+about manually implementing flash objects on every page, the TPG 
+notifier takes care of this. Also, when a user agent is not capable of 
+playing Flash content, this method will degrade gracefully without 
+bothering the end users about missing plugins. Since the notifier has 
+different notification methods next to Flash, supporting Flash is not 
+crucial. The Notifier object will switch the notification method to 
+something that does not require a plugin (currently it will switch to 
+the ‘live region’ method).</p>
+<p>The sound files have be in mp3 format. These can be simple and short 
+sound files (such as a beep) , speech recordings, or anything that’s 
+appropriate. Also, different types of alerts can be created using the 
+same sound file, by manipulating volume, spacial position and 
+repetition. For example, the demo provided with this article generates 
+three alerts, based on the remaining number of characters left in a text
+ area. Using the preferences section you can choose to either use a 
+different sound for each event, or to use the same sound but louder for 
+each event. Have a look at the <a href="http://www.paciellogroup.com/blog/misc/notifier/prefs.html">preferences section of the demo</a> to get an idea of the possibilities.</p>
+<h3>Using JavaScript alerts</h3>
+<p>A method that is more natively supported by most browsers is the use 
+of browser alerts (e.g. window.alert() calls). The main disadvantage of 
+this approach is that it is disruptive to the user’s browsing 
+experience. For this reason, this method should never be a default 
+setting when using the notifier. It should only be used when chosen by 
+the user. Next to the wide level of support, there is another advantage 
+for this approach: the fact that the alert box is modal and always draws
+ focus to itself provides a guarantee that the user will perceive the 
+notification. Also, even though it steals focus, it always places it 
+back to where it was.</p>
+<h3>Using ARIA Live Regions</h3>
+<p><a href="http://developer.mozilla.org/en/docs/AJAX:WAI_ARIA_Live_Regions">ARIA Live regions</a>
+ are ideal for notifying users of changed content. The TPG notifier can 
+be used to either create a new live region from scratch to place the 
+notification text in, or an existing element can be targeted to function
+ as a live region. The notifier also takes a set of parameters that 
+determine how the live region will be created. For your visitors to try 
+this method out, they will need a browser that supports live regions 
+(such as <a href="http://www.getfirefox.com/">Mozilla Firefox </a>), as well as compatible assistive technology (such as <a href="http://www.firevox.clcworld.net/">Firevox</a>, <a href="http://www.nvda-project.org/">NVDA</a> or <a href="http://live.gnome.org/Orca/Firefox/LiveRegions">ORCA</a>).</p>
+<h3>To Implement</h3>
+<p>The Notifier requires a few files to be present in your site 
+structure (and the javascript files will have to be loaded in this 
+order:</p>
+<ul>
+<li>swfobject.js, which contains the swfobject code responsible for injecting flash into the page.</li>
+<li><a href="https://developer.paciellogroup.com/blog/misc/notifier/js/tpglib/TPG/Utilities.js">TPG/Utilities.js</a>, which contains core functions used by the notifier.</li>
+<li><a href="https://developer.paciellogroup.com/blog/misc/notifier/js/tpglib/TPG/Notifier.js">TPG/Notifier.js</a>, which contains the actual notifier related classes.</li>
+<li>TPG/tpgnotifier.swf, which is the actual flash file responsible for 
+loading and playing the sounds. The functionality is is located in the <a href="https://developer.paciellogroup.com/blog/misc/notifier/flash/TPG/SoundHandler.as">SoundHander.as</a> file.</li>
+<li>Additionally MP3 files will have to be provided by the developer.</li>
+</ul>
+<p>In short, these are the steps that have to be undertaken to implement the TPG notifier in your page:</p>
+<ol>
+<li>Create a new instance of the TPG.Notifier class. The constructor 
+takes two parameters: the method to use, and an optional object that can
+ be used to pass configuration parameters to the notifier. Since the 
+user has to be able to choose the preferred method, this variable should
+ be provided through a persistent preference (such as a cookie).</li>
+<li>Load the actual notifications. Regardless of the method, a 
+notification always requires a text message to be specified. The reason 
+is that a chosen non-text method (such as Flash) is not supported, it 
+can fall back to a text based alternative.</li>
+<li>For Flash Notifications, create a new sound object and add it to the
+ notification created in the previous step. You don’t have to create a 
+new sound object for every notification. You can also reuse the same 
+sound in a unique way by changing its parameters.</li>
+<li>Whenever an event occurs that should notify the user, fire the notification. The notifier will handle which method to use.:</li>
+</ol>
+<p>The basic code sample below shows a basic version of the function calls required to set up a notification involving Flash sound:</p>
+<pre lang="javascript">//1. <span><span>create</span> notifier object. The <span>'method'</span> parameter should be retrieved <span>from</span> a <span>user</span> preference
+tpgNotifier = new TPG.Notifier(method, Params);</span>
+//2. Add a new notification, specifying its text message and ID which we will use for referencing
+tpgNotifier.addNotification("30 characters left", "alert1");
+//3. <span><span>create</span> a new sound object, <span>and</span> <span>add</span> the resulting ID <span>to</span> the notifier we created <span>in</span> step <span>2</span>
+tpgNotifier.setNotificationSound(<span>"alert1"</span>, tpgNotifier.createSound(<span>"myFile.mp3"</span>));</span>
+//4. On appropriate event, fire the notification
+tpgNotifier.notify("alert1");</pre>
+<h3>Browser Support</h3>
+<p>This method has currently been tested on Internet Explorer 6 and up, 
+Opera 9, Firefox 2 and Safari for Windows. Safari seems to have some 
+issues when running the notifier from a local web page. As mentioned 
+above this is still a work in progress.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

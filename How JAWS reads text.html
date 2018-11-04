@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>How JAWS reads text</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2008/03/how-jaws-reads-text/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">How JAWS reads text</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">3-4 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>Making public statements based on limited knowledge of an 
+assistive technology and with little understanding of how it is used, 
+can lead to incorrect conclusions and poor implementations. <span id="more-2488"></span>For example, <a href="http://ln.hixie.ch/?start=1188895731&amp;count=1">a blog post</a>
+ about the JAWS screen reader (amongst other things) and how poorly it 
+supports the reading of paragraph’s in HTML, is being cited to 
+re-inforce arguments in an <a href="http://blog.ianbicking.org/2008/03/23/html-accessibility">opinion piece</a> about web accessibility, which in turn is <a href="http://lists.w3.org/Archives/Public/public-pfwg-comments/2008JanMar/0093.html">being cited</a> in other debates. In attempt to introduce a little perspective, here is some information about how JAWS reads text.</p>
+<h3>JAWS support for the HTML <code>p</code> element.</h3>
+<p>Users can navigate content via the p element in HTML, by using the <kbd>P</kbd> (move to next <code>p</code> element) and <kbd>Shift-P</kbd> (move to the previous <code>p</code> element) keys. When these commands are used, JAWS will move to the next or previous <code>p</code> element and read the text contained in that <code>p</code> element and then stop reading. The user can then move to and start reading the next paragraph by pressing the <kbd>P</kbd> key. Using this command, JAWS <strong>will stop reading at the end of each paragraph independent of style or punctuation</strong>. This was tested with JAWS 8.0 and 9.0 on Windows XP using a <a href="http://www.paciellogroup.com/blog/misc/paragraph-test.html">test page</a>.</p>
+<h3>The “Say All” command</h3>
+<p>The “Say all” command <kbd>INS+DWN ARROW</kbd>, is a more general 
+command that applies to desktop applications and other situations where 
+text can be read as well as HTML documents. Using this command JAWS will
+ simply start reading from the top of the document, without pausing, 
+until it reaches the end of the document.</p>
+<p>For example when a page first loads in a browser JAWS will start 
+reading from the top of the page automatically or the user may invoke 
+the “Say All” command. It will then read all text and text alternatives 
+found on the page. The user can modify the progess of the reading by 
+using the right and left <kbd>SHIFT</kbd> keys . Depending on the preference the user has set in the “Say All By” verbosity options, pressing the <kbd>SHIFT</kbd> keys will have different effects:</p>
+<ul>
+<li><strong>Line with Pauses</strong>: This option reads by line, pausing slightly at the end of each line.</li>
+<li><strong>Line without Pauses</strong>: This option allows for smoother reading.</li>
+<li><strong>Sentence</strong>: Select this option for applications in 
+which SayAll sounds choppy. This moves the pauses between elements to 
+the ends of sentences, and makes the reading sound smoother.</li>
+<li><strong>Paragraph</strong>: This option is very useful in large documents as you can press the right <kbd>SHIFT</kbd> key to quickly move through the paragraphs without needing to interrupt SayAll.</li>
+</ul>
+<p>The user can stop the “Say All” at anytime (by pressing the <kbd>CTRL</kbd> key) and navigate the content using the many <a href="http://www.freedomscientific.com/fs_products/JAWSkeystrokes.asp">other methods available</a>.</p>
+<h3>Addendum</h3>
+<p>As a further test of JAWS support for the <code>p</code> element in HTML documents, the JAWS ‘Skim Reading’ feature was tested. When the <kbd>CTRL+INS+DWN ARROW</kbd> command is used, JAWS should read the first sentence of each paragraph (other preferences also available). Using the <a href="http://www.paciellogroup.com/blog/misc/paragraph-test.html">test page</a>,
+ it was found that JAWS announced the first sentence of each paragragh 
+regardless of punctuation (for the last sentence in each paragraph) or 
+visual formatting.</p>
+<h3>Further Reading:</h3>
+<ul>
+<li><a href="http://www.freedomscientific.com/fs_products/JAWSkeystrokes.asp">JAWS Keystrokes</a></li>
+<li><a href="http://ln.hixie.ch/?start=1188895731&amp;count=1">Fire, a two-hour weekend, accessibility, and other rants </a></li>
+<li><a href="http://blog.ianbicking.org/2008/03/23/html-accessibility/">HTML Accessibility</a></li>
+<li><a title="Permanent Link: They shoot standardistas, donâ€™t they?" href="http://blog.fawny.org/2007/12/23/janefonda/" rel="bookmark">They shoot standardistas, don’t they?</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="How%20JAWS%20reads%20text_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

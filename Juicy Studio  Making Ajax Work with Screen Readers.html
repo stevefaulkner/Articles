@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head>
+	<title>Juicy Studio: Making Ajax Work with Screen Readers</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="robots" content="index,follow">
+	<link rel="shortcut icon" href="http://juicystudio.com/favicon.ico">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://juicystudio.com/syndicate/juicyatom.xml">
+	<link href="http://juicystudio.com/index.php" rel="home" title="Home Page">
+	<link href="http://juicystudio.com/contact.php" rel="author" title="Send feedback">
+	<link href="http://juicystudio.com/article/wcag2-last-call-working-draft.php" rel="prev" title="Last Call Working Draft of Web Content Accessibility Guidelines 2.0">
+	<link href="http://juicystudio.com/article/formal-objection-wcag-claiming-address-cognitive-limitations.php" rel="next" title="Formal Objection to WCAG Claiming to Address Cognitive Limitations">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/basic.css" rel="stylesheet" type="text/css">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/code.css" rel="stylesheet" type="text/css">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/main.css" rel="stylesheet" type="text/css" title="Regular">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/nav.css" rel="stylesheet" type="text/css" title="Regular">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/alternate.css" rel="alternate stylesheet" type="text/css" title="High Contast">
+	<link href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/print.css" rel="stylesheet" type="text/css" media="print">
+<!--[if !IE]>-->
+	<link type="text/css" rel="stylesheet" media="screen and (max-width: 700px)" href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/smartphone.css">
+	<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/smartphone.css">
+	<link type="text/css" rel="stylesheet" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait)" href="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/handheld.css">
+<!--<![endif]-->
+<!--[if lt IE 7]>
+	<link href="/css/ie.css" rel="stylesheet" type="text/css">
+<![endif]-->
+	<script type="text/javascript" src="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/basic.js"></script>
+</head>
+<body id="juicystudio-com">
+<header role="banner" aria-labelledby="docttl">
+	<p id="logo">
+		<a href="http://juicystudio.com/index.php"><img alt="Juicy Studio" title="Juicy Studio: No artificial additives" src="Juicy%20Studio%20%20Making%20Ajax%20Work%20with%20Screen%20Readers_files/logo.gif" width="153" height="49"></a>
+	</p>
+	<h1 id="docttl">Making Ajax Work with Screen Readers</h1>
+</header>
+
+<div id="content" role="main" aria-labelledby="docttl">
+<nav role="navigation" aria-label="Breadcrumb">
+	<ul id="breadcrumb">
+		<li>You are here:</li>
+		<li><a href="http://juicystudio.com/index.php">Home</a></li>
+		<li><a href="http://juicystudio.com/articles.php">Articles</a></li>
+		<li><strong>Making Ajax Work with Screen Readers</strong></li>
+	</ul>
+</nav>
+
+<p id="sitenav">
+<a href="#navigation" title="Go to the navigation bar">Site Navigation</a>
+</p>
+<article aria-labelledby="docttl">
+<p class="postdate"><time datetime="2006-05-25T01:33Z">Thursday, 25th May 2006</time></p>
+<div id="abstract">
+<h2>Summary</h2>
+<p>
+The accessibility community is understandably concerned about the 
+accessibility of client-side scripting, in particular using Asynchronous
+ JavaScript and <abbr title="Extensible Markup Language">XML</abbr> (<abbr>Ajax</abbr>) to produce Rich Internet Applications. Steve Faulkner of <a href="http://www.accessibleinfo.org.au/">Vision Australia</a> and founder member of the <a href="http://www.wat-c.org/">Web Accessibility Tools Consortium</a> (<abbr>WAT-C</abbr>) and myself on behalf of <a href="http://www.paciellogroup.com/">The Paciello Group (TPG)</a> have collaborated in an effort to come up with techniques to make <abbr title="Asynchronous JavaScript and XML">Ajax</abbr> and other client-side scripting techniques accessible to assistive technology.
+</p>
+<p>
+The Web Accessibility Initiative's <a href="http://www.w3.org/WAI/PF/">Protocols and Formats working group</a>
+ directly address the issue of making rich Internet applications 
+accessible, and we borrow some of their concepts to investigate methods 
+of ensuring that <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ applications work with leading assistive technology products. The bad 
+news is that it isn't possible to make Ajax work in every known 
+assistive technology, in the same way that it isn't possible to get Ajax
+ to work with older browsers, but we explain the fundamental issues; how
+ to inform users of assistive technology that a change has taken place, 
+and how they can interact with the content. To illustrate our findings, 
+we summarise the behaviour of popular screen readers.
+</p>
+</div>
+<p>
+Author: Gez Lemon and  Steve Faulkner </p>
+<h2 id="toc">Contents</h2>
+<ul>
+	<li>
+		<a href="#screenmodes">Screen Reader Modes</a>
+		<ul>
+			<li><a href="#jawsvirtual">JAWS Virtual PC Cursor Mode</a></li>
+			<li><a href="#pccursor">JAWS PC Cursor Mode</a></li>
+			<li><a href="#formsmode">JAWS Forms Mode</a></li>
+			<li><a href="#browsemode">Window-Eyes Browse Mode</a></li>
+		</ul>
+	</li>
+	<li><a href="#informreader">Informing a Screen Reader that Content has Changed</a></li>
+	<li><a href="#structurecontent">Structuring Content for Ajax Applications</a></li>
+	<li><a href="#ajaxexample">Examples of Screen-Reader Friendly Ajax</a></li>
+	<li><a href="#further">Further Reading</a></li>
+	<li><a href="#translations">Translations</a></li>
+</ul>
+
+<h2 id="screenmodes">Screen Reader Modes</h2>
+<p>
+To understand the issues behind ensuring that <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ is accessible to screen readers, it's essential to have an 
+understanding of how screen readers work. To allow screen reader users 
+to read and interact with web content, screen readers take a snapshot of
+ the web page, and place this content in a virtual buffer. The screen 
+reader uses the virtual buffer to allow the user to navigate the 
+content. Without the virtual buffer, the screen reader only has access 
+to the parts of the page that are focusable by non-assistive user 
+agents, such as anchors and interface elements. Without the virtual 
+buffer, the user cannot interact with other elements and their child 
+nodes in the content, such as images, lists, tables, and so on. Screen 
+readers have their own specific name for the virtual buffer, such as 
+Virtual Focus mode in Supernova, but they essentially do the same job. 
+The following section describes how the virtual buffer is implemented in
+ <abbr title="Job Access with Speech">JAWS</abbr> and Window-Eyes.
+</p>
+<h3 id="jawsvirtual">JAWS Virtual PC Cursor Mode</h3>
+<p>
+The virtual buffer is referred to as Virtual PC Cursor mode in <abbr title="Job Access with Speech">JAWS</abbr>. Virtual PC Cursor mode is enabled by default when viewing <abbr title="HyperText Markup Language">HTML</abbr>
+ documents in supported applications (such as Internet Explorer and 
+Firefox with JAWS 7.0), and can be toggled on and off using the 
+keystroke combination <kbd>Insert</kbd> + <kbd>Z</kbd>. In this mode, the user has access to HTML elements and their attributes, such as the <code>th</code> element for table headings. 
+</p>
+<p>
+When in Virtual PC Cursor mode, <abbr title="Job Access with Speech">JAWS</abbr>
+ responds inconsistently to client-side scripting events. JAWS is able 
+to respond to basic events in Virtual PC Cursor mode, such as <code>click</code> and <code>keypress</code>, and will refresh the Virtual PC Cursor snapshot to reflect any changes made to the content. The problem when using <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ is that new content isn't usually added directly in response to these 
+events; instead, the content is usually added through the <code>onreadystatechange</code> event of the <code>XMLHttpRequest</code> object. Interestingly, JAWS 7.0 responds to the <code>onreadystatechange</code> event with Firefox, but not with Internet Explorer. The lack of response to the <code>onreadystatechange</code>
+ event along with authors failing to focus on the parts of the document 
+that has changed is essentially why most Ajax applications are reported 
+to either not work at all, or behave inconsistently. For changes to be 
+reported successfully to JAWS in Virtual PC Mode (the default mode and 
+the mode that allows the user to interact with the content), the only 
+reliable method of adding new content in Virtual PC Cursor mode is as a 
+direct result of a <code>click</code>, <code>keypress</code>, or <code>mouseover</code> event, which obviously isn't good enough for an Ajax solution.
+</p>
+<p>
+From version 6, <abbr title="Job Access with Speech">JAWS</abbr> introduced a command to refresh the Virtual PC Cursor using the keystroke combination <kbd>Insert</kbd> + <kbd>Esc</kbd>.
+ This means that a JAWS user can use this keystroke combination to gain 
+access to content that has been added dynamically. The problem is 
+letting the user know that the content has changed. A solution we 
+considered was to add content that prompts the user to refresh the 
+virtual buffer as a direct response to a <code>click</code>/<code>keypress</code> event, and replace that content when the <code>onreadystatechange</code> event is raised in the <code>XMLHttpRequest</code>
+ object. The thinking behind this approach was that users of JAWS 6 and 
+later could use the Refresh Virtual PC Cursor command, and users of 
+earlier versions of JAWS and other screen readers that use a virtual 
+buffer would be able to respond to this by toggling virtual mode on and 
+off — for example, using the keyboard combination <kbd>Insert</kbd> + <kbd>Z</kbd> twice would toggle the Virtual PC Cursor mode on and off in JAWS, refreshing the virtual buffer.
+</p>
+<p>
+When testing this technique with Internet Explorer, the prompt to refresh the virtual buffer is announced by <abbr title="Job Access with Speech">JAWS</abbr>, but refreshing the buffer using the keystroke combination <kbd>Insert</kbd> + <kbd>Esc</kbd>
+ only announces that the screen has been updated, and doesn't start to 
+read the updated content. Toggling the Virtual PC Cursor mode off and on
+ again only results in JAWS announcing that it is changing modes in 
+Internet Explorer. As JAWS with Firefox responds to the <code>onreadystatechange</code> event, the content from the <code>click</code> event is overridden by the content from the <code>onreadystatechange</code> event, and announced to the user. As Firefox can respond directly to the <code>onreadystatechange</code> event, and toggling modes doesn't announce new content, this technique isn't worth pursuing further.
+</p>
+<h3 id="pccursor">JAWS PC Cursor Mode</h3>
+<p>
+PC Cursor mode is the opposite of Virtual PC Cursor mode in that it 
+doesn't use a virtual buffer. In this mode, the user interacts directly 
+with the application, and can only focus on elements that a 
+non-assistive user agent can focus on, such as anchors and interface 
+elements. If <abbr title="Asynchronous JavaScript and XML">Ajax</abbr> 
+is used in response to an event, then it can be made to work in this 
+mode, as the scripting capabilities are limited by the browser that <abbr title="Job Access with Speech">JAWS</abbr>
+ is "reading" rather than restricting the events to the few that JAWS 
+responds to in order to update its virtual buffer when in Virtual PC 
+Cursor mode. Although the user has very limited ability in PC Cursor 
+mode, they can activate links and command buttons. If the content 
+generated by the <code>onreadystatechange</code> event can receive focus, then the user will be notified and can access the content generated in this mode. The <abbr title="HyperText Markup Language">HTML</abbr>
+ specification only allows certain elements to receive focus, so unless 
+the generated content is in an element that can receive focus, extra 
+work is required to make this approach workable. For more information, 
+see the section on <a href="#informreader">informing a screen reader that content has changed</a>.
+</p>
+<h3 id="formsmode">JAWS Forms Mode</h3>
+<p>
+Forms mode is identical to the PC Cursor mode. <abbr title="Job Access with Speech">JAWS</abbr> associates text prompts for form controls that have been marked up and explicitly associated to a form control with the <code>label</code>
+ element, or guesses by looking for text immediately to the left or 
+above form controls (or to the right for checkboxes and radio buttons). 
+Users enter Forms Mode by Pressing <kbd>Enter</kbd> when an edit box has focus.
+</p>
+<p>
+As <abbr title="Asynchronous JavaScript and XML">Ajax</abbr> is used to 
+build applications, it makes sense to use forms for their interface 
+elements. This approach means that the user's interaction with form 
+controls will work correctly with Ajax when the user is operating <abbr title="Job Access with Speech">JAWS</abbr> in Forms Mode or PC Cursor mode, but would need to switch to Virtual PC Cursor mode when interacting with non-form content.
+</p>
+
+<h3 id="browsemode">Window-Eyes Browse Mode</h3>
+<p>
+Browse Mode is the name given to the virtual buffer in Window-Eyes, and is toggled on and off using the keystrokes <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd>. As with <abbr title="Job Access with Speech">JAWS</abbr>'
+ virtual buffer mode, when Window-Eyes is in Browse Mode, it does not 
+have access to content that is dynamically generated with the <code>onreadystatechange</code> event of the <code>XMLHttpRequest</code> object in Internet Explorer. Window-Eyes does respond to basic events such as <code>click</code> and <code>keypress</code>, and like JAWS, updates the virtual buffer when Browse Mode is toggled on and off.
+</p>
+<p>
+When Browse Mode is off, Window-Eyes is only able to focus on anchors 
+and interface elements, and is unable to interact with other <abbr title="HyperText Markup Language">HTML</abbr> elements. For the user to be able to interact with form controls, Browse Mode <em>must</em> be off. If <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ is activated in response to events raised by anchors or interface 
+elements, then the user can be informed that the content has changed in 
+Window-Eyes, in the same way they can with <abbr title="Job Access with Speech">JAWS</abbr>.
+ Both JAWS and Window-Eyes are able to read the updated content when not
+ in Browse/Virtual PC mode, but the content is only available as part of
+ a reading "screen scrape" of all text currently available on the 
+screen.
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="informreader">Informing a Screen Reader that Content has Changed</h2>
+<p>
+If content is changed with scripting, then this needs to be relayed to 
+the screen reader. Without a mechanism to discover what has changed, a 
+screen reader user might not be notified that the content has changed at
+ all, or only be notified that the content has been changed, but will be
+ required to read the whole document to discover exactly what has 
+changed. For example, when content is inserted into the document with 
+scripting, Window-Eyes responds with the following.
+</p>
+<blockquote>
+<p>
+Loading Page. Load Done. Looking for visible line.
+</p>
+</blockquote>
+<p>
+The last visible line is the line containing the element the user 
+activated to produce the new content, so the user has no idea how to 
+find what has changed. To get around this, the ECMAScript <code>focus</code>
+ method can be used to place focus to the part of the page that has 
+changed. For this to work, the target element needs to be an element 
+that can receive focus. In <abbr title="HyperText Markup Lanuage">HTML</abbr> (and <abbr title="Extensible HyperText Markup Language">XHTML</abbr>) the only elements that can receive focus are the <code>a</code>, <code>area</code>, <code>button</code>, <code>input</code>, <code>object</code>, <code>select</code>, and <code>textarea</code> elements.
+</p>
+<p>
+In <abbr title="Extensible HyperText Markup Language">XHTML</abbr> 2, all elements will be able to receive focus, but the problem we have with the current specifications for <abbr title="HyperText Markup Language">HTML</abbr>
+ 4.01 and XHTML 1.x is that they do not allow elements other than 
+anchors and interface elements to receive focus. To get around this 
+problem, The Web Accessibility Initiative's <a href="http://www.w3.org/WAI/PF/">Protocols and Formats working group</a> propose a <a href="http://www.w3.org/WAI/PF/roadmap/">Dynamic Accessible Web Content Roadmap</a> that suggests using a <code>tabindex</code> value of <code>-1</code> on elements that cannot receive focus according to the specification, and will formalise this with the <a href="http://www.w3.org/WAI/PF/roadmap/DHTMLRoadmap040506.html#focus">States and Adaptable Properties Module</a>. A need for making all elements focusable is also recognised by <a href="http://whatwg.org/specs/web-apps/current-work/#tabindex0">Web Applications 1.0</a>.
+</p>
+<p>
+The <code>tabindex</code> attribute accepts a value between <code>0</code> and <code>32767</code>. A positive value determines the order that the element will be visited when navigating using the keyboard. A value of <code>0</code> means that the element will be visited where it naturally occurs in the document source. Assigning a <code>tabindex</code> attribute value of <code>0</code>
+ to an element that is neither an anchor nor an interface element means 
+the element will be able to receive focus with ECMAScript, but might be 
+confusing to visitors as they will be able to navigate to the element 
+using the keyboard. Assigning a <code>tabindex</code> attribute value of <code>-1</code>
+ means that the element will be able to receive focus with ECMAScript, 
+but will not be placed in the tab order. Internet Explorer and Firefox 
+both support a <code>tabindex</code> attribute value of <code>-1</code>, but this may not work with other browsers. For example, a <code>tabindex</code> attribute value of <code>-1</code> is ignored by Safari, and the element will not receive focus with the ECMAScript <code>focus</code> method.
+</p>
+<p>
+When focus is given to an element that has a negative tabindex value 
+that wouldn't normally receive focus, such as a paragraph element, the 
+behaviour is different depending on the mode — in virtual buffer mode, 
+the screen reader focuses on the element, but it won't automatically 
+announce the content of the element; if virtual buffer mode is off, the 
+screen reader announces the content of the element. In virtual buffer 
+mode, the user needs to request the screen reader to read the current 
+line after an element receives focus (<kbd>Insert</kbd> + <kbd>Down arrow</kbd> in <abbr title="Job Access with Speech">JAWS</abbr> and <kbd>Down arrow</kbd>
+ in Window-Eyes and Supernova). If focus is given to an anchor in 
+virtual buffer mode, then the content of the anchor element is 
+automatically announced.
+</p>
+<p>
+When a non-interface element is given a <code>tabindex</code> attribute value of <code>-1</code>
+ so that it can receive focus in Window-Eyes when Browse Mode is off, it
+ is mistakenly reported as being an edit box, as that is what it has 
+interpreted from Microsoft Active Accessibility (<abbr>MSAA</abbr>), but announces the content to the user. The following is an extract of what MSAA reports for a paragraph with a <code>tabindex</code> attribute value of <code>-1</code>.
+</p>
+
+<table>
+<caption>Partial MSAA Report</caption>
+<tbody><tr>
+	<th scope="row">Name</th>
+	<td>"Content for paragraph."</td>
+</tr>
+<tr>
+	<th scope="row">Value</th>
+	<td>none [null]</td>
+</tr>
+<tr>
+	<th scope="row">Role</th>
+	<td>editable text</td>
+</tr>
+<tr>
+	<th scope="row">State</th>
+	<td>focused, focusable</td>
+</tr>
+</tbody></table>
+
+<p>
+<abbr title="Job Access with Speech">JAWS</abbr> merely announces the 
+text that has focus to the user, and doesn't report the element as being
+ an edit box. Unfortunately, it is impossible to get Home Page Reader (<abbr>HPR</abbr>) to work at all, even though it supports scripting, because it doesn't support the <code>focus</code> method.
+</p>
+
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="structurecontent">Structuring Content for Ajax Applications</h2>
+<p>
+There are several approaches that can be used to structure content for an <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ application so that it works with screen readers. The simplest, and 
+probably the best fit for an application, is to make the parts of the 
+application that are to be activated by the user interface elements in a
+ form. With this approach, the user can be informed of the change by 
+focusing on the part of the document where the change took place. This 
+requires the user to change in and out of virtual buffer mode, but this 
+is what the user expects anyway when interacting with forms.
+</p>
+<p>
+If the changed part of the content is in the form itself, then this 
+presents a problem; although the user can get at the text, they won't be
+ able to interact with the content as they would if they were in virtual
+ buffer mode. As an example, consider a data table that is embedded in a
+ form (in itself, this is indicative that the structure could be 
+improved, but worth considering, as it's a plausible scenario). If a 
+data cell in a table that is embedded in a form element is updated in 
+response to the <code>onreadystatechange</code> event, focus can be 
+given to the table cell, and the screen reader will successfully 
+announce it. The problem is that the table containing the text will not 
+be recognised, which means the user won't be able to determine headers, 
+or be able to navigate the rest of the table. In order to do that, the 
+user will need to change the mode back to the screen reader's virtual 
+buffer mode. As screen readers always announce the <code>title</code> 
+attribute for form controls that don't have explicitly associated labels
+ for elements that can receive focus in a form (including non-interface 
+elements with an explicit <code>tabindex</code> attribute), regardless of the verbosity settings, this could be prompted through the <code>title</code>
+ attribute, and then removed when the element loses focus. For example, 
+the following might be used to update a table cell in response to the <code>onreadystatechange</code> event being fired.
+</p>
+
+<pre><code><span class="keyword">var</span> objCurrent = document.getElementById('update');
+<span class="keyword">var</span> objReplacement = document.createElement('td');
+
+<span class="comment">// Set the title attribute to prompt the user to change mode
+// This should use simpler language than used here, as the user
+// isn't likely to understand the concept of a virtual buffer</span>
+objReplacement.setAttribute('title', 'Switch to virtual buffer');
+<span class="comment">// When the element loses focus, remove the attribute for other
+// user agents</span>
+objReplacement.onblur = <span class="keyword">function</span>(){<span class="keyword">this</span>.removeAttribute('title');};
+<span class="comment">// Set a negative tabindex attribute value so the element 
+// can receive focus</span>
+objReplacement.tabIndex = -1;
+
+objReplacement.setAttribute('id', 'update');
+objReplacement.appendChild(document.createTextNode(strResult));
+
+<span class="comment">// Replace the existing node with the new node</span>
+objCurrent.parentNode.replaceChild(objReplacement, objCurrent);
+<span class="comment">// Set focus to the element</span>
+objReplacement.focus();</code></pre>
+
+<p>
+If interaction with the application isn't in a form, the most important 
+thing is to inform the user that they must have virtual buffer mode 
+switched off (as they would in order to use a form). This isn't as 
+simple as it sounds, as it will need to be worded so that is easily 
+understood by screen reader users that don't necessarily understand the 
+technicalities of the software they are using — in the same way that 
+users of visual browsers don't necessarily know how to resize text. A 
+simple solution would be to have a help page that is easily discoverable
+ from the application that explains virtual buffers, with a table 
+containing the commands to toggle the virtual buffer in all of the 
+popular screen readers. The following table shows how to toggle the 
+virtual buffer in the screen readers we used for testing.
+</p>
+
+<table>
+<caption>Toggle Virtual Cursor</caption>
+<thead>
+<tr>
+	<th scope="col">Screen Reader</th>
+	<th scope="col">Keystroke</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><abbr title="Job Access with Speech">JAWS</abbr></td>
+	<td><kbd>Insert</kbd> + <kbd>Z</kbd></td>
+</tr>
+<tr>
+	<td>Window-Eyes</td>
+	<td><kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd></td>
+</tr>
+<tr>
+	<td>Supernova</td>
+	<td><kbd>Left Control</kbd> + <kbd>4</kbd></td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="ajaxexample">Examples of Screen-Reader Friendly Ajax</h2>
+<p>
+To help illustrate the concepts presented in this article, we have put together three very contrived examples of an <abbr title="Asynchronous JavaScript and XML">Ajax</abbr>
+ application. All of the examples should run as expected when the 
+virtual buffer is off with Internet Explorer. Examples 1 and 2 work with
+ Firefox and <abbr title="Job Access with Speech">JAWS</abbr> 7 in virtual mode.
+</p>
+
+<dl id="accessnav">
+	<dt><a href="http://juicystudio.com/experiments/ajax/">Example 1 — Random Fact Generator (link)</a></dt>
+	<dd>
+		<ul>
+			<li>Triggered from an anchor, and focused with a <code>tabindex</code> attribute value of <code>-1</code>.</li>
+			<li><a href="http://juicystudio.com/experiments/ajax/script.js">ECMAScript Source Code for Example 1</a></li>
+		</ul>
+	</dd>
+	<dt><a href="http://juicystudio.com/experiments/ajax/direct/">Example 2 — Random Fact Generator (anchor)</a></dt>
+	<dd>
+		<ul>
+			<li>Triggered from an anchor, and focus is given to an anchor element within a paragraph.</li>
+			<li><a href="http://juicystudio.com/experiments/ajax/direct/script.js">ECMAScript Source Code for Example 2</a></li>
+		</ul>
+	</dd>
+	<dt><a href="http://juicystudio.com/experiments/ajax/form/">Example 3 — Random Fact Generator (form)</a></dt>
+	<dd>
+		<ul>
+			<li>Triggered from a submit button, and focused with a <code>tabindex</code> attribute value of <code>-1</code>.</li>
+			<li><a href="http://juicystudio.com/experiments/ajax/form/script.js">ECMAScript Source Code for Example 3</a></li>
+		</ul>
+	</dd>
+</dl>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="further">Further Reading</h2>
+<ul>
+	<li><a href="http://www.freedomscientific.com/fs_products/Surfs_Up/Forms.htm">Using Forms with JAWS</a></li>
+	<li><a href="http://www.gwmicro.com/Window-Eyes/Manual/HTML/index.html?19_1whatismsaa.htm">Window-Eyes Browse Mode</a></li>
+</ul>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="translations">Translations</h2>
+<ul>
+	<li><a href="http://www.maujor.com/tutorial/ajax-screen-readers.php" hreflang="pt-br">Brazilian Portuguese</a>, kindly provided by <a href="http://www.maujor.com/" hreflang="pt-br">Mauricio Samy Silva</a>. (2006-05-26)</li>
+	<li><a href="http://www.designcontest.com/show/ajax-work-be">Belorussian</a>, kindly provided by Patricia Clausnitzer. (2010-05-13)</li>
+</ul>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+<p>Category: <a href="http://juicystudio.com/articles.php?page=0&amp;category=1">Accessibility</a>.</p>
+</article>
+
+<h2 id="startofcomments">Comments</h2>
+<ol id="commentlist">
+<li id="comment1">
+<article aria-label="Comment 1">
+<p class="permurl">[<a href="#comment1">making-ajax-work-with-screen-readers.php#comment1</a>]</p>
+<p>I can't tell you how much I appreciate your research and your timing 
+of this article...just what I needed as Sharron Rush and I head to 
+NetSquared in San Jose next week.</p><p>
+Posted by <a href="http://glendathegood.com/">goodwitch</a> on <time datetime="2006-05-25T02:17:05Z">Thursday, 25th May 2006 at 02:17:05</time></p>
+</article>
+</li>
+<li id="comment2">
+<article aria-label="Comment 2">
+<p class="permurl">[<a href="#comment2">making-ajax-work-with-screen-readers.php#comment2</a>]</p>
+<p>The simple examples demonstrate the big usability problem with 
+dynamic content for screen reader users, which is that objects on the 
+screen can change, be added or removed, and the user may not know.  To 
+add to this, the user also doesn't know where that change occurred on 
+the page.</p><p>
+It is not sufficient to say that users can hit ins+esc to refresh the 
+jaws buffer if they don't have a reason to believe that anything has 
+changed.</p><p>
+As you indicate, this issue is somewhat resolved when in forms mode in 
+that there is no off-screen model so the user doesn't need to refresh 
+the off-screen model to access the content, provided that he knows where
+ to find it or runs into it (perhaps due to good application design).</p><p>
+We've been dealing with the issues around rich internet applications at 
+Adobe for quite a while now, and I'd like to encourage people to take a 
+look at Flex (<a href="http://www.adobe.com/macromedia/accessibility/features/flex/">http://www.adobe.com/macromedia/accessibility/features/flex/</a>).  I'll be showcasing a series of accessible Flex application components on the new Adobe accessibility blog (<a href="http://blogs.adobe.com/accessibility">http://blogs.adobe.com/accessibility</a>) soon.<br></p><p>
+Posted by <a href="http://blogs.adobe.com/accessibility">AWK</a> on <time datetime="2006-05-25T13:07:37Z">Thursday, 25th May 2006 at 13:07:37</time></p>
+</article>
+</li>
+<li id="comment3">
+<article aria-label="Comment 3">
+<p class="permurl">[<a href="#comment3">making-ajax-work-with-screen-readers.php#comment3</a>]</p>
+<p>Thank you for the feedback, Andrew. </p><blockquote><p>It is not 
+sufficient to say that users can hit ins+esc to refresh the JAWS buffer 
+if they don't have a reason to believe that anything has changed.</p></blockquote><p>I
+ totally agree. We investigated methods whereby the user was informed 
+that content was updated in response to a direct action (rather than the
+ onreadystatechange event), but it couldn't have been considered 
+equivalent access, as the user would have to perform several keystrokes 
+after that to get to the changed content, so we abandoned the idea. </p><blockquote><p>As
+ you indicate, this issue is somewhat resolved when in forms mode in 
+that there is no off-screen model so the user doesn't need to refresh 
+the off-screen model to access the content, provided that he knows where
+ to find it or runs into it (perhaps due to good application design).</p></blockquote><p>Absolutely,
+ but providing the user knows where to find the content is a big 
+obstacle, but fortunately, solvable using the focus method.</p><p>
+Thank you for the information on Flex.</p><p>
+Best regards,</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-05-25T13:28:50Z">Thursday, 25th May 2006 at 13:28:50</time></p>
+</article>
+</li>
+<li id="comment4">
+<article aria-label="Comment 4">
+<p class="permurl">[<a href="#comment4">making-ajax-work-with-screen-readers.php#comment4</a>]</p>
+<p><br>Thanks Gez and Steve for this excellent article. You do a 
+fantastic job motivating the discussion by explaining the "virtual 
+buffer" concept.</p><p>
+I'd like to use this in an article I'm writing on this very topic.  I 
+want to try and summarize where we are now, what an ideal interaction 
+mode might be, and then how we might get there.  Obviously, "getting 
+there" is going to involve helping the screen reader vendors figure out 
+the best way of making their software respond correctly to dom events 
+and provide the correct info from the DOM to the user.  However, this 
+will take a while, and also its not exactly clear how the screen reader 
+can help, especially when multiple asynchronous events occur 
+simultaneously (or nearly coincident). </p><p>
+Aaron Leventhal is working on this very problem. He is one of the 
+principle authors of Firefox, and also works for IBM research. He is 
+involved with the W3C protocols and formats working group who are 
+working on these very issues.  I have heard comments to the effect that 
+"yes, IBM and the w3c are working on this, but their solution encourages
+ invalid code, uses namespaces which are cumbersome and sometimes 
+misunderstood, and this stuff is better left for XForms.  In fact, this 
+solution was never meant to be "a real solution"; it's a work around. 
+XForms, XHTML2, declarative markup, etc (i.e. a much smarter user agent)
+ is the correct solution, but that isn't going to help us now!</p><p>
+Here are some interesting comments from Aaron on the whole issue of asynchronous alerting: </p><blockquote><p>Hello,</p><p>
+Right now when we want text to be spoken without giving it focus, we 
+need to make it a role="alert", which is not rich enough for all the 
+page updates that can happen with AJAX. I thought the people in this 
+group would be an excellent place to get feedback. The working group is 
+adding some new roles for areas of a page that are updated dynamically. 
+For example, role="log" for chat/game/error logs or tickers, 
+role="status" for status information, role="counter" and 
+role="liveregion".</p><p>
+Liveregion is still being designed. We need to finalize it at the W3C PF
+ face to face next week, and it's still pretty rough. The idea is that 
+the assistive technology would see a liveregion, and from the properties
+ be able to determine good default behaviors for speaking the contents. 
+It would also be able to provide the user with configuration options for
+ each web page, so the user could customize what each liveregion does. A
+ list of liveregions might be presented with a name for each one. The 
+user might specify whether they want it spoken at all, as an 
+interruption, appended, put on the Braille display, done in a different 
+voice, etc.. The more properties we provide the smarter the AT can be up
+ front, and the better the options for the user can be.</p><p>
+Here are some thoughts on what the properties should be, all of them are optional additional info and would have defaults.</p><p>
+controlledby="[id]" (optional), if changes can be controlled by another 
+part of UI via explicit user action. For example, the document pane of 
+an email<br>application is controlledby the message list. A liveregion might be controlledby a button that says "do it".</p><p>
+labelledby= "[id]" name of container such as "Red Sox player 
+statistics", default is nothing.  Can be hidden visually but will still 
+be exposed to screen reader</p><p>
+describedby = "[id]" description of container, can be hidden visually but will still be exposed to screen reader</p><p>
+weight="trivial" or "normal" or "warning" or "error" or "critical",  
+default is "normal"  -- should also add this property to role="alert"</p><p>
+politeness="interrupt" or "wait" for when the text is spoken within the 
+current tts stream, default is "wait"    -- should also add this 
+property to role="alert"</p><p>
+signal="additions" or "removals" or "text" or "style"  or "all"  
+(optional, default is change which means everything, can combine by 
+delimiting with spaces, e.g. signal="additions text"</p><p>
+frequency="often" or "rare"</p><p>
+rate="slow" or "fast"-- fast is something that might change twice within
+ about 5 seconds, default is "slow". This helps the AT determine whether
+ it's really worth speaking automatically -- it might be better to have a
+ sound for changes if it is "fast" and provide a hotkey for retrieving 
+the last change. This is a tough one. We don't want liveregions that 
+change quickly to constantly be talking to the user.</p><p>
+By the way, good news on another front -- W3C has agreed to put role 
+into an XHTML1.x module, so hopefully by Firefox 2 you won't have to say
+ xhtml2:role any more, you'll just be able to use the role attribute. 
+Now we just need to get rid of the need for some of the other 
+namespaces.</p><p>
+Anyway, I would appreciate feedback on the liveregion role as soon as I 
+can get it. Feel free to give me a call if you want to chat about it.</p><p>
+- Aaron</p><p>
+Aaron Leventhal<br>IBM web accessibility architect<br><a href="http://www.mozilla.org/access">http://www.mozilla.org/access</a></p><p>
+--</p></blockquote><p>Another thought is to take a "real world" 
+application (something complex enough to be difficult, simple enough to 
+be fairly easily modifiable), and experiment with different work-arounds
+ to help today's screen readers deal with at least some of the most 
+common RIA paradigms.  If anyone has suggestions on such a freely 
+available, open source ajax application which we could experiment with, 
+please let us know.</p><p>
+Thanks again Gez and Steve for an excellent article.</p><p>
+-- Rich</p><p>
+Posted by Rich Caloggero on <time datetime="2006-05-25T19:10:57Z">Thursday, 25th May 2006 at 19:10:57</time></p>
+</article>
+</li>
+<li id="comment5">
+<article aria-label="Comment 5">
+<p class="permurl">[<a href="#comment5">making-ajax-work-with-screen-readers.php#comment5</a>]</p>
+<p>Thank you for your kind words, Rich. </p><blockquote><p>In fact, this
+ solution was never meant to be "a real solution"; it's a work around. 
+XForms, XHTML2, declarative markup, etc (i.e. a much smarter user agent)
+ is the correct solution, but that isn't going to help us now!</p></blockquote><p>Yes,
+ the fundamental problem is that we're trying to build rich Internet 
+applications using technology that just wasn't designed for that. 
+Innovative developers have come up with ways of building applications 
+that appear to work in modern visual browsers, but as usual, 
+accessibility hasn't been considered in the process. </p><blockquote><p>Here are some interesting comments from Aaron on the whole issue of asynchronous alerting:</p></blockquote><p>I've
+ been following the discussions about the liveregion role, and think it 
+will be a great addition to the protocols and formats roadmap. </p><blockquote><p>Another
+ thought is to take a "real world" application (something complex enough
+ to be difficult, simple enough to be fairly easily modifiable), and 
+experiment with different work-arounds to help today's screen readers 
+deal with at least some of the most common RIA paradigms.</p></blockquote><p>That's
+ an excellent idea, Rich - and realistically, the only way of knowing 
+for sure that a rich Internet application can be made accessible.</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-05-25T21:36:20Z">Thursday, 25th May 2006 at 21:36:20</time></p>
+</article>
+</li>
+<li id="comment6">
+<article aria-label="Comment 6">
+<p class="permurl">[<a href="#comment6">making-ajax-work-with-screen-readers.php#comment6</a>]</p>
+<p>Oh, and I forgot to say that I am blind and a screen reader user.<br>I'd
+ be glad to test any applications people want to suggest, again keeping 
+in mind that they should be simple enough to be "hackable" 
+(understandable + modifiable fairly easily), but complex enough to be 
+meaningful.</p><p>
+-- Rich<br></p><p>
+Posted by Rich Caloggero on <time datetime="2006-05-25T21:45:36Z">Thursday, 25th May 2006 at 21:45:36</time></p>
+</article>
+</li>
+<li id="comment7">
+<article aria-label="Comment 7">
+<p class="permurl">[<a href="#comment7">making-ajax-work-with-screen-readers.php#comment7</a>]</p>
+<blockquote><p>Oh, and I forgot to say that I am blind and a screen reader user.</p></blockquote><p>Are
+ you using a different screen reader to the ones we tested with - JAWS, 
+Window-Eyes, and Supernova? If so, it would be great to know which one 
+you use, and whether you tried any of the examples with the virtual 
+buffer off. </p><blockquote><p>I'd be glad to test any applications 
+people want to suggest, again keeping in mind that they should be simple
+ enough to be "hackable" (understandable + modifiable fairly easily), 
+but complex enough to be meaningful.</p></blockquote><p>A hurdle is that
+ people are likely to think you will perform a public evaluation of the 
+accessibility of their application, and it's unlikely anyone would want 
+that unless they were already confident the application is accessible. 
+It's worth pointing out that that isn't the case. This is a win/win 
+situation - the application could be made accessible as a result, and we
+ as developers learn important lessons about how to structure rich 
+Internet applications from the process.</p><p>
+Email addresses aren't published by default, so anyone wanting to get in
+ touch with Rich directly, please contact me and I'll pass on your 
+contact details.</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-05-25T23:43:58Z">Thursday, 25th May 2006 at 23:43:58</time></p>
+</article>
+</li>
+<li id="comment8">
+<article aria-label="Comment 8">
+<p class="permurl">[<a href="#comment8">making-ajax-work-with-screen-readers.php#comment8</a>]</p>
+<p>I came accross some interesting behaviour when testing the third example (form based) using JAWS 6.1 and IE6.</p><p>
+When using the "f" shortcut key to find the form and locate the button 
+the content of the randomly generated text changed but the content 
+spoken by JAWs did not match the screen content.  However if I simply 
+used the up arrow or the "b" to return to the button after listening to 
+the content the content spoken by jaws matched that on the visual 
+display.</p><p>
+Care to speculate on the discrepancy?</p><p>
+Mike</p><p>
+Posted by Mike Moore on <time datetime="2006-05-26T22:35:37Z">Friday, 26th May 2006 at 22:35:37</time></p>
+</article>
+</li>
+<li id="comment9">
+<article aria-label="Comment 9">
+<p class="permurl">[<a href="#comment9">making-ajax-work-with-screen-readers.php#comment9</a>]</p>
+<blockquote><p>Care to speculate on the discrepancy?</p></blockquote><p>In
+ a nutshell - Ajax doesn't work reliably with Internet Explorer in 
+virtual buffer mode, but does in either Forms Mode or PC Cursor mode 
+(they're the same thing). If you switch to PC Cursor mode (Insert + Z), 
+it will work as expected.</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-05-26T23:22:24Z">Friday, 26th May 2006 at 23:22:24</time></p>
+</article>
+</li>
+<li id="comment10">
+<article aria-label="Comment 10">
+<p class="permurl">[<a href="#comment10">making-ajax-work-with-screen-readers.php#comment10</a>]</p>
+<p>Mike wrote: </p><blockquote><p>When using the "f" shortcut key to 
+find the form and locate the button the content of the randomly 
+generated text changed but the content spoken by JAWS did not match the 
+screen content. However if I simply used the up arrow or the "b" to 
+return to the button after listening to the content the content spoken 
+by JAWS matched that on the visual display.</p></blockquote><p>Mike, I tested this in Virtual PC cursor mode and did not get the results you found: No new content was announced by JAWS.</p><p>
+Posted by steve faulkner on <time datetime="2006-05-29T03:28:23Z">Monday, 29th May 2006 at 03:28:23</time></p>
+</article>
+</li>
+<li id="comment11">
+<article aria-label="Comment 11">
+<p class="permurl">[<a href="#comment11">making-ajax-work-with-screen-readers.php#comment11</a>]</p>
+<p>Hi Steve, </p><p>
+I understand the point you are making, however you overlooked the role 
+type of document and application in the role taxonomy specification. 
+Setting it to application is the equivalent of telling JAWS to treat the
+ page like a GUI application. This means all the browser mode functions 
+get disable in the context of this role. Window-Eyes supports this now. 
+It just has not been implmented in JAWS yet.</p><p>
+Aaron indicated some other states and properties we are including to 
+support AJAX and live regions. Be patient, the specification is not done
+ yet. We will fill the holes. The Firefox 1.5 release did not address 
+all the AJAX use cases for live regions but it does support rich 
+widgets. If you have use case/requirements that the PF group has not yet
+ addressed please email myself or Aaron and we will address them in the 
+PF working group. </p><p>
+Cheers,<br>Rich</p><p>
+Posted by Richard Schwerdtfeger on <time datetime="2006-05-30T17:04:15Z">Tuesday, 30th May 2006 at 17:04:15</time></p>
+</article>
+</li>
+<li id="comment12">
+<article aria-label="Comment 12">
+<p class="permurl">[<a href="#comment12">making-ajax-work-with-screen-readers.php#comment12</a>]</p>
+<p>Gez asked: </p><blockquote><p>Are you using a different screen reader
+ to the ones we tested with - JAWS, Window-Eyes, and Supernova? If so, 
+it would be great to know which one you use, and whether you tried any 
+of the examples with the virtual buffer off.</p></blockquote><p>I use Jaws, and tried the examples with the virtual buffer on and off. I've pretty much come up with the results you've stated.</p><p>
+Posted by Rich Caloggero on <time datetime="2006-05-30T17:10:56Z">Tuesday, 30th May 2006 at 17:10:56</time></p>
+</article>
+</li>
+<li id="comment13">
+<article aria-label="Comment 13">
+<p class="permurl">[<a href="#comment13">making-ajax-work-with-screen-readers.php#comment13</a>]</p>
+<p>Reading parts of this article again, there seems to be lots of space 
+given to the question of how to inform the user about switching modes 
+(virtual buffer on/off).  I believe this is the crux of Rich 
+Schwerdtfeger's comment above; there is a role of  "application" which 
+effectively turns off the virtual buffer for that element, so when focus
+ moves to that element, then forms mode is enabled and the screen reader
+ responds like any other application to the keyboard and focus changes, 
+etc.</p><p>The question I have is that if this is done automatically, 
+there seems as if there will still be times when one will need to 
+manually enable virtual buffer again to read the page.  As in the 
+example given in the article:  </p><blockquote><p>If a data cell in a 
+table that is embedded in a form element is updated in response to the 
+onreadystatechange event, focus can be given to the table cell, and the 
+screen reader will successfully announce it. The problem is that the 
+table containing the text will not be recognised, which means the user 
+won't be able to determine headers, or be able to navigate the rest of 
+the table. In order to do that, the user will need to change the mode 
+back to the screen reader's virtual buffer mode.</p></blockquote><p>If 
+the user tabs into the form and thus the virtual buffer is disabled 
+automatically, then the user does something which causes the table cell 
+to change, how would the system know if/when to re-enable the virtual 
+buffer again so the user can read the table properly?  Now, in Firefox 
+we have "caret browsing mode", where the browser actually moves the 
+keyboard focus in response to the arrow keys as well as the tab and 
+shift + tab keys.  I've tried this somewhat, but JAWS gets confused by 
+it, or maybe its me being confused by it! -smile-  If Aaron or Rich are 
+reading this, then maybe they can comment on how this is supposed to 
+work?</p><p>Thanx...</p><p>-- Rich</p><p>
+Posted by Rich Caloggero on <time datetime="2006-05-30T17:41:39Z">Tuesday, 30th May 2006 at 17:41:39</time></p>
+</article>
+</li>
+<li id="comment14">
+<article aria-label="Comment 14">
+<p class="permurl">[<a href="#comment14">making-ajax-work-with-screen-readers.php#comment14</a>]</p>
+<blockquote><p>I understand the point you are making, however you 
+overlooked the role type of document and application in the role 
+taxonomy specification. Setting it to application is the equivalent of 
+telling JAWS to treat the page like a GUI application. This means all 
+the browser mode functions get disable in the context of this role. 
+Window-Eyes supports this now. It just has not been implmented in JAWS 
+yet.</p></blockquote><p>We haven't overlooked the role of the document 
+and application in the role taxonomy specification. The work you're 
+doing is great, and we both acknowledge and fully support what you're 
+doing. We're just providing techniques that can be used now (and for the
+ immediate future while you finish your work and user agents catch up) 
+so that users of assistive technology aren't disadvantaged to the extent
+ they currently are when they encounter web applications. We appreciate 
+the problems this causes, and have highlighted them in this article.</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-05-30T20:22:51Z">Tuesday, 30th May 2006 at 20:22:51</time></p>
+</article>
+</li>
+<li id="comment15">
+<article aria-label="Comment 15">
+<p class="permurl">[<a href="#comment15">making-ajax-work-with-screen-readers.php#comment15</a>]</p>
+<p>Hi Rich, thanks for your comments.<br>Firstly I concur with what Gez said in his response.</p><p>
+Furthermore I would like to emphasise that one of the main aims of the 
+article is to provide techniques that work with current and earlier 
+versions of screen reading software.</p><p>
+i.e. "techniques for the here and now"</p><p>
+Today I canvassed about a dozen people here at work on what screen 
+readers and versions they use at work and at home. All used JAWS 
+(although I am aware of some window eyes users and a supernova user here
+ at work). The versions ranged from 4.5 to 7. The reasons for this range
+ were varied:<br>*current work SOE supports version 6.2, but the SOE has not yet been rolled out to all users.<br>*version
+ 5 for a number of people who use JAWS , because the later version(s) 
+are currently incompatible with the Braille device they use.<br>*for some users at home they had not upgraded due to cost.</p><p>
+This adhoc survey indicates that there is a range of constraints on 
+people having access to the latest version of screen reading software. 
+So techniques that provide improved accessibility for current screen 
+reader users are going to be useful for some time.</p><p>
+Best regards<br>Steve<br></p><p>
+Posted by Steve Faulkner on <time datetime="2006-05-31T03:45:44Z">Wednesday, 31st May 2006 at 03:45:44</time></p>
+</article>
+</li>
+<li id="comment16">
+<article aria-label="Comment 16">
+<p class="permurl">[<a href="#comment16">making-ajax-work-with-screen-readers.php#comment16</a>]</p>
+<p>&gt;one of the main aims of<br> the article is to provide techniques 
+that work with current and earlier versions of screen reading software. 
+i.e. "techniques for the here and now" Today</p><p>
+Yes. However, I've been playing around a bit more with Jaws and both IE 
+and Firefox, and I'm not sure there are ways of making older versions of
+ Jaws do the right thing when dealing with many of these Ajax "use 
+cases". </p><p>
+PPK has a nice article on his blog at quirkmode.org which summarizes the
+ most common user-centric Ajax use cases. The brief summary is as 
+follows:<br>&lt;blockquote&gt;<br>1. Sending data to the server; note that a response is not really necessary. <br>2.
+ Automatically refreshing data; note that from an interaction 
+perspective there is no request since the user doesn't take action. <br>3. Moving around tiny bits of text. <br>4.
+ Fetching "new pages" from the server; fundamentally there is no 
+difference with an old-fashioned Web 1.0 site, although Ajax conveys a 
+few subtle benefits.<br>&lt;/blockquote&gt;</p><p>
+Let's consider 2 and 3 above.  Use case 2 is more or less akin to a 
+ticker, or some sort of dynamic feed which is updated at random (at 
+least with respect to the client). Data is grabbed whenever it is ready 
+and pushed into the page.  There is no way that I can find to make this 
+reliably "show up" on the page without doing a jaws refresh (i.e. 
+actively polling for it). <br>Note: I need to test this, but there might
+ be a total kludge possible if we ensure that the element being added to
+ the DOM is an anchor. If we make our data show up on the page wrapped 
+inside an anchor tag, then Jaws may dynamically announce it. You could 
+wrap the data in an anchor tag, attach it to the page, set focus to the 
+anchor, then after a certain amount of time, change the element to 
+whatever you really wish it to be (this might simply mean unwrapping the
+ anchor tag and reattaching the node.  However, this is kind of 
+rediculous, and I'm sure won't be very visually appealing. Plus, I'm not
+ sure it'll work; I'll try it and comment here again on my findings.</p><p>
+The only way I know of for sure to present the Jaws user with truly 
+dynamic asynchronous data is to use alert(), which is clearly not the 
+right thing in most cases. However, if we are willing to have an option 
+setting somewhere in the aplication which says something like: "enable 
+alert() - useful for screen reader users", then perhaps this might be 
+acceptable?</p><p>
+I believe case 3 above is very similar to case 2. I believe he was 
+thinking about apps like Google suggest and chats. I don't see reliable 
+ways of doing this stuff using today's screen reader technology; you 
+really got to know when the DOM changes. IE doesn't fire this event, and
+ the screen readers don't listen to this event in Firefox.</p><p>
+-- Rich Caloggero</p><p>
+Posted by Rich Caloggero on <time datetime="2006-06-13T22:43:56Z">Tuesday, 13th June 2006 at 22:43:56</time></p>
+</article>
+</li>
+<li id="comment17">
+<article aria-label="Comment 17">
+<p class="permurl">[<a href="#comment17">making-ajax-work-with-screen-readers.php#comment17</a>]</p>
+<p>Check out 508 compliant Ajax framework Bindows.</p><p>
+Posted by <a href="http://www.bindows.net/">Johan Lund</a> on <time datetime="2006-06-15T14:48:21Z">Thursday, 15th June 2006 at 14:48:21</time></p>
+</article>
+</li>
+</ol>
+<p>Comments are closed for this entry.</p>
+
+
+
+</div>
+
+<div id="sidebar">
+
+<form method="post" role="search" action="/search.php" id="searchform">
+<p>
+<label for="searchcriteria">Search Criteria</label><br><input type="search" size="16" name="searchcriteria" id="searchcriteria"><input type="submit" value="Search" name="search"></p>
+</form>
+<nav role="navigation" aria-labelledby="navigation" id="navcontainer">
+<h2 id="navigation">Site Navigation</h2>
+<ul id="nav">
+<li class="topcorner"><a href="#content" title="Go directly to main content">Main Content</a></li>
+<li><a href="http://juicystudio.com/switchstyle.php" title="Switch the current style sheet to a high contrast style sheet" id="togstyle">Switch to High Contrast</a></li>
+<li><a href="http://juicystudio.com/index.php">Home</a></li>
+<li><a href="http://juicystudio.com/services.php">Quality Assurance</a></li>
+<li><a href="http://juicystudio.com/articles.php">Articles Archive</a></li>
+<li><a href="http://juicystudio.com/privacy.php">Privacy Statement</a></li>
+<li class="last"><a href="http://juicystudio.com/contact.php">Contact</a></li>
+</ul>
+</nav>
+<div id="secondary">
+
+<h3 id="syndicate">Syndication</h3>
+<ul>
+<li><a href="http://juicystudio.com/syndicate/juicyatom.xml">Atom 1.0</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p id="footer">Copyright © 2000-2018 Juicy Studio. All rights reserved.</p>
+</footer>
+
+</body></html>

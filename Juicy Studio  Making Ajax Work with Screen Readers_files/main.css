@@ -1,0 +1,238 @@
+/* ö */
+p#logo
+{
+	background: transparent url(/img/braille.gif) no-repeat top right;
+	color: #000;
+	margin: 0 1em 0 0;
+	padding: 0;
+}
+
+p#logo a:hover, p#logo a:active, p#logo a:focus
+{
+	background: transparent;
+}
+
+dl#watcontact dt
+{
+	margin-top: 0.5em;
+}
+
+dl#watcontact dd
+{
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+dl#accessnav dt
+{
+	font-weight: bold;
+	margin-top: 0.5em;
+}
+
+dl#accessnav dd
+{
+	margin-bottom: 0;
+}
+
+div#mission
+{
+	padding: 0 0 0 215px;
+	background: transparent url(/img/juicy.jpg) no-repeat top left;
+}
+
+div#mission blockquote
+{
+	padding: 0;
+	margin: 0.4em;
+	border-top: #999 1px solid;
+	border-bottom: #ccc 1px dashed;
+	font-style: italic;
+}
+
+div#mission p.cited
+{
+	margin: 0 0.4em;
+	padding-top: 0;
+	text-align: right;
+	color: #666;
+}
+
+form#searchform
+{
+	margin-top: 0.8em;
+	border-bottom: 1px solid #360;
+}
+
+#content
+{
+	float: left;
+	width: 70%;
+}
+
+#recentarticles
+{
+	clear: left;
+}
+
+#recentarticles h2
+{
+	background: transparent url(/img/woodburst.gif) repeat-x top left;
+	padding-top: 0.4em;
+	line-height: 170%;
+}
+
+#sidebar
+{
+	float: left;
+	width: 25%;
+	min-width: 9em;
+	margin: 0 0 0.5em 0.5em;
+	padding-left: 0.8em;
+	background: transparent url(/img/edge.gif) no-repeat left bottom;
+	border-left: 1px solid #ccc;
+}
+
+#sidebar dd
+{
+	margin: 0 0 1em 1em;
+}
+
+p#footer
+{
+	font-size: 0.8em;
+	padding: 0.5em 0;
+	clear: both;
+	color: #666;
+	border-top: 1px solid #ccc;
+}
+
+#abstract
+{
+	margin: 1em 1em 1em 0;
+	border-top: 1px solid #ccc;
+	border-right: 2px solid #666;
+	border-bottom: 2px solid #666;
+	border-left: 1px solid #ccc;
+	padding: 1em;
+}
+
+#abstract h2
+{
+	margin: 0;
+}
+
+p.postdate
+{
+	margin: 0;
+	color: #666;
+	border-bottom: 1px dashed #ccc;
+}
+
+ul.articles
+{
+	padding: 0;
+	margin: 0;
+}
+
+ul.articles li
+{
+	margin: 0.5em 0;
+	list-style-type: none;
+	list-style-image: none;
+}
+
+ul.articles li.comments
+{
+	background: transparent url(/img/comments.gif) no-repeat 0 50%;
+	padding-left: 15px;
+}
+
+ul.articles li.continue a
+{
+	background: transparent url(/img/next.gif) no-repeat 99% 50%;
+	padding-right: 20px;
+}
+
+ul.articles li.continue a:hover, ul.articles li.continue a:focus, ul.articles li.continue a:active, p#sitenav a:hover, p#sitenav a:focus, p#sitenav a:active, ul#breadcrumb li a:hover, ul#breadcrumb li a:focus, ul#breadcrumb li a:active
+{
+	color:#000;
+	background-color: #fc0;
+}
+
+ol#commentlist
+{
+	list-style-position: outside;
+	border-bottom: 1px solid #ccc;
+}
+
+ol#commentlist li
+{
+	background: transparent url(/img/woodburst.gif) repeat-x top left;
+	padding: 0.2em 0.5em 0.5em 0.5em;
+	margin-bottom: 1em;
+}
+
+ol#commentlist li blockquote
+{
+	padding-left: 2em;
+	background: transparent url(/img/quote.gif) no-repeat 0 1em;
+}
+
+ol#commentlist li li
+{
+	background: transparent;
+	padding: 0;
+	margin-bottom: 0.5em;
+}
+
+ol#commentlist li p.permurl
+{
+	padding-right: 30px;
+	background: transparent url(/img/speech.gif) no-repeat 100% 50%;
+}
+
+li.information
+{
+	list-style-image: url(/services/images/information.gif);
+	padding-top: 0.5em;
+}
+
+li.warning
+{
+	list-style-image: url(/services/images/warning.gif);
+	padding-top: 0.5em;
+}
+
+li.error
+{
+	list-style-image: url(/services/images/error.gif);
+	padding-top: 0.5em;
+}
+
+dd.information
+{
+	background: transparent url(/services/images/information.gif) no-repeat top left;
+	padding-top: 2em;
+}
+
+dd.warning
+{
+	background: transparent url(/services/images/warning.gif) no-repeat top left;
+	padding-top: 2em;
+}
+
+dd.error
+{
+	background: transparent url(/services/images/error.gif) no-repeat top left;
+	padding-top: 2em;
+}
+
+#filterform label
+{
+	width: 10em;
+}
+
+div#frenchblock p:first-letter
+{
+	padding-left: 2em;
+}

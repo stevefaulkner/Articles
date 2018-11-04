@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>Using the HTML title attribute – updated</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2013/01/using-the-html-title-attribute-updated/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Using the HTML title attribute – updated</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-7 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<h2 title="too long didn't read">tl;dr</h2>
+<p>If you want to hide content from mobile and tablet users as well as assistive tech users and keyboard only users, use the <code>title</code> attribute.</p>
+<h2>The details</h2>
+<p>The <a href="http://www.w3.org/html/wg/drafts/html/master/dom.html#the-title-attribute">HTML title attribute</a>
+ is problematic. It is problematic because it is not well supported in 
+some crucial respects, even though it has been with us for <a href="http://www.w3.org/TR/REC-html32#anchor">over 14 years</a>. With the rise of touch screen interfaces, the usefulness of this attribute has decreased. The accessibility of the <code>title</code>
+ attribute has fallen victim to a unfortunate combination of poor 
+browser support, poor screen reader support and poor authoring 
+practices.</p>
+<h3>Situations in which the the <code>title</code> attribute is not useful due to lack of support:</h3>
+<ul>
+<li>Displaying information for web content viewed on mobile phone browsers. Typically in desktop browsers <code>title</code> attribute content is displayed as a tooltip. From what I could find, tooltip display is <a href="http://twitter.com/jared_w_smith/status/29095537048">not</a> <a href="http://twitter.com/johnfoliot/status/29097500347">supported</a> in any mobile browser and alternative visual methods of accessing <code>title</code> attribute content are not supported.</li>
+<li>Providing information for people who cannot use a mouse. Typically in desktop browsers, <code>title</code> attribute content is displayed as a tooltip. Although the tooltip behaviour has been supported for 10+ years, <strong>no browser </strong>(except IE10+ [on focusable elements]) as yet has implemented a practical method to display <code>title</code> attribute content using the keyboard.</li>
+<li>Using it on <strong>most</strong> <a href="http://www.w3.org/TR/2010/WD-html-markup-20101019/elements.html#elements">HTML elements</a>
+ to provide information for users of a variety of assistive 
+technologies. Access to title attribute information is not supported 
+uniformly by screen readers</li>
+</ul>
+<h3>User groups not well served by use of the title attribute</h3>
+<ul>
+<li>Mobile phone users.</li>
+<li>Keyboard only users.</li>
+<li>Screen magnifier users.</li>
+<li>Screen reader users.</li>
+<li>Users with fine motor skill impairments.</li>
+<li>Users with cognitive impairments</li>
+</ul>
+<h3>Examples of <code>title</code> attribute use that are USEFUL:</h3>
+<ul>
+<li>Labelling frame or iframe elements:
+<ul>
+<li><code>&lt;frame <strong>title="navigation"</strong>&gt;</code></li>
+</ul>
+</li>
+<li>Providing a programmatically associated label for a control in situations where a visible text label would be redundant:
+<ul>
+<li><code>&lt;input type="text" <strong>title="search"</strong>&gt; &lt;input type="submit" value="search"&gt;</code></li>
+<li>labelling <a href="http://www.paciellogroup.com/presentations/techshare07/?slideSelect=0#slide28">controls in data tables</a>.</li>
+</ul>
+</li>
+</ul>
+<h3>Examples of <code>title</code> attribute use that are NOT USEFUL or are of LIMITED USE:</h3>
+<ul>
+<li>For additional information not provided as text in a link or surrounding content:
+<ul>
+<li><code>&lt;a href="newsletter.PDF" <strong>title="PDF file, size 1 mb."&gt;</strong>newsletter&lt;/a&gt;</code></li>
+<li>Instead include such information as part of the link text or next to the link.</li>
+</ul>
+</li>
+<li>Providing the same information provided as link text:
+<ul>
+<li><code>&lt;a href="newsletter.PDF" <strong>title="newsletter"</strong>&gt;<strong>newsletter</strong>&lt;/a&gt;</code></li>
+<li>Recommend not duplicating content of a link in the title attribute. It does nothing and makes it less likely if people <em>can</em> access title attribute content that they will do so.</li>
+</ul>
+</li>
+<li>For a caption on an image:
+<ul>
+<li><code>&lt;img src="castle1858.jpeg" <strong>title="Oil-based paint on canvas. Maria Towle, 1858."<br>
+</strong>alt="The castle now has two towers and two walls."&gt;</code></li>
+<li>Presumably caption information is important information that should 
+be available to all users by default. If so present this content as text
+ next to the image.</li>
+</ul>
+</li>
+<li>For a label on a control that has no visible text label:
+<ul>
+<li><code>&lt;input type="text" <strong>title="name"</strong>&gt;</code></li>
+<li>Screen readers users will have access to the control label, as the <code>title</code> attribute is mapped to the accessible name property in accessibility APIs (when a text label using the <code>label</code> element is not supplied ). Many other users will not. Recommend including a visible text label whenever possible.</li>
+</ul>
+</li>
+<li>Providing the same information as a visible explicitly associated text label for a control:
+<ul>
+<li><code>&lt;label for="n1"&gt;name&lt;/label&gt; &lt;input type="text" <strong>title="name"</strong> id="n1"&gt;</code></li>
+<li>Repeating the visible label text does nothing except possibly add cognitive noise for a range of users. Do not do it.</li>
+</ul>
+</li>
+<li>Providing additional instructions for a control:
+<ul>
+<li><code>&lt;label for="n1"&gt;name&lt;/label&gt; &lt;input type="text" <strong>title="Please use uppercase."</strong> id="n1"&gt;</code></li>
+<li>If the instructions are important for using the control correctly, 
+then provide them in text near the control, so they can be read by 
+everyone.</li>
+</ul>
+</li>
+<li>Expansion of an abbreviation:
+<ul>
+<li><code>&lt;abbr <strong>title="world wide web consortium"</strong>&gt;W3C&lt;/abbr&gt;</code></li>
+<li>The <code>title</code> on the <code>abbr</code> element is well 
+supported by screen reader software, but its use is still problematic, 
+as other user groups cannot access the expansion. It is recommended that
+ the expanded form of an abbreviation is provided in plain text when it 
+is first used in a document, and/or a glossary of terms that provides 
+the expanded form is provided. This is not to suggest that that the 
+expansion should not be provided using the <code>title</code> attribute, only that due to its limitations, an expansion in plain text should also be provided.</li>
+</ul>
+</li>
+</ul>
+<h3><a href="http://www.w3.org/TR/html/dom.html#the-title-attribute">The HTML5 Recommendation</a> includes this warning on use of the <code>title</code> attribute:</h3>
+<blockquote><p>Relying on the <code><a href="http://www.w3.org/TR/html/dom.html#the-title-attribute">title</a></code>
+ attribute for the visual display of text content is currently 
+discouraged as many user agents do not expose the attribute in an 
+accessible manner as required by this specification (e.g. requiring a 
+pointing device such as a mouse to cause a tooltip to appear, which 
+excludes keyboard-only users and touch-only users, such as anyone with a
+ modern phone or tablet).</p></blockquote>
+<p><strong>source: </strong><a href="http://www.w3.org/TR/html/dom.html#the-title-attribute">HTML5 – the title attribute</a></p>
+<h3>Further Reading</h3>
+<ul>
+<li><a href="http://www.paciellogroup.com/blog/2012/01/html5-accessibility-chops-title-attribute-use-and-abuse/">title attribute use and abuse</a></li>
+<li><a href="http://www.paciellogroup.com/blog/2008/02/the-title-attribute-what-is-it-good-for-resurrected/">The title attribute – what is it good for? (resurrected)</a></li>
+<li><a href="http://www.rnib.org.uk/wacblog/articles/too-much-accessibility/too-much-accessibility-title-attributes/">Too much accessibility – TITLE attributes</a></li>
+</ul>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="Using%20the%20HTML%20title%20attribute%20%E2%80%93%20updated_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

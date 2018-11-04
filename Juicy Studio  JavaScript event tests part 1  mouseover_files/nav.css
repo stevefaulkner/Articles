@@ -1,0 +1,118 @@
+#nav
+/* ö */
+{
+	margin: 0.5em 0 2em 0;
+	padding: 0 0;
+	list-style-type: none;
+	list-style-image: none;
+	border-left: 6px double #fff;
+	background: #360 url(/img/navcorner.gif) no-repeat bottom right;
+}
+
+#nav li
+{
+	border-bottom: 1px solid #fff;
+	padding: 0.1em 0;
+}
+
+#nav li.topcorner
+{
+	background: #360 url(/img/navtopcorner.gif) no-repeat top right;
+}
+
+#nav li.last
+{
+	border-bottom: none;
+}
+
+#nav li a, #nav li span
+{
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	padding: 0.2em 0.05em 0.2em 0.4em;
+}
+
+#nav li span
+{
+	background: transparent url(/img/current.gif) no-repeat 90% 65%;
+}
+
+#nav li a:hover, #nav li a:active, #nav li a:focus
+{
+	color: #ff9;
+	background-color: transparent;
+}
+
+div#sidebar label
+{
+	color: #030;
+}
+
+div.elsewhere
+{
+	background: #cf9;
+	border-top: 1px #ccc solid;
+	border-right: 1px #666 solid;
+	border-bottom: 1px #666 solid;
+	border-left: 1px #ccc solid;
+	padding: 0.5em;
+	margin-bottom: 1em;
+}
+
+div.elsewhere h3
+{
+	margin-top: 0;
+}
+
+div.elsewhere a:visited
+{
+	color: #030;
+}
+
+div.elsewhere a:hover, div.elsewhere a:active, div.elsewhere a:focus
+{
+	color: #000;
+	background-color: #fc0;
+	text-decoration: underline;
+}
+
+div.elsewhere ul
+{
+	list-style-image: url(/img/sub-arrow.gif);
+}
+
+p.showcase
+{
+	text-align: center;
+}
+
+p.showcase span.externallink
+{
+	padding-right: 0;
+	background-image: none;
+}
+
+p.showcase a:hover, p.showcase a:active, p.showcase a:focus
+{
+	background: transparent;
+}
+
+div.elsewhere div.profile
+{
+	text-align: center;
+	padding: 0.3em;
+}
+
+div.elsewhere div.profile img
+{
+	border: 3px solid #fff;
+}
+
+div.elsewhere span.twitterdate
+{
+	display: block;
+	margin: 0.2em 0 0.4em 0;
+	font-size: 0.8em;
+	font-style: italic;
+}

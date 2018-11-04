@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>AJAX and Screen Readers – Content Access Issues</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2008/02/ajax-and-screen-readers-content-access-issues/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">AJAX and Screen Readers – Content Access Issues</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">9-11 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p>The rise in the use of <abbr title="Asynchronous JavaScript and XML">AJAX</abbr>
+ to dynamically change content without refreshing the page has resulted 
+in accessibility problems for users of Assistive Technology such as 
+Screen Readers. The problem can be divided into two issues<span id="more-2470"></span></p>
+<ol>
+<li>Users not having access to content changes.</li>
+<li>Users not being aware of the changed content <em>if they can</em> access it.</li>
+</ol>
+<p>The first issue, which is detailed in this article, is largely 
+confined to 2 software products, the JAWS and Window Eyes Screen 
+Readers. The second issue potentially affects users of most Assistive 
+Technology including Screen Readers and Screen Magnifiers.</p>
+<h3>Access to updated or new content</h3>
+<p>JAWS and Window Eyes are the 2 most popular screen readers on the 
+Windows operating system. They both provide access to web pages by 
+taking a copy of the <abbr title="document object model"></abbr>DOM of 
+the page displayed in the web browser and storing it in a “virtual 
+buffer”. It is this copy that the user interacts with when browsing 
+(known as “browse mode”), unless they are interacting with some types of
+ form controls in which case they interact directly with the browser 
+(known as “forms mode”).</p>
+<h4>Browse mode</h4>
+<p>When in browse mode the user can navigate to or list many components 
+of page structure including headings, controls, paragraphs and links 
+using keystrokes. One major limitation of browse mode for users of JAWS 
+prior to version 7.1 and all Window Eyes versions is, that unless they 
+do something such as press a button, their view of the content is 
+static. If an independent content update occurs in the browser view of 
+the page it is not automatically updated in the AT users view. Also user
+ dependent changes are not reliably updated, especially when AJAX is 
+used, due to the latency issue. Another limitation is that the user 
+cannot interact with some types of form controls.</p>
+<h4>Forms mode</h4>
+<p>To use a text <code>input</code>, <code>textarea</code> or <code>select</code>
+ element the user must step out of browse mode into forms mode. When in 
+forms mode only content contained in elements that can receive focus or 
+content associated with controls (implicit – content positioned near a 
+control or explicit – label element or title attribute) is <em>practically</em>
+ available to the user. Compared to browse mode, the user’s ability to 
+navigate and access non interactive content is severely restricted.</p>
+<h3>Triggering and Update – JAWS prior to version 7.1 and all Window Eyes versions</h3>
+<p>An update of the screen reader view is never triggered by a change in
+ content in the browser view, only by a user action, either knowingly or
+ unknowingly. For the users view of the content to be updated and 
+synchronised with the browser view, the user must either manually 
+refresh (Window Eyes ctr+shift+A twice, JAWS insert+esc) the screen 
+readers copy of the page or press the enter or spacebar keys, actions 
+which occur when a user activates a link, button or an element with an 
+onclick event attached.</p>
+<h4>enter and spacebar</h4>
+<p>The developers at GWMicro (Window Eyes) and Freedom Scientific (JAWS)
+ both implemented a similar substandard fix to the issue of updating the
+ virtual copy in response to JavaScript based changes in browser 
+content. They figured that if they attached a virtual buffer update 
+command in response to the pressing of the enter or spacebar keys, any 
+content change <em>that may</em> occur, if by chance the element 
+triggered a JavaScript based content change would be included in the new
+ copy, and thus be available to the user.</p>
+<p>On the surface this may have seem like a reasonable solution, but it 
+has a number of major flaws; the most glaring being that the user must 
+do something in order for the content to be updated, secondly the 
+JavaScript content change process must be completed within 400 – 1000 
+milliseconds (the average time it takes for the virtual copy update to 
+occur after it is triggered, this varies across screen readers, browsers
+ and browser versions) of the user pressing the enter or spacebar key. 
+If it is not completed within this time frame the updated content will 
+not be included within the updated screen reader view. For most 
+JavaScript routines the time frame is adequate and the change is caught 
+by the copy update, but when AJAX is used for content updates it can 
+regularly take longer than 400 milliseconds to complete. This <strong>latency</strong> leads to a disconnect between content the user has access to and what is displayed in the browser.</p>
+<h4>Browser and screen reader view disconnect – independent content change</h4>
+<p>An example of the occurence of a disconnect between the browser and screen reader view due to a change in content <strong>independent of user action</strong> is demonstrated in the <a href="http://www.paciellogroup.com/blog/misc/removelink.html">independent content change</a>
+ test page. In this example the page loads, after 5 seconds a script is 
+called that removes 1 of the 3 links and 1of the 2 buttons on the page.</p>
+<p>Users of JAWS &lt; 7.1 and Window Eyes will be presented with the 
+initial content displayed on page load. they will not be informed that a
+ change in content has occurred in the browser and will be able to 
+browse through the original content, although it has changed in the 
+browser.</p>
+<p>If the JAWS user attempts to follow a link the result will be:</p>
+<ol>
+<li>the ‘Google’ link will load the Yahoo page</li>
+<li>the ‘Yahoo’ link will load the article page</li>
+<li>the ‘back to article’ link will update the screen reader view so it 
+corresponds with the browser view, but the link will not be followed.</li>
+</ol>
+<p>For the Yes and No buttons:</p>
+<ol>
+<li>pressing the ‘yes’ button will press the no button</li>
+<li>pressing the ‘no’ button will update the screen reader view so it 
+corresponds with the browser view, but the action associated with the 
+button is not triggered.</li>
+</ol>
+<p>For the Window Eyes user, if they try to activate a link or button 
+that no longer exists in the browser, the screen reader view is updated 
+and the browser/screen reader views are synchronized.</p>
+<h4>Browser and screen reader view disconnect (the latency issue) – user dependent content change</h4>
+<p>An example of the occurance of a disconnect between the browser and screen reader view due to a change in content <strong>dependent on user action</strong> is demonstrated in the <a href="http://www.paciellogroup.com/blog/misc/latencynobuf/index1.php">dependent content</a>
+ test page. In this example when the 200 (millisecond) button is pressed
+ a request is sent to the server using AJAX and a response is returned 
+that changes the <code>alt </code>attribute content of the image to “200 milliseconds” and add the text “200 milliseconds” to an empty paragraph.</p>
+<p>Users of JAWS &lt; 7.1 and Window Eyes will be able to access the 
+changed content in the screen reader view as the time taken for the 
+change to occur (200 milliseconds approximately) is within the 
+acceptable latency period between action and content change. It is 
+caught by the buffer update.</p>
+<p>When the 1000 (millisecond) button is pressed the same process 
+occurs, but the latency period is 1000 milliseconds (approximately). In 
+this case the buffer update has already occured by the time the content 
+change occurs. As a consequence JAW &lt; 7.1 and Window Eyes users will 
+not have access to the changed content in the screen reader view. So for
+ example, if the user has previously pressed the 200 button, they will 
+still “see” the image <code>alt</code> and text as “200 milliseconds” although the content has changed (to “1000 milliseconds”) in the browser view.</p>
+<h3>JAWS version 7.1 + and content change</h3>
+<p>With the release of JAWS 7.1 there was a marked change in the way 
+content changes are handled. The virtual buffer update is no longer tied
+ to a user action (pressing the enter or spacebar keys), but updates in 
+response to content change events in the browser. So, for example, if 
+text is added or removed , it triggers a buffer update. This is a major 
+improvement in relation to both user dependent and independent 
+JavaScript based content changes. The latency issue (particularly in 
+relation to <abbr title="Asynchronous JavaScript and XML">AJAX</abbr>) 
+is no longer a problem and the user does not have to do anything for the
+ content change to be updated in the screen reader view. The examples of
+ user <a href="http://www.paciellogroup.com/blog/misc/latencynobuf/index1.php">dependent</a> and <a href="http://www.paciellogroup.com/blog/misc/removelink.html">independent</a> content change do not cause a disconnect between browser and screen reader view.</p>
+<p>There are still some issues which Gez Lemon and I detailed in <a href="http://juicystudio.com/article/improving-ajax-applications-for-jaws-users.php">Improving Ajax applications for JAWS users</a>, but with subsequent releases (current JAWS release is version 9), the support has improved.</p>
+<h3>Conclusion</h3>
+<p>The use of AJAX based content changes is still a formidable 
+accessibility barrier for users of JAWS and Window Eyes, although the 
+technical accessibility issue of access to content changes has been 
+largely resolved in later versions of JAWS, Window Eyes has yet to 
+tackle the problem. It is interesting to note that <a href="http://www.paciellogroup.com/blog/?p=23">NVDA</a>, a free screen reader, has better support for content updates than Window Eyes.</p>
+<p>Furthermore the issue of informing users of content change has not 
+been resolved. There are work arounds such as the use of the JavaScript <code>focus()</code>
+ method to move focus to changed content, but this is not reliable and 
+of use only in limited circumstances. The implementation of support for <a href="http://juicystudio.com/article/wai-aria-live-regions.php"><abbr title="web accessibility initiative">WAI</abbr> <abbr title="accessible rich internet applications">ARIA</abbr> live regions</a> by Assistive Technology vendors is required to provide developers with the tools required to resolve the <abbr title="Asynchronous JavaScript and XML">AJAX</abbr> accessibility issue.</p>
+					</article></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>

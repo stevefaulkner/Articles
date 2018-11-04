@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-gb"><head>
+	<title>Juicy Studio: JavaScript event tests part 1: mouseover</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="robots" content="index,follow">
+	<link rel="shortcut icon" href="http://juicystudio.com/favicon.ico">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://juicystudio.com/syndicate/juicyatom.xml">
+	<link href="http://juicystudio.com/index.php" rel="home" title="Home Page">
+	<link href="http://juicystudio.com/contact.php" rel="author" title="Send feedback">
+	<link href="http://juicystudio.com/article/wcag-2-quick-reference-document.php" rel="prev" title="WCAG 2.0 Quick Reference Document">
+	<link href="http://juicystudio.com/article/providing-choices.php" rel="next" title="Assuring E-Accessibility: Providing Choices">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/basic.css" rel="stylesheet" type="text/css">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/code.css" rel="stylesheet" type="text/css">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/main.css" rel="stylesheet" type="text/css" title="Regular">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/nav.css" rel="stylesheet" type="text/css" title="Regular">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/alternate.css" rel="alternate stylesheet" type="text/css" title="High Contast">
+	<link href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/print.css" rel="stylesheet" type="text/css" media="print">
+<!--[if !IE]>-->
+	<link type="text/css" rel="stylesheet" media="screen and (max-width: 700px)" href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/smartphone.css">
+	<link type="text/css" rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/smartphone.css">
+	<link type="text/css" rel="stylesheet" media="only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait)" href="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/handheld.css">
+<!--<![endif]-->
+<!--[if lt IE 7]>
+	<link href="/css/ie.css" rel="stylesheet" type="text/css">
+<![endif]-->
+	<script type="text/javascript" src="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/basic.js"></script>
+</head>
+<body id="juicystudio-com">
+<header role="banner" aria-labelledby="docttl">
+	<p id="logo">
+		<a href="http://juicystudio.com/index.php"><img alt="Juicy Studio" title="Juicy Studio: No artificial additives" src="Juicy%20Studio%20%20JavaScript%20event%20tests%20part%201%20%20mouseover_files/logo.gif" width="153" height="49"></a>
+	</p>
+	<h1 id="docttl">JavaScript event tests part 1: mouseover</h1>
+</header>
+
+<div id="content" role="main" aria-labelledby="docttl">
+<nav role="navigation" aria-label="Breadcrumb">
+	<ul id="breadcrumb">
+		<li>You are here:</li>
+		<li><a href="http://juicystudio.com/index.php">Home</a></li>
+		<li><a href="http://juicystudio.com/articles.php">Articles</a></li>
+		<li><strong>JavaScript event tests part 1: mouseover</strong></li>
+	</ul>
+</nav>
+
+<p id="sitenav">
+<a href="#navigation" title="Go to the navigation bar">Site Navigation</a>
+</p>
+<article aria-labelledby="docttl">
+<p class="postdate"><time datetime="2006-07-21T18:41Z">Friday, 21st July 2006</time></p>
+<div id="abstract">
+<h2>Summary</h2>
+<p>
+This is the first part of a series of articles investigating support for
+ JavaScript events in popular screen readers. This article investigates 
+the <code>mouseover</code> event.
+</p></div>
+<p>
+Author: <a href="http://www.accessibleinfo.org.au/">Steven  Faulkner</a> </p>
+<h2 id="toc">Contents</h2>
+<ul>
+	<li><a href="#intro">Introduction</a></li>
+	<li><a href="#claimedsupport">Claimed Support for mouseover</a></li>
+	<li><a href="#jaws">JAWS</a></li>
+	<li><a href="#wineyes">Window-Eyes</a></li>
+	<li><a href="#supernova">Supernova</a></li>
+	<li><a href="#thetests">The Tests</a></li>
+	<li><a href="#testconditions">Test Conditions</a></li>
+	<li><a href="#voiceover">VoiceOver</a></li>
+	<li><a href="#references">References</a></li>
+</ul>
+
+<h2 id="intro">Introduction</h2>
+<p>
+A Screen Reader is a non-visual user interface for supported operating 
+systems and applications. Whilst screen readers support many popular 
+applications, screen readers do not support all applications. When an 
+application isn't supported, the functionality is limited, and in 
+extreme cases, cannot be used at all with a screen reader. <abbr title="Job Access With Speech">JAWS</abbr> has its own scripting language to enable support for applications, and the <a href="http://www.blindprogramming.com/jfw.htm">programming community offers JAWS scripts</a> to work with other applications.
+</p>
+<p>
+Until recently the only web browsing application that had practical 
+support by the screen readers discussed in this article was Internet 
+Explorer (and other applications that used the Internet Explorer engine 
+to display <abbr title="HyperText Markup Language">HTML</abbr> documents). The latest versions of <abbr title="Job Access With Speech">JAWS</abbr> and Window-Eyes include support for the Firefox browser, although <a href="http://www.freedomscientific.com/fs_products/software_jaws70fea.asp#Web">JAWS support for Firefox is still limited</a>
+ compared to its support for Internet Explorer. Supernova supports 
+Internet Explorer, and does not claim to support Firefox. From adhoc 
+testing, it appears that Firefox can be used successfully with 
+Supernova, although it is not as fully supported as Internet Explorer.
+</p>
+<p>
+Screen reader support for browsing <abbr title="HyperText Markup Language">HTML</abbr> documents in supported applications is achieved through a <dfn title="A snapshot of a web page that allows screen reader users to interact with the content">virtual buffer</dfn>. For a detailed explanation of screen reader modes, see <a href="http://juicystudio.com/article/making-ajax-work-with-screen-readers.php#screenmodes">making Ajax work with screen readers</a>. The virtual buffer facilitates much of the advanced functionality for navigating and providing access to content in <abbr title="HyperText Markup Language">HTML</abbr>
+ documents; heading navigation, table header &amp; data interrogation, 
+link and form control lists, expansions of abbreviations, and much more.
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="claimedsupport">Claimed Support for <code>mouseover</code></h2>
+<p>
+<abbr title="Job Access With Speech">JAWS</abbr> has claimed support for the <code>mouseover</code> event since version 5.0; Supernova and Window-Eyes have never claimed support for the <code>mouseover</code> event.
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="jaws">JAWS</h2>
+<p>
+<abbr title="Job Access With Speech">JAWS</abbr> support for the <code>mouseover</code> event is unbelievably crass — it depends entirely on identifying the <code>mouseover</code> attribute inline in the markup. If it finds an element with an <code>mouseover</code> attribute it will announce its presence to the user when the element with the attribute has <em>virtual focus</em>. If a user activates the <code>mouseover</code> event using the appropriate key combination, <abbr title="Job Access With Speech">JAWS</abbr> will inform the user if the activation has resulted in a change in content that <abbr title="Job Access With Speech">JAWS</abbr> could detect, and provide the location (line number) of where change occurred. The user can then use the <a href="http://www.freedomscientific.com/HTML_challenge/files/navigation_challenge.html">Jump to line</a> function to move the virtual focus to that location in the document. <abbr title="Job Access With Speech">JAWS</abbr>
+ also has functionality (accessed via the HTML options dialog) that 
+announces string literals within JavaScript code that are triggered by 
+the <code>mouseover</code> event. From the following comments in the <abbr title="Job Access With Speech">JAWS</abbr> script file containing the functions that enable this mechanism, it can be concluded that the mechanism by which <abbr title="Job Access With Speech">JAWS</abbr> accesses a string literal is rudimentary to say the least:
+</p>
+<blockquote>
+<p>
+<code>OnMouseOver</code> attributes are often used to run script functions to display tooltips containing useful information. If no <code>OnMouseOver</code> quoted text is found, <abbr title="Job Access With Speech">JAWS</abbr> speaks the on screen text for the link. "OnMouseOver quoted text" is text provided through a function in the <code>OnMouseOver</code> <abbr title="HyperText Markup Language">HTML</abbr> attribute, in the form of: <code>OnMouseOver="myfunction('information about link')"</code>. If more complex script code is referenced in the <code>OnMouseOver</code> attribute, the information is ignored.
+</p>
+</blockquote>
+<p>
+<cite>Source: text comment in the JAWS 'Configuration Manager.jsb' file</cite>
+</p>
+
+<h3>JAWS <code>mouseover</code> conclusions</h3> 
+<ul>
+<li><abbr title="Job Access With Speech">JAWS</abbr> announces the presence of inline <code>onmouseover</code> attributes on elements. The user can activate the event by using the <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> keystroke combination when the virtual focus is on the element that has the event attached.</li>
+<li>Its support (that is its identification and announcing of mouseover events) is based on it identifying the <code>onmouseover</code> attribute inline within the markup.</li>
+<li>Whilst <abbr title="Job Access With Speech">JAWS</abbr> doesn't announce the presence of <code>mouseover</code> events that aren't written inline, they can be activated using the keystroke combination, <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd>. Of course, this is of little practical use, as the user isn't aware the <code>mouseover</code> event exists.</li>
+<li>The event is simulated by causing the mouse cursor to physically 
+move to the coordinates on the screen corresponding to the position of 
+the element within the document. The coordinates used are those that <abbr title="Job Access With Speech">JAWS</abbr> has stored in its virtual buffer.</li>
+<li>Using the <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> keystroke combination on an element with an <code>onmouseover</code> attribute identified by <abbr title="Job Access With Speech">JAWS</abbr>, triggers a refresh of the virtual buffer. <abbr title="Job Access With Speech">JAWS</abbr> then compares the new version with the previous version of the document. If <abbr title="Job Access With Speech">JAWS</abbr> finds changes within the content of the document it announces the change; otherwise, it announces, <q>could not detect change in content</q>.</li>
+<li>If a delay (&gt; 500 milliseconds) is placed on the processing of the script triggered by the <code>mouseover</code>
+ event, the addition of the new content to the document in the web 
+browser occurs after the "virtual buffer" has been refreshed. In this 
+case <abbr title="Job Access With Speech">JAWS</abbr> announces that it <q>could not detect change in content</q>.
+ This results in a disconnect between the content that is presented to 
+the screen reader user and the content displayed in the web browser.</li>
+<li>If new content causes a change in the position of elements, but the 
+new content is added following a delay, the virtual buffer will not 
+contain the additional content, and element coordinates and other 
+information available to JAWS from the virtual buffer will be outdated. 
+If the <code>mouseover</code> event is triggered a second time, <abbr title="Job Access With Speech">JAWS</abbr>
+ moves the mouse cursor to the position in the document (in the web 
+browser) using the outdated coordinates. Depending on the circumstances,
+ the following might occur: 
+<ul>
+<li>an incorrect event being triggered</li>
+<li>a correct event on a different element being triggered</li>
+<li>or no event being triggered (if the outdated coordinates position the mouse cursor over an element with no attached events).</li>
+</ul>
+But it also results in <abbr title="Job Access With Speech">JAWS</abbr> announcing that a change in content has occurred: The change identified by <abbr title="Job Access With Speech">JAWS</abbr> is the content added due to the original triggering of the event, which was not identified by <abbr title="Job Access With Speech">JAWS</abbr> initially, because it occurred after the virtual buffer was refreshed.</li>
+</ul>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="wineyes">Window-Eyes</h2>
+<p>
+Window-Eyes does not claim to support the <code>mouseover</code> event, and the test results reflect this. If perchance the user knows that a <code>mouseover</code> event is attached to a particular element within a document and the user moves the virtual focus to that element, the <code>mouseover</code> event can be triggered by using the Window-Eyes <em>Mouse hot-key</em>: Mouse to focus <kbd>Insert</kbd> + <kbd>Numpad-Plus</kbd>, which results in the mouse cursor moving over the element with the attached <code>mouseover</code> event, but there is little practical value as the user is not informed of the presence of the <code>mouseover</code> attribute. 
+</p>
+<ul>
+<li>Activating the <code>mouseover</code> (using the mouse to focus hot key) does not result in the virtual buffer being refreshed.</li>
+<li>Tests incorporating a delay and a change in element position do not result in the element coordinates being outdated.</li>
+</ul>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="supernova">Supernova</h2>
+<p>
+While Supernova does not claim to support the <code>mouseover</code> event and does not inform the user that an element has this event attached, the event can be triggered by the pressing of the <kbd>Enter</kbd>
+ key when an element has virtual focus. This is due to the mechanism by 
+which Supernova passes keystroke commands to the web browser. Unlike <abbr title="Job Access With Speech">JAWS</abbr> and Window-Eyes, the mouse cursor is moved to the location of the element that has virtual focus whenever the <kbd>Enter</kbd>
+ key is pressed. It appears that this method is used by Supernova to 
+activate links. There is little practical value, as the user is not 
+informed of the presence of the <code>mouseover</code> event, but the additional content is available to the user once added.
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="thetests">The Tests</h2>
+<p>
+The tests consist of documents containing either an anchor (<code>a</code> element) or a paragraph (<code>p</code> element) with an inline <code>onmouseover</code>
+ attribute that activates a JavaScript function. The function either 
+adds text content to the element containing the event or to another 
+element prior to the element containing the event. The latter results in
+ the position of the element containing the event being changed by the 
+addition of new content.
+</p>
+<p>
+Each test has two conditions:
+</p>
+<ol>
+<li>the function is processed immediately</li>
+<li>the function is processed after a delay of 1500 milliseconds.</li>
+</ol>
+<p>
+The reason for the second condition is that there is a delay between 
+when an event is triggered by some screen readers and the triggering of 
+the refresh of the document copy that is stored in the virtual buffer. 
+For <abbr title="Job Access With Speech">JAWS</abbr>, the delay is 
+approximately 500 milliseconds; for Window-Eyes, the delay is 
+approximately 900 milliseconds. The delay, if there is one, for 
+Supernova could not be ascertained. So the delay condition was included 
+to investigate the issues that arise from content changes that occur 
+after a  user event caused the virtual buffer to be refreshed.
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="testconditions">Test Conditions</h2>
+<p>
+All test were conducted using Internet Explorer 6.0, <abbr title="Job Access With Speech">JAWS</abbr> v7.1 beta, Window-Eyes 5.5, and Supernova 6.51. The default mode of the screen readers was used for the tests (<abbr title="Job Access With Speech">JAWS</abbr> — Virtual PC Cursor; Window-eyes — Browse mode; Supernova — Virtual focus).
+</p>
+
+<table summary="Basic mouseover test for screen readers">
+<caption>Basic <code>mouseover</code> event <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-link.html">test 1</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate. Announces content change and line number.</li>
+			<li>Mouse cursor moves over link.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered [<a href="#wineyes">refer to Window-Eyes</a>]</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>Use <kbd>Enter</kbd> to activate link; mouse cursor moves over link; mouseover event activated; link text announced including new content.</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="Basic mouseover test for screen readers with a delay of 1.5 seconds">
+<caption><code>mouseover</code> event with 1.5 second delay <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-link-delay.html">test 2</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces <code>mouseover</code> attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate. Announces, <q>could not detect change in content</q>.</li>
+			<li>Hand cursor moves over link.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>Use <kbd>Enter</kbd> to activate link; mouse cursor moves over link; mouseover event activated; link text announced including new content.</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="Basic mouseover test for screen readers (non-link)">
+<caption>Non-link <code>mouseover</code> event <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-non-link.html">test 3</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate. Announces content change and line number.</li>
+			<li>text/edit cursor appears at start of text.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>move virtual focus to mouseover text.</li>
+			<li>Press <kbd>Enter</kbd>; mouseover event activated; nothing announced.</li>
+			<li>Use <kbd>Right Arrow</kbd> to added text announces end of line at end of original mouseover text; not announced.</li>
+			<li>Use <kbd>Up Arrow</kbd> to move up to heading and down arrow to move back to mouseover text, added content now announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="Basic mouseover test for screen readers (non-link) with a 1.5 second delay">
+<caption>Non-link <code>mouseover</code> event with a delay of 1.5 seconds <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-non-link-delay.html">test 4</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate. Announces, <q>could not detect change in content</q>.</li>
+			<li>text/edit cursor appears at start of text.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>move virtual focus to mouseover text.</li>
+			<li>Press <kbd>Enter</kbd>; mouseover event activated; nothing announced.</li>
+			<li>Use <kbd>Right Arrow</kbd> to added text announces end of line at end of original mouseover text; not announced.</li>
+			<li>Use <kbd>Up Arrow</kbd> to move up to heading and down arrow to move back to mouseover text, added content now announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="mouseover test for screen readers that adds text">
+<caption><code>mouseover</code> event that adds text <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-link-add-text.html">test 5</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate. Announces content change and line number.</li>
+			<li>Hand cursor appears momentarily then text/edit cursor appears at 
+start of added text as it displaces the link text. The added text 
+appears at the original position of the link, the link is moved 
+downward.</li>
+			<li>Use <kbd>J</kbd> function to jump to line , then announces the new content.</li>
+			<li>Repeating procedure works correctly.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>move virtual focus to mouseover text.</li>
+			<li>Press <kbd>Enter</kbd> to activate link</li>
+			<li>text/edit cursor appears at start of added text as it displaces the link text.</li>
+			<li>The added text appears at the original position of the link, the link is moved downward.</li>
+			<li>Virtual focus rectangle is on the added text, but virtual focus remains on the link</li>
+			<li>Use <kbd>Up Arrow</kbd> to move to line with added content. </li>
+			<li>Added content is announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="mouseover test for screen readers that adds text after a 1.5 second delay">
+<caption><code>mouseover</code> event that adds text after a 1.5 second delay <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-link-add-text-delay.html">test 6</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>Announces, <q>Could not detect change in content.</q></li>
+			<li>Hand cursor appears momentarily then text/edit cursor appears at 
+start of added text as it displaces the link text. The added text 
+appears at the original position of the link, the link is moved 
+downward.</li>
+		</ul>
+		<p><strong>2nd activation:</strong></p>
+		<ul>
+			<li>Use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>The mouseover event does not result in new text being added</li>
+			<li>text/edit cursor remains at start of added text. </li>
+			<li>Announces content change and line number.</li>
+		</ul>
+		<p><strong>2nd activation:</strong></p>
+		<ul>
+			<li>Use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>Announces, <q>could not detect change in content.</q></li>
+			<li>New text added</li>
+			<li>Hand cursor moves over link.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>Press <kbd>Enter</kbd> to activate link</li>
+			<li>text/edit cursor appears at start of added text as it displaces the link text.</li>
+			<li>The added text appears at the original position of the link, the link is moved downward.</li>
+			<li>Virtual focus rectangle is on the added text, but virtual focus remains on the link</li>
+			<li>Use <kbd>Up Arrow</kbd> to move to line with added content. </li>
+			<li>Added content is announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="Non-link mouseover test for screen readers that adds text">
+<caption>Non-link <code>mouseover</code> event that adds text <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-non%20link-add-text.html">test 7</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>Announces, <q>Text changed line 5</q></li>
+			<li>text/edit cursor appears at start of added text as it displaces 
+the mouseover text. The added text appears at the original position of 
+the mouseover text, the text is moved downward.</li>
+			<li>Repeating procedure works correctly.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>Press <kbd>Enter</kbd> to activate mouseover</li>
+			<li>text/edit cursor appears at start of added text as it displaces the mouseover text.</li>
+			<li>The added text appears at the original position of the text, the mouseover text is moved downward.</li>
+			<li>Virtual focus rectangle is on the added text</li>
+			<li>Added content is announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<table summary="Non-link mouseover test for screen readers that adds text after 1.5 second delay">
+<caption>Non-link <code>mouseover</code> event that adds text after 1.5 second delay <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-non%20link-add-text-delay.html">test 8</a></caption>
+<thead>
+<tr>
+	<th scope="col">Screen reader</th>
+	<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td scope="row"><abbr title="Job Access With Speech">JAWS</abbr></td>
+	<td>
+		<ul>
+			<li>Announces mouseover attribute; use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>Announces, <q>Could not detect change in content</q></li>
+			<li>text/edit cursor appears at start of added text as it displaces 
+the mouseover text. The added text appears at the original position of 
+the mouseover text, the text is moved downward.</li>
+		</ul>
+		<p><strong>2nd activation:</strong></p>
+		<ul>
+			<li>Use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>The mouseover event does not result in new text being added.</li>
+			<li>text/edit cursor remains at start of added text.</li>
+			<li>Announces content change and line number.</li>
+		</ul>
+		<p><strong>3rd activation:</strong></p>
+		<ul>
+			<li>Use <kbd>Ctrl</kbd>+<kbd>Insert</kbd>+<kbd>Enter</kbd> to activate.</li>
+			<li>Announces, <q>Could not detect change in content.</q></li>
+			<li>New text added.</li>
+			<li>Edit cursor appears at start of mouseover text.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td scope="row">Window-Eyes</td>
+	<td>Event not triggered.</td>
+</tr>
+<tr>
+	<td scope="row">Supernova</td>
+	<td>
+		<ul>
+			<li>Press <kbd>Enter</kbd> to activate mouseover</li>
+			<li>text/edit cursor appears at start of added text as it displaces the mouseover text.</li>
+			<li>The added text appears at the original position of the text, the mouseover text is moved downward.</li>
+			<li>Virtual focus rectangle is on the added text, but virtual focus remains on the mouseover text</li>
+			<li>Added content is not announced.</li>
+			<li>Use <kbd>Up Arrow</kbd> to move to line with added content.</li>
+			<li>Added content is announced.</li>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="voiceover">VoiceOver</h2>
+<p>
+The Mac OS X Tiger has "built-in" screen reading software called <a href="http://developer.apple.com/accessibility/">VoiceOver</a>. When it comes to accessing <abbr title="HyperText Markup Language">HTML</abbr> documents, an initial assessment from an article on VoiceOver published by the (U.S.) <a href="http://juicystudio.com/article/www.nfb.org">National Federation of the Blind</a> concludes:
+</p>
+<blockquote cite="http://www.voiceofthenationsblind.org/articles/147/voiceover-accessibility-out-of-the-box-at-last">
+<p>
+VoiceOver, in its current technical state, lacks the sophistication and 
+maturity to be capable of allowing efficient Internet Browsing by blind 
+users.
+</p>
+</blockquote>
+
+<p>
+<a href="http://www.456bereastreet.com/">Roger Johansson</a> has a <a href="http://www.456bereastreet.com/archive/200505/voiceover_and_safari_screen_reading_on_the_mac/">more positive opinion of VoiceOver</a>. Roger states, <q>It
+ doesn't have all the features of a more advanced screen reader like 
+JAWS, but from the testing I have done so far it seems to do a decent 
+job.</q>, but points out that he is, <q>by no means as experienced with screen readers as someone using one on a daily basis.</q>
+</p>
+
+<h3>VoiceOver <code>mouseover</code> test results</h3>
+<p>
+<a href="http://alastairc.ac/">Alastair Campbell</a> has kindly provided his results using VoiceOver.
+</p>
+<ul>
+<li>Whether it's a link or just text, there is no indication that there is a mouseover event to trigger.</li>
+<li>There is no assigned keyboard command to activate onmouseover.</li>
+<li>However, <em>if</em> you knew there was something to activate, you 
+can make the mouse pointer go to the current keyboard cursor position 
+with, "Move VO to mouse" (<kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>F5</kbd>), which will activate the <code>mouseover</code> event.</li>
+<li>If the mouse pointer is set to follow the keyboard cursor "<a href="http://docs.info.apple.com/article.html?path=VoiceOver/1.0/en/mh2053.html">Mouse cursor tracks VoiceOver cursor</a>", tabbing through the content causes the mouse pointer to move with the keyboard cursor. In this case, the <code>mouseover</code> event will fire on elements that have a <code>mouseover</code> event attached as you move through the content.</li> 
+<li>Activating "Move VO to mouse" on a link results in the cursor moving to the top of the screen.</li>
+<li>Activating "Move VO to mouse" on text results in the cursor remaining over the text.</li>
+<li>With the non-link events, moving focus away from the text and back 
+again results in the new text (content) being available to the user.</li>
+<li>On <a href="http://sf.id.au/js_tests/onmouseover/mouseover-event-non%20link-add-text.html">test 7</a>, the cursor is left in the same place as the new text, but if you query the current item, it reads out the former text.</li>
+</ul>
+<p>
+Alastair also posted a request for <a href="http://www.macvisionaries.com/pipermail/discuss_macvisionaries.com/2006-July/015400.html">feedback on the macvisionaries mailing list</a>, which elicited testing results from other users. 
+</p>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+
+<h2 id="references">References</h2>
+<ul>
+	<li><a href="http://www.freedomscientific.com/fs_support/doc_screenreaders.asp">JAWS Documentation</a></li>
+	<li><a href="http://www.gwmicro.com/Window-Eyes/Manual/wineyes55.pdf">Window-Eyes 5.5 Manual (PDF)</a></li>
+	<li><a href="http://www.dolphincomputeraccess.com/support/v6_tutorials.htm">Supernova Tutorials</a></li>
+	<li><a href="http://www.freedomscientific.com/fs_products/Surfs_Up/OnMouseOver.htm">OnMouseOvers and JAWS</a></li>
+	<li><a href="http://docs.info.apple.com/help/guide.html?path=VoiceOver/1.0/en/">VoiceOver help</a></li>
+	<li><a href="http://images.apple.com/support/tiger/voiceover/VoiceOver_Commands_Color.pdf">VoiceOver keyboard commmands [PDF, 400kb]</a></li>
+</ul>
+
+<p class="skiplink">
+[<a href="#toc">Back to the contents</a>]
+</p>
+<p>Category: <a href="http://juicystudio.com/articles.php?page=0&amp;category=1">Accessibility</a>.</p>
+</article>
+
+<h2 id="startofcomments">Comments</h2>
+<ol id="commentlist">
+<li id="comment1">
+<article aria-label="Comment 1">
+<p class="permurl">[<a href="#comment1">screen-reader-mouseover.php#comment1</a>]</p>
+<p>Interesting stuff - how does this compare with other events, particularly onClick?</p><p>
+Posted by <a href="http://www.calcresult.co.uk/">Mike</a> on <time datetime="2006-07-25T13:48:01Z">Tuesday, 25th July 2006 at 13:48:01</time></p>
+</article>
+</li>
+<li id="comment2">
+<article aria-label="Comment 2">
+<p class="permurl">[<a href="#comment2">screen-reader-mouseover.php#comment2</a>]</p>
+<p>The event is called mouseover, actually.</p><p>
+Posted by <a href="http://annevankesteren.nl/">Anne van Kesteren</a> on <time datetime="2006-07-31T13:21:53Z">Monday, 31st July 2006 at 13:21:53</time></p>
+</article>
+</li>
+<li id="comment3">
+<article aria-label="Comment 3">
+<p class="permurl">[<a href="#comment3">screen-reader-mouseover.php#comment3</a>]</p>
+<blockquote><p>The event is called mouseover, actually.</p></blockquote><p>Thanks,
+ Anne, that's a good point. I suspect it was being referred to as 
+onmouseover in the article, as that's how the JAWS documentation refers 
+to it. I've updated all references of the event to mouseover, apart from
+ the parts that are referring to the onmouseover attribute.</p><p>
+Thanks,</p><p>
+Posted by <a href="http://juicystudio.com/">Gez</a> on <time datetime="2006-07-31T14:42:32Z">Monday, 31st July 2006 at 14:42:32</time></p>
+</article>
+</li>
+<li id="comment4">
+<article aria-label="Comment 4">
+<p class="permurl">[<a href="#comment4">screen-reader-mouseover.php#comment4</a>]</p>
+<p>Real nice, will wait for the second part. especially liked the delay onmouseover event..</p><p>
+Posted by <a href="http://technews.in/">Rush</a> on <time datetime="2006-08-07T20:39:06Z">Monday, 7th August 2006 at 20:39:06</time></p>
+</article>
+</li>
+<li id="comment5">
+<article aria-label="Comment 5">
+<p class="permurl">[<a href="#comment5">screen-reader-mouseover.php#comment5</a>]</p>
+<p>what a great article.... thanks so much for putting the effort in to 
+produce this article as the topic needs addressing and clarity.... which
+ i now feel i have.</p><p>
+what is more interesting for me is to understand in terms SEO, is a link
+ more important then a H1 tag?? i guess what i need to find is someone 
+who knows what HTML elements have higher relivance for SEO.</p><p>
+thanks for the article and an intersting read.</p><p>
+Posted by <a href="http://www.webtrendz.co.uk/">rahim haji</a> on <time datetime="2006-08-24T11:30:03Z">Thursday, 24th August 2006 at 11:30:03</time></p>
+</article>
+</li>
+<li id="comment6">
+<article aria-label="Comment 6">
+<p class="permurl">[<a href="#comment6">screen-reader-mouseover.php#comment6</a>]</p>
+<p>As always, a very thorough and exacting description, offered in enough detail to be completely understandable.   THANKS!</p><p>
+Now, there are about a zillion more JavaScript events to test, and a LOT
+ more writing if you want to describe each with this level of detail.</p><p>
+Over at the access-matters site, James Edwards, Mike Stenhouse, and 
+Derek Featherstone cooked up some JavaScript test cases and I hosted 
+them.  The results, one set for link events [1], the other set for form 
+events[2], are very extensive and might be an interesting supplement to 
+this article.  </p><p>
+However, none of us have had the patience to describe the results as well as you do for this single event.</p><p>
+[1] <a href="http://www.access-matters.com/results-for-javascript-part-1-navigating-links/">http://www.access-matters.com/results-for-javascript-part-1-navigating-links/</a></p><p>
+[2] <a href="http://www.access-matters.com/results-for-javascript-part-2-navigating-forms/">http://www.access-matters.com/results-for-javascript-part-2-navigating-forms/</a></p><p>
+Posted by <a href="http://access-matters.com/">Bob Easton</a> on <time datetime="2006-08-25T01:38:02Z">Friday, 25th August 2006 at 01:38:02</time></p>
+</article>
+</li>
+</ol>
+<p>Comments are closed for this entry.</p>
+
+
+
+</div>
+
+<div id="sidebar">
+
+<form method="post" role="search" action="/search.php" id="searchform">
+<p>
+<label for="searchcriteria">Search Criteria</label><br><input type="search" size="16" name="searchcriteria" id="searchcriteria"><input type="submit" value="Search" name="search"></p>
+</form>
+<nav role="navigation" aria-labelledby="navigation" id="navcontainer">
+<h2 id="navigation">Site Navigation</h2>
+<ul id="nav">
+<li class="topcorner"><a href="#content" title="Go directly to main content">Main Content</a></li>
+<li><a href="http://juicystudio.com/switchstyle.php" title="Switch the current style sheet to a high contrast style sheet" id="togstyle">Switch to High Contrast</a></li>
+<li><a href="http://juicystudio.com/index.php">Home</a></li>
+<li><a href="http://juicystudio.com/services.php">Quality Assurance</a></li>
+<li><a href="http://juicystudio.com/articles.php">Articles Archive</a></li>
+<li><a href="http://juicystudio.com/privacy.php">Privacy Statement</a></li>
+<li class="last"><a href="http://juicystudio.com/contact.php">Contact</a></li>
+</ul>
+</nav>
+<div id="secondary">
+
+<h3 id="syndicate">Syndication</h3>
+<ul>
+<li><a href="http://juicystudio.com/syndicate/juicyatom.xml">Atom 1.0</a></li>
+</ul>
+
+</div>
+</div>
+
+<footer role="contentinfo">
+	<p id="footer">Copyright © 2000-2018 Juicy Studio. All rights reserved.</p>
+</footer>
+
+</body></html>

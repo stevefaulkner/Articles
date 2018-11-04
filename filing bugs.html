@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="chrome://global/content/reader/aboutReader.js"></script>
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"><title>filing bugs</title><link rel="shortcut icon" href="https://developer.paciellogroup.com/favicon.ico"></head>
+
+<body class="sepia sans-serif loaded">
+  <div class="container font-size9 content-width4">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://developer.paciellogroup.com/blog/2014/06/filing-bugs/">developer.paciellogroup.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">filing bugs</h1>
+      <div class="credits reader-credits">Steve Faulkner</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">5-6 minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height6 reader-show-element"><div id="readability-page-1" class="page"><article>
+						
+						
+						<p><img src="filing%20bugs_files/firefox.png" alt="Fireox" width="64" height="64"> <img src="filing%20bugs_files/msedge.svg" alt="Microsoft Edge" width="56" height="60">&nbsp; <img src="filing%20bugs_files/chrome.png" alt="chrome" width="64" height="64">&nbsp; <img src="filing%20bugs_files/safari.png" alt="Safari" width="62" height="61"> <img src="filing%20bugs_files/opera-browser.png" alt="Opera" width="68" height="75"></p>
+<p>One of the ways to get things fixed in browsers, or at least 
+understand why things aren’t/won’t be fixed,&nbsp; is to file a bug. I 
+spend a fair bit of time filing and commenting on bugs. (Updated to 
+include reference to Opera bug report wizard)<br>
+<span id="more-2540"></span></p>
+<h2>Filing bugs:</h2>
+<h3>Firefox</h3>
+<p><strong>Example bug:</strong> <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=998590"><span id="summary_alias_container"><span id="short_desc_nonedit_display">expose heading level in acc layer based on outline depth not heading numeric value</span></span></a></p>
+<p>Use the <a href="https://bugzilla.mozilla.org/">Firefox bugzilla</a>, you need to <a href="https://bugzilla.mozilla.org/createaccount.cgi">register to file</a>. Read the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/QA/Bug_writing_guidelines">bug writing guidelines</a></p>
+<p>For <strong>accessibility bugs</strong> Mozilla Accessibility Engineer <a href="https://twitter.com/MarcoInEnglish/status/483516483537211392">Marco Zehe&nbsp; advises&nbsp; </a></p>
+<blockquote><p>Use product Core, Component Disability Access APIs, and we’ll take it from there.</p>
+<p>“Firefox: Disability Access” will also work, but usually we assign it to the other product/component straight away anyway.</p></blockquote>
+<h3>Edge</h3>
+<p><strong>Example bug: </strong><a href="https://connect.microsoft.com/IE/feedback/details/893334/html5-main-element-not-supported">HTML5 main element not supported</a></p>
+<p><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/">Edge HTML Issue Tracker</a>, you need to <a href="https://signup.live.com/signup.aspx">sign up for a Microsoft account</a> (if you don’t have one) to file.&nbsp; Read the <a href="https://connect.microsoft.com/IE/content/content.aspx?ContentID=29582">Bug reporting guidelines</a></p>
+<p>Advice from <a href="https://twitter.com/dstorey">David Storey</a>:</p>
+<blockquote><p>If you can:</p>
+<ol>
+<li>Also include a reduction that just shows issue.</li>
+<li>Include real world site it affects as (at least for IE and Opera in 
+my experience) a bug that affects real world sites have higher priority 
+as it breaks things.</li>
+</ol>
+</blockquote>
+<h3>Safari</h3>
+<p><strong>Example bug:</strong>&nbsp;<a href="https://bugs.webkit.org/show_bug.cgi?id=134492">HTML indeterminate IDL attribute not mapped to checkbox value=2</a></p>
+<p>Use the <a href="https://bugs.webkit.org/">Webkit bugzilla</a>, there is an <a href="https://bugs.webkit.org/enter_bug.cgi?product=WebKit&amp;component=Accessibility&amp;op_sys=All&amp;rep_platform=All&amp;short_desc=AX%3A">accessibility related category</a>, you need to <a href="https://bugs.webkit.org/createaccount.cgi">sign up for a webkit bugzilla account</a> to file.&nbsp; Read the <a href="https://bugs.webkit.org/page.cgi?id=bug-writing.html">Bug writing guidelines</a></p>
+<h3>Chrome</h3>
+<p>You need a <a href="https://accounts.google.com/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=https%3A%2F%2Fcode.google.com%2Fp%2Fchromium%2Fissues%2Flist&amp;followup=https%3A%2F%2Fcode.google.com%2Fp%2Fchromium%2Fissues%2Flist">Google account</a> to file bugs.</p>
+<p><strong>Example bug:</strong> <a href="https://code.google.com/p/chromium/issues/detail?id=384723">hr element not exposed with a separator role</a></p>
+<ul>
+<li><a href="http://code.google.com/p/chromium/issues/entry">Report bugs </a></li>
+<li><a href="https://code.google.com/p/chromium/issues/list?can=2&amp;q=accessibility&amp;colspec=ID+Pri+M+Iteration+ReleaseBlock+Cr+Status+Owner+Summary+OS+Modified&amp;x=m&amp;y=releaseblock&amp;cells=tiles">Open Accessibility bugs list</a></li>
+<li><a href="http://www.chromium.org/for-testers/bug-reporting-guidlines-for-the-mac-linux-builds" target="_blank" rel="noopener noreferrer">Bug Reporting Guidelines for the Mac &amp; Linux builds</a>&nbsp;(with links to known issues pages)</li>
+<li><a href="http://www.chromium.org/for-testers/bug-reporting-guidelines/reporting-crash-bug">Instructions for reporting crashes</a>.</li>
+</ul>
+<h3>Opera</h3>
+<p>Use the <a href="https://bugs.opera.com/wizard/">Opera bug report wizard</a>
+ (though note that, once filed, you won’t be able to check back on the 
+bug’s status…but if it gets fixed, it’ll appear in the relevant <a href="http://blogs.opera.com/desktop">Opera release notes</a>).</p>
+<h2>Writing bugs</h2>
+<p>As an example of things to do when writing a bug report, the <a href="https://connect.microsoft.com/IE/content/content.aspx?ContentID=29582">IE bug reporting guide</a> is excerpted below:</p>
+<blockquote>
+<h3 id="fbugs" tabindex="-1">Before Filing a New Bug Report</h3>
+<p>Ensure you’re running the latest version of the browser, since your issue may already have been resolved in a newer version.</p>
+<p>Search for existing bugs in the bug database to see if your issue has already been reported.</p>
+<p>Try to identify specifics steps that would allow us to consistently reproduce the issue you’re seeing, if possible.</p>
+<p>Please file separate bug reports for each problem encountered.</p>
+<h3>Key Components of a Good Bug Report</h3>
+<h4>Title</h4>
+<p>A good bug report has a clear and concise title (usually less than 15
+ words). Summarizing your problem concisely improves our ability to 
+understand and fix bugs.</p>
+<p><strong>Good</strong>: “[browser version XX] Unable to type in search box of www.example-url.com”</p>
+<p><strong>Bad</strong>:“Search functionality broken”</p>
+<h4>Description</h4>
+<p>A good bug report clearly explains what you were expecting to see, 
+and how it differs from what you actually saw happen. We’ve found that 
+both of these perspectives are valuable and help us fix more bugs. For 
+example, describing your expectation can help us fill in gaps and fix 
+bugs that otherwise might not be reproducible, since bugs sometimes 
+depend on external factors like the language of the underlying operating
+ system.</p>
+<h4>Selecting the correct area</h4>
+<p>A good bug report has the correct area selected. We want to get your 
+bug report to the right developer as quickly as possible, and selecting 
+the correct area in the form helps.&nbsp; Since some issues might fall 
+under more than one area, try searching in the bug database to find 
+similar bugs in that area.</p>
+<h4>Precise, reproducible steps</h4>
+<p>A good bug report is descriptive and easy to follow. A clear 
+step-by-step guide that lets us reproduce a bug is often the single most
+ important factor in determining whether we can fix a bug or not. When 
+we aren’t able to reproduce the bug, it will often be resolved as “Not 
+Repro”. Clearer and more detailed bug reports greatly improve our 
+ability to understand the underlying issues and respond accordingly.</p>
+<h4>Screenshots &amp; attachments</h4>
+<p>A good bug report may include screenshots (or even videos). For 
+example, you can use screenshots to guide us through relatively complex 
+steps or to highlight where we need to look to see the issue you’re 
+reporting.</p></blockquote>
+<h2>Also check out <a href="http://webcompat.com/">webcompat.com</a> – Bug reporting for the internet</h2>
+<p>A great new service/initiative that makes it <em>really</em> easy to <a href="http://webcompat.com/">report a bug</a> you have found with a browser or web site.</p>
+<div id="howitworks">
+<h3>How It Works</h3>
+<div id="threesteps">
+<ol>
+<li><a href="http://webcompat.com/">Report a bug</a> for any website or browser.</li>
+<li>the webcompat team of volunteers diagnoses the bug.</li>
+<li>Then send a fix to the site owner or browser.</li>
+</ol>
+</div>
+</div>
+					</article><div id="entry-author-info">
+							<p><img alt="" src="filing%20bugs_files/12c1f1f330e3f2e393d0a7e15ff18eb4.jpg" width="96" height="96">							</p>
+							
+						</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+  </div>
+
+  <ul class="toolbar reader-toolbar">
+    <li><button class="button close-button" title="Close Reader View"></button></li>
+    <ul class="dropdown style-dropdown">
+      <li><button class="dropdown-toggle button style-button" title="Type controls"></button></li>
+      <li class="dropdown-popup">
+        <div class="font-type-buttons"><button class="sans-serif-button selected"><div class="name">Aa</div><div class="description">Sans-serif</div></button><button class="serif-button"><div class="name">Aa</div><div class="description">Serif</div></button></div>
+        <hr>
+        <div class="font-size-buttons">
+          <button class="minus-button">
+          </button><button class="font-size-sample">Aa</button><button class="plus-button" disabled="true">
+        </button></div>
+        <hr>
+        <div class="content-width-buttons">
+          <button class="content-width-minus-button">
+          </button><button class="content-width-plus-button">
+        </button></div>
+        <hr>
+        <div class="line-height-buttons">
+          <button class="line-height-minus-button">
+          </button><button class="line-height-plus-button">
+        </button></div>
+        <hr>
+        <div class="color-scheme-buttons"><button class="light-button"><div class="name">Light</div></button><button class="dark-button"><div class="name">Dark</div></button><button class="sepia-button selected"><div class="name">Sepia</div></button></div>
+        <div class="dropdown-arrow">
+      </div></li>
+    </ul>
+  <ul class="dropdown narrate-dropdown"><li>
+       <button class="dropdown-toggle button narrate-toggle" title="Narrate"></button>
+    </li>
+    <li class="dropdown-popup">
+      <div class="narrate-row narrate-control">
+        <button disabled="disabled" class="narrate-skip-previous" title="Back"></button>
+        <button class="narrate-start-stop" title="Start"></button>
+        <button disabled="disabled" class="narrate-skip-next" title="Forward"></button>
+      </div>
+      <div class="narrate-row narrate-rate">
+        <input class="narrate-rate-input" value="50" step="5" max="100" min="-100" type="range" title="Speed">
+      </div>
+      <div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Voice:</span> <span class="current-voice">Default</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Default</button><button data-value="urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft David Desktop - English (United States)</button><button data-value="urn:moz-tts:sapi:Microsoft Hazel Desktop - English (Great Britain)?en-GB" class="option" tabindex="-1" role="option">Microsoft Hazel Desktop - English (Great Britain)</button><button data-value="urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US" class="option" tabindex="-1" role="option">Microsoft Zira Desktop - English (United States)</button></div></div></div>
+      <div class="dropdown-arrow"></div>
+    </li></ul><button data-buttonid="pocket-button" class="button pocket-button" style="background-image: url(&quot;chrome://pocket/content/panels/img/pocket-outline.svg&quot;); background-size: 20px 20px;" title="Save to Pocket"></button></ul>
+
+
+
+
+</body></html>
